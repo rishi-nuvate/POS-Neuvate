@@ -28,6 +28,7 @@
                         {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star', 'defaultValue', 'required','readonly')}} --}}
 
                         {!! textInputField('col-md-3 mt-3', 'Scan Sales Order No.', 'text', 'date', 'date', 'Description','','', '','') !!}
+                        {!! textInputField('col-md-3 mt-3', 'Scan Sales Order No.', 'text', 'date', 'date', 'Description','','', '','') !!}
                         {!! textInputField('col-md-3 mt-3', 'Pc. Scan', 'text', 'date', 'date', 'Description', '', '', '','') !!}
 
                         <div id="datatable-list_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer pt-3">
