@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Create-bulkInward ')
+@section('title', 'Pending-Outward ')
 
 @section('page-script')
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>

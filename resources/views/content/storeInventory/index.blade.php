@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Inventory Menu')
+@section('title', 'Store Inventory Menu')
 
 @section('content')
 
