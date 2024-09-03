@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Pending-Stock-In ')
+@section('title', 'Pending-Stock-In')
 
 @section('page-script')
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
@@ -13,8 +13,6 @@
         <span class="text-muted fw-light float-left">Store Inventory/ Stock In </span> / Pending
     </h4>
     <!-- Invoice List Widget -->
-
-
 
 
     <div class="card">
