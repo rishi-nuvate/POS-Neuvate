@@ -1,20 +1,20 @@
 <?php
 
 if (!function_exists('textInputField')) {
-    function textInputField($class, $label, $inputType, $name, $id, $placeholder, $star = '', $defaultValue = '', $required = '', $readonly = null)
+    function textInputField($class, $label, $inputType, $name, $id, $placeholder, $star = '', $inputClass='', $defaultValue = '', $required = '', $readonly = null)
     {
         $value = old($name, $defaultValue);
         return '
         <div class="' . $class . '">
             <label class="form-label" for="' . $id . '">' . $label . '</label>
             <span class="text-danger"><strong>' . $star . '</strong></span>
-            <input type="' . $inputType . '" id="' . $id . '" name="' . $name . '" class="form-control" placeholder="' . $placeholder . '" value="' . $value . '" ' . $required . '' . $readonly . ' />
+            <input type="' . $inputType . '" id="' . $id . '" name="' . $name . '" class= "form-control ' .$inputClass .' " placeholder="' . $placeholder . '" value="' . $value . '" ' . $required . '' . $readonly . ' />
         </div>';
     }
 }
 
 if (!function_exists('selectField')) {
-    function selectField($class, $label, $name, $id, $selectClass, $options = [], $star = '', $defaultValue = '', $required = '', $readonly = null)
+    function selectField($class, $label, $name, $id, $selectClass, $placeholder , $options = [], $star = '', $defaultValue = '', $required = '', $readonly = null)
     {
         $value = old($name, $defaultValue);
         $readonlyAttr = $readonly ? 'disabled' : '';
@@ -29,7 +29,7 @@ if (!function_exists('selectField')) {
         <div class="' . $class .'">
             <label class="form-label" for="' . $id . '">' . $label . '</label>
             <span class="text-danger"><strong>' . $star .'</strong></span>
-            <select id="' . $id . '" name="' . $name . '" class="' .$selectClass. ' " ' . $required . ' ' . $readonlyAttr . '>
+            <select id="' . $id . '" name="' . $name . '" " data-placeholder="' . $placeholder . '"class="' .$selectClass. ' " ' . $required . ' ' . $readonlyAttr . '>
                 ' . $optionsHtml . '
             </select>
         </div>';

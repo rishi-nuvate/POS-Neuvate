@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/fonts/tabler-icons.css')) }}"/>
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/fonts/fontawesome.css')) }}"/>
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/fonts/flag-icons.css')) }}"/>
+
+
+
 <!-- Core CSS -->
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/css' .$configData['rtlSupport'] .'/core.css')) }}"
       class="{{ $configData['hasCustomizer'] ? 'template-customizer-core-css' : '' }}"/>
@@ -21,6 +24,8 @@
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/typeahead-js/typeahead.css')) }}"/>
 <link rel="stylesheet" href="{{asset(mix('assets/vendor/css/rtl/theme-default.css'))}}" class="template-customizer-theme-css"/>
 
+
+
 {{--vendor-style--}}
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
@@ -32,6 +37,10 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/form-validation.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/form-validation.css') }}" />
+
 
 
 <!-- Vendor Styles -->

@@ -34,50 +34,24 @@
                                 value="{{ old('employeeName') }}" placeholder="Employee Name" />
                         </div> --}}
 
-{{-- Example --}}
-                        {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star', 'defaultValue', 'required')}} --}}
+                        {{-- Example --}}
+
+                        {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star', 'input class', 'defaultValue', 'required','Readonly')}} --}}
+
+                        {{--{!! selectField('col-md-3 mt-3', 'Lable', 'name', 'for,id','select2 select21 form-select (select class)', 'placeholder' ,[10 => 'Ten',20 => 'Twenty',30 => 'Thirty',], 'star', 'default value', 'required', 'readonly') !!}--}}
+
 
                         {{-- Employee Name --}}
-                        {!! textInputField('col-md-3', 'Employee Name', 'text', 'employeeName', 'employeeName', 'Enter your name', '', '', 'required', $employee->name ?? '') !!}
+                        {!! textInputField('col-md-3 mt-3', 'Employee Name', 'text', 'employeeName', 'employeeName', 'Enter your name', '', '', 'required', $employee->name ?? '') !!}
 
+                        {{--Company --}}
+                        {!! selectField('col-md-3 mt-3', 'Company', 'employeeCompany', 'employeeCompany','select2 select21 form-select','Select Company', [10 => 'Select',20 => 'Twenty',30 => 'Thirty',], '', '', '', '') !!}
 
+                        {{--Store--}}
+                        {!! selectField('col-md-3 mt-3', 'Store', 'employeeStoreId', 'employeeStoreId','select2 select21 form-select', 'Select Company',[10 => 'Select',20 => 'Blue Buddha CG Road',30 => 'Thirty',], '', '', '', '') !!}
 
-                        <div class="col-md-3">
-                            <label class="form-label" for="employeeCompany">Company</label>
-                            <select required id="employeeCompany" name="employeeCompany"
-                                class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Company">
-                                <option value="dd">Select</option>
-                                <option value="dd">Admin</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label" for="employeeStoreId">Store</label>
-                            <select required id="employeeStoreId" name="employeeStoreId"
-                                class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Company">
-                                <option value="dd">Select</option>
-                                <option value="dd">Blue Buddha CG Road</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label" for="employeeType">Employee Type</label>
-                            <select required id="employeeType" name="employeeType" class="select2 select21 form-select"
-                                data-allow-clear="true" data-placeholder="Select Company">
-                                <option value="dd">Select</option>
-                                <option value="dd">Full Time</option>
-                                <option value="dd">Part Time</option>
-                            </select>
-                        </div>
-
-{{--
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeeNumber">Employee Number</label>
-                            <input type="text" id="employeeNumber" name="employeeNumber" class="form-control"
-                                value="{{ old('employeeNumber') }}" placeholder="Employee Number" />
-                        </div> --}}
+                        {{-- Employee Type--}}
+                        {!! selectField('col-md-3 mt-3', 'Employee Type', 'employeeType', 'employeeType','select2 select21 form-select', 'Select Type',[10 => 'Select',20 => 'Full Time',30 => 'Part Time',], '', '', '', '') !!}
 
                         {{-- Employee Number --}}
                         {!! textInputField('col-md-3 mt-3', 'Employee Email', 'email', 'employeeEmail', 'employeeEmail', 'Enter your email', '*', '', 'required', $employee->email ?? '') !!}
@@ -85,108 +59,51 @@
                         {{-- Employee Number --}}
                         {!! textInputField('col-md-3 mt-3', 'Employee Number', 'number', 'employeeNumber', 'employeeNumber', 'Employee Number', '*', '', 'required', $employee->employeeNumber ?? '') !!}
 
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeeRole">Role</label>
-                            <select required id="employeeRole" name="employeeRole" class="select2 select21 form-select"
-                                data-allow-clear="true" data-placeholder="Select Role">
-                                <option value="ds">Select</option>
-                                <option value="sdf">Admin</option>
-                            </select>
-                        </div>
+                        {{--Role--}}
+                        {!! selectField('col-md-3 mt-3', 'Role', 'employeeRole', 'employeeRole','select2 select21 form-select', 'Select Role',[10 => 'Select',20 => 'Admin',30 => 'Part Time',], '', '', '', '') !!}
 
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeeDepartment">Department</label>
-                            <select required id="employeeDepartment" name="employeeDepartment"
-                                class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Department">
-                                <option value="">Select</option>
-                                <option value="ds">Sales</option>
-                                <option value="sd">Cashier</option>
-                            </select>
-                        </div>
+                        {{--Department--}}
+                        {!! selectField('col-md-3 mt-3', 'Department', 'employeeDepartment', 'employeeDepartment','select2 select21 form-select', 'Select Department',[10 => 'Select',20 => 'Sales',30 => 'Cashier',], '', '', '', '') !!}
 
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeeSubDepartment">Sub Department</label>
-                            <select required id="employeeSubDepartment" name="employeeSubDepartment"
-                                class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Sub Department">
-                                <option value="">Select</option>
-                                <option value="ds">Sales</option>
-                                <option value="sd">Cashier</option>
-                            </select>
-                        </div>
+                        {{--Sub Department--}}
+                        {!! selectField('col-md-3 mt-3', 'Sub Department', 'employeeSubDepartment', 'employeeSubDepartment','select2 select21 form-select', 'Select Department',[10 => 'Select',20 => 'Sales',30 => 'Cashier',], '', '', '', '') !!}
 
                         {{-- Birth Date --}}
                         {{-- {!! textInputField('col-md-3 mt-3', 'Birth Date', 'text', 'birthdate', 'multicol-birthdate', 'YYYY-MM-DD', '', '', '', '') !!} --}}
 
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="multicol-birthdate">Birth Date</label>
-                            <input type="text" id="multicol-birthdate" class="form-control dob-picker"
-                                placeholder="YYYY-MM-DD" />
-                        </div>
+                        {{--Birth Date--}}
+                        {!! textInputField('col-md-3 mt-3', 'Birth Date', 'text', 'employeeBirthdate', 'multiCol-birthdate', 'YYYY-MM-DD', '', 'dob-picker', '','','') !!}
 
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="multicol-birthdate">Anniversary Date</label>
-                            <input type="text" id="multicol-birthdate" class="form-control dob-picker"
-                                placeholder="YYYY-MM-DD" />
-                        </div>
+                        {{--Anniversary Date--}}
+                        {!! textInputField('col-md-3 mt-3', 'Anniversary Date', 'text', 'employeeBirthdate', 'multiCol-anniversary', 'YYYY-MM-DD', '', 'dob-picker', '','','') !!}
 
                         {{-- Employee Mobile Number --}}
                         {!! textInputField('col-md-3 mt-3', 'Employee Other Mobile Number', 'number', 'employeeOtherMoNumber', 'employeeOtherMoNumber', 'Employee Other Mobile No', '*', '', $employee->employeeOtherMoNumber ?? '') !!}
 
-                        {{-- <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeeMoNumber">Employee Mobile Number</label>
-                            <input type="text" id="employeeMoNumber" name="employeeMoNumber" class="form-control"
-                                value="{{ old('employeeMoNumber') }}" placeholder="Employee Mobile Number" />
-                        </div> --}}
+                        {{-- Date Of Joining --}}
+                        {!! textInputField('col-md-3 mt-3', 'Date of Joining', 'text', 'dateOfJoining', 'multiCol-date-of-joining', 'YYYY-MM-DD', '', 'dob-picker', '','','') !!}
 
-                        {{-- Employee Other Mobile Number --}}
-                        {!! textInputField('col-md-3 mt-3', 'Employee Other Mobile Number', 'number', 'employeeOtherMoNumber', 'employeeOtherMoNumber', 'Employee Other Mobile No', '*', '', $employee->employeeOtherMoNumber ?? '') !!}
-{{--
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeeOtherMoNumber">Other Mobile Number</label>
-                            <input type="text" id="employeeOtherMoNumber" name="employeeOtherMoNumber"
-                                class="form-control" value="{{ old('employeeOtherMoNumber') }}"
-                                placeholder="Employee Other Mobile Number" />
-                        </div> --}}
+                        {{--Date Of Leaving--}}
+                        {!! textInputField('col-md-3 mt-3', 'Date of Leaving', 'text', 'dateOfLeaving', 'multiCol-date-of-joining', 'YYYY-MM-DD', '', 'dob-picker', '','','') !!}
 
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="multicol-birthdate">Date of Joining</label>
-                            <input type="text" id="multicol-birthdate" class="form-control dob-picker"
-                                placeholder="YYYY-MM-DD" />
-                        </div>
+                        {{--Aadhar Card Number--}}
+                        {!! textInputField('col-md-3 mt-3', 'Aadhar Card Number', 'text', 'employeeAadhar', 'employeeAadhar', 'Employee Aadhar Card Number', '', '', old('employeeAadhar'),'','') !!}
 
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="multicol-birthdate">Date of Leaving</label>
-                            <input type="text" id="multicol-birthdate" class="form-control dob-picker"
-                                placeholder="YYYY-MM-DD" />
-                        </div>
+                        {{--Pan Card Number--}}
+                        {!! textInputField('col-md-3 mt-3', 'Pan Card Number', 'text', 'employeePan', 'employeePan', 'Employee Pan Card Number', '', '', old('employeePan'),'','') !!}
 
-
-
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeeAadhar">Aadhar Card Number</label>
-                            <input type="text" id="employeeAadhar" name="employeeAadhar" class="form-control"
-                                value="{{ old('employeeAadhar') }}" placeholder="Employee Aadhar Card Number" />
-                        </div>
-
-                        <div class="col-md-3 mt-3">
-                            <label class="form-label" for="employeePan">PAN Number</label>
-                            <input type="text" id="employeePan" name="employeePan" class="form-control"
-                                value="{{ old('employeePan') }}" placeholder="Employee PAN Number" />
-                        </div>
 
                         <div class="col-md-6 mt-4">
                             <label class="form-check-label">Gender</label>
                             <div class="col mt-2">
                                 <div class="form-check form-check-inline">
                                     <input name="collapsible-address-type" class="form-check-input" type="radio"
-                                        value="" id="collapsible-address-type-home" checked="" />
+                                           value="" id="collapsible-address-type-home" checked=""/>
                                     <label class="form-check-label" for="collapsible-address-type-home">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input name="collapsible-address-type" class="form-check-input" type="radio"
-                                        value="" id="collapsible-address-type-office" />
+                                           value="" id="collapsible-address-type-office"/>
                                     <label class="form-check-label" for="collapsible-address-type-office">
                                         Female
                                     </label>
@@ -194,36 +111,38 @@
                             </div>
                         </div>
 
+
                         <hr class="mt-5">
                         <h5>Address</h5>
-                        <div class="col-md-6 mt-3">
-                            <label class="form-label" for="employeePan">Address Line 1</label>
-                            <input type="text" id="employeePan" name="employeePan" class="form-control"
-                                value="{{ old('employeePan') }}" placeholder="Address Line 1" />
-                        </div>
+
+                        {{--Address Line 1--}}
+                        {!! textInputField('col-md-6 mt-3', 'Address Line 1', 'text', 'addressLine1', 'addressLine1', 'Address Line 1', '', '', old('addressLine1'),'','') !!}
+
+                        {{--Address Line 2--}}
+                        {!! textInputField('col-md-6 mt-3', 'Address Line 2', 'text', 'addressLine2', 'addressLine2', 'Address Line 2', '', '', old('addressLine2'),'','') !!}
 
                         <div class="col-md-6 mt-3">
                             <label class="form-label" for="employeePan">Address Line 2</label>
                             <input type="text" id="employeePan" name="employeePan" class="form-control"
-                                value="{{ old('employeePan') }}" placeholder="Address Line 2" />
+                                   value="{{ old('employeePan') }}" placeholder="Address Line 2"/>
                         </div>
 
                         <div class="col-md-4 mt-3">
                             <label class="form-label" for="employeePan">City</label>
                             <input type="text" id="employeePan" name="employeePan" class="form-control"
-                                value="{{ old('employeePan') }}" placeholder="Ahmedabad" />
+                                   value="{{ old('employeePan') }}" placeholder="Ahmedabad"/>
                         </div>
 
                         <div class="col-md-4 mt-3">
                             <label class="form-label" for="employeePan">State</label>
                             <input type="text" id="employeePan" name="employeePan" class="form-control"
-                                value="{{ old('employeePan') }}" placeholder="Gujarat" />
+                                   value="{{ old('employeePan') }}" placeholder="Gujarat"/>
                         </div>
 
                         <div class="col-md-4 mt-3">
                             <label class="form-label" for="employeePan">Pin Code</label>
                             <input type="text" id="employeePan" name="employeePan" class="form-control"
-                                value="{{ old('employeePan') }}" placeholder="382480" />
+                                   value="{{ old('employeePan') }}" placeholder="382480"/>
                         </div>
 
 
@@ -233,17 +152,17 @@
                         <div class="col-md-4">
                             <label class="form-label" for="basic-default-upload-file">Aadhar Card</label>
                             <input type="file" class="form-control" id="basic-default-upload-file" required="">
-                          </div>
+                        </div>
 
-                          <div class="col-md-4">
+                        <div class="col-md-4">
                             <label class="form-label" for="basic-default-upload-file">PAN Card</label>
                             <input type="file" class="form-control" id="basic-default-upload-file" required="">
-                          </div>
+                        </div>
 
-                          <div class="col-md-4">
+                        <div class="col-md-4">
                             <label class="form-label" for="basic-default-upload-file">Profile Pic</label>
                             <input type="file" class="form-control" id="basic-default-upload-file" required="">
-                          </div>
+                        </div>
 
                     </div>
                     <br>
@@ -256,7 +175,5 @@
             </div>
         </div>
     </div>
-
-
 
 @endsection
