@@ -143,10 +143,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Brand
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('add-brand') }}"><i
+                                <a class="dropdown-item" href="{{ route('brand.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href="{{ route('view-brand') }}"><i
+                                <a class="dropdown-item" href="{{ route('brand.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>
@@ -159,10 +159,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Season
                             </button>
                             <div class="dropdown-menu" style="">
-                                {{-- <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{ route('season.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
-                                    Add</a> --}}
-                                <a class="dropdown-item" href="{{ route('view-season') }}"><i
+                                    Add</a>
+                                <a class="dropdown-item" href="{{ route('season.index') }}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>
@@ -175,10 +175,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Tags
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('add-tags') }}"><i
+                                <a class="dropdown-item" href="{{ route('tags.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href="{{ route('view-tags') }}"><i
+                                <a class="dropdown-item" href="{{ route('tags.index') }}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>

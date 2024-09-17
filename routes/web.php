@@ -1,6 +1,10 @@
 <?php
 
 
+use App\Http\Controllers\Auth\LoginRegistrationController;
+use App\Http\Controllers\authenticate\AuthLogin;
+use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\CategoryMasterController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
 use App\Http\Controllers\centralWarehouse\GRNMasterController;
 use App\Http\Controllers\centralWarehouse\OutwardMasterController;
@@ -8,43 +12,37 @@ use App\Http\Controllers\centralWarehouse\PackMasterController;
 use App\Http\Controllers\centralWarehouse\PickMasterController;
 use App\Http\Controllers\centralWarehouse\ShelfMasterController;
 use App\Http\Controllers\centralWarehouse\StockInMasterController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\master\basicInfo\BrandController;
+use App\Http\Controllers\master\basicInfo\SeasonController;
+use App\Http\Controllers\master\basicInfo\TagsController;
+use App\Http\Controllers\master\EmployeeMasterController;
+use App\Http\Controllers\master\InventoryMasterController;
+use App\Http\Controllers\master\MasterController;
+use App\Http\Controllers\master\ProductMasterController;
+use App\Http\Controllers\master\TagsMasterController;
 use App\Http\Controllers\orderRequisition\OrderRequisitionMasterController;
 use App\Http\Controllers\orderRequisition\SalesOrderController;
+use App\Http\Controllers\pages\ExpenseController;
+use App\Http\Controllers\pages\InventoryController;
+use App\Http\Controllers\pages\InventoryTransferController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\storeInventory\StockInController;
 use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
 use App\Http\Controllers\supplyChain\POMasterController;
-use Illuminate\Routing\CreatesRegularExpressionRouteConstraints;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\authenticate\AuthLogin;
-use App\Http\Controllers\Auth\LoginRegistrationController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\TransferContoller;
-use App\Http\Controllers\PosController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\BalanceController;
+use Illuminate\Support\Facades\Route;
 
 // Pages Controller
-use App\Http\Controllers\pages\ExpenseController;
-use App\Http\Controllers\pages\SalesListController;
-use App\Http\Controllers\pages\InventoryTransferController;
-use App\Http\Controllers\pages\InventoryController;
 
 
 // Master Controller
-use App\Http\Controllers\master\MasterController;
-use App\Http\Controllers\master\BrandMasterController;
-use App\Http\Controllers\master\SeasonMasterController;
-use App\Http\Controllers\master\TagsMasterController;
-use App\Http\Controllers\master\EmployeeMasterController;
-use App\Http\Controllers\master\ProductMasterController;
-use App\Http\Controllers\master\CategoryMasterController;
-use App\Http\Controllers\master\InventoryMasterController;
 
 //Supply Chain Controller
-use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 
 
 date_default_timezone_set('Asia/Kolkata');
@@ -67,7 +65,7 @@ Route::controller(LoginRegistrationController::class)->group(function () {
 Route::get('/authenticate/login', [AuthLogin::class, 'login'])->name('authenticate-login');
 Route::get('/authenticate/register', [AuthLogin::class, 'register'])->name('authenticate-register');
 
-Route::middleware([EnsureTokenIsValid::class])->group(callback: function () {
+Route::middleware('auth:web')->group(callback: function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard-blank');
     Route::get('/dashboard', [DashboardController::class, 'crm'])->name('dashboard-crm');
 
@@ -82,14 +80,21 @@ Route::middleware([EnsureTokenIsValid::class])->group(callback: function () {
     // Master
     Route::resource('/master', MasterController::class);
 
-    // Season Master
-    Route::get('season/view', [SeasonMasterController::class, 'index'])->name('view-season');
-    // Route::get('/master', [masterController::class, 'index'])->name('master-index');
+//    // Season Master
+//    Route::get('season/view', [SeasonMasterController::class, 'index'])->name('view-season');
 
-    // Brand Master
-    // Route::resource('/brand', BrandMasterController::class);
-    Route::get('brand/add', [BrandMasterController::class, 'create'])->name('add-brand');
-    Route::get('/brand/view', [BrandMasterController::class, 'index'])->name('view-brand');
+    // Season Master
+    Route::resource('season', SeasonController::class);
+
+
+    // Tags Master
+    Route::resource('tags', TagsController::class);
+
+// Brand Master
+    Route::resource('brand', BrandController::class);
+// Brand Master
+    Route::resource('category', CategoryMasterController::class);
+
 
     // Tags Master
     Route::get('tags/add', [TagsMasterController::class, 'create'])->name('add-tags');
@@ -104,69 +109,66 @@ Route::middleware([EnsureTokenIsValid::class])->group(callback: function () {
     Route::get('employee/view', [EmployeeMasterController::class, 'index'])->name('view-employee');
 
     // Category Master
-    Route::get('category/add', [CategoryMasterController::class, 'create'])->name('add-category');
-    Route::get('category/view', [CategoryMasterController::class, 'index'])->name('view-category');
+//    Route::get('category/add', [CategoryMasterController::class, 'create'])->name('add-category');
+//    Route::get('category/view', [CategoryMasterController::class, 'index'])->name('view-category');
 
 
     //Inventory Master
     Route::resource('/storeInventory', InventoryMasterController::class);
 
 //    Stock In
-     Route::get('/storeInventory/stockIn/pending', [StockInController::class, 'pending'])->name('pending-stock-in');
-     Route::get('/storeInventory/stockIn/create', [StockInController::class, 'create'])->name('create-stock-in');
+    Route::get('/storeInventory/stockIn/pending', [StockInController::class, 'pending'])->name('pending-stock-in');
+    Route::get('/storeInventory/stockIn/create', [StockInController::class, 'create'])->name('create-stock-in');
 
 
     //Supply Chain
     Route::resource('/supplyChain', SupplyChainMasterController::class);
 
 //    Design Library
-    Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class,'create'])->name('create-design');
+    Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class, 'create'])->name('create-design');
 
 //    PO
-    Route::get('/supplyChain/po/create', [POMasterController::class,'create'])->name('create-po');
+    Route::get('/supplyChain/po/create', [POMasterController::class, 'create'])->name('create-po');
 
 //    Barcode
-    Route::get('/supplyChain/barcode/create', [BarcodeMasterController::class,'create'])->name('create-barcode');
-
+    Route::get('/supplyChain/barcode/create', [BarcodeMasterController::class, 'create'])->name('create-barcode');
 
 
     //Central Warehouse
     Route::resource('/centralWarehouse', CentralWarehouseMasterController::class);
 
 //    GRN
-    Route::get('/centralWarehouse/grn/create', [GRNMasterController::class,'create'])->name('create-grn');
+    Route::get('/centralWarehouse/grn/create', [GRNMasterController::class, 'create'])->name('create-grn');
 
 //Stock In
-    Route::get('/centralWarehouse/stockIn/bulkInward', [StockInMasterController::class,'bulkInward'])->name('bulkInward');
-    Route::get('/centralWarehouse/stockIn/singleInward', [StockInMasterController::class,'singleInward'])->name('singleInward');
+    Route::get('/centralWarehouse/stockIn/bulkInward', [StockInMasterController::class, 'bulkInward'])->name('bulkInward');
+    Route::get('/centralWarehouse/stockIn/singleInward', [StockInMasterController::class, 'singleInward'])->name('singleInward');
 
 //Shelf
-    Route::get('/centralWarehouse/shelf/create', [ShelfMasterController::class,'create'])->name('create-shelf');
+    Route::get('/centralWarehouse/shelf/create', [ShelfMasterController::class, 'create'])->name('create-shelf');
 
 
 //Pick
-    Route::get('/centralWarehouse/pick/pendingList', [PickMasterController::class,'pendingList'])->name('pending-list-pick');
-    Route::get('/centralWarehouse/pick/create', [PickMasterController::class,'create'])->name('create-pick');
+    Route::get('/centralWarehouse/pick/pendingList', [PickMasterController::class, 'pendingList'])->name('pending-list-pick');
+    Route::get('/centralWarehouse/pick/create', [PickMasterController::class, 'create'])->name('create-pick');
 
 
 //Pack
-    Route::get('/centralWarehouse/pack/create', [PackMasterController::class,'create'])->name('create-pack');
+    Route::get('/centralWarehouse/pack/create', [PackMasterController::class, 'create'])->name('create-pack');
 
 //    Outward (dispatch)
-    Route::get('/centralWarehouse/outward/pending', [OutwardMasterController::class,'pending'])->name('pending-outward');
+    Route::get('/centralWarehouse/outward/pending', [OutwardMasterController::class, 'pending'])->name('pending-outward');
 
 
 //    Order Requisition
     Route::resource('/orderRequisition', OrderRequisitionMasterController::class);
 
 //Sales Order
-    Route::get('/orderRequisition/salesOrder/create', [SalesOrderController::class,'create'])->name('create-salesOrder');
-
+    Route::get('/orderRequisition/salesOrder/create', [SalesOrderController::class, 'create'])->name('create-salesOrder');
 
 
     // Inventory Controller
     Route::resource('/inventory', InventoryController::class);
-
 
 
     // Inventory Trasnfer Controller

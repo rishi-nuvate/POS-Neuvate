@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\master;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\CategoryMaster;
+use App\Http\Requests\StoreCategoryMasterRequest;
+use App\Http\Requests\UpdateCategoryMasterRequest;
+use App\Models\Season;
 
 class CategoryMasterController extends Controller
 {
@@ -13,6 +15,7 @@ class CategoryMasterController extends Controller
     public function index()
     {
         return view('content.master.category.index');
+
     }
 
     /**
@@ -21,20 +24,23 @@ class CategoryMasterController extends Controller
     public function create()
     {
         return view('content.master.category.create');
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryMasterRequest $request)
     {
-        //
+        CategoryMaster::create($request->validated());
+
+        return redirect()->back()->with('success', 'Category has been created.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(CategoryMaster $categoryMaster)
     {
         //
     }
@@ -42,7 +48,7 @@ class CategoryMasterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CategoryMaster $categoryMaster)
     {
         //
     }
@@ -50,7 +56,7 @@ class CategoryMasterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoryMasterRequest $request, CategoryMaster $categoryMaster)
     {
         //
     }
@@ -58,7 +64,7 @@ class CategoryMasterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CategoryMaster $categoryMaster)
     {
         //
     }
