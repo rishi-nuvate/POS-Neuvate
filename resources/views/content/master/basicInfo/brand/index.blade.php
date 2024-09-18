@@ -3,9 +3,20 @@
 @section('title', 'List-Brands')
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Master / Brands /</span> View
-    </h4>
+
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/master') }}">Master</a>
+            </li>
+            <li class="breadcrumb-item active">Brand</li>
+            <li class="breadcrumb-item active">View</li>
+        </ol>
+    </nav>
+{{--    --}}
+{{--    <h4 class="py-3 mb-4">--}}
+{{--        <span class="text-muted fw-light float-left">Master / Brands /</span> View--}}
+{{--    </h4>--}}
     <!-- Master Brands List -->
 
 
@@ -26,9 +37,12 @@
                         <td class="text-bold">{{$num}}</td>
                         <td>{{$brand->name}}</td>
                         <td>
-                            <a class="btn btn-icon btn-label-primary mx-2" href="{{route('brand.edit',['brand' => $brand->id])}}"><i
+                            <a class="btn btn-icon btn-label-primary mx-2"
+                               href="{{route('brand.edit',['brand' => $brand->id])}}"><i
                                     class="ti ti-edit mx-2 ti-sm"></i></a>
-                            <button type="button" class="btn btn-icon btn-label-danger mx-2"><i
+                            <button type="button" class="btn btn-icon btn-label-danger mx-2"
+                                    onclick="deleteBlog({{$brand->id}})"
+                               href="{{ route('brand.destroy', $brand->id) }}"><i
                                     class="ti ti-trash mx-2 ti-sm"></i></button>
                         </td>
                     </tr>
@@ -39,4 +53,39 @@
         </div>
     </div>
 
+
+    <script>
+        function deleteBlog(blogId) {
+            // var VendorName = document.getElementById('VendorName').value;
+            // var VendorName = document.querySelector('#VendorName').value;
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonText: "Yes, Approve it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#overlay").fadeIn(100);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/brands/' + blogId,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            blogId: blogId,
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function (resultData) {
+                            Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
+                                location.reload();
+                                $("#overlay").fadeOut(100);
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 @endsection

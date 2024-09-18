@@ -14,10 +14,8 @@ class TagsController extends Controller
      */
     public function index()
     {
-
         $tags = Tags::all();
-        return view('content.master.basicInfo.tags.index',compact('tags'));
-
+        return view('content.master.basicInfo.tags.index', compact('tags'));
     }
 
     /**
@@ -51,9 +49,10 @@ class TagsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tags $tags)
+    public function edit(Tags $tag)
     {
-        //
+        $tag = Tags::where('id', $tag->id)->first();
+        return view('content.master.basicInfo.tags.edit', compact('tag'));
     }
 
     /**

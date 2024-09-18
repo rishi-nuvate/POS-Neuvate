@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::table('brands', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

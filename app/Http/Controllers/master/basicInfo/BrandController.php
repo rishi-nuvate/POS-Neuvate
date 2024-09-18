@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Gate;
 
 class BrandController extends Controller
 {
@@ -51,6 +52,8 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
+        dd($brand);
+
         $brands = Brand::where('id',$brand->id)->first();
 
         return view('content.master.basicInfo.brand.edit',compact('brands'));
@@ -63,6 +66,10 @@ class BrandController extends Controller
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
 
+        $brand->update($request->validated());
+
+        return redirect()->route('brand.index')->with('success', 'Brand updated.');
+
     }
 
     /**
@@ -70,6 +77,21 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        if (Gate::allows('delete', $brand)) {
+            $brand->delete();
+        }
+
+        // Perform the deletion
+
+        return redirect()->route('brand.index')->with('success', 'Brand deleted.');
     }
+
+//    public function delete(Brand $brand)
+//    {
+//        $this->authorize('delete', $brand);
+//
+//        // Perform the deletion
+//        $brand->delete();
+//        return redirect()->route('brand.index')->with('success', 'Brand deleted.');
+//    }
 }

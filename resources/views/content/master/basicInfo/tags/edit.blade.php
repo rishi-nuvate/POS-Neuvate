@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active"><a href="{{ route('season.index') }}">Season</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('tags.index') }}">Season</a></li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
     </nav>
@@ -28,7 +28,7 @@
                 <div class="content-header mb-4">
                     <h3 class="mb-1">Add Season</h3>
                 </div>
-                <form method="post" action="{{route('season.update',[$seasons->id])}}" enctype="multipart/form-data">
+                <form method="post" href="{{route('tabs.update')}}"  enctype="multipart/form-data">
                     @method('put')
                     @csrf
 
@@ -37,7 +37,7 @@
                         {{-- Example --}}
                         {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','inputClass', 'defaultValue', 'required','readonly')}} --}}
 
-                        {!! textInputField('col-md-6', 'Season Name', 'text', 'name', 'seasonName', 'Season Name', '*', '',$seasons->name ,'required','') !!}
+                        {!! textInputField('col-md-6', 'Season Name', 'text', 'name', 'seasonName', 'Season Name', '*', '',$tag->name ,'required','') !!}
 
                     </div>
                     <br>

@@ -4,6 +4,17 @@
 
 
 @section('content')
+
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/master') }}">Master</a>
+            </li>
+            <li class="breadcrumb-item active">Season</li>
+            <li class="breadcrumb-item active">Add</li>
+        </ol>
+    </nav>
+
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light float-left">Master / Season /</span> Add
     </h4>

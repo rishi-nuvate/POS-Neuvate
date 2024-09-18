@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Brand;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class UpdateBrandRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('update',$this->user(), Brand::class );
+        return Gate::allows('update', $this->route('brand'));
     }
 
     /**
@@ -24,7 +25,7 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:brands,name',
+            'name' => ['required', 'string ', Rule::unique('brands')->ignore($this->route('brand')->id, 'id')],
         ];
     }
 }

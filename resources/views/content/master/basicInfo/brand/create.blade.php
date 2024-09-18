@@ -4,9 +4,18 @@
 
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Master / Brand /</span> Add
-    </h4>
+    <nav aria-label="breadcrumb" style="font-size: 30px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/master') }}">Master</a>
+            </li>
+            <li class="breadcrumb-item active">Brand</li>
+            <li class="breadcrumb-item active">Add</li>
+        </ol>
+    </nav>
+{{--    <h4 class="py-3 mb-4">--}}
+{{--        <span class="text-muted fw-light float-left">Master / Brand /</span> Add--}}
+{{--    </h4>--}}
     <!-- Invoice List Widget -->
 
     <div class="card">

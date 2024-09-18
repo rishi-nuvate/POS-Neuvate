@@ -60,7 +60,9 @@ class SeasonController extends Controller
      */
     public function update(UpdateSeasonRequest $request, Season $season)
     {
-        //
+        $season->update($request->validated());
+
+        return redirect()->route('season.index')->with('success', 'Season updated.');
     }
 
     /**

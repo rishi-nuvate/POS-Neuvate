@@ -62,7 +62,7 @@ Route::controller(LoginRegistrationController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
 });
 
-Route::get('/authenticate/login', [AuthLogin::class, 'login'])->name('authenticate-login');
+Route::get('/authenticate/login', [AuthLogin::class, 'login'])->name('login');
 Route::get('/authenticate/register', [AuthLogin::class, 'register'])->name('authenticate-register');
 
 Route::middleware('auth:web')->group(callback: function () {
@@ -86,12 +86,13 @@ Route::middleware('auth:web')->group(callback: function () {
     // Season Master
     Route::resource('season', SeasonController::class);
 
-
     // Tags Master
     Route::resource('tags', TagsController::class);
 
 // Brand Master
     Route::resource('brand', BrandController::class);
+    Route::post('/brands/{brand}', [BrandController::class, 'destroy'])->name('brand.destroy');
+
 // Brand Master
     Route::resource('category', CategoryMasterController::class);
 
@@ -109,8 +110,8 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('employee/view', [EmployeeMasterController::class, 'index'])->name('view-employee');
 
     // Category Master
-//    Route::get('category/add', [CategoryMasterController::class, 'create'])->name('add-category');
-//    Route::get('category/view', [CategoryMasterController::class, 'index'])->name('view-category');
+    Route::get('category/add', [CategoryMasterController::class, 'create'])->name('add-category');
+    Route::get('category/view', [CategoryMasterController::class, 'index'])->name('view-category');
 
 
     //Inventory Master
