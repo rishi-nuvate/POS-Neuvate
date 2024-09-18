@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active"><a href="{{ route('tags.index') }}">Season</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('tags.index') }}">Tags</a></li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
     </nav>
@@ -26,10 +26,10 @@
 
 
                 <div class="content-header mb-4">
-                    <h3 class="mb-1">Add Season</h3>
+                    <h3 class="mb-1">Edit Tags</h3>
                 </div>
-                <form method="post" href="{{route('tabs.update')}}"  enctype="multipart/form-data">
-                    @method('put')
+                <form method="post" href="{{route('tags.update',['tag'=> $tag->id])}}"  enctype="multipart/form-data">
+                    @method('get')
                     @csrf
 
                     <div class="row">

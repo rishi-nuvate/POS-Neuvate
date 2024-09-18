@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class UpdateTagsRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateTagsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('update', $this->route('tags'));
     }
 
     /**
@@ -22,7 +24,7 @@ class UpdateTagsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string ', Rule::unique('tags')->ignore($this->route('tags')->id, 'id')],
         ];
     }
 }

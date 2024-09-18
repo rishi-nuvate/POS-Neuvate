@@ -37,7 +37,7 @@ class TagsPolicy
      */
     public function update(User $user, Tags $tags): bool
     {
-        //
+        return $user->role === "Super Admin";
     }
 
     /**
