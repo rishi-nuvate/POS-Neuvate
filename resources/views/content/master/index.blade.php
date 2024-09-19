@@ -127,7 +127,7 @@
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Category
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('add-category') }}"><i
+                                <a class="dropdown-item" href="{{ route('category.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
                                 <a class="dropdown-item" href="{{ route('view-category') }}"><i

@@ -52,7 +52,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        dd($brand);
+//        dd($brand);
 
         $brands = Brand::where('id',$brand->id)->first();
 

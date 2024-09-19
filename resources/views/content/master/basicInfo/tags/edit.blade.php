@@ -1,43 +1,37 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Add-Season')
+@section('title', 'Add-Brand')
 
 
 @section('content')
+
     <nav aria-label="breadcrumb" style="font-size: 20px">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active"><a href="{{ route('tags.index') }}">Tags</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('brand.index') }}">Brand</a></li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
     </nav>
-
-    {{--    <h4 class="py-3 mb-4">--}}
-    {{--        <span class="text-muted fw-light float-left">Master / Season /</span> Add--}}
-    {{--    </h4>--}}
     <!-- Invoice List Widget -->
 
     <div class="card">
-        {{-- <h5 class="card-header">Applicable Categories</h5> --}}
         <div class="card-body">
             <div class="content">
 
-
                 <div class="content-header mb-4">
-                    <h3 class="mb-1">Edit Tags</h3>
+                    <h3 class="mb-1">Add Brand</h3>
                 </div>
-                <form method="post" href="{{route('tags.update',['tag'=> $tag->id])}}"  enctype="multipart/form-data">
-                    @method('get')
+                <form method="post" action="{{route('tags.update',[$tag->id])}}" enctype="multipart/form-data">
+                    @method('put')
                     @csrf
 
                     <div class="row">
-
                         {{-- Example --}}
                         {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','inputClass', 'defaultValue', 'required','readonly')}} --}}
 
-                        {!! textInputField('col-md-6', 'Season Name', 'text', 'name', 'seasonName', 'Season Name', '*', '',$tag->name ,'required','') !!}
+                        {!! textInputField('col-md-6', 'Brand Name', 'text', 'name', 'brandName', 'Brand Name', '', '',$tag->name ,'','') !!}
 
                     </div>
                     <br>

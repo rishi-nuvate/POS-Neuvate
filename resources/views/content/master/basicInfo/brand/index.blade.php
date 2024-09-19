@@ -41,8 +41,7 @@
                                href="{{route('brand.edit',['brand' => $brand->id])}}"><i
                                     class="ti ti-edit mx-2 ti-sm"></i></a>
                             <button type="button" class="btn btn-icon btn-label-danger mx-2"
-                                    onclick="deleteBlog({{$brand->id}})"
-                               href="{{ route('brand.destroy', $brand->id) }}"><i
+                                    onclick="deleteBlog({{$brand->id}})"><i
                                     class="ti ti-trash mx-2 ti-sm"></i></button>
                         </td>
                     </tr>
@@ -56,8 +55,6 @@
 
     <script>
         function deleteBlog(blogId) {
-            // var VendorName = document.getElementById('VendorName').value;
-            // var VendorName = document.querySelector('#VendorName').value;
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",

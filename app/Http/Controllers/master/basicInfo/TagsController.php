@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTagsRequest;
 use App\Http\Requests\UpdateTagsRequest;
 use App\Models\Tags;
+use Illuminate\Support\Facades\Gate;
 
 class TagsController extends Controller
 {
@@ -35,7 +36,7 @@ class TagsController extends Controller
 
         Tags::create($request->validated());
 
-        return redirect()->back()->with('success', 'Tag Created Successfully');
+        return redirect()->route('tags.index')->with('success', 'Tag Created Successfully');
     }
 
     /**
@@ -51,6 +52,7 @@ class TagsController extends Controller
      */
     public function edit(Tags $tag)
     {
+//        dd($tag);
         $tag = Tags::where('id', $tag->id)->first();
         return view('content.master.basicInfo.tags.edit', compact('tag'));
     }
@@ -60,8 +62,9 @@ class TagsController extends Controller
      */
     public function update(UpdateTagsRequest $request, Tags $tag)
     {
+//        dd($tag);
         $tag->update($request->validated());
-
+//
         return redirect()->route('tags.index')->with('success', 'Tags updated.');
 
     }
@@ -71,6 +74,9 @@ class TagsController extends Controller
      */
     public function destroy(Tags $tags)
     {
-        //
+        if(Gate::allows('delete', $tags)){
+            $tags->delete();
+        }
+        return redirect()->route('tags.index')->with('success', 'Tags Deleted.');
     }
 }

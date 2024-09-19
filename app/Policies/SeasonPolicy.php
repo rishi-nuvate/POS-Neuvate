@@ -45,7 +45,7 @@ class SeasonPolicy
      */
     public function delete(User $user, Season $season): bool
     {
-        //
+        return $user->role === "Super Admin";
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSeasonRequest;
 use App\Http\Requests\UpdateSeasonRequest;
 use App\Models\Season;
+use Illuminate\Support\Facades\Gate;
 
 class SeasonController extends Controller
 {
@@ -70,6 +71,10 @@ class SeasonController extends Controller
      */
     public function destroy(Season $season)
     {
-        //
+        if (Gate::allows('delete', $season)) {
+            $season->delete();
+        }
+
+        return redirect()->route('season.index')->with('success', 'Season deleted.');
     }
 }

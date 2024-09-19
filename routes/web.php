@@ -85,13 +85,15 @@ Route::middleware('auth:web')->group(callback: function () {
 
     // Season Master
     Route::resource('season', SeasonController::class);
+    Route::post('/season/{season}', [SeasonController::class, 'destroy']);
 
     // Tags Master
     Route::resource('tags', TagsController::class);
+    Route::post('/tags/{tag}', [TagsController::class, 'destroy']);
 
 // Brand Master
     Route::resource('brand', BrandController::class);
-    Route::post('/brands/{brand}', [BrandController::class, 'destroy'])->name('brand.destroy');
+    Route::post('/brands/{brand}', [BrandController::class, 'destroy']);
 
 // Brand Master
     Route::resource('category', CategoryMasterController::class);

@@ -41,7 +41,7 @@
                             <a class="btn btn-icon btn-label-primary mx-2" href="{{route('season.edit',['season'=> $season->id])}}"><i
                                     class="ti ti-edit mx-2 ti-sm"></i></a>
                             <button type="button" class="btn btn-icon btn-label-danger mx-2"><i
-                                    class="ti ti-trash mx-2 ti-sm"></i></button>
+                                    class="ti ti-trash mx-2 ti-sm" onclick="deleteSeason({{$season->id}})"></i></button>
                         </td>
                     </tr>
                     @php$num++ @endphp
@@ -51,5 +51,39 @@
             </table>
         </div>
     </div>
+
+    <script>
+        function deleteSeason(seasonId) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonText: "Yes, Approve it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#overlay").fadeIn(100);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/season/' + seasonId,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            seasonId: seasonId,
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function (resultData) {
+                            Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
+                                location.reload();
+                                $("#overlay").fadeOut(100);
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
 
 @endsection

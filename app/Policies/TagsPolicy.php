@@ -45,7 +45,7 @@ class TagsPolicy
      */
     public function delete(User $user, Tags $tags): bool
     {
-        //
+        return $user->role === "Super Admin";
     }
 
     /**

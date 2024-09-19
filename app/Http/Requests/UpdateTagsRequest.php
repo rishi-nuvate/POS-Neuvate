@@ -13,7 +13,7 @@ class UpdateTagsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('update', $this->route('tags'));
+       return Gate::allows('update', $this->route('tags'));
     }
 
     /**
