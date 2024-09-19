@@ -20,7 +20,7 @@
       .fade-in {
           animation: fadeIn 0.8s ease-in-out forwards;
       }
-  
+
       @keyframes fadeIn {
           from {
               opacity: 0;
@@ -57,11 +57,8 @@
 <h4 class="py-3 mb-4">
     <span class="text-muted fw-light float-left">Category /</span> Add
 </h4>
-<!-- Invoice List Widget -->
-
 
 <div class="card">
-    {{-- <h5 class="card-header">Applicable Categories</h5> --}}
     <div class="card-body">
         <div class="content">
 
@@ -69,7 +66,7 @@
             <div class="content-header mb-4">
                 <h3 class="mb-1">Category Information</h3>
             </div>
-            <form method="post" action="" enctype="multipart/form-data">
+            <form method="post" action="{{route('category.store')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
@@ -77,8 +74,8 @@
                     <div class="col-md-6">
                         <div class="col-md-12">
                             <label class="form-label" for="categoryName">Category Name</label>
-                            <input type="text" id="categoryName" name="categoryName"
-                                class="form-control" value="{{ old('categoryName') }}" placeholder="Category Name" />
+                            <input type="text" id="categoryName" name="CategoryName"
+                                class="form-control" value="{{ old('CategoryName') }}" placeholder="Category Name" />
                         </div>
                     </div>
 
@@ -93,8 +90,8 @@
 
                     <div class="col-md-6 mt-2">
                         <div class="col-md-10">
-                            <label class="form-label" for="SubCategoryName_0">Subcategory Name</label>
-                            <input type="text" id="SubCategoryName_0" name="SubCategoryName[0]" value=""
+                            <label class="form-label" for="SubCatName_0">Subcategory Name</label>
+                            <input type="text" id="SubCatName_0" name="SubCatName[]" value=""
                                 class="form-control" placeholder="Sub Category Name" />
                         </div>
                     </div>
@@ -129,8 +126,8 @@
         newDiv.innerHTML = `
         <div class="row">
           <div class="col-md-10 mt-2">
-              <label class="form-label" for="SubCategoryName_` + counter + `">Subcategory Name</label>
-              <input required type="text" id="SubCategoryName_` + counter + `" name="SubCategoryName[` + counter + `]" value="" class="form-control" placeholder="Sub Category Name" autofocus/>
+              <label class="form-label" for="SubCatName_` + counter + `">Subcategory Name</label>
+              <input required type="text" id="SubCatName_` + counter + `" name="SubCatName[` + counter + `]" value="" class="form-control" placeholder="Sub Category Name" autofocus/>
           </div>
           <div class="col-md-2 mt-3">
             <div class="demo-inline-spacing">

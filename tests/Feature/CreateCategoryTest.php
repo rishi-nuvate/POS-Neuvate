@@ -1,46 +1,43 @@
 <?php
 
-use App\Models\CategoryMaster;
+use App\Models\Category;
 use App\Models\User;
 
-test('admin can create a season', function () {
+test('example', function () {
+    $response = $this->get('/');
 
-    $this->actingAs(User::factory()->createOne(['role' => 'Super Admin']));
-
-    $data = [
-        'CategoryName' => 'test'
-    ];
-
-    $this->post(route('category.store'), $data)
-        ->assertRedirect();
-
-    $category = CategoryMaster::first();
-
-    // Assertions
-    expect($category)->not->toBeNull();
-    expect($category->CategoryName)->toBe('test');
-
+    $response->assertStatus(200);
 });
 
+test(' can create a brand', function () {
 
-
-test('admin can update a brand', function () {
-    // Create a user with the "Super Admin" role and log in
     $this->actingAs(User::factory()->createOne(['role' => 'Super Admin']));
 
-    // Create a brand to update
-    $season = \App\Models\Season::factory()->createOne(['name' => 'Old Brand Name']);
-
-    // Data to update the brand
-    $data = [
-        'name' => 'updated Brand Name',
+    $requestData = [
+        'CategoryName' => 'Sample Category',
+        'SubCatName' => ['SubCat 1', 'SubCat 2', 'SubCat 3'],
     ];
 
-    // Send the PUT request to update the brand
-    $this->put(route('brand.update', $season->id), $data)
-        ->assertRedirect(); // Assert the request was redirected
+    // Simulate the POST request to the route that handles category creation
+    $response = $this->post(route('category.store'),$requestData);
 
-    // Assert the brand was updated in the database
-    expect(\App\Models\Season::find($season->id))
-        ->name->toBe('updated Brand Name');
+
+    // Check if the category was created
+    $this->assertDatabaseHas('categories', [
+        'name' => 'Sample Category',
+    ]);
+
+    // Retrieve the created category
+    $category = Category::where('name', 'Sample Category')->first();
+
+    // Check if the subcategories were created
+    foreach ($requestData['SubCatName'] as $subCatName) {
+        $this->assertDatabaseHas('sub_categories', [
+            'name' => $subCatName,
+        ]);
+    }
+
+    // Check if the response was a redirect with success message
+    $response->assertRedirect(); // Adjust this based on your actual redirection
+    $response->assertSessionHas('success', 'Category has been created');
 });

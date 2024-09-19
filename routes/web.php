@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\LoginRegistrationController;
 use App\Http\Controllers\authenticate\AuthLogin;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryMasterController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
 use App\Http\Controllers\centralWarehouse\GRNMasterController;
@@ -96,7 +97,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/brands/{brand}', [BrandController::class, 'destroy']);
 
 // Brand Master
-    Route::resource('category', CategoryMasterController::class);
+    Route::resource('category', CategoryController::class);
 
 
     // Tags Master

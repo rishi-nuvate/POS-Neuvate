@@ -36,5 +36,5 @@ test('admin can update a tags', function () {
 
     // Assert the brand was updated in the database
     expect(\App\Models\Season::find($tag->id))
-        ->name->toBe('updated season Name');
+        ->name->toBe('updated tags Name');
 });

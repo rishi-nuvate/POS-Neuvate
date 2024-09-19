@@ -130,7 +130,7 @@
                                 <a class="dropdown-item" href="{{ route('category.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href="{{ route('view-category') }}"><i
+                                <a class="dropdown-item" href="{{ route('category.index') }}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>
