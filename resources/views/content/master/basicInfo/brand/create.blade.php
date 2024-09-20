@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <nav aria-label="breadcrumb" style="font-size: 30px">
+    <nav aria-label="breadcrumb" style="font-size: 20px">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>

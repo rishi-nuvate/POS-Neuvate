@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master\basicInfo;
 
-use App\Models\SubCategory;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Models\SubCategory;
 
 class SubCategoryController extends Controller
 {

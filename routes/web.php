@@ -4,7 +4,6 @@
 use App\Http\Controllers\Auth\LoginRegistrationController;
 use App\Http\Controllers\authenticate\AuthLogin;
 use App\Http\Controllers\BalanceController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryMasterController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
 use App\Http\Controllers\centralWarehouse\GRNMasterController;
@@ -13,9 +12,11 @@ use App\Http\Controllers\centralWarehouse\PackMasterController;
 use App\Http\Controllers\centralWarehouse\PickMasterController;
 use App\Http\Controllers\centralWarehouse\ShelfMasterController;
 use App\Http\Controllers\centralWarehouse\StockInMasterController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\master\basicInfo\BrandController;
+use App\Http\Controllers\master\basicInfo\CategoryController;
 use App\Http\Controllers\master\basicInfo\SeasonController;
 use App\Http\Controllers\master\basicInfo\TagsController;
 use App\Http\Controllers\master\EmployeeMasterController;
@@ -98,11 +99,10 @@ Route::middleware('auth:web')->group(callback: function () {
 
 // Brand Master
     Route::resource('category', CategoryController::class);
+    Route::post('/category/{category}', [CategoryController::class, 'destroy']);
 
-
-    // Tags Master
-    Route::get('tags/add', [TagsMasterController::class, 'create'])->name('add-tags');
-    Route::get('tags/view', [TagsMasterController::class, 'index'])->name('view-tags');
+// Company
+    Route::resource('company', CompanyController::class);
 
     // SKU Master
     Route::get('product/add', [ProductMasterController::class, 'create'])->name('add-product');

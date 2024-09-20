@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Company;
+use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
-class CategoryController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('content.master.category.index');
+        return view('content.master.company.company.index');
+
     }
 
     /**
@@ -23,35 +24,25 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('content.master.basicInfo.category.create');
-
+        return view('content.master.company.company.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCompanyRequest $request)
     {
-
 //        dd($request->all());
-        if (Gate::allows('create', Category::class)) {
 
+        if (Gate::allows('create', Company::class)) {
             DB::beginTransaction();
-
             try {
-                $cat = Category::create([
-                    'name' => $request->CategoryName,
-                ]);
-
-                foreach ($request->SubCatName as $subCat) {
-                    $cat->subCategory()->create([
-                        'name' => $subCat,
-                    ]);
-                }
-
+                $company = new Company();
+                $company->fill($request->only(['CompanyName','BillingName','BillingMobileNo','BillingEmail','AddLine1','AddLine2','City','State','PinCode']));
+                $company->save();
                 DB::commit();
-                return redirect()->back()->with('success', 'Category has been created');
-
+                dd($company);
+                return redirect()->route('company.index')->with('success','successfully created');
             } catch (\Exception $e) {
                 DB::rollBack();
                 return redirect()->back()->with('error', $e->getMessage());
@@ -62,7 +53,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Company $company)
     {
         //
     }
@@ -70,7 +61,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Company $company)
     {
         //
     }
@@ -78,7 +69,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
         //
     }
@@ -86,7 +77,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Company $company)
     {
         //
     }

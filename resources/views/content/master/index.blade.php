@@ -44,6 +44,14 @@
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Company
                             </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" href="{{ route('company.create') }}"><i
+                                        class="ti ti-pencil me-1"></i>
+                                    Add</a>
+                                <a class="dropdown-item" href="{{ route('company.index') }}"><i
+                                        class="ti ti-eye me-1"></i>
+                                    View</a>
+                            </div>
                         </div>
 
                         {{--                        Central Warehouse--}}

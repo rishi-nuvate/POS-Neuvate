@@ -2,6 +2,8 @@
 
 @section('title', 'List-Brands')
 
+
+
 @section('content')
 
     <nav aria-label="breadcrumb" style="font-size: 20px">
@@ -54,6 +56,8 @@
 
 
     <script>
+
+
         function deleteBlog(blogId) {
             Swal.fire({
                 title: "Are you sure?",
@@ -85,4 +89,10 @@
             });
         }
     </script>
+
+@endsection
+
+@section('page-script')
+    <script src="{{ asset('assets/js/tables-datatables-basic.js') }}"></script>
+
 @endsection

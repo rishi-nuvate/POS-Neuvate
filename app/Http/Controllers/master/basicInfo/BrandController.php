@@ -86,6 +86,8 @@ class BrandController extends Controller
         return redirect()->route('brand.index')->with('success', 'Brand deleted.');
     }
 
+
+
 //    public function delete(Brand $brand)
 //    {
 //        $this->authorize('delete', $brand);
