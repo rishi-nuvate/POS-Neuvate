@@ -77,4 +77,29 @@ class SeasonController extends Controller
 
         return redirect()->route('season.index')->with('success', 'Season deleted.');
     }
+
+    public function getSeasonData()
+    {
+        $allSeasons = Season::all();
+
+//        dd($allBrands);
+        $num = 1;
+        $result = ['data' => []];
+        foreach ($allSeasons as $season) {
+
+            $id = $season->id;
+            $name = $season->name;
+
+            $action =
+                ' <a href="season/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+            <button onclick="deleteSeason(' .
+                $season->id .
+                ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
+            array_push($result['data'], [$num, $name, $action]);
+            $num++;
+        }
+        echo json_encode($result);
+
+        // return view('tour.create', compact('navSubCategory', 'navCategory'));
+    }
 }

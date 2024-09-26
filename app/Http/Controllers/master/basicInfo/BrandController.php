@@ -17,7 +17,7 @@ class BrandController extends Controller
     {
         $brands = Brand::all();
 
-        return view('content.master.basicInfo.brand.index',compact('brands'));
+        return view('content.master.basicInfo.brand.index', compact('brands'));
 
     }
 
@@ -54,9 +54,9 @@ class BrandController extends Controller
     {
 //        dd($brand);
 
-        $brands = Brand::where('id',$brand->id)->first();
+        $brands = Brand::where('id', $brand->id)->first();
 
-        return view('content.master.basicInfo.brand.edit',compact('brands'));
+        return view('content.master.basicInfo.brand.edit', compact('brands'));
 
     }
 
@@ -86,14 +86,28 @@ class BrandController extends Controller
         return redirect()->route('brand.index')->with('success', 'Brand deleted.');
     }
 
+    public function getBrandData()
+    {
+        $allBrands = Brand::all();
 
+//        dd($allBrands);
+        $num = 1;
+        $result = ['data' => []];
+        foreach ($allBrands as $brand) {
 
-//    public function delete(Brand $brand)
-//    {
-//        $this->authorize('delete', $brand);
-//
-//        // Perform the deletion
-//        $brand->delete();
-//        return redirect()->route('brand.index')->with('success', 'Brand deleted.');
-//    }
+            $id = $brand->id;
+            $name = $brand->name;
+
+            $action =
+                ' <a href="brand/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+            <button onclick="deleteBlog(' .
+                $brand->id .
+                ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
+            array_push($result['data'], [$num, $name, $action]);
+            $num++;
+        }
+        echo json_encode($result);
+
+        // return view('tour.create', compact('navSubCategory', 'navCategory'));
+    }
 }
