@@ -40,12 +40,11 @@ class CompanyController extends Controller
 
         if (Gate::allows('create', Company::class)) {
             DB::beginTransaction();
-            try {
 
+            try {
                 $company = new Company();
                 $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode']));
                 $company->save();
-
                 $id = $company->id;
                 if (!empty($request->ShipCompName)) {
                     foreach ($request->ShipCompName as $key => $company) {
@@ -65,6 +64,8 @@ class CompanyController extends Controller
                         $shipping->save();
                     }
                 }
+
+
                 DB::commit();
 //                dd($company);
                 return redirect()->route('company.index')->with('success', 'successfully created');
@@ -88,7 +89,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        $company = $company::with('ShipAdd')->where('id',$company->id)->first();
+        $company = $company::with('ShipAdd')->where('id', $company->id)->first();
 //dd($company);
         return view('content.master.company.company.edit', compact('company'));
     }
@@ -109,7 +110,7 @@ class CompanyController extends Controller
 
                 if (!empty($request->shipId)) {
                     foreach ($request->shipId as $key => $value) {
-                        $shipping = CompanyShipAddress::where('company_id', $value)->first();
+                        $shipping = CompanyShipAddress::where('id', $value)->first();
                         $shipping->update([
                             'ShipCompName' => $request->ShipCompName[$key],
                             'ShipPersonNo' => $request->ShipPersonNo[$key],
