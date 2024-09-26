@@ -12,13 +12,13 @@ use App\Http\Controllers\centralWarehouse\PackMasterController;
 use App\Http\Controllers\centralWarehouse\PickMasterController;
 use App\Http\Controllers\centralWarehouse\ShelfMasterController;
 use App\Http\Controllers\centralWarehouse\StockInMasterController;
-use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\master\basicInfo\BrandController;
 use App\Http\Controllers\master\basicInfo\CategoryController;
 use App\Http\Controllers\master\basicInfo\SeasonController;
 use App\Http\Controllers\master\basicInfo\TagsController;
+use App\Http\Controllers\master\company\CompanyController;
 use App\Http\Controllers\master\EmployeeMasterController;
 use App\Http\Controllers\master\InventoryMasterController;
 use App\Http\Controllers\master\MasterController;
@@ -35,6 +35,7 @@ use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
 use App\Http\Controllers\supplyChain\POMasterController;
 use App\Http\Controllers\supplyChain\SupplyChainMasterController;
+use App\Http\Controllers\VenderController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -88,14 +89,17 @@ Route::middleware('auth:web')->group(callback: function () {
     // Season Master
     Route::resource('season', SeasonController::class);
     Route::post('/season/{season}', [SeasonController::class, 'destroy']);
+    Route::post('/seasonData', [SeasonController::class, 'getSeasonData'])->name('getSeasonData');
 
     // Tags Master
     Route::resource('tags', TagsController::class);
     Route::post('/tags/{tag}', [TagsController::class, 'destroy']);
+    Route::post('/tagsData/', [TagsController::class, 'getTagData'])->name('getTagData');
 
 // Brand Master
     Route::resource('brand', BrandController::class);
     Route::post('/brands/{brand}', [BrandController::class, 'destroy']);
+    Route::post('/brandsData', [BrandController::class, 'getBrandData'])->name('getBrandData');
 
 // Brand Master
     Route::resource('category', CategoryController::class);
@@ -103,6 +107,11 @@ Route::middleware('auth:web')->group(callback: function () {
 
 // Company
     Route::resource('company', CompanyController::class);
+    Route::post('/company/{company}', [CompanyController::class, 'destroy']);
+
+//    Vendor
+    Route::resource('vendor',VenderController::class);
+    Route::post('vendor/store',[VenderController::class,'store']);
 
     // SKU Master
     Route::get('product/add', [ProductMasterController::class, 'create'])->name('add-product');
@@ -110,12 +119,6 @@ Route::middleware('auth:web')->group(callback: function () {
 
     // Employee Master
     Route::get('employee/add', [EmployeeMasterController::class, 'create'])->name('add-employee');
-    Route::get('employee/view', [EmployeeMasterController::class, 'index'])->name('view-employee');
-
-    // Category Master
-    Route::get('category/add', [CategoryMasterController::class, 'create'])->name('add-category');
-    Route::get('category/view', [CategoryMasterController::class, 'index'])->name('view-category');
-
 
     //Inventory Master
     Route::resource('/storeInventory', InventoryMasterController::class);
