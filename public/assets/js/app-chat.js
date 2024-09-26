@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function scrollToBottom() {
       chatHistoryBody.scrollTo(0, chatHistoryBody.scrollHeight);
     }
-
     scrollToBottom();
 
     // User About Maxlength Init

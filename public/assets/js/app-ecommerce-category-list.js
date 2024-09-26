@@ -56,12 +56,12 @@ $(function () {
       ajax: assetsPath + 'json/ecommerce-category-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'id'},
-        {data: 'categories'},
-        {data: 'total_products'},
-        {data: 'total_earnings'},
-        {data: ''}
+        { data: '' },
+        { data: 'id' },
+        { data: 'categories' },
+        { data: 'total_products' },
+        { data: 'total_earnings' },
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -192,7 +192,7 @@ $(function () {
       buttons: [
         {
           text: '<i class="ti ti-plus ti-xs me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Add Category</span>',
-          className: 'add-new btn btn-primary ms-2',
+          className: 'add-new btn btn-primary ms-2 waves-effect waves-light',
           attr: {
             'data-bs-toggle': 'offcanvas',
             'data-bs-target': '#offcanvasEcommerceCategoryList'
@@ -213,18 +213,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td> ' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td class="ps-0">' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td> ' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td class="ps-0">' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

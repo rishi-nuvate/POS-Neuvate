@@ -431,7 +431,7 @@
         parentHeightOffset: 0,
         stacked: true,
         type: 'bar',
-        toolbar: {show: false}
+        toolbar: { show: false }
       },
       tooltip: {
         enabled: false
@@ -652,8 +652,8 @@
     budgetChartOptions = {
       chart: {
         height: 100,
-        toolbar: {show: false},
-        zoom: {enabled: false},
+        toolbar: { show: false },
+        zoom: { enabled: false },
         type: 'line'
       },
       series: [
@@ -813,13 +813,13 @@
       ajax: assetsPath + 'json/invoice-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'invoice_id'},
-        {data: 'invoice_status'},
-        {data: 'total'},
-        {data: 'issued_date'},
-        {data: 'invoice_status'},
-        {data: 'action'}
+        { data: '' },
+        { data: 'invoice_id' },
+        { data: 'invoice_status' },
+        { data: 'total' },
+        { data: 'issued_date' },
+        { data: 'invoice_status' },
+        { data: 'action' }
       ],
       columnDefs: [
         {
@@ -837,7 +837,7 @@
           render: function (data, type, full, meta) {
             var $invoice_id = full['invoice_id'];
             // Creates full output for row
-            var $row_output = '<a href="' + baseUrl + 'app/invoice/preview"><span>#' + $invoice_id + '</span></a>';
+            var $row_output = '<a href="app-invoice-preview.html"><span>#' + $invoice_id + '</span></a>';
             return $row_output;
           }
         },
@@ -890,9 +890,7 @@
             return (
               '<div class="d-flex align-items-center">' +
               '<a href="javascript:;" class="text-body" data-bs-toggle="tooltip" title="Send Mail"><i class="ti ti-mail me-2 ti-sm"></i></a>' +
-              '<a href="' +
-              baseUrl +
-              'app/invoice/preview"class="text-body" data-bs-toggle="tooltip" title="Preview"><i class="ti ti-eye mx-2 ti-sm"></i></a>' +
+              '<a href="app-invoice-preview.html" class="text-body" data-bs-toggle="tooltip" title="Preview"><i class="ti ti-eye mx-2 ti-sm"></i></a>' +
               '<div class="d-inline-block">' +
               '<a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm lh-1"></i></a>' +
               '<div class="dropdown-menu dropdown-menu-end m-0">' +
@@ -933,9 +931,9 @@
       buttons: [
         {
           text: '<i class="ti ti-plus me-md-2"></i><span class="d-md-inline-block d-none">Create Invoice</span>',
-          className: 'btn btn-primary',
+          className: 'btn btn-primary waves-effect waves-light',
           action: function (e, dt, button, config) {
-            window.location = baseUrl + 'app/invoice/add';
+            window.location = 'app-invoice-add.html';
           }
         }
       ],
@@ -953,18 +951,18 @@
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

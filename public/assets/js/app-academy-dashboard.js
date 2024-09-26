@@ -214,7 +214,7 @@
         onDatasetHover: {
           highlightDataSeries: false
         },
-        custom: function ({series, seriesIndex, dataPointIndex, w}) {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
           return '<div class="px-3 py-2">' + '<span>' + series[seriesIndex][dataPointIndex] + '%</span>' + '</div>';
         }
       },
@@ -305,12 +305,12 @@
       ajax: assetsPath + 'json/app-academy-dashboard.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'id'},
-        {data: 'course name'},
-        {data: 'time'},
-        {data: 'progress'},
-        {data: 'status'}
+        { data: '' },
+        { data: 'id' },
+        { data: 'course name' },
+        { data: 'time' },
+        { data: 'progress' },
+        { data: 'status' }
       ],
       columnDefs: [
         {
@@ -367,9 +367,7 @@
               logoObj[$logo] +
               '</span>' +
               '<div>' +
-              '<a class="text-body text-truncate fw-medium mb-2 text-wrap" href=" ' +
-              baseUrl +
-              'app/academy/course-details">' +
+              '<a class="text-body text-truncate fw-medium mb-2 text-wrap" href="app-academy-course-details.html">' +
               $course +
               '</a>' +
               '<div class="d-flex align-items-center mt-1">' +
@@ -480,18 +478,18 @@
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

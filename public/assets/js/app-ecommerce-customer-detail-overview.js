@@ -8,12 +8,12 @@
 $(function () {
   // Variable declaration for table
   var dt_customer_order = $('.datatables-customer-order'),
-    order_details = baseUrl + 'app/ecommerce/order/details',
+    order_details = 'app-ecommerce-order-details.html',
     statusObj = {
-      1: {title: 'Ready to  Pickup', class: 'bg-label-info'},
-      2: {title: 'Dispatched', class: 'bg-label-warning'},
-      3: {title: 'Delivered', class: 'bg-label-success'},
-      4: {title: 'Out for delivery', class: 'bg-label-primary'}
+      1: { title: 'Ready to  Pickup', class: 'bg-label-info' },
+      2: { title: 'Dispatched', class: 'bg-label-warning' },
+      3: { title: 'Delivered', class: 'bg-label-success' },
+      4: { title: 'Out for delivery', class: 'bg-label-primary' }
     };
 
   // orders datatable
@@ -22,13 +22,13 @@ $(function () {
       ajax: assetsPath + 'json/ecommerce-customer-order.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'id'},
-        {data: 'order'},
-        {data: 'date'},
-        {data: 'status'},
-        {data: 'spent'},
-        {data: ' '}
+        { data: '' },
+        { data: 'id' },
+        { data: 'order' },
+        { data: 'date' },
+        { data: 'status' },
+        { data: 'spent' },
+        { data: ' ' }
       ],
       columnDefs: [
         {
@@ -71,7 +71,7 @@ $(function () {
           targets: 3,
           render: function (data, type, full, meta) {
             var date = new Date(full.date); // convert the date string to a Date object
-            var formattedDate = date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+            var formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             return '<span class="text-nowrap">' + formattedDate + '</span > ';
           }
         },
@@ -148,18 +148,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

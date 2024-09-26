@@ -8,12 +8,12 @@
 $(function () {
   var dtUserTable = $('.datatables-users'),
     statusObj = {
-      1: {title: 'Pending', class: 'bg-label-warning'},
-      2: {title: 'Active', class: 'bg-label-success'},
-      3: {title: 'Inactive', class: 'bg-label-secondary'}
+      1: { title: 'Pending', class: 'bg-label-warning' },
+      2: { title: 'Active', class: 'bg-label-success' },
+      3: { title: 'Inactive', class: 'bg-label-secondary' }
     };
 
-  var userView = baseUrl + 'app/user/view/account';
+  var userView = 'app-user-view-account.html';
 
   // Users List datatable
   if (dtUserTable.length) {
@@ -21,13 +21,13 @@ $(function () {
       ajax: assetsPath + 'json/user-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'full_name'},
-        {data: 'role'},
-        {data: 'current_plan'},
-        {data: 'billing'},
-        {data: 'status'},
-        {data: ''}
+        { data: '' },
+        { data: 'full_name' },
+        { data: 'role' },
+        { data: 'current_plan' },
+        { data: 'billing' },
+        { data: 'status' },
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -181,18 +181,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

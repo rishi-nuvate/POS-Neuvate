@@ -21,7 +21,7 @@ $(function () {
   // Variable declaration for table
   var dt_customer_table = $('.datatables-customers'),
     select2 = $('.select2'),
-    customerView = baseUrl + 'app/ecommerce/customer/details/overview';
+    customerView = 'app-ecommerce-customer-details-overview.html';
   if (select2.length) {
     var $this = select2;
     $this.wrap('<div class="position-relative"></div>').select2({
@@ -36,13 +36,13 @@ $(function () {
       ajax: assetsPath + 'json/ecommerce-customer-all.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'id'},
-        {data: 'customer'},
-        {data: 'customer_id'},
-        {data: 'country'},
-        {data: 'order'},
-        {data: 'total_spent'}
+        { data: '' },
+        { data: 'id' },
+        { data: 'customer' },
+        { data: 'customer_id' },
+        { data: 'country' },
+        { data: 'order' },
+        { data: 'total_spent' }
       ],
       columnDefs: [
         {
@@ -191,7 +191,7 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle me-3',
+          className: 'btn btn-label-secondary dropdown-toggle me-3 waves-effect waves-light',
           text: '<i class="ti ti-download me-1"></i>Export',
           buttons: [
             {
@@ -331,7 +331,7 @@ $(function () {
         },
         {
           text: '<i class="ti ti-plus me-0 me-sm-1 mb-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add Customer</span>',
-          className: 'add-new btn btn-primary py-2',
+          className: 'add-new btn btn-primary py-2 waves-effect waves-light',
           attr: {
             'data-bs-toggle': 'offcanvas',
             'data-bs-target': '#offcanvasEcommerceCustomerAdd'
@@ -352,18 +352,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

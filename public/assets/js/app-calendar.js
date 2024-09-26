@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return $badge;
       }
-
       eventLabel.wrap('<div class="position-relative"></div>').select2({
         placeholder: 'Select value',
         dropdownParent: eventLabel.parent(),
@@ -101,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return $avatar;
       }
-
       eventGuests.wrap('<div class="position-relative"></div>').select2({
         placeholder: 'Select value',
         dropdownParent: eventGuests.parent(),
@@ -272,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
       direction: direction,
       initialDate: new Date(),
       navLinks: true, // can click day/week names to navigate views
-      eventClassNames: function ({event: calendarEvent}) {
+      eventClassNames: function ({ event: calendarEvent }) {
         const colorName = calendarsColor[calendarEvent._def.extendedProps.calendar];
         // Background Color
         return ['fc-event-' + colorName];
