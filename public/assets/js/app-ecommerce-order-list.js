@@ -23,16 +23,16 @@ $(function () {
 
   var dt_order_table = $('.datatables-order'),
     statusObj = {
-      1: {title: 'Dispatched', class: 'bg-label-warning'},
-      2: {title: 'Delivered', class: 'bg-label-success'},
-      3: {title: 'Out for Delivery', class: 'bg-label-primary'},
-      4: {title: 'Ready to Pickup', class: 'bg-label-info'}
+      1: { title: 'Dispatched', class: 'bg-label-warning' },
+      2: { title: 'Delivered', class: 'bg-label-success' },
+      3: { title: 'Out for Delivery', class: 'bg-label-primary' },
+      4: { title: 'Ready to Pickup', class: 'bg-label-info' }
     },
     paymentObj = {
-      1: {title: 'Paid', class: 'text-success'},
-      2: {title: 'Pending', class: 'text-warning'},
-      3: {title: 'Failed', class: 'text-danger'},
-      4: {title: 'Cancelled', class: 'text-secondary'}
+      1: { title: 'Paid', class: 'text-success' },
+      2: { title: 'Pending', class: 'text-warning' },
+      3: { title: 'Failed', class: 'text-danger' },
+      4: { title: 'Cancelled', class: 'text-secondary' }
     };
 
   // E-commerce Products datatable
@@ -42,15 +42,15 @@ $(function () {
       ajax: assetsPath + 'json/ecommerce-customer-order.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: 'id'},
-        {data: 'id'},
-        {data: 'order'},
-        {data: 'date'},
-        {data: 'customer'}, //email //avatar
-        {data: 'payment'},
-        {data: 'status'},
-        {data: 'method'}, //method_number
-        {data: ''}
+        { data: 'id' },
+        { data: 'id' },
+        { data: 'order' },
+        { data: 'date' },
+        { data: 'customer' }, //email //avatar
+        { data: 'payment' },
+        { data: 'status' },
+        { data: 'method' }, //method_number
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -82,8 +82,7 @@ $(function () {
           render: function (data, type, full, meta) {
             var $order_id = full['order'];
             // Creates full output for row
-            var $row_output =
-              '<a href=" ' + baseUrl + 'app/ecommerce/order/details"><span>#' + $order_id + '</span></a>';
+            var $row_output = '<a href="app-ecommerce-order-details.html"><span>#' + $order_id + '</span></a>';
             return $row_output;
           }
         },
@@ -133,9 +132,7 @@ $(function () {
               '</div>' +
               '</div>' +
               '<div class="d-flex flex-column">' +
-              '<h6 class="m-0"><a href="' +
-              baseUrl +
-              'pages/profile-user" class="text-body">' +
+              '<h6 class="m-0"><a href="pages-profile-user.html" class="text-body">' +
               $name +
               '</a></h6>' +
               '<small class="text-muted">' +
@@ -216,9 +213,7 @@ $(function () {
               '<div class="d-flex justify-content-sm-center align-items-sm-center">' +
               '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>' +
               '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              '<a href=" ' +
-              baseUrl +
-              'app/ecommerce/order/details" class="dropdown-item">View</a>' +
+              '<a href="app-ecommerce-order-details.html" class="dropdown-item">View</a>' +
               '<a href="javascript:0;" class="dropdown-item delete-record">' +
               'Delete' +
               '</a>' +
@@ -247,7 +242,7 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle',
+          className: 'btn btn-label-secondary dropdown-toggle waves-effect waves-light',
           text: '<i class="ti ti-download me-1"></i>Export',
           buttons: [
             {
@@ -395,18 +390,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

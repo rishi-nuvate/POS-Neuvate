@@ -20,27 +20,27 @@ $(function () {
 
   // Variable declaration for table
   var dt_product_table = $('.datatables-products'),
-    productAdd = baseUrl + 'app/ecommerce/product/add',
+    productAdd = 'app-ecommerce-product-add.html',
     statusObj = {
-      1: {title: 'Scheduled', class: 'bg-label-warning'},
-      2: {title: 'Publish', class: 'bg-label-success'},
-      3: {title: 'Inactive', class: 'bg-label-danger'}
+      1: { title: 'Scheduled', class: 'bg-label-warning' },
+      2: { title: 'Publish', class: 'bg-label-success' },
+      3: { title: 'Inactive', class: 'bg-label-danger' }
     },
     categoryObj = {
-      0: {title: 'Household'},
-      1: {title: 'Office'},
-      2: {title: 'Electronics'},
-      3: {title: 'Shoes'},
-      4: {title: 'Accessories'},
-      5: {title: 'Game'}
+      0: { title: 'Household' },
+      1: { title: 'Office' },
+      2: { title: 'Electronics' },
+      3: { title: 'Shoes' },
+      4: { title: 'Accessories' },
+      5: { title: 'Game' }
     },
     stockObj = {
-      0: {title: 'Out_of_Stock'},
-      1: {title: 'In_Stock'}
+      0: { title: 'Out_of_Stock' },
+      1: { title: 'In_Stock' }
     },
     stockFilterValObj = {
-      0: {title: 'Out of Stock'},
-      1: {title: 'In Stock'}
+      0: { title: 'Out of Stock' },
+      1: { title: 'In Stock' }
     };
 
   // E-commerce Products datatable
@@ -50,16 +50,16 @@ $(function () {
       ajax: assetsPath + 'json/ecommerce-product-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: 'id'},
-        {data: 'id'},
-        {data: 'product_name'},
-        {data: 'category'},
-        {data: 'stock'},
-        {data: 'sku'},
-        {data: 'price'},
-        {data: 'quantity'},
-        {data: 'status'},
-        {data: ''}
+        { data: 'id' },
+        { data: 'id' },
+        { data: 'product_name' },
+        { data: 'category' },
+        { data: 'stock' },
+        { data: 'sku' },
+        { data: 'price' },
+        { data: 'quantity' },
+        { data: 'status' },
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -283,7 +283,7 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle me-3',
+          className: 'btn btn-label-secondary dropdown-toggle me-3 waves-effect waves-light',
           text: '<i class="ti ti-download me-1 ti-xs"></i>Export',
           buttons: [
             {
@@ -418,7 +418,7 @@ $(function () {
         },
         {
           text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add Product</span>',
-          className: 'add-new btn btn-primary ms-2 ms-sm-0',
+          className: 'add-new btn btn-primary ms-2 ms-sm-0 waves-effect waves-light',
           action: function () {
             window.location.href = productAdd;
           }
@@ -438,18 +438,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

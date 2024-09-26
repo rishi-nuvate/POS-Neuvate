@@ -17,12 +17,12 @@ $(function () {
       ajax: assetsPath + 'json/ecommerce-order-details.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: 'id'},
-        {data: 'id'},
-        {data: 'product_name'},
-        {data: 'price'},
-        {data: 'qty'},
-        {data: ''}
+        { data: 'id' },
+        { data: 'id' },
+        { data: 'product_name' },
+        { data: 'price' },
+        { data: 'qty' },
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -148,18 +148,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 
@@ -190,8 +190,8 @@ $(function () {
         showCancelButton: true,
         confirmButtonText: 'Yes, Delete order!',
         customClass: {
-          confirmButton: 'btn btn-primary me-2',
-          cancelButton: 'btn btn-label-secondary'
+          confirmButton: 'btn btn-primary me-2 waves-effect waves-light',
+          cancelButton: 'btn btn-label-secondary waves-effect waves-light'
         },
         buttonsStyling: false
       }).then(function (result) {
@@ -201,7 +201,7 @@ $(function () {
             title: 'Deleted!',
             text: 'Order has been removed.',
             customClass: {
-              confirmButton: 'btn btn-success'
+              confirmButton: 'btn btn-success waves-effect waves-light'
             }
           });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -210,7 +210,7 @@ $(function () {
             text: 'Cancelled Delete :)',
             icon: 'error',
             customClass: {
-              confirmButton: 'btn btn-success'
+              confirmButton: 'btn btn-success waves-effect waves-light'
             }
           });
         }
