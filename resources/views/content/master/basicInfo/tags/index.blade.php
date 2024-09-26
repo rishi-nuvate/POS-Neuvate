@@ -30,27 +30,32 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                @foreach($tags as $tag)
-                <tr>
-                    <td class="text-bold">{{$num}}</td>
-                    <td>{{$tag->name}}</td>
-                    <td>
-                        <a class="btn btn-icon btn-label-primary mx-2" href="{{route('tags.edit',['tag' => $tag->id])}}"><i
-                                    class="ti ti-edit mx-2 ti-sm"></i></a>
-                        <button type="button" class="btn btn-icon btn-label-danger mx-2"><i
-                                    class="ti ti-trash mx-2 ti-sm" onclick="daleteTag({{$tag->id}})"></i></button>
-                    </td>
-                </tr>
-                @php $num++ @endphp
-                @endforeach
+{{--                <tbody>--}}
+{{--                @foreach($tags as $tag)--}}
+{{--                    <tr>--}}
+{{--                        <td class="text-bold">{{$num}}</td>--}}
+{{--                        <td>{{$tag->name}}</td>--}}
+{{--                        <td>--}}
+{{--                            <a class="btn btn-icon btn-label-primary mx-2"--}}
+{{--                               href="{{route('tags.edit',['tag' => $tag->id])}}"><i--}}
+{{--                                    class="ti ti-edit mx-2 ti-sm"></i></a>--}}
+{{--                            <button type="button" class="btn btn-icon btn-label-danger mx-2"><i--}}
+{{--                                    class="ti ti-trash mx-2 ti-sm" onclick="daleteTag({{$tag->id}})"></i></button>--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
+{{--                    @php $num++ @endphp--}}
+{{--                @endforeach--}}
 
-                </tbody>
+{{--                </tbody>--}}
             </table>
         </div>
     </div>
 
 
+
+@endsection
+
+@section('page-script')
     <script>
         function daleteTag(tagId) {
             Swal.fire({
@@ -81,6 +86,36 @@
                 }
             });
         }
-    </script>
 
+        window.onload = function () {
+            getTagData();
+        }
+
+        function getTagData() {
+            $("#overlay").fadeIn(100);
+            $('#datatable-list').DataTable({
+                autoWidth: false,
+                lengthMenu: [
+                    [10, 20, 100, 500],
+                    [10, 20, 100, "All"]
+                ],
+                order: [
+                    [0, 'asc']
+                ],
+                "ajax": {
+                    "url": "{{ route('getTagData') }}",
+                    "type": "POST",
+                    "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
+                    "data": {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                },
+
+                "initComplete": function (setting, json) {
+                    $("#overlay").fadeOut(100);
+                },
+                bDestroy: true
+            });
+        }
+    </script>
 @endsection

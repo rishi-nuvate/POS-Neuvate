@@ -1,3 +1,4 @@
+
 @extends('layouts/layoutMaster')
 
 @section('title', 'Master Menu')
@@ -106,7 +107,14 @@
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Vendor
                             </button>
-
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" href="{{ route('vendor.create') }}"><i
+                                        class="ti ti-pencil me-1"></i>
+                                    Add</a>
+{{--                                <a class="dropdown-item" href=""><i--}}
+{{--                                        class="ti ti-eye me-1"></i>--}}
+{{--                                    View</a>--}}
+                            </div>
                         </div>
 
                         <div class="btn-group mb-2">

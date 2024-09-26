@@ -71,7 +71,7 @@
     @include('layouts/sections/scripts' . $isFront)
 
     {{-- LiveWire Script --}}
-    @livewireScripts
+{{--    @livewireScripts--}}
 
 </body>
 

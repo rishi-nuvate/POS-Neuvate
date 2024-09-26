@@ -1,60 +1,8 @@
 @extends('layouts.layoutMaster')
 
-@section('title', 'Add-Product')
-
-{{--@section('vendor-style')--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css"/>--}}
-
-{{--    <style>--}}
-{{--        .fade-in {--}}
-{{--            animation: fadeIn 0.8s ease-in-out forwards;--}}
-{{--        }--}}
-
-{{--        @keyframes fadeIn {--}}
-{{--            from {--}}
-{{--                opacity: 0;--}}
-{{--                transform: translateY(-10px);--}}
-{{--            }--}}
-{{--            to {--}}
-{{--                opacity: 1;--}}
-{{--                transform: translateY(0);--}}
-{{--            }--}}
-{{--        }--}}
-{{--    </style>--}}
-{{--@endsection--}}
-
-{{--@section('page-script')--}}
-{{--    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/app-ecommerce-product-add.js') }}"></script>--}}
-{{--@endsection--}}
-
-{{--@section('vendor-script')--}}
-{{--    <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/quill/katex.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/quill/quill.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js') }}"></script>--}}
-{{--@endsection--}}
+@section('title', 'List-Category')
 
 @section('content')
-
 
     <nav aria-label="breadcrumb" style="font-size: 20px">
         <ol class="breadcrumb">
@@ -68,7 +16,7 @@
 
     <div class="card">
         <div class="card-datatable table-responsive pt-0">
-            <table class="datatables-basic table">
+            <table class="datatables-basic table" id="datatable-list">
                 <thead>
                 <tr>
                     <th>id</th>
@@ -86,11 +34,11 @@
                         <td>
                             <ul>
 
-                            @foreach($category->subCategory as $subCategory)
-                             <li>
-                                 {{$subCategory->Name}}
-                             </li>
-                            @endforeach
+                                @foreach($category->subCategory as $subCategory)
+                                    <li>
+                                        {{$subCategory->Name}}
+                                    </li>
+                                @endforeach
                             </ul>
                         </td>
                         <td>
@@ -108,24 +56,6 @@
             </table>
         </div>
     </div>
-
-{{--    <div class="card">--}}
-{{--        <h5 class="card-header">Ajax Sourced Server-side</h5>--}}
-{{--        <div class="card-datatable text-nowrap">--}}
-{{--            <table class="datatables-ajax table">--}}
-{{--                <thead>--}}
-{{--                <tr>--}}
-{{--                    <th>Full name</th>--}}
-{{--                    <th>Email</th>--}}
-{{--                    <th>Position</th>--}}
-{{--                    <th>Office</th>--}}
-{{--                    <th>Start date</th>--}}
-{{--                    <th>Salary</th>--}}
-{{--                </tr>--}}
-{{--                </thead>--}}
-{{--            </table>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
 @endsection
 
@@ -162,6 +92,13 @@
                 }
             });
         }
+
+        $(document).ready(function () {
+            $('#datatable-list').DataTable({
+                order: [
+                    [0, 'asc']
+                ],
+            });
+        });
     </script>
-    <script src="{{ asset('assets/js/tables-datatables-basic.js') }}"></script>
 @endsection

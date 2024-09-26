@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="row" id="dynamicFormContainer">
-                    {!! textInputField('col-md-6', 'SubCategory Name', 'text', 'SubCatName[]', 'SubCatName_0', 'Sub Category Name', '*', '',old('SubCatName') ,'required','') !!}
+                    {!! textInputField('col-md-6', 'SubCategory Name', 'text', 'SubCatName[]', 'SubCatName_0', 'Sub Category Name', '*', '','' ,'required','') !!}
                 </div>
 
                 <div class="col-lg-3 col-12 invoice-actions mt-3">
@@ -92,8 +92,8 @@
         newDiv.innerHTML = `
         <div class="row">
           <div class="col-md-10 mt-2">
-              <label class="form-label" for="SubCatName_` + counter + `">Subcategory Name</label>
-              <input required type="text" id="SubCatName_` + counter + `" name="SubCatName[` + counter + `]" value="" class="form-control" placeholder="Sub Category Name" autofocus/>
+              <label class="form-label" for="SubCatName_${counter}">Subcategory Name</label>
+              <input required type="text" id="SubCatName_${counter}" name="SubCatName[]" value="" class="form-control" placeholder="Sub Category Name" autofocus/>
           </div>
           <div class="col-md-2 mt-3">
             <div class="demo-inline-spacing">

@@ -2,8 +2,6 @@
 
 @section('title', 'List-Brands')
 
-
-
 @section('content')
 
     <nav aria-label="breadcrumb" style="font-size: 20px">
@@ -15,11 +13,30 @@
             <li class="breadcrumb-item active">View</li>
         </ol>
     </nav>
-{{--    --}}
-{{--    <h4 class="py-3 mb-4">--}}
-{{--        <span class="text-muted fw-light float-left">Master / Brands /</span> View--}}
-{{--    </h4>--}}
-    <!-- Master Brands List -->
+    {{--    --}}
+    {{--    <h4 class="py-3 mb-4">--}}
+    {{--        <span class="text-muted fw-light float-left">Master / Brands /</span> View--}}
+    {{--    </h4>--}}
+
+    {{--    <div class="card">--}}
+    {{--        <div class="card-datatable table-responsive pt-0">--}}
+    {{--            <table class="datatables-basic datatable table" id="datatable-list">--}}
+    {{--                <thead>--}}
+    {{--                <tr>--}}
+    {{--                    <th></th>--}}
+    {{--                    <th></th>--}}
+    {{--                    <th>id</th>--}}
+    {{--                    <th>Brand Name</th>--}}
+    {{--                    <th>Action</th>--}}
+    {{--                    <th>Date</th>--}}
+    {{--                    <th>Salary</th>--}}
+    {{--                    <th>Status</th>--}}
+    {{--                    <th>Action</th>--}}
+    {{--                </tr>--}}
+    {{--                </thead>--}}
+    {{--            </table>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 
 
     <div class="card">
@@ -32,31 +49,14 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                @php $num=1 @endphp
-                @foreach($brands as $brand)
-                    <tr>
-                        <td class="text-bold">{{$num}}</td>
-                        <td>{{$brand->name}}</td>
-                        <td>
-                            <a class="btn btn-icon btn-label-primary mx-2"
-                               href="{{route('brand.edit',['brand' => $brand->id])}}"><i
-                                    class="ti ti-edit mx-2 ti-sm"></i></a>
-                            <button type="button" class="btn btn-icon btn-label-danger mx-2"
-                                    onclick="deleteBlog({{$brand->id}})"><i
-                                    class="ti ti-trash mx-2 ti-sm"></i></button>
-                        </td>
-                    </tr>
-                    @php $num++ @endphp
-                @endforeach
-                </tbody>
             </table>
         </div>
     </div>
 
+@endsection
 
+@section('page-script')
     <script>
-
 
         function deleteBlog(blogId) {
             Swal.fire({
@@ -88,11 +88,37 @@
                 }
             });
         }
+
+        window.onload = function () {
+            getBrandData();
+        }
+
+        function getBrandData() {
+            $("#overlay").fadeIn(100);
+            $('#datatable-list').DataTable({
+                autoWidth: false,
+                lengthMenu: [
+                    [10, 20, 100, 500],
+                    [10, 20, 100, "All"]
+                ],
+
+                order: [
+                    [0, 'asc']
+                ],
+                "ajax": {
+                    "url": "{{ route('getBrandData') }}",
+                    "type": "POST",
+                    "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
+                    "data": {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                },
+
+                "initComplete": function (setting, json) {
+                    $("#overlay").fadeOut(100);
+                },
+                bDestroy: true
+            });
+        }
     </script>
-
-@endsection
-
-@section('page-script')
-    <script src="{{ asset('assets/js/tables-datatables-basic.js') }}"></script>
-
 @endsection

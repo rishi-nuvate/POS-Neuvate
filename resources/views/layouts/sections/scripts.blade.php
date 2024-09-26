@@ -5,8 +5,12 @@
 <script src="{{ asset(mix('assets/vendor/libs/node-waves/node-waves.js')) }}"></script>
 <script src="{{ asset(mix('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')) }}"></script>
 <script src="{{ asset(mix('assets/vendor/libs/hammer/hammer.js')) }}"></script>
+{{--<script src="{{ asset(mix('assets/vendor/libs/i18n/i18n.js')) }}"></script>--}}
 <script src="{{ asset(mix('assets/vendor/libs/typeahead-js/typeahead.js')) }}"></script>
 <script src="{{ asset(mix('assets/vendor/js/menu.js')) }}"></script>
+{{--<script src="{{ asset(mix('assets/vendor/libs/@form-validation/popular.js')) }}"></script>--}}
+{{--<script src="{{ asset(mix('assets/vendor/libs/@form-validation/bootstrap5.js')) }}"></script>--}}
+{{--<script src="{{ asset(mix('assets/vendor/libs/@form-validation/auto-focus.js')) }}"></script>--}}
 
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>

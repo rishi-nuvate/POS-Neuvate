@@ -41,7 +41,7 @@
 
                             <div class="row g-3">
 
-                                {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','inputClass', 'defaultValue', 'required','readonly')}} --}}
+{{--                                 {!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', '*','inputClass', 'defaultValue', 'required','readonly') !!} --}}
 
                                 {!! textInputField('col-md-6', 'Company Name', 'text', 'CompanyName', 'CompanyName', 'Company Name', '*', 'form-control',old('CompanyName') ,'required','') !!}
 
@@ -68,7 +68,7 @@
 
                                 {!! textInputField('col-md-6', 'Billing Name', 'text', 'BillingName', 'BillingName', 'Billing Name', '*', 'form-control',old('BillingName'),'required','') !!}
 
-                                {!! textInputField('col-md-3', 'Billing Mobile No.', 'text', 'BillingMobileNo', 'BillingMobileNo', 'Billing Name', '*', 'form-control',old('BillingMobileNo'),'required','') !!}
+                                {!! textInputField('col-md-3', 'Billing Mobile No.', 'number', 'BillingMobileNo', 'BillingMobileNo', 'Billing Name', '*', 'form-control',old('BillingMobileNo'),'required','') !!}
 
                                 {!! textInputField('col-md-3', 'Billing Email', 'email', 'BillingEmail', 'BillingEmail', 'Billing Name', '*', 'form-control',old('BillingEmail'),'required','') !!}
 
@@ -159,13 +159,13 @@
                                 </div>
                                 <div class="row g-3 mb-4">
 
-                                    {!! textInputField('col-md-4', 'Shipping Company Name', 'text', 'ShipCompName[]', 'ShipCompName', 'Shipping Company Name', '*', 'form-control',old('ShipCompName'),'required','') !!}
+                                    {!! textInputField('col-md-4', 'Shipping Company Name', 'text', 'ShipCompName[]', 'ShipCompName', 'Shipping Company Name', '*', 'form-control','','required','') !!}
 
-                                    {!! textInputField('col-md-4', 'Shipping Person Mobile No.', 'text', 'ShipPersonNo[]', 'ShipPersonNo', 'Mobile No.', '*', 'form-control',old('ShipPersonNo'),'required','') !!}
+                                    {!! textInputField('col-md-4', 'Shipping Person Mobile No.', 'text', 'ShipPersonNo[]', 'ShipPersonNo', 'Mobile No.', '*', 'form-control','','required','') !!}
 
-                                    {!! textInputField('col-md-4', 'Shipping Person Email', 'email', 'ShipPersonEmail[]', 'ShipPersonEmail', 'Email', '*', 'form-control',old('ShipPersonEmail'),'required','') !!}
+                                    {!! textInputField('col-md-4', 'Shipping Person Email', 'email', 'ShipPersonEmail[]', 'ShipPersonEmail', 'Email', '*', 'form-control','','required','') !!}
 
-                                    {!! textInputField('col-md-4', 'GST No.', 'text', 'ShipGstNo[]', 'ShipGstNo', 'GST No.', '*', 'form-control',old('ShipGstNo'),'required','') !!}
+                                    {!! textInputField('col-md-4', 'GST No.', 'text', 'ShipGstNo[]', 'ShipGstNo', 'GST No.', '*', 'form-control','','required','') !!}
 
 
                                     <div class="col-md-4">
@@ -181,11 +181,10 @@
                                                   placeholder="Address Line 2"></textarea>
                                     </div>
 
-                                    {!! textInputField('col-md-4', 'City', 'text', 'ShipCity[]', 'ShipCity', 'Shipping City', '*', 'form-control',old('ShipCity'),'required','') !!}
+                                    {!! textInputField('col-md-4', 'City', 'text', 'ShipCity[]', 'ShipCity', 'Shipping City', '*', 'form-control','','required','') !!}
 
                                     <div class="col-sm-4">
                                         <label class="form-label" for="ShipState">State</label>
-
                                         <select required id="ShipState" name="ShipState[]" class="select2 form-select"
                                                 data-allow-clear="true">
                                             <option value="">Select</option>
@@ -231,7 +230,7 @@
                                         </select>
                                     </div>
 
-                                    {!! textInputField('col-md-4', 'PinCode', 'number', 'ShipPinCode[]', 'ShipPinCode', 'Shipping Pin Code', '*', 'form-control',old('ShipPinCode'),'required','') !!}
+                                    {!! textInputField('col-md-4', 'PinCode', 'number', 'ShipPinCode[]', 'ShipPinCode', 'Shipping Pin Code', '*', 'form-control','','required','') !!}
 
                                 </div>
 
