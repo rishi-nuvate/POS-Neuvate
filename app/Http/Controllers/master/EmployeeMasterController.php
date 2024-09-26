@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\master;
+
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class EmployeeMasterController extends Controller
      */
     public function create()
     {
-        return view('content.master.employee.create');
+//
     }
 
     /**

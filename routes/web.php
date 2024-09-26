@@ -14,6 +14,7 @@ use App\Http\Controllers\centralWarehouse\ShelfMasterController;
 use App\Http\Controllers\centralWarehouse\StockInMasterController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\master\basicInfo\BrandController;
 use App\Http\Controllers\master\basicInfo\CategoryController;
 use App\Http\Controllers\master\basicInfo\SeasonController;
@@ -37,6 +38,7 @@ use App\Http\Controllers\supplyChain\POMasterController;
 use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 use App\Http\Controllers\VenderController;
 use App\Http\Middleware\EnsureTokenIsValid;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -110,15 +112,18 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/company/{company}', [CompanyController::class, 'destroy']);
 
 //    Vendor
-    Route::resource('vendor',VenderController::class);
-    Route::post('vendor/store',[VenderController::class,'store']);
+    Route::resource('vendors', VenderController::class);
+    Route::post('/vendor/store', [VenderController::class, 'store']);
+    Route::post('/vendor/viewModelUserEdit', [VenderController::class, 'viewModelUserEdit'])->name('viewModelUserEdit');
 
     // SKU Master
     Route::get('product/add', [ProductMasterController::class, 'create'])->name('add-product');
     Route::get('product/view', [ProductMasterController::class, 'index'])->name(('view-product'));
 
-    // Employee Master
-    Route::get('employee/add', [EmployeeMasterController::class, 'create'])->name('add-employee');
+    // Employee
+    Route::resource('employee', EmployeeController::class);
+    Route::post('/employeeData', [EmployeeController::class, 'getEmployeeData'])->name('getEmployeeData');
+    Route::post('/employee/{employee}', [EmployeeController::class, 'destroy']);
 
     //Inventory Master
     Route::resource('/storeInventory', InventoryMasterController::class);

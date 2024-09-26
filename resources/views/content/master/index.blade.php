@@ -92,10 +92,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Employee
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('add-employee') }}"><i
+                                <a class="dropdown-item" href="{{ route('employee.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('employee.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>
@@ -108,10 +108,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Vendor
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('vendor.create') }}"><i
+                                <a class="dropdown-item" href="{{ route('vendors.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href="{{ route('vendor.index') }}"><i
+                                <a class="dropdown-item" href="{{ route('vendors.index') }}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>

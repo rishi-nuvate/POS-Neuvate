@@ -53,4 +53,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function UserBank()
+    {
+        return $this->hasOne(UserBank::class);
+    }
+
+    public function UserAddress(){
+        return $this->hasOne(UserAddress::class);
+    }
 }
