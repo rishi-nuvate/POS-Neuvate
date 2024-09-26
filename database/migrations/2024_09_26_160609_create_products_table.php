@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('product_description')->nullable(); // Product description
             $table->foreignId('cat_id')->nullable()->constrained('categories'); // Category ID
             $table->foreignId('sub_cat_id')->nullable()->constrained('sub_categories'); // Sub-category ID
-            $table->foreignId('tag_id')->nullable()->constrained('tags'); // Tag ID
+            $table->string('tag_id')->nullable(); // Tag ID
             $table->foreignId('season_id')->nullable()->constrained('seasons'); // Season ID
             $table->foreignId('brand_id')->nullable()->constrained('brands'); // Brand ID
             $table->integer('cost_price'); // Cost price

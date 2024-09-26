@@ -31,6 +31,7 @@ use App\Http\Controllers\pages\ExpenseController;
 use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\storeInventory\StockInController;
 use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
@@ -106,6 +107,7 @@ Route::middleware('auth:web')->group(callback: function () {
 // Brand Master
     Route::resource('category', CategoryController::class);
     Route::post('/category/{category}', [CategoryController::class, 'destroy']);
+    Route::post('/getCategory', [CategoryController::class, 'getCategory'])->name('getCategory');
 
 // Company
     Route::resource('company', CompanyController::class);
@@ -117,8 +119,9 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/vendor/viewModelUserEdit', [VenderController::class, 'viewModelUserEdit'])->name('viewModelUserEdit');
 
     // SKU Master
-    Route::get('product/add', [ProductMasterController::class, 'create'])->name('add-product');
-    Route::get('product/view', [ProductMasterController::class, 'index'])->name(('view-product'));
+    Route::resource('product', ProductController::class);
+//    Route::get('product/add', [ProductMasterController::class, 'create'])->name('add-product');
+//    Route::get('product/view', [ProductMasterController::class, 'index'])->name(('view-product'));
 
     // Employee
     Route::resource('employee', EmployeeController::class);

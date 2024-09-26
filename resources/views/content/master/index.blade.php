@@ -220,10 +220,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Product
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('add-product') }}"><i
+                                <a class="dropdown-item" href="{{ route('product.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href="{{ route('view-product') }}"><i
+                                <a class="dropdown-item" href="{{ route('product.index') }}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>

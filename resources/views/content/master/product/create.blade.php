@@ -3,8 +3,18 @@
 @section('title', 'Add-Product')
 
 @section('vendor-style')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css') }}"/>
 
     <style>
         .fade-in {
@@ -25,11 +35,18 @@
 @endsection
 
 @section('page-script')
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
     <script src="{{ asset('assets/js/app-ecommerce-product-add.js') }}"></script>
 @endsection
 
 @section('vendor-script')
+    <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/quill/katex.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/quill/quill.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js') }}"></script>
@@ -43,336 +60,339 @@
         <h4 class="ml-4">
             <span class="text-muted fw-light float-left">Master / Product /</span> Add
         </h4>
-        <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="flex-grow-1">
             <div class="app-ecommerce">
                 <!-- Add Product -->
-                <div
-                    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
-                    <div class="d-flex flex-column justify-content-center">
-                        <h4 class="mb-1 mt-3">Add a new Product</h4>
-                    </div>
-                    <div class="d-flex align-content-center flex-wrap gap-3">
-                        <div class="d-flex gap-3">
-                            <button class="btn btn-label-secondary">Discard</button>
-                            <button class="btn btn-label-primary">Save draft</button>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Product</button>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <!-- First column-->
-                    <div class="col-12 col-lg-8">
-                        <!-- Product Information -->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h5 class="card-tile mb-0">Product information</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label class="form-label" for="ecommerce-product-name">Name</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="ecommerce-product-name"
-                                        placeholder="Product title"
-                                        name="productTitle"
-                                        aria-label="Product title"/>
+                <form method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div
+                        class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h4 class="mb-1 mt-3">Add a new Product</h4>
+                        </div>
+                        <div class="d-flex align-content-center flex-wrap gap-3">
+                            {{--                            <div class="d-flex gap-3">--}}
+                            {{--                                <button class="btn btn-label-secondary">Discard</button>--}}
+                            {{--                                <button class="btn btn-label-primary">Save draft</button>--}}
+                            {{--                            </div>--}}
+                            <button type="submit" class="btn btn-primary">Save Product</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- First column-->
+                        <div class="col-12 col-lg-8">
+                            <!-- Product Information -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-tile mb-0">Product information</h5>
                                 </div>
-                                <div class="row mb-3 col-md-12">
-                                    <div class="col-md-4 mt-1">
-                                        <label class="form-label" for="productCode">Product Code</label>
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            id="productCode"
-                                            placeholder="Product Code"
-                                            name="productCode"
-                                            aria-label="productCode"/>
-                                    </div>
-                                    <div class="col-md-4 mt-1">
-                                        <label class="form-label" for="productHSNCode">HSN Code</label>
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            id="productHSNCode"
-                                            placeholder="Product HSN Code"
-                                            name="productHSNCode"
-                                            aria-label="productHSNCode"/>
-                                    </div>
-                                    <div class="col-md-4 mt-1">
-                                        <label class="form-label" for="productHSNCode">Material</label>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="product_name">Name</label>
                                         <input
                                             type="text"
                                             class="form-control"
-                                            id="ecommerce-product-name"
-                                            placeholder="Material Name"
-                                            name="productTitle"
+                                            id="product_name"
+                                            placeholder="Product title"
+                                            name="product_name"
                                             aria-label="Product title"/>
                                     </div>
-
-                                </div>
-                                <!-- Description -->
-                                <div class="col-12">
-                                    <div class="col-12">
-                                        <label class="form-label" for="bootstrap-maxlength-example2">Product
-                                            Description</label>
-                                        <textarea
-                                            id="bootstrap-maxlength-example2"
-                                            class="form-control bootstrap-maxlength-example"
-                                            rows="3"
-                                            maxlength="255"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Product Information -->
-
-                        <!-- Variants -->
-
-
-
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Variants</h5>
-                            </div>
-                            <div class="card-body">
-                                <div id="productSKU">
-                                    <div class="row">
-                                        <div class="mb-3 col-3">
-                                            <label class="form-label" for="productSKU">Color</label>
-                                            <input type="text" name="color" id="color" placeholder="Color"
-                                                   class="form-control">
+                                    <div class="row mb-3 col-md-12">
+                                        <div class="col-md-4 mt-1">
+                                            <label class="form-label" for="product_code">Product Code</label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="product_code"
+                                                placeholder="Product Code"
+                                                name="product_code"
+                                                aria-label="productCode"/>
                                         </div>
-
-                                        <div class="mb-3 col-6">
-                                            <label class="form-label" for="productSKU">Media</label>
-                                            <input type="file" name="media" id="media" placeholder="Color"
-                                                   class="form-control">
+                                        <div class="col-md-4 mt-1">
+                                            <label class="form-label" for="hsn_code">HSN Code</label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="hsn_code"
+                                                placeholder="Product HSN Code"
+                                                name="hsn_code"
+                                                aria-label="productHSNCode"/>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="mb-3 col-3">
-                                            <label class="form-label" for="productSKU">Size</label>
-                                            <input type="text" name="size" id="size" placeholder="Size"
-                                                   class="form-control">
-                                        </div>
-
-                                        <div class="mb-3 col-6">
-                                            <label class="form-label" for="productSKU">SKU</label>
+                                        <div class="col-md-4 mt-1">
+                                            <label class="form-label" for="material">Material</label>
                                             <input
                                                 type="text"
-                                                id="productSKU"
                                                 class="form-control"
-                                                placeholder="SKU"/>
+                                                id="material"
+                                                placeholder="Material Name"
+                                                name="material"
+                                                aria-label="Product title"/>
+                                        </div>
+
+                                    </div>
+                                    <!-- Description -->
+                                    <div class="col-12">
+                                        <div class="col-12">
+                                            <label class="form-label" for="bootstrap-maxlength-example2">Product
+                                                Description</label>
+                                            <textarea name="product_description"
+                                                      id="bootstrap-maxlength-example2"
+                                                      class="form-control bootstrap-maxlength-example"
+                                                      rows="3"
+                                                      maxlength="255"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary" onclick="addAnotherSize()">Add another Size
-                                    </button>
+                            </div>
+                            <!-- /Product Information -->
+
+                            <!-- Variants -->
+
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Variants</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="productSKU0">
+                                        <div class="row">
+                                            <div class="mb-3 col-3">
+                                                <label class="form-label" for="productSKU">Color</label>
+                                                <input type="text" name="productColor[0][color]" id="color0"
+                                                       placeholder="Color"
+                                                       class="form-control">
+                                            </div>
+
+                                            <div class="mb-3 col-6">
+                                                <label class="form-label" for="productSKU">Media</label>
+                                                <input type="file" name="productColor[0][media]" id="media0"
+                                                       placeholder="Color"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="mb-3 col-3">
+                                                <label class="form-label" for="productSKU">Size</label>
+                                                <input type="text" name="optionValueSize[0][0][size]" id="size0"
+                                                       placeholder="Size"
+                                                       class="form-control">
+                                            </div>
+
+                                            <div class="mb-3 col-6">
+                                                <label class="form-label" for="productSKU">SKU</label>
+                                                <input
+                                                    type="text"
+                                                    id="productSKU"
+                                                    name="optionValueSize[0][0][sku]"
+                                                    class="form-control"
+                                                    placeholder="SKU"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-primary" onclick="addAnotherSize(0)">Add
+                                            another Size
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="colorVariant">
+                            </div>
+                            <div class="m-4">
+                                <button type="button" class="btn btn-warning" onclick="addAnotherColor()">Add another
+                                    Color
+                                </button>
+                            </div>
+
+                            <!-- /Variants -->
+                            <div class="card mb-4">
+                                <h5 class="card-header">Price</h5>
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        {{--Cost Price--}}
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="ecommerce-product-price">Cost Price</label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="ecommerce-cost_price"
+                                                placeholder="Price"
+                                                name="cost_price"
+                                                aria-label="Product price"/>
+                                        </div>
+                                        <!-- Discounted Price -->
+                                        <div class=" col-md-4 mb-3">
+                                            <label class="form-label" for="ecommerce-product-selling-price">Selling
+                                                Price</label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="ecommerce-sell_price"
+                                                placeholder="Discounted Price"
+                                                name="sell_price"
+                                                aria-label="Product discounted price"/>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="ecommerce-product-mrp-price">MRP
+                                            </label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="product_mrp"
+                                                placeholder="Mrp Price"
+                                                name="product_mrp"
+                                                aria-label="Product mrp price"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="colorVariant">
-                        </div>
-                        <div class="m-4">
-                            <button class="btn btn-warning" onclick="addAnotherColor()">Add another Color
-                            </button>
-                        </div>
+                        <!-- /Second column -->
 
-                        <!-- /Variants -->
-                        <div class="card mb-4">
-                            <h5 class="card-header">Price</h5>
-                            <div class="card-body">
-                                <div class="row">
-
-                                    {{--Cost Price--}}
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label" for="ecommerce-product-price">Cost Price</label>
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            id="ecommerce-product-price"
-                                            placeholder="Price"
-                                            name="productPrice"
-                                            aria-label="Product price"/>
-                                    </div>
-                                    <!-- Discounted Price -->
-                                    <div class=" col-md-4 mb-3">
-                                        <label class="form-label" for="ecommerce-product-selling-price">Selling
-                                            Price</label>
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            id="ecommerce-product-selling-price"
-                                            placeholder="Discounted Price"
-                                            name="productDiscountedPrice"
-                                            aria-label="Product discounted price"/>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label" for="ecommerce-product-mrp-price">MRP
-                                        </label>
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            id="ecommerce-product-mrp-price"
-                                            placeholder="Mrp Price"
-                                            name="productMrpPrice"
-                                            aria-label="Product mrp price"/>
+                        <!-- Second column -->
+                        <div class="col-12 col-lg-4">
+                            <!-- Pricing Card -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Status</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <select name="status" class="select2 form-select">
+                                            <option value="">select umo</option>
+                                            <option value="0">Active</option>
+                                            <option value="1">Deactive</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Organize Card -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Organize</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Category -->
+                                    <div class="mb-3 col ecommerce-select2-dropdown">
+                                        <label class="form-label mb-1" for="productCategory">Category</label>
+                                        <select id="cat_id" class="select2 form-select"
+                                                data-placeholder="Select Category" name="cat_id">
+                                            <option value="">Select Category</option>
+
+                                        </select>
+                                    </div>
+                                    <!-- Sub Category -->
+                                    <div class="mb-3 col ecommerce-select2-dropdown">
+                                        <label class="form-label mb-1" for="sub_cat_id">Sub Category </label>
+                                        <select id="sub_cat_id" name="sub_cat_id" class="select2 form-select"
+                                                data-placeholder="Sub Category">
+                                            <option value="">Collection</option>
+                                            <option value="2">Men's Clothing</option>
+                                            <option value="3">Women's-clothing</option>
+                                            <option value="4">Kid's-clothing</option>
+                                        </select>
+                                    </div>
+                                    <!-- Tags -->
+                                    <div class="mb-3">
+                                        <label for="ecommerce-product-tags" class="form-label mb-1">Tags</label>
+                                        <select name="tag_id[]" class="select2 form-select" id="tag_id" multiple>
+                                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                <option value="2">Jeans</option>
+                                                <option value="3">Shirt</option>
+                                                <option value="4">Kurtas</option>
+                                                <option value="4">T-Shirt</option>
+                                                <option value="5">Cargo</option>
+                                                <option value="6">Joggers</option>
+                                            </optgroup>
+
+                                        </select>
+                                    </div>
+                                    {{--Season--}}
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Season</label>
+                                        <select name="season_id" id="season_id" class="select2 form-select">
+                                            <option value="">select umo</option>
+                                            <option value="1">Winter</option>
+                                            <option value="2">Summer</option>
+                                        </select>
+                                    </div>
+                                    {{--Brand--}}
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Brand</label>
+                                        <select name="brand_id" id="brand_id" class="select2 form-select">
+                                            <option value="">select umo</option>
+                                            <option value="4">NEW</option>
+                                            <option value="5">REPEAT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Organize Card -->
+
+
                         </div>
+                        <input type="hidden" id="sizeVariantStart0" value="0">
+                        <!-- /Second column -->
                     </div>
-                    <!-- /Second column -->
+                </form>
 
-                    <!-- Second column -->
-                    <div class="col-12 col-lg-4">
-                        <!-- Pricing Card -->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Status</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <select name="wefw" class="select2 form-select">
-                                        <option value="">select umo</option>
-                                        <option value="active">Active</option>
-                                        <option value="deactive">Deactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Organize Card -->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Organize</h5>
-                            </div>
-                            <div class="card-body">
-                                <!-- Category -->
-                                <div class="mb-3 col ecommerce-select2-dropdown">
-                                    <label class="form-label mb-1" for="productCategory">Category</label>
-                                    <select id="category-org" class="select2 form-select"
-                                            data-placeholder="Select Category">
-                                        <option value="">Select Category</option>
-                                        <option value="Household">Household</option>
-                                        <option value="Management">Management</option>
-                                        <option value="Electronics">Electronics</option>
-                                        <option value="Office">Office</option>
-                                        <option value="Office">Office</option>
-                                        <option value="Automotive">Automotive</option>
-                                    </select>
-                                </div>
-                                <!-- Sub Category -->
-                                <div class="mb-3 col ecommerce-select2-dropdown">
-                                    <label class="form-label mb-1" for="collection">Sub Category </label>
-                                    <select id="collection" class="select2 form-select" data-placeholder="Sub Category">
-                                        <option value="">Collection</option>
-                                        <option value="men-clothing">Men's Clothing</option>
-                                        <option value="women-clothing">Women's-clothing</option>
-                                        <option value="kid-clothing">Kid's-clothing</option>
-                                    </select>
-                                </div>
-                                <!-- Tags -->
-                                <div class="mb-3">
-                                    <label for="ecommerce-product-tags" class="form-label mb-1">Tags</label>
-                                    {{-- <select name="wefwe" class="select2 form-select" multiple>
-                                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                                          <option value="AK">Jeans</option>
-                                          <option value="HI">Shirt</option>
-                                          <option value="CA">Kurtas</option>
-                                          <option value="NV">T-Shirt</option>
-                                          <option value="OR">Cargo</option>
-                                          <option value="WA">Joggers</option>
-                                      </optgroup>
-
-                                  </select> --}}
-                                    <select id="select2Multiple" class="select2 form-select" multiple>
-                                        <optgroup label="#Tags">
-                                            <option value="AK">Jeans</option>
-                                            <option value="HI">Shirt</option>
-                                            <option value="CA">Kurtas</option>
-                                            <option value="NV">T-Shirt</option>
-                                            <option value="OR">Cargo</option>
-                                            <option value="WA">Joggers</option>
-                                        </optgroup>
-
-                                    </select>
-                                </div>
-                                {{--Season--}}
-                                <div class="mb-3">
-                                    <label for="select2Multiple" class="form-label">Season</label>
-                                    <select name="wefw" class="select2 form-select">
-                                        <option value="">select umo</option>
-                                        <option value="MTRS">Winter</option>
-                                        <option value="PIECES">Summer</option>
-                                    </select>
-                                </div>
-                                {{--                                Brand--}}
-                                <div class="mb-3">
-                                    <label for="select2Multiple" class="form-label">Brand</label>
-                                    <select name="wefw" class="select2 form-select">
-                                        <option value="">select umo</option>
-                                        <option value="MTRS">NEW</option>
-                                        <option value="PIECES">REPEAT</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Organize Card -->
-
-
-                    </div>
-                    <!-- /Second column -->
-                </div>
             </div>
         </div>
         <!-- / Content -->
         <div class="content-backdrop fade"></div>
     </div>
     <!-- Content wrapper -->
+@endsection
 
-
+@section('page-script')
     <script>
-        var counter = 0;
         var counter1 = 0;
 
-        function addAnotherSize() {
-            counter++;
-            // Create a new div element with the specified HTML code
+        function addAnotherSize(colorVariantStart) {
+            let productSKU = document.querySelector(`#productSKU${colorVariantStart}`);
+            var sizeVariantStart = document.getElementById(`sizeVariantStart${colorVariantStart}`).value;
+            sizeVariantStart++;
+            let newIndex = sizeVariantStart;
+
+
             var newDiv = document.createElement("div");
-            newDiv.className = "row fade-in";
-            newDiv.id = "item_" + counter;
+            newDiv.className = "row";
+            newDiv.id = "sizeItem_" + colorVariantStart + sizeVariantStart;
             newDiv.innerHTML = `
           <div class="mb-3 col-3">
-              <label class="form-label" for="productSize_${counter}">Size</label>
-              <input type="text" name="size[]" id="size_${counter}" placeholder="Size" class="form-control">
+              <label class="form-label" for="optionValueSize_${colorVariantStart}">Size</label>
+              <input type="text" name="optionValueSize[${colorVariantStart}][${newIndex}][size]" id="size_${colorVariantStart}" placeholder="Size" class="form-control">
           </div>
           <div class="mb-3 col-8">
-              <label class="form-label" for="productSKU_${counter}">SKU</label>
-              <input type="text" id="productSKU_${counter}" class="form-control" placeholder="SKU" />
+              <label class="form-label" for="optionValueSize_${colorVariantStart}">SKU</label>
+              <input type="text" id="optionValueSize_${colorVariantStart}" name="optionValueSize[${colorVariantStart}][${newIndex}][sku]" class="form-control" placeholder="SKU" />
           </div>
           <div class="col-1 mt-4">
-              <button type="button" onclick="removeItem(${counter})" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
+              <button type="button" onclick="removeSize(${colorVariantStart},${newIndex})" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
                   <span class="ti ti-trash"></span>
               </button>
           </div>
       `;
 
-            // Append the new div to the container
-            document.getElementById("productSKU").appendChild(newDiv);
+            // document.querySelector(`#productSKU${colorVariantStart}`)
 
-            // Set focus to the input field
-            newDiv.querySelector("input").focus();
+            document.getElementById(`productSKU${colorVariantStart}`).appendChild(newDiv)
 
-            // Remove the animation class after the animation ends
-            newDiv.addEventListener('animationend', () => {
-                newDiv.classList.remove('fade-in');
-            });
+            document.getElementById(`sizeVariantStart${colorVariantStart}`).value = sizeVariantStart;
         }
+
+        function removeSize(colorId, sizeId) {
+            var elementToRemove = document.getElementById("sizeItem_" + colorId + sizeId);
+
+            if (elementToRemove) {
+                elementToRemove.remove();
+            }
+        }
+
+        var counter2 = 0;
 
         function addAnotherColor() {
             counter1++;
@@ -386,17 +406,17 @@
                                 <h5 class="card-title mb-0">Variants</h5>
                             </div>
                             <div class="card-body">
-                                <div id="productSKU">
+                                <div id="productSKU${counter1}">
                                     <div class="row">
                                         <div class="mb-3 col-3">
                                             <label class="form-label" for="productSKU">Color</label>
-                                            <input type="text" name="color" id="color" placeholder="Color"
+                                            <input type="text" name="productColor[${counter1}][color]" id="color${counter1}" placeholder="Color"
                                                    class="form-control">
                                         </div>
 
                                         <div class="mb-3 col-6">
                                             <label class="form-label" for="productSKU">Media</label>
-                                            <input type="file" name="media" id="media" placeholder="Color"
+                                            <input type="file" name="productColor[${counter1}][media]" id="media" placeholder="Color"
                                                    class="form-control">
                                         </div>
                                     </div>
@@ -405,14 +425,15 @@
 
                                         <div class="mb-3 col-3">
                                             <label class="form-label" for="productSKU">Size</label>
-                                            <input type="text" name="size" id="size" placeholder="Size"
+                                            <input type="text" name="optionValueSize[${counter1}][0][size]" id="size" placeholder="Size"
                                                    class="form-control">
                                         </div>
-
+                                        <input type="hidden" id="sizeVariantStart${counter1}" value="0">
                                         <div class="mb-3 col-6">
                                             <label class="form-label" for="productSKU">SKU</label>
                                             <input
                                                 type="text"
+                                                name="optionValueSize[${counter1}][0][sku]"
                                                 id="productSKU"
                                                 class="form-control"
                                                 placeholder="SKU"/>
@@ -420,7 +441,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary" onclick="addAnotherSKU()">Add another Size
+                                    <button type="button" class="btn btn-primary" onclick="addAnotherSize(${counter1})">Add another Size
                                     </button>
                                 </div>
                             </div>
@@ -446,5 +467,31 @@
             }
         }
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.onload = function() {
+            console.log(1);
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('getCategory') }}',
+                data: {
+                    'X-CSRF-TOKEN': "{{ csrf_token()}}",
+                },
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    $.each(response, function (key, value) {
+                        $('#cat_id').append('<option value="' + value.id + '">' + value
+                            .Name + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.log(1);
+                    console.error('Error:', xhr.responseText);
+                    console.error('Status:', status);
+                    console.error('Error:', error);
+                }
+            });
+        };
+    </script>
 @endsection
