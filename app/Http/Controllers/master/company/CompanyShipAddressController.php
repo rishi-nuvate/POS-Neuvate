@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master\company;
 
-use App\Models\CompanyShipAddress;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCompanyShipAddressRequest;
 use App\Http\Requests\UpdateCompanyShipAddressRequest;
+use App\Models\CompanyShipAddress;
 
 class CompanyShipAddressController extends Controller
 {
