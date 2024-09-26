@@ -16,11 +16,11 @@ $(function () {
       ajax: assetsPath + 'json/projects-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: 'hours'},
-        {data: 'project_name'},
-        {data: 'total_task'},
-        {data: 'progress'},
-        {data: 'hours'}
+        { data: 'hours' },
+        { data: 'project_name' },
+        { data: 'total_task' },
+        { data: 'progress' },
+        { data: 'hours' }
       ],
       columnDefs: [
         {
@@ -159,18 +159,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 
@@ -188,12 +188,12 @@ $(function () {
       ajax: assetsPath + 'json/invoice-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'invoice_id'},
-        {data: 'invoice_status'},
-        {data: 'total'},
-        {data: 'issued_date'},
-        {data: 'action'}
+        { data: '' },
+        { data: 'invoice_id' },
+        { data: 'invoice_status' },
+        { data: 'total' },
+        { data: 'issued_date' },
+        { data: 'action' }
       ],
       columnDefs: [
         {
@@ -211,7 +211,7 @@ $(function () {
           render: function (data, type, full, meta) {
             var $invoice_id = full['invoice_id'];
             // Creates full output for row
-            var $row_output = '<a href="' + baseUrl + 'app/invoice/preview"><span>#' + $invoice_id + '</span></a>';
+            var $row_output = '<a href="app-invoice-preview.html"><span>#' + $invoice_id + '</span></a>';
             return $row_output;
           }
         },
@@ -264,9 +264,7 @@ $(function () {
             return (
               '<div class="d-flex align-items-center">' +
               '<a href="javascript:;" class="text-body" data-bs-toggle="tooltip" title="Send Mail"><i class="ti ti-mail me-2 ti-sm"></i></a>' +
-              '<a href="' +
-              baseUrl +
-              'app/invoice/preview" class="text-body" data-bs-toggle="tooltip" title="Preview"><i class="ti ti-eye mx-2 ti-sm"></i></a>' +
+              '<a href="app-invoice-preview.html" class="text-body" data-bs-toggle="tooltip" title="Preview"><i class="ti ti-eye mx-2 ti-sm"></i></a>' +
               '<div class="d-inline-block">' +
               '<a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow text-body" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></a>' +
               '<ul class="dropdown-menu dropdown-menu-end m-0">' +
@@ -300,38 +298,38 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle float-sm-end mb-3 mb-sm-0',
+          className: 'btn btn-label-secondary dropdown-toggle float-sm-end mb-3 mb-sm-0 waves-effect waves-light',
           text: '<i class="ti ti-screen-share ti-xs me-2"></i>Export',
           buttons: [
             {
               extend: 'print',
               text: '<i class="ti ti-printer me-2" ></i>Print',
               className: 'dropdown-item',
-              exportOptions: {columns: [1, 2, 3, 4]}
+              exportOptions: { columns: [1, 2, 3, 4] }
             },
             {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-2" ></i>Csv',
               className: 'dropdown-item',
-              exportOptions: {columns: [1, 2, 3, 4]}
+              exportOptions: { columns: [1, 2, 3, 4] }
             },
             {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
               className: 'dropdown-item',
-              exportOptions: {columns: [1, 2, 3, 4]}
+              exportOptions: { columns: [1, 2, 3, 4] }
             },
             {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-2"></i>Pdf',
               className: 'dropdown-item',
-              exportOptions: {columns: [1, 2, 3, 4]}
+              exportOptions: { columns: [1, 2, 3, 4] }
             },
             {
               extend: 'copy',
               text: '<i class="ti ti-copy me-2" ></i>Copy',
               className: 'dropdown-item',
-              exportOptions: {columns: [1, 2, 3, 4]}
+              exportOptions: { columns: [1, 2, 3, 4] }
             }
           ]
         }
@@ -350,18 +348,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

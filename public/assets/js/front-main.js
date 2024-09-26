@@ -3,8 +3,8 @@
  */
 'use strict';
 
-let isRtl = window.Helpers.isRtl(),
-  isDarkStyle = window.Helpers.isDarkStyle();
+window.isRtl = window.Helpers.isRtl();
+window.isDarkStyle = window.Helpers.isDarkStyle();
 
 (function () {
   const menu = document.getElementById('navbarSupportedContent'),
@@ -88,13 +88,13 @@ let isRtl = window.Helpers.isRtl(),
   //Style Switcher (Light/Dark/System Mode)
   let styleSwitcher = document.querySelector('.dropdown-style-switcher');
 
+  // Get style from local storage or use 'system' as default
+  let storedStyle =
+    localStorage.getItem('templateCustomizer-' + templateName + '--Style') || //if no template style then use Customizer style
+    (window.templateCustomizer?.settings?.defaultStyle ?? 'light'); //!if there is no Customizer then use default style as light
+
   // Set style on click of style switcher item if template customizer is enabled
   if (window.templateCustomizer && styleSwitcher) {
-    // Get style from local storage or use 'system' as default
-    let storedStyle =
-      localStorage.getItem('templateCustomizer-' + templateName + '--Style') ||
-      window.templateCustomizer.settings.defaultStyle;
-
     let styleSwitcherItems = [].slice.call(styleSwitcher.children[1].querySelectorAll('.dropdown-item'));
     styleSwitcherItems.forEach(function (item) {
       item.addEventListener('click', function () {
@@ -132,9 +132,10 @@ let isRtl = window.Helpers.isRtl(),
         fallbackPlacements: ['bottom']
       });
     }
-    // Run switchImage function based on the stored style
-    switchImage(storedStyle);
   }
+
+  // Run switchImage function based on the stored style
+  switchImage(storedStyle);
 
   // Update light/dark image based on current style
   function switchImage(style) {

@@ -319,7 +319,7 @@
         parentHeightOffset: 0,
         stacked: true,
         type: 'bar',
-        toolbar: {show: false}
+        toolbar: { show: false }
       },
       tooltip: {
         enabled: false
@@ -473,13 +473,13 @@
     var dt_project = dt_projects_table.DataTable({
       ajax: assetsPath + 'json/user-profile.json',
       columns: [
-        {data: ''},
-        {data: 'id'},
-        {data: 'project_name'},
-        {data: 'project_leader'},
-        {data: ''},
-        {data: 'status'},
-        {data: ''}
+        { data: '' },
+        { data: 'id' },
+        { data: 'project_name' },
+        { data: 'project_leader' },
+        { data: '' },
+        { data: 'status' },
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -630,18 +630,18 @@
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

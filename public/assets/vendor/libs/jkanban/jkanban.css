@@ -26,7 +26,6 @@
 }
 
 .kanban-board.is-moving.gu-mirror {
-  -webkit-transform: rotate(3deg);
   transform: rotate(3deg);
 }
 
@@ -78,7 +77,6 @@
 }
 
 .kanban-item.is-moving.gu-mirror {
-  -webkit-transform: rotate(3deg);
   transform: rotate(3deg);
   height: auto !important;
 }
@@ -103,7 +101,6 @@
 
 .gu-transit {
   opacity: 0.2 !important;
-  -webkit-transform: rotate(0deg) !important;
   transform: rotate(0deg) !important;
 }
 
@@ -154,7 +151,6 @@
 .light-style .kanban-board {
   background: #dbdade;
 }
-
 .light-style .kanban-item {
   background: #fff;
 }
@@ -162,7 +158,6 @@
 .dark-style .kanban-board {
   background: #434968;
 }
-
 .dark-style .kanban-item {
   background: #2f3349;
 }

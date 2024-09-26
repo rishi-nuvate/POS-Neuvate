@@ -110,7 +110,15 @@ $(function () {
     $('.dt-column-search thead tr').clone(true).appendTo('.dt-column-search thead');
     $('.dt-column-search thead tr:eq(1) th').each(function (i) {
       var title = $(this).text();
-      $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+      var $input = $('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+
+      // Add left and right border styles to the parent element
+      $(this).css('border-left', 'none');
+      if (i === $('.dt-column-search thead tr:eq(1) th').length - 1) {
+        $(this).css('border-right', 'none');
+      }
+
+      $(this).html($input);
 
       $('input', this).on('keyup change', function () {
         if (dt_filter.column(i).search() !== this.value) {
@@ -122,12 +130,12 @@ $(function () {
     var dt_filter = dt_filter_table.DataTable({
       ajax: assetsPath + 'json/table-datatable.json',
       columns: [
-        {data: 'full_name'},
-        {data: 'email'},
-        {data: 'post'},
-        {data: 'city'},
-        {data: 'start_date'},
-        {data: 'salary'}
+        { data: 'full_name' },
+        { data: 'email' },
+        { data: 'post' },
+        { data: 'city' },
+        { data: 'start_date' },
+        { data: 'salary' }
       ],
       orderCellsTop: true,
       dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>'
@@ -143,13 +151,13 @@ $(function () {
       dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6 dataTables_pager'p>>",
       ajax: assetsPath + 'json/table-datatable.json',
       columns: [
-        {data: ''},
-        {data: 'full_name'},
-        {data: 'email'},
-        {data: 'post'},
-        {data: 'city'},
-        {data: 'start_date'},
-        {data: 'salary'}
+        { data: '' },
+        { data: 'full_name' },
+        { data: 'email' },
+        { data: 'post' },
+        { data: 'city' },
+        { data: 'start_date' },
+        { data: 'salary' }
       ],
 
       columnDefs: [
@@ -176,18 +184,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 
@@ -210,16 +218,16 @@ $(function () {
     var dt_responsive = dt_responsive_table.DataTable({
       ajax: assetsPath + 'json/table-datatable.json',
       columns: [
-        {data: ''},
-        {data: 'full_name'},
-        {data: 'email'},
-        {data: 'post'},
-        {data: 'city'},
-        {data: 'start_date'},
-        {data: 'salary'},
-        {data: 'age'},
-        {data: 'experience'},
-        {data: 'status'}
+        { data: '' },
+        { data: 'full_name' },
+        { data: 'email' },
+        { data: 'post' },
+        { data: 'city' },
+        { data: 'start_date' },
+        { data: 'salary' },
+        { data: 'age' },
+        { data: 'experience' },
+        { data: 'status' }
       ],
       columnDefs: [
         {
@@ -237,11 +245,11 @@ $(function () {
           render: function (data, type, full, meta) {
             var $status_number = full['status'];
             var $status = {
-              1: {title: 'Current', class: 'bg-label-primary'},
-              2: {title: 'Professional', class: ' bg-label-success'},
-              3: {title: 'Rejected', class: ' bg-label-danger'},
-              4: {title: 'Resigned', class: ' bg-label-warning'},
-              5: {title: 'Applied', class: ' bg-label-info'}
+              1: { title: 'Current', class: 'bg-label-primary' },
+              2: { title: 'Professional', class: ' bg-label-success' },
+              3: { title: 'Rejected', class: ' bg-label-danger' },
+              4: { title: 'Resigned', class: ' bg-label-warning' },
+              5: { title: 'Applied', class: ' bg-label-info' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -268,18 +276,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

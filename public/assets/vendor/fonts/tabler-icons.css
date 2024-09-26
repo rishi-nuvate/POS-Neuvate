@@ -9,14 +9,12 @@
   src: url("tabler/tabler-icons.eot");
   src: url("tabler/tabler-icons.eot?#iefix") format("embedded-opentype"), url("tabler/tabler-icons.woff2") format("woff2"), url("tabler/tabler-icons.woff") format("woff"), url("tabler/tabler-icons.ttf") format("truetype");
 }
-
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   @font-face {
     font-family: "tabler-icons";
     src: url("tabler/tabler-icons.svg#tabler-icons") format("svg");
   }
 }
-
 .ti {
   vertical-align: middle;
   font-size: 1.25rem;
@@ -47,7 +45,6 @@
     transform: rotate(359deg);
   }
 }
-
 @keyframes spin {
   0% {
     -webkit-transform: rotate(0);
@@ -58,7 +55,6 @@
     transform: rotate(359deg);
   }
 }
-
 @-webkit-keyframes burst {
   0% {
     -webkit-transform: scale(1);
@@ -71,7 +67,6 @@
     opacity: 0;
   }
 }
-
 @keyframes burst {
   0% {
     -webkit-transform: scale(1);
@@ -84,7 +79,6 @@
     opacity: 0;
   }
 }
-
 @-webkit-keyframes flashing {
   0% {
     opacity: 1;
@@ -96,7 +90,6 @@
     opacity: 1;
   }
 }
-
 @keyframes flashing {
   0% {
     opacity: 1;
@@ -108,7 +101,6 @@
     opacity: 1;
   }
 }
-
 @-webkit-keyframes fade-left {
   0% {
     -webkit-transform: translateX(0);
@@ -121,7 +113,6 @@
     opacity: 0;
   }
 }
-
 @keyframes fade-left {
   0% {
     -webkit-transform: translateX(0);
@@ -134,7 +125,6 @@
     opacity: 0;
   }
 }
-
 @-webkit-keyframes fade-right {
   0% {
     -webkit-transform: translateX(0);
@@ -147,7 +137,6 @@
     opacity: 0;
   }
 }
-
 @keyframes fade-right {
   0% {
     -webkit-transform: translateX(0);
@@ -160,7 +149,6 @@
     opacity: 0;
   }
 }
-
 @-webkit-keyframes fade-up {
   0% {
     -webkit-transform: translateY(0);
@@ -173,7 +161,6 @@
     opacity: 0;
   }
 }
-
 @keyframes fade-up {
   0% {
     -webkit-transform: translateY(0);
@@ -186,7 +173,6 @@
     opacity: 0;
   }
 }
-
 @-webkit-keyframes fade-down {
   0% {
     -webkit-transform: translateY(0);
@@ -199,7 +185,6 @@
     opacity: 0;
   }
 }
-
 @keyframes fade-down {
   0% {
     -webkit-transform: translateY(0);
@@ -212,7 +197,6 @@
     opacity: 0;
   }
 }
-
 @-webkit-keyframes tada {
   from {
     -webkit-transform: scale3d(1, 1, 1);
@@ -235,7 +219,6 @@
     transform: scale3d(1, 1, 1);
   }
 }
-
 @keyframes tada {
   from {
     -webkit-transform: scale3d(1, 1, 1);
@@ -258,7 +241,6 @@
     transform: scale3d(1, 1, 1);
   }
 }
-
 .ti-spin {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;

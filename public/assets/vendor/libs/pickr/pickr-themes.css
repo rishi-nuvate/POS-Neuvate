@@ -1,7 +1,7 @@
+/*! Pickr 1.9.0 MIT | https://github.com/Simonwep/pickr */
 .pickr {
   position: relative;
   overflow: visible;
-  -webkit-transform: translateY(0);
   transform: translateY(0);
 }
 
@@ -70,43 +70,28 @@
   cursor: not-allowed;
 }
 
-.pickr *,
-.pcr-app * {
+.pickr *, .pcr-app * {
   box-sizing: border-box;
   outline: none;
   border: none;
   -webkit-appearance: none;
 }
 
-.pickr input:focus, .pickr input.pcr-active,
-.pickr button:focus,
-.pickr button.pcr-active,
-.pcr-app input:focus,
-.pcr-app input.pcr-active,
-.pcr-app button:focus,
-.pcr-app button.pcr-active {
+.pickr input:focus, .pickr input.pcr-active, .pickr button:focus, .pickr button.pcr-active, .pcr-app input:focus, .pcr-app input.pcr-active, .pcr-app button:focus, .pcr-app button.pcr-active {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px var(--pcr-color);
 }
 
-.pickr .pcr-palette,
-.pickr .pcr-slider,
-.pcr-app .pcr-palette,
-.pcr-app .pcr-slider {
+.pickr .pcr-palette, .pickr .pcr-slider, .pcr-app .pcr-palette, .pcr-app .pcr-slider {
   transition: box-shadow 0.3s;
 }
 
-.pickr .pcr-palette:focus,
-.pickr .pcr-slider:focus,
-.pcr-app .pcr-palette:focus,
-.pcr-app .pcr-slider:focus {
+.pickr .pcr-palette:focus, .pickr .pcr-slider:focus, .pcr-app .pcr-palette:focus, .pcr-app .pcr-slider:focus {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(0, 0, 0, 0.25);
 }
 
 .pcr-app {
   position: fixed;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   z-index: 10000;
   border-radius: 0.1em;
@@ -127,9 +112,7 @@
 }
 
 .pcr-app .pcr-swatches {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-top: 0.75em;
 }
@@ -141,12 +124,10 @@
 @supports (display: grid) {
   .pcr-app .pcr-swatches {
     display: grid;
-    -ms-flex-align: center;
     align-items: center;
     grid-template-columns: repeat(auto-fit, 1.75em);
   }
 }
-
 .pcr-app .pcr-swatches > button {
   font-size: 1em;
   position: relative;
@@ -155,12 +136,11 @@
   border-radius: 0.15em;
   cursor: pointer;
   margin: 2.5px;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   justify-self: center;
   transition: all 0.15s;
   overflow: hidden;
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
   z-index: 1;
 }
 
@@ -191,7 +171,6 @@
 }
 
 .pcr-app .pcr-swatches > button:hover {
-  -webkit-filter: brightness(1.05);
   filter: brightness(1.05);
 }
 
@@ -200,11 +179,8 @@
 }
 
 .pcr-app .pcr-interaction {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -ms-flex-align: center;
   align-items: center;
   margin: 0 -0.2em 0 -0.2em;
 }
@@ -227,7 +203,6 @@
 }
 
 .pcr-app .pcr-interaction input:hover {
-  -webkit-filter: brightness(0.975);
   filter: brightness(0.975);
 }
 
@@ -238,7 +213,6 @@
 .pcr-app .pcr-interaction .pcr-result {
   color: #75797e;
   text-align: left;
-  -ms-flex: 1 1 8em;
   flex: 1 1 8em;
   min-width: 8em;
   transition: all 0.2s;
@@ -262,23 +236,16 @@
   background: #4285f4;
 }
 
-.pcr-app .pcr-interaction .pcr-save,
-.pcr-app .pcr-interaction .pcr-cancel,
-.pcr-app .pcr-interaction .pcr-clear {
+.pcr-app .pcr-interaction .pcr-save, .pcr-app .pcr-interaction .pcr-cancel, .pcr-app .pcr-interaction .pcr-clear {
   color: #fff;
   width: auto;
 }
 
-.pcr-app .pcr-interaction .pcr-save,
-.pcr-app .pcr-interaction .pcr-cancel,
-.pcr-app .pcr-interaction .pcr-clear {
+.pcr-app .pcr-interaction .pcr-save, .pcr-app .pcr-interaction .pcr-cancel, .pcr-app .pcr-interaction .pcr-clear {
   color: #fff;
 }
 
-.pcr-app .pcr-interaction .pcr-save:hover,
-.pcr-app .pcr-interaction .pcr-cancel:hover,
-.pcr-app .pcr-interaction .pcr-clear:hover {
-  -webkit-filter: brightness(0.925);
+.pcr-app .pcr-interaction .pcr-save:hover, .pcr-app .pcr-interaction .pcr-cancel:hover, .pcr-app .pcr-interaction .pcr-clear:hover {
   filter: brightness(0.925);
 }
 
@@ -286,13 +253,11 @@
   background: #4285f4;
 }
 
-.pcr-app .pcr-interaction .pcr-clear,
-.pcr-app .pcr-interaction .pcr-cancel {
+.pcr-app .pcr-interaction .pcr-clear, .pcr-app .pcr-interaction .pcr-cancel {
   background: #f44250;
 }
 
-.pcr-app .pcr-interaction .pcr-clear:focus,
-.pcr-app .pcr-interaction .pcr-cancel:focus {
+.pcr-app .pcr-interaction .pcr-clear:focus, .pcr-app .pcr-interaction .pcr-cancel:focus {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(244, 66, 80, 0.75);
 }
 
@@ -304,29 +269,21 @@
   border-radius: 100%;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.pcr-app .pcr-selection .pcr-color-palette,
-.pcr-app .pcr-selection .pcr-color-chooser,
-.pcr-app .pcr-selection .pcr-color-opacity {
+.pcr-app .pcr-selection .pcr-color-palette, .pcr-app .pcr-selection .pcr-color-chooser, .pcr-app .pcr-selection .pcr-color-opacity {
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   cursor: grab;
   cursor: -webkit-grab;
 }
 
-.pcr-app .pcr-selection .pcr-color-palette:active,
-.pcr-app .pcr-selection .pcr-color-chooser:active,
-.pcr-app .pcr-selection .pcr-color-opacity:active {
+.pcr-app .pcr-selection .pcr-color-palette:active, .pcr-app .pcr-selection .pcr-color-chooser:active, .pcr-app .pcr-selection .pcr-color-opacity:active {
   cursor: grabbing;
   cursor: -webkit-grabbing;
 }
@@ -338,11 +295,8 @@
 }
 
 .pcr-app[data-theme=classic] .pcr-selection {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 
@@ -350,11 +304,8 @@
   position: relative;
   z-index: 1;
   width: 2em;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-right: 0.75em;
 }
@@ -382,8 +333,7 @@
   border-radius: 0 0 0.15em 0.15em;
 }
 
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-preview .pcr-last-color,
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-preview .pcr-current-color {
+.pcr-app[data-theme=classic] .pcr-selection .pcr-color-preview .pcr-last-color, .pcr-app[data-theme=classic] .pcr-selection .pcr-color-preview .pcr-current-color {
   background: var(--pcr-color);
   width: 100%;
   height: 50%;
@@ -396,7 +346,6 @@
 }
 
 .pcr-app[data-theme=classic] .pcr-selection .pcr-color-palette .pcr-palette {
-  -ms-flex-positive: 1;
   flex-grow: 1;
   border-radius: 0.15em;
 }
@@ -414,22 +363,17 @@
   z-index: -1;
 }
 
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser,
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity {
+.pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser, .pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity {
   margin-left: 0.75em;
 }
 
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser .pcr-picker,
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity .pcr-picker {
+.pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser .pcr-picker, .pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity .pcr-picker {
   left: 50%;
-  -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser .pcr-slider,
-.pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity .pcr-slider {
+.pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser .pcr-slider, .pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity .pcr-slider {
   width: 8px;
-  -ms-flex-positive: 1;
   flex-grow: 1;
   border-radius: 50em;
 }
@@ -447,17 +391,16 @@
   margin-right: inherit;
   margin-left: 0.75em;
 }
-
 [dir=rtl] .pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser,
 [dir=rtl] .pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity {
   margin-left: inherit;
   margin-right: 0.75em;
 }
 
+/*! Pickr 1.9.0 MIT | https://github.com/Simonwep/pickr */
 .pickr {
   position: relative;
   overflow: visible;
-  -webkit-transform: translateY(0);
   transform: translateY(0);
 }
 
@@ -526,43 +469,28 @@
   cursor: not-allowed;
 }
 
-.pickr *,
-.pcr-app * {
+.pickr *, .pcr-app * {
   box-sizing: border-box;
   outline: none;
   border: none;
   -webkit-appearance: none;
 }
 
-.pickr input:focus, .pickr input.pcr-active,
-.pickr button:focus,
-.pickr button.pcr-active,
-.pcr-app input:focus,
-.pcr-app input.pcr-active,
-.pcr-app button:focus,
-.pcr-app button.pcr-active {
+.pickr input:focus, .pickr input.pcr-active, .pickr button:focus, .pickr button.pcr-active, .pcr-app input:focus, .pcr-app input.pcr-active, .pcr-app button:focus, .pcr-app button.pcr-active {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px var(--pcr-color);
 }
 
-.pickr .pcr-palette,
-.pickr .pcr-slider,
-.pcr-app .pcr-palette,
-.pcr-app .pcr-slider {
+.pickr .pcr-palette, .pickr .pcr-slider, .pcr-app .pcr-palette, .pcr-app .pcr-slider {
   transition: box-shadow 0.3s;
 }
 
-.pickr .pcr-palette:focus,
-.pickr .pcr-slider:focus,
-.pcr-app .pcr-palette:focus,
-.pcr-app .pcr-slider:focus {
+.pickr .pcr-palette:focus, .pickr .pcr-slider:focus, .pcr-app .pcr-palette:focus, .pcr-app .pcr-slider:focus {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(0, 0, 0, 0.25);
 }
 
 .pcr-app {
   position: fixed;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   z-index: 10000;
   border-radius: 0.1em;
@@ -583,9 +511,7 @@
 }
 
 .pcr-app .pcr-swatches {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-top: 0.75em;
 }
@@ -597,12 +523,10 @@
 @supports (display: grid) {
   .pcr-app .pcr-swatches {
     display: grid;
-    -ms-flex-align: center;
     align-items: center;
     grid-template-columns: repeat(auto-fit, 1.75em);
   }
 }
-
 .pcr-app .pcr-swatches > button {
   font-size: 1em;
   position: relative;
@@ -611,12 +535,11 @@
   border-radius: 0.15em;
   cursor: pointer;
   margin: 2.5px;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   justify-self: center;
   transition: all 0.15s;
   overflow: hidden;
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
   z-index: 1;
 }
 
@@ -647,7 +570,6 @@
 }
 
 .pcr-app .pcr-swatches > button:hover {
-  -webkit-filter: brightness(1.05);
   filter: brightness(1.05);
 }
 
@@ -656,11 +578,8 @@
 }
 
 .pcr-app .pcr-interaction {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -ms-flex-align: center;
   align-items: center;
   margin: 0 -0.2em 0 -0.2em;
 }
@@ -683,7 +602,6 @@
 }
 
 .pcr-app .pcr-interaction input:hover {
-  -webkit-filter: brightness(0.975);
   filter: brightness(0.975);
 }
 
@@ -694,7 +612,6 @@
 .pcr-app .pcr-interaction .pcr-result {
   color: #75797e;
   text-align: left;
-  -ms-flex: 1 1 8em;
   flex: 1 1 8em;
   min-width: 8em;
   transition: all 0.2s;
@@ -718,23 +635,16 @@
   background: #4285f4;
 }
 
-.pcr-app .pcr-interaction .pcr-save,
-.pcr-app .pcr-interaction .pcr-cancel,
-.pcr-app .pcr-interaction .pcr-clear {
+.pcr-app .pcr-interaction .pcr-save, .pcr-app .pcr-interaction .pcr-cancel, .pcr-app .pcr-interaction .pcr-clear {
   color: #fff;
   width: auto;
 }
 
-.pcr-app .pcr-interaction .pcr-save,
-.pcr-app .pcr-interaction .pcr-cancel,
-.pcr-app .pcr-interaction .pcr-clear {
+.pcr-app .pcr-interaction .pcr-save, .pcr-app .pcr-interaction .pcr-cancel, .pcr-app .pcr-interaction .pcr-clear {
   color: #fff;
 }
 
-.pcr-app .pcr-interaction .pcr-save:hover,
-.pcr-app .pcr-interaction .pcr-cancel:hover,
-.pcr-app .pcr-interaction .pcr-clear:hover {
-  -webkit-filter: brightness(0.925);
+.pcr-app .pcr-interaction .pcr-save:hover, .pcr-app .pcr-interaction .pcr-cancel:hover, .pcr-app .pcr-interaction .pcr-clear:hover {
   filter: brightness(0.925);
 }
 
@@ -742,13 +652,11 @@
   background: #4285f4;
 }
 
-.pcr-app .pcr-interaction .pcr-clear,
-.pcr-app .pcr-interaction .pcr-cancel {
+.pcr-app .pcr-interaction .pcr-clear, .pcr-app .pcr-interaction .pcr-cancel {
   background: #f44250;
 }
 
-.pcr-app .pcr-interaction .pcr-clear:focus,
-.pcr-app .pcr-interaction .pcr-cancel:focus {
+.pcr-app .pcr-interaction .pcr-clear:focus, .pcr-app .pcr-interaction .pcr-cancel:focus {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(244, 66, 80, 0.75);
 }
 
@@ -760,29 +668,21 @@
   border-radius: 100%;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.pcr-app .pcr-selection .pcr-color-palette,
-.pcr-app .pcr-selection .pcr-color-chooser,
-.pcr-app .pcr-selection .pcr-color-opacity {
+.pcr-app .pcr-selection .pcr-color-palette, .pcr-app .pcr-selection .pcr-color-chooser, .pcr-app .pcr-selection .pcr-color-opacity {
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   cursor: grab;
   cursor: -webkit-grab;
 }
 
-.pcr-app .pcr-selection .pcr-color-palette:active,
-.pcr-app .pcr-selection .pcr-color-chooser:active,
-.pcr-app .pcr-selection .pcr-color-opacity:active {
+.pcr-app .pcr-selection .pcr-color-palette:active, .pcr-app .pcr-selection .pcr-color-chooser:active, .pcr-app .pcr-selection .pcr-color-opacity:active {
   cursor: grabbing;
   cursor: -webkit-grabbing;
 }
@@ -794,13 +694,9 @@
 }
 
 .pcr-app[data-theme=monolith] .pcr-selection {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 
@@ -809,11 +705,8 @@
   z-index: 1;
   width: 100%;
   height: 1em;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 0.5em;
 }
@@ -842,8 +735,7 @@
   border-radius: 0 0.15em 0.15em 0;
 }
 
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-preview .pcr-last-color,
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-preview .pcr-current-color {
+.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-preview .pcr-last-color, .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-preview .pcr-current-color {
   background: var(--pcr-color);
   width: 50%;
   height: 100%;
@@ -874,22 +766,17 @@
   z-index: -1;
 }
 
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-chooser,
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-opacity {
+.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-chooser, .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-opacity {
   height: 0.5em;
   margin-top: 0.75em;
 }
 
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-chooser .pcr-picker,
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-opacity .pcr-picker {
+.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-chooser .pcr-picker, .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-opacity .pcr-picker {
   top: 50%;
-  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-chooser .pcr-slider,
-.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-opacity .pcr-slider {
-  -ms-flex-positive: 1;
+.pcr-app[data-theme=monolith] .pcr-selection .pcr-color-chooser .pcr-slider, .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-opacity .pcr-slider {
   flex-grow: 1;
   border-radius: 50em;
 }
@@ -906,15 +793,14 @@
 [dir=rtl] .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-preview .pcr-last-color {
   border-radius: 0 0.15em 0.15em 0;
 }
-
 [dir=rtl] .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-preview .pcr-current-color {
   border-radius: 0.15em 0 0 0.15em;
 }
 
+/*! Pickr 1.9.0 MIT | https://github.com/Simonwep/pickr */
 .pickr {
   position: relative;
   overflow: visible;
-  -webkit-transform: translateY(0);
   transform: translateY(0);
 }
 
@@ -983,43 +869,28 @@
   cursor: not-allowed;
 }
 
-.pickr *,
-.pcr-app * {
+.pickr *, .pcr-app * {
   box-sizing: border-box;
   outline: none;
   border: none;
   -webkit-appearance: none;
 }
 
-.pickr input:focus, .pickr input.pcr-active,
-.pickr button:focus,
-.pickr button.pcr-active,
-.pcr-app input:focus,
-.pcr-app input.pcr-active,
-.pcr-app button:focus,
-.pcr-app button.pcr-active {
+.pickr input:focus, .pickr input.pcr-active, .pickr button:focus, .pickr button.pcr-active, .pcr-app input:focus, .pcr-app input.pcr-active, .pcr-app button:focus, .pcr-app button.pcr-active {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px var(--pcr-color);
 }
 
-.pickr .pcr-palette,
-.pickr .pcr-slider,
-.pcr-app .pcr-palette,
-.pcr-app .pcr-slider {
+.pickr .pcr-palette, .pickr .pcr-slider, .pcr-app .pcr-palette, .pcr-app .pcr-slider {
   transition: box-shadow 0.3s;
 }
 
-.pickr .pcr-palette:focus,
-.pickr .pcr-slider:focus,
-.pcr-app .pcr-palette:focus,
-.pcr-app .pcr-slider:focus {
+.pickr .pcr-palette:focus, .pickr .pcr-slider:focus, .pcr-app .pcr-palette:focus, .pcr-app .pcr-slider:focus {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(0, 0, 0, 0.25);
 }
 
 .pcr-app {
   position: fixed;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   z-index: 10000;
   border-radius: 0.1em;
@@ -1040,9 +911,7 @@
 }
 
 .pcr-app .pcr-swatches {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-top: 0.75em;
 }
@@ -1054,12 +923,10 @@
 @supports (display: grid) {
   .pcr-app .pcr-swatches {
     display: grid;
-    -ms-flex-align: center;
     align-items: center;
     grid-template-columns: repeat(auto-fit, 1.75em);
   }
 }
-
 .pcr-app .pcr-swatches > button {
   font-size: 1em;
   position: relative;
@@ -1068,12 +935,11 @@
   border-radius: 0.15em;
   cursor: pointer;
   margin: 2.5px;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   justify-self: center;
   transition: all 0.15s;
   overflow: hidden;
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
   z-index: 1;
 }
 
@@ -1104,7 +970,6 @@
 }
 
 .pcr-app .pcr-swatches > button:hover {
-  -webkit-filter: brightness(1.05);
   filter: brightness(1.05);
 }
 
@@ -1113,11 +978,8 @@
 }
 
 .pcr-app .pcr-interaction {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -ms-flex-align: center;
   align-items: center;
   margin: 0 -0.2em 0 -0.2em;
 }
@@ -1140,7 +1002,6 @@
 }
 
 .pcr-app .pcr-interaction input:hover {
-  -webkit-filter: brightness(0.975);
   filter: brightness(0.975);
 }
 
@@ -1151,7 +1012,6 @@
 .pcr-app .pcr-interaction .pcr-result {
   color: #75797e;
   text-align: left;
-  -ms-flex: 1 1 8em;
   flex: 1 1 8em;
   min-width: 8em;
   transition: all 0.2s;
@@ -1175,23 +1035,16 @@
   background: #4285f4;
 }
 
-.pcr-app .pcr-interaction .pcr-save,
-.pcr-app .pcr-interaction .pcr-cancel,
-.pcr-app .pcr-interaction .pcr-clear {
+.pcr-app .pcr-interaction .pcr-save, .pcr-app .pcr-interaction .pcr-cancel, .pcr-app .pcr-interaction .pcr-clear {
   color: #fff;
   width: auto;
 }
 
-.pcr-app .pcr-interaction .pcr-save,
-.pcr-app .pcr-interaction .pcr-cancel,
-.pcr-app .pcr-interaction .pcr-clear {
+.pcr-app .pcr-interaction .pcr-save, .pcr-app .pcr-interaction .pcr-cancel, .pcr-app .pcr-interaction .pcr-clear {
   color: #fff;
 }
 
-.pcr-app .pcr-interaction .pcr-save:hover,
-.pcr-app .pcr-interaction .pcr-cancel:hover,
-.pcr-app .pcr-interaction .pcr-clear:hover {
-  -webkit-filter: brightness(0.925);
+.pcr-app .pcr-interaction .pcr-save:hover, .pcr-app .pcr-interaction .pcr-cancel:hover, .pcr-app .pcr-interaction .pcr-clear:hover {
   filter: brightness(0.925);
 }
 
@@ -1199,13 +1052,11 @@
   background: #4285f4;
 }
 
-.pcr-app .pcr-interaction .pcr-clear,
-.pcr-app .pcr-interaction .pcr-cancel {
+.pcr-app .pcr-interaction .pcr-clear, .pcr-app .pcr-interaction .pcr-cancel {
   background: #f44250;
 }
 
-.pcr-app .pcr-interaction .pcr-clear:focus,
-.pcr-app .pcr-interaction .pcr-cancel:focus {
+.pcr-app .pcr-interaction .pcr-clear:focus, .pcr-app .pcr-interaction .pcr-cancel:focus {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(244, 66, 80, 0.75);
 }
 
@@ -1217,29 +1068,21 @@
   border-radius: 100%;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.pcr-app .pcr-selection .pcr-color-palette,
-.pcr-app .pcr-selection .pcr-color-chooser,
-.pcr-app .pcr-selection .pcr-color-opacity {
+.pcr-app .pcr-selection .pcr-color-palette, .pcr-app .pcr-selection .pcr-color-chooser, .pcr-app .pcr-selection .pcr-color-opacity {
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   cursor: grab;
   cursor: -webkit-grab;
 }
 
-.pcr-app .pcr-selection .pcr-color-palette:active,
-.pcr-app .pcr-selection .pcr-color-chooser:active,
-.pcr-app .pcr-selection .pcr-color-opacity:active {
+.pcr-app .pcr-selection .pcr-color-palette:active, .pcr-app .pcr-selection .pcr-color-chooser:active, .pcr-app .pcr-selection .pcr-color-opacity:active {
   cursor: grabbing;
   cursor: -webkit-grabbing;
 }
@@ -1263,7 +1106,6 @@
   grid-gap: 0.6em;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 5fr auto auto;
-  -ms-flex-align: center;
   align-items: center;
   height: 10.5em;
   width: 100%;
@@ -1274,11 +1116,8 @@
   grid-area: 2/1/4/1;
   height: 100%;
   width: 100%;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -ms-flex-pack: center;
   justify-content: center;
   margin-left: 0.6em;
 }
@@ -1343,22 +1182,17 @@
   grid-area: 3/2/3/2;
 }
 
-.pcr-app[data-theme=nano] .pcr-selection .pcr-color-chooser,
-.pcr-app[data-theme=nano] .pcr-selection .pcr-color-opacity {
+.pcr-app[data-theme=nano] .pcr-selection .pcr-color-chooser, .pcr-app[data-theme=nano] .pcr-selection .pcr-color-opacity {
   height: 0.5em;
   margin: 0 0.6em;
 }
 
-.pcr-app[data-theme=nano] .pcr-selection .pcr-color-chooser .pcr-picker,
-.pcr-app[data-theme=nano] .pcr-selection .pcr-color-opacity .pcr-picker {
+.pcr-app[data-theme=nano] .pcr-selection .pcr-color-chooser .pcr-picker, .pcr-app[data-theme=nano] .pcr-selection .pcr-color-opacity .pcr-picker {
   top: 50%;
-  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
-.pcr-app[data-theme=nano] .pcr-selection .pcr-color-chooser .pcr-slider,
-.pcr-app[data-theme=nano] .pcr-selection .pcr-color-opacity .pcr-slider {
-  -ms-flex-positive: 1;
+.pcr-app[data-theme=nano] .pcr-selection .pcr-color-chooser .pcr-slider, .pcr-app[data-theme=nano] .pcr-selection .pcr-color-opacity .pcr-slider {
   flex-grow: 1;
   border-radius: 50em;
 }
@@ -1383,13 +1217,11 @@
 .dark-style .pcr-app {
   background: #2f3349 !important;
 }
-
 .dark-style .pcr-app .pcr-type:not(.active),
 .dark-style .pcr-app .pcr-result {
   background: #2f3349 !important;
   color: #fff !important;
 }
-
 .dark-style .pcr-app .pcr-interaction input:focus {
   box-shadow: 0 0.25rem 1rem rgba(15, 20, 34, 0.55);
 }

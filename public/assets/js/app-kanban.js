@@ -85,7 +85,6 @@
       '</div>'
     );
   }
-
   // Render item dropdown
   function renderDropdown() {
     return (
@@ -99,7 +98,6 @@
       '</div>'
     );
   }
-
   // Render header
   function renderHeader(color, text) {
     return (
@@ -125,31 +123,31 @@
     return images == undefined
       ? ' '
       : images
-        .split(',')
-        .map(function (img, index, arr) {
-          var $margin = margin && index !== arr.length - 1 ? ' me-' + margin + '' : '';
+          .split(',')
+          .map(function (img, index, arr) {
+            var $margin = margin && index !== arr.length - 1 ? ' me-' + margin + '' : '';
 
-          return (
-            "<div class='avatar " +
-            $size +
-            $margin +
-            "'" +
-            "data-bs-toggle='tooltip' data-bs-placement='top'" +
-            "title='" +
-            member[index] +
-            "'" +
-            '>' +
-            "<img src='" +
-            assetsPath +
-            'img/avatars/' +
-            img +
-            "' alt='Avatar' class='rounded-circle " +
-            $transition +
-            "'>" +
-            '</div>'
-          );
-        })
-        .join(' ');
+            return (
+              "<div class='avatar " +
+              $size +
+              $margin +
+              "'" +
+              "data-bs-toggle='tooltip' data-bs-placement='top'" +
+              "title='" +
+              member[index] +
+              "'" +
+              '>' +
+              "<img src='" +
+              assetsPath +
+              'img/avatars/' +
+              img +
+              "' alt='Avatar' class='rounded-circle " +
+              $transition +
+              "'>" +
+              '</div>'
+            );
+          })
+          .join(' ');
   }
 
   // Render footer
@@ -171,7 +169,6 @@
       '</div>'
     );
   }
-
   // Init kanban
   const kanban = new jKanban({
     element: '.kanban-wrapper',
@@ -191,14 +188,14 @@
     click: function (el) {
       let element = el;
       let title = element.getAttribute('data-eid')
-        ? element.querySelector('.kanban-text').textContent
-        : element.textContent,
+          ? element.querySelector('.kanban-text').textContent
+          : element.textContent,
         date = element.getAttribute('data-due-date'),
         dateObj = new Date(),
         year = dateObj.getFullYear(),
         dateToUse = date
           ? date + ', ' + year
-          : dateObj.getDate() + ' ' + dateObj.toLocaleString('en', {month: 'long'}) + ', ' + year,
+          : dateObj.getDate() + ' ' + dateObj.toLocaleString('en', { month: 'long' }) + ', ' + year,
         label = element.getAttribute('data-badge-text'),
         avatars = element.getAttribute('data-assigned');
 
@@ -219,9 +216,9 @@
         .insertAdjacentHTML(
           'afterbegin',
           renderAvatar(avatars, false, 'xs', '1', el.getAttribute('data-members')) +
-          "<div class='avatar avatar-xs ms-1'>" +
-          "<span class='avatar-initial rounded-circle bg-label-secondary'><i class='ti ti-plus ti-xs text-heading'></i></span>" +
-          '</div>'
+            "<div class='avatar avatar-xs ms-1'>" +
+            "<span class='avatar-initial rounded-circle bg-label-secondary'><i class='ti ti-plus ti-xs text-heading'></i></span>" +
+            '</div>'
         );
     },
 
@@ -233,8 +230,8 @@
         '<textarea class="form-control add-new-item" rows="2" placeholder="Add Content" autofocus required></textarea>' +
         '</div>' +
         '<div class="mb-3">' +
-        '<button type="submit" class="btn btn-primary btn-sm me-2">Add</button>' +
-        '<button type="button" class="btn btn-label-secondary btn-sm cancel-add-item">Cancel</button>' +
+        '<button type="submit" class="btn btn-primary btn-sm me-2 waves-effect waves-light">Add</button>' +
+        '<button type="button" class="btn btn-label-secondary btn-sm cancel-add-item waves-effect waves-light">Cancel</button>' +
         '</div>';
       kanban.addForm(boardId, addNew);
 

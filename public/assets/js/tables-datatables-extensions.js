@@ -17,16 +17,16 @@ $(function () {
     var dt_scrollableTable = dt_scrollable_table.DataTable({
       ajax: assetsPath + 'json/table-datatable.json',
       columns: [
-        {data: 'full_name'},
-        {data: 'post'},
-        {data: 'email'},
-        {data: 'city'},
-        {data: 'start_date'},
-        {data: 'salary'},
-        {data: 'age'},
-        {data: 'experience'},
-        {data: ''},
-        {data: ''}
+        { data: 'full_name' },
+        { data: 'post' },
+        { data: 'email' },
+        { data: 'city' },
+        { data: 'start_date' },
+        { data: 'salary' },
+        { data: 'age' },
+        { data: 'experience' },
+        { data: '' },
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -35,11 +35,11 @@ $(function () {
           render: function (data, type, full, meta) {
             var $status_number = full['status'];
             var $status = {
-              1: {title: 'Current', class: 'bg-label-primary'},
-              2: {title: 'Professional', class: ' bg-label-success'},
-              3: {title: 'Rejected', class: ' bg-label-danger'},
-              4: {title: 'Resigned', class: ' bg-label-warning'},
-              5: {title: 'Applied', class: ' bg-label-info'}
+              1: { title: 'Current', class: 'bg-label-primary' },
+              2: { title: 'Professional', class: ' bg-label-success' },
+              3: { title: 'Rejected', class: ' bg-label-danger' },
+              4: { title: 'Resigned', class: ' bg-label-warning' },
+              5: { title: 'Applied', class: ' bg-label-info' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -74,7 +74,11 @@ $(function () {
       // Scroll options
       scrollY: '300px',
       scrollX: true,
-      dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>'
+      dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      initComplete: function (settings, json) {
+        // Add the mti-n1 class to the first row in tbody
+        dt_scrollable_table.find('tbody tr:first').addClass('border-top-0');
+      }
     });
   }
 
@@ -85,15 +89,15 @@ $(function () {
     var dt_fixedheader = dt_fixedheader_table.DataTable({
       ajax: assetsPath + 'json/table-datatable.json',
       columns: [
-        {data: ''},
-        {data: 'id'},
-        {data: 'id'},
-        {data: 'full_name'},
-        {data: 'email'},
-        {data: 'start_date'},
-        {data: 'salary'},
-        {data: 'status'},
-        {data: ''}
+        { data: '' },
+        { data: 'id' },
+        { data: 'id' },
+        { data: 'full_name' },
+        { data: 'email' },
+        { data: 'start_date' },
+        { data: 'salary' },
+        { data: 'status' },
+        { data: '' }
       ],
       columnDefs: [
         {
@@ -179,11 +183,11 @@ $(function () {
             // var $rand_num = Math.floor(Math.random() * 5) + 1;
             var $status_number = full['status'];
             var $status = {
-              1: {title: 'Current', class: 'bg-label-primary'},
-              2: {title: 'Professional', class: ' bg-label-success'},
-              3: {title: 'Rejected', class: ' bg-label-danger'},
-              4: {title: 'Resigned', class: ' bg-label-warning'},
-              5: {title: 'Applied', class: ' bg-label-info'}
+              1: { title: 'Current', class: 'bg-label-primary' },
+              2: { title: 'Professional', class: ' bg-label-success' },
+              3: { title: 'Rejected', class: ' bg-label-danger' },
+              4: { title: 'Resigned', class: ' bg-label-warning' },
+              5: { title: 'Applied', class: ' bg-label-info' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -231,18 +235,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 
@@ -267,16 +271,16 @@ $(function () {
     var dt_fixedcolumns = dt_fixedcolumns_table.DataTable({
       ajax: assetsPath + 'json/table-datatable.json',
       columns: [
-        {data: 'full_name'},
-        {data: 'post'},
-        {data: 'email'},
-        {data: 'city'},
-        {data: 'start_date'},
-        {data: 'salary'},
-        {data: 'age'},
-        {data: 'experience'},
-        {data: 'status'},
-        {data: 'id'}
+        { data: 'full_name' },
+        { data: 'post' },
+        { data: 'email' },
+        { data: 'city' },
+        { data: 'start_date' },
+        { data: 'salary' },
+        { data: 'age' },
+        { data: 'experience' },
+        { data: 'status' },
+        { data: 'id' }
       ],
       columnDefs: [
         {
@@ -285,11 +289,11 @@ $(function () {
           render: function (data, type, full, meta) {
             var $status_number = full['status'];
             var $status = {
-              1: {title: 'Current', class: 'bg-label-primary'},
-              2: {title: 'Professional', class: ' bg-label-success'},
-              3: {title: 'Rejected', class: ' bg-label-danger'},
-              4: {title: 'Resigned', class: ' bg-label-warning'},
-              5: {title: 'Applied', class: ' bg-label-info'}
+              1: { title: 'Current', class: 'bg-label-primary' },
+              2: { title: 'Professional', class: ' bg-label-success' },
+              3: { title: 'Rejected', class: ' bg-label-danger' },
+              4: { title: 'Resigned', class: ' bg-label-warning' },
+              5: { title: 'Applied', class: ' bg-label-info' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -328,7 +332,11 @@ $(function () {
       paging: false,
       info: false,
       // Fixed column option
-      fixedColumns: true
+      fixedColumns: true,
+      initComplete: function (settings, json) {
+        // Add the mti-n1 class to the first row in tbody
+        dt_fixedcolumns_table.find('tbody tr:first').addClass('border-top-0');
+      }
     });
   }
 
@@ -339,14 +347,14 @@ $(function () {
     var dt_select = dt_select_table.DataTable({
       ajax: assetsPath + 'json/table-datatable.json',
       columns: [
-        {data: 'id'},
-        {data: 'full_name'},
-        {data: 'post'},
-        {data: 'email'},
-        {data: 'city'},
-        {data: 'start_date'},
-        {data: 'salary'},
-        {data: 'status'}
+        { data: 'id' },
+        { data: 'full_name' },
+        { data: 'post' },
+        { data: 'email' },
+        { data: 'city' },
+        { data: 'start_date' },
+        { data: 'salary' },
+        { data: 'status' }
       ],
       columnDefs: [
         {
@@ -368,11 +376,11 @@ $(function () {
           render: function (data, type, full, meta) {
             var $status_number = full['status'];
             var $status = {
-              1: {title: 'Current', class: 'bg-label-primary'},
-              2: {title: 'Professional', class: ' bg-label-success'},
-              3: {title: 'Rejected', class: ' bg-label-danger'},
-              4: {title: 'Resigned', class: ' bg-label-warning'},
-              5: {title: 'Applied', class: ' bg-label-info'}
+              1: { title: 'Current', class: 'bg-label-primary' },
+              2: { title: 'Professional', class: ' bg-label-success' },
+              3: { title: 'Rejected', class: ' bg-label-danger' },
+              4: { title: 'Resigned', class: ' bg-label-warning' },
+              5: { title: 'Applied', class: ' bg-label-info' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;

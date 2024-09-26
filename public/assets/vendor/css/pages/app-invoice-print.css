@@ -4,14 +4,13 @@ body {
 }
 
 body > :not(.invoice-print) {
-  /*display: none !important;*/
+  display: none !important;
 }
 
 .invoice-print {
   min-width: 768px !important;
   font-size: 15px !important;
 }
-
 .invoice-print svg {
   fill: #6f6b7d !important;
 }

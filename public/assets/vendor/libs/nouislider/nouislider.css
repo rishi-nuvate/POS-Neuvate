@@ -12,6 +12,7 @@
   -ms-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -47,7 +48,6 @@
   -webkit-transform-origin: 0 0;
   -webkit-transform-style: preserve-3d;
   transform-origin: 0 0;
-  -webkit-transform-style: flat;
   transform-style: flat;
 }
 
@@ -83,9 +83,8 @@
 
 .noUi-state-tap .noUi-connect,
 .noUi-state-tap .noUi-origin {
-  transition: -webkit-transform 0.3s;
+  -webkit-transition: transform 0.3s;
   transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s;
 }
 
 .noUi-state-drag * {
@@ -208,6 +207,7 @@
  */
 .noUi-pips,
 .noUi-pips * {
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -365,11 +365,7 @@
 
 .noUi-target,
 .noUi-target * {
-  -ms-touch-action: none;
   touch-action: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   box-sizing: border-box;
 }
@@ -389,7 +385,6 @@
 .noUi-horizontal .noUi-origin {
   height: 0;
 }
-
 html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
   left: auto;
   right: 0;
@@ -400,33 +395,24 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .noUi-handle {
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   outline: none !important;
   position: absolute;
-  -webkit-transform-origin: center;
   transform-origin: center;
-  transition: -webkit-transform 0.2s;
   transition: transform 0.2s;
-  transition: transform 0.2s, -webkit-transform 0.2s;
 }
-
 .noUi-handle:before, .noUi-handle:after {
   display: none;
 }
-
 .noUi-handle.noUi-active {
-  -webkit-transform: scale(1.4, 1.4);
   transform: scale(1.4, 1.4);
 }
 
 .noUi-horizontal .noUi-handle.noUi-active .noUi-tooltip {
-  -webkit-transform: translate(-50%, 10%) scale(0.8, 0.8);
   transform: translate(-50%, 10%) scale(0.8, 0.8);
 }
 
 .noUi-vertical .noUi-handle.noUi-active .noUi-tooltip {
-  -webkit-transform: translate(10%, -50%) scale(0.8, 0.8);
   transform: translate(10%, -50%) scale(0.8, 0.8);
 }
 
@@ -454,7 +440,6 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
   height: 0.875rem;
   top: -5px !important;
 }
-
 html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   right: -0.4375rem;
   left: auto;
@@ -533,12 +518,9 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 
 .noUi-value-horizontal {
   padding-top: 0.125rem;
-  -webkit-transform: translate(-50%, 50%);
   transform: translate(-50%, 50%);
 }
-
 [dir=rtl] .noUi-value-horizontal {
-  -webkit-transform: translate(50%, 50%);
   transform: translate(50%, 50%);
 }
 
@@ -557,7 +539,6 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   padding: 0 0 0 0.625rem;
   height: 100%;
 }
-
 [dir=rtl] .noUi-pips-vertical {
   right: 100%;
   left: auto;
@@ -565,10 +546,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 
 .noUi-value-vertical {
   padding-left: 0.875rem;
-  -webkit-transform: translate(0, 50%);
   transform: translate(0, 50%);
 }
-
 [dir=rtl] .noUi-value-vertical {
   right: 100%;
   padding-right: 0.875rem;
@@ -591,9 +570,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   border-radius: 0.25rem;
   text-align: center;
   line-height: 1;
-  transition: -webkit-transform 0.2s;
   transition: transform 0.2s;
-  transition: transform 0.2s, -webkit-transform 0.2s;
   font-size: 0.8125rem;
   border: 0;
 }
@@ -601,119 +578,93 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 .noUi-horizontal .noUi-tooltip {
   bottom: 157%;
   left: 50%;
-  -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
 
 .noUi-vertical .noUi-tooltip {
   top: 50%;
   right: 200%;
-  -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
 }
-
 [dir=rtl] .noUi-vertical .noUi-tooltip {
   right: auto;
   left: 125%;
 }
 
 [dir=rtl] .noUi-vertical .noUi-handle.noUi-active .noUi-tooltip {
-  -webkit-transform: translate(-10%, -50%) scale(0.8, 0.8);
   transform: translate(-10%, -50%) scale(0.8, 0.8);
 }
 
 .light-style .noUi-target {
   background: rgba(75, 70, 92, 0.08);
 }
-
 .light-style .noUi-connect {
   background: #93909d !important;
 }
-
 .light-style .noUi-handle {
   border: 2px solid #fff;
   box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
   background: #6f6b7d !important;
 }
-
 .light-style .noUi-target[disabled] {
   background: rgba(75, 70, 92, 0.24);
 }
-
 .light-style .noUi-value {
   color: #a5a3ae;
 }
-
 .light-style .noUi-marker {
   background: #dbdade;
 }
-
 .light-style .noUi-tooltip {
   color: #5d596c;
   background: #e2e1e5;
   font-weight: 500;
 }
-
 .light-style .noUi-secondary .noUi-connect {
   background: #a8aaae !important;
 }
-
 .light-style .noUi-secondary .noUi-handle {
   background: #86888b !important;
 }
-
 .light-style .noUi-success .noUi-connect {
   background: #28c76f !important;
 }
-
 .light-style .noUi-success .noUi-handle {
   background: #209f59 !important;
 }
-
 .light-style .noUi-info .noUi-connect {
   background: #00cfe8 !important;
 }
-
 .light-style .noUi-info .noUi-handle {
   background: #00a6ba !important;
 }
-
 .light-style .noUi-warning .noUi-connect {
   background: #ff9f43 !important;
 }
-
 .light-style .noUi-warning .noUi-handle {
   background: #cc7f36 !important;
 }
-
 .light-style .noUi-danger .noUi-connect {
   background: #ea5455 !important;
 }
-
 .light-style .noUi-danger .noUi-handle {
   background: #bb4344 !important;
 }
-
 .light-style .noUi-light .noUi-connect {
   background: #dfdfe3 !important;
 }
-
 .light-style .noUi-light .noUi-handle {
   background: #b2b2b6 !important;
 }
-
 .light-style .noUi-dark .noUi-connect {
   background: #4b4b4b !important;
 }
-
 .light-style .noUi-dark .noUi-handle {
   background: #3c3c3c !important;
 }
-
 .light-style .noUi-gray .noUi-connect {
   background: rgba(75, 70, 92, 0.05) !important;
 }
-
 .light-style .noUi-gray .noUi-handle {
   background: rgba(7, 7, 9, 0.24) !important;
 }
@@ -721,95 +672,73 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 .dark-style .noUi-target {
   background: rgba(134, 146, 208, 0.08);
 }
-
 .dark-style .noUi-connect {
   background: #7983bb;
 }
-
 .dark-style .noUi-handle {
   border: 2px solid #2f3349;
   box-shadow: 0 0.125rem 0.25rem rgba(15, 20, 34, 0.4);
   background: #4a5072 !important;
 }
-
 .dark-style .noUi-target[disabled] {
   background: rgba(134, 146, 208, 0.24);
 }
-
 .dark-style .noUi-value {
   color: #7983bb;
 }
-
 .dark-style .noUi-marker {
   background: #434968;
 }
-
 .dark-style .noUi-tooltip {
   color: #cfd3ec;
   background: rgba(134, 146, 208, 0.16);
   font-weight: 500;
 }
-
 .dark-style .noUi-secondary .noUi-connect {
   background: #a8aaae !important;
 }
-
 .dark-style .noUi-secondary .noUi-handle {
   background: #86888b !important;
 }
-
 .dark-style .noUi-success .noUi-connect {
   background: #28c76f !important;
 }
-
 .dark-style .noUi-success .noUi-handle {
   background: #209f59 !important;
 }
-
 .dark-style .noUi-info .noUi-connect {
   background: #00cfe8 !important;
 }
-
 .dark-style .noUi-info .noUi-handle {
   background: #00a6ba !important;
 }
-
 .dark-style .noUi-warning .noUi-connect {
   background: #ff9f43 !important;
 }
-
 .dark-style .noUi-warning .noUi-handle {
   background: #cc7f36 !important;
 }
-
 .dark-style .noUi-danger .noUi-connect {
   background: #ea5455 !important;
 }
-
 .dark-style .noUi-danger .noUi-handle {
   background: #bb4344 !important;
 }
-
 .dark-style .noUi-light .noUi-connect {
   background: #44475b !important;
 }
-
 .dark-style .noUi-light .noUi-handle {
   background: #363949 !important;
 }
-
 .dark-style .noUi-dark .noUi-connect {
   background: #d7d8de !important;
 }
-
 .dark-style .noUi-dark .noUi-handle {
   background: #acadb2 !important;
 }
-
 .dark-style .noUi-gray .noUi-connect {
   background: rgba(255, 255, 255, 0.8) !important;
 }
-
 .dark-style .noUi-gray .noUi-handle {
   background: rgba(185, 185, 185, 0.84) !important;
 }

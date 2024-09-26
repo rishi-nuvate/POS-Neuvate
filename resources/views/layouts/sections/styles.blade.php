@@ -19,6 +19,7 @@
       href="{{ asset(mix('assets/vendor/css' .$configData['rtlSupport'] .'/' .$configData['theme'].'.css')) }}"
       class="{{ $configData['hasCustomizer'] ? 'template-customizer-theme-css' : '' }}"/>
 <link rel="stylesheet" href="{{ asset(mix('assets/css/demo.css')) }}"/>
+
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/node-waves/node-waves.css')) }}"/>
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')) }}"/>
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/typeahead-js/typeahead.css')) }}"/>
@@ -45,7 +46,7 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/form-validation.css') }}" />
+{{--<link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/form-validation.css') }}" />--}}
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}" />

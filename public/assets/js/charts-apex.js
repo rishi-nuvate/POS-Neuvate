@@ -422,7 +422,7 @@
         }
       },
       tooltip: {
-        custom: function ({series, seriesIndex, dataPointIndex, w}) {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
           return '<div class="px-3 py-2">' + '<span>' + series[seriesIndex][dataPointIndex] + '%</span>' + '</div>';
         }
       },
@@ -1014,7 +1014,7 @@
       legend: {
         show: true,
         position: 'bottom',
-        markers: {offsetX: -3},
+        markers: { offsetX: -3 },
         itemMargin: {
           vertical: 3,
           horizontal: 10

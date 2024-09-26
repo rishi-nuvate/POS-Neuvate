@@ -26,7 +26,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             'CategoryName' => 'required|string|max:255|unique:categories,name',
             'SubCatName' => 'required|array|min:1|distinct', // Ensures subjects is an array with unique values
-            'SubCatName.*' => 'required|string|max:255|unique:sub_categories,name',
+            'SubCatName.*' => 'required|string|max:255|distinct',
         ];
     }
 }

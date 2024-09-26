@@ -132,8 +132,6 @@
   /* disable selection/Copy of UIWebView */
   -webkit-touch-callout: none;
   /* disable the IOS popup when long-press on a link */
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -232,7 +230,6 @@
 }
 
 .vakata-context .vakata-contextmenu-disabled > a > i {
-  -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
 
@@ -448,6 +445,8 @@
 }
 
 .jstree-default .jstree-wholerow {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -457,6 +456,7 @@
 
 .jstree-default .jstree-wholerow-clicked {
   background: #beebff;
+  background: -webkit-linear-gradient(top, #beebff 0%, #a8e4ff 100%);
   background: linear-gradient(to bottom, #beebff 0%, #a8e4ff 100%);
 }
 
@@ -1157,25 +1157,21 @@
     font-size: 1.1em;
     text-shadow: 1px 1px white;
   }
-
   #jstree-dnd.jstree-dnd-responsive > i {
     background: transparent;
     width: 40px;
     height: 40px;
   }
-
   #jstree-dnd.jstree-dnd-responsive > .jstree-ok {
     background-image: url("40px.png");
     background-position: 0 -200px;
     background-size: 120px 240px;
   }
-
   #jstree-dnd.jstree-dnd-responsive > .jstree-er {
     background-image: url("40px.png");
     background-position: -40px -200px;
     background-size: 120px 240px;
   }
-
   #jstree-marker.jstree-dnd-responsive {
     border-left-width: 10px;
     border-top-width: 10px;
@@ -1183,7 +1179,6 @@
     margin-top: -10px;
   }
 }
-
 @media (max-width: 768px) {
   .jstree-default-responsive {
     /*
@@ -1191,16 +1186,13 @@
     .jstree-closed > .jstree-ocl { border-radius:20px; background-color:white; }
     */
   }
-
   .jstree-default-responsive .jstree-icon {
     background-image: url("40px.png");
   }
-
   .jstree-default-responsive .jstree-node,
   .jstree-default-responsive .jstree-leaf > .jstree-ocl {
     background: transparent;
   }
-
   .jstree-default-responsive .jstree-node {
     min-height: 40px;
     line-height: 40px;
@@ -1208,115 +1200,92 @@
     min-width: 40px;
     white-space: nowrap;
   }
-
   .jstree-default-responsive .jstree-anchor {
     line-height: 40px;
     height: 40px;
   }
-
   .jstree-default-responsive .jstree-icon,
   .jstree-default-responsive .jstree-icon:empty {
     width: 40px;
     height: 40px;
     line-height: 40px;
   }
-
   .jstree-default-responsive > .jstree-container-ul > .jstree-node {
     margin-left: 0;
   }
-
   .jstree-default-responsive.jstree-rtl .jstree-node {
     margin-left: 0;
     margin-right: 40px;
     background: transparent;
   }
-
   .jstree-default-responsive.jstree-rtl .jstree-container-ul > .jstree-node {
     margin-right: 0;
   }
-
   .jstree-default-responsive .jstree-ocl,
   .jstree-default-responsive .jstree-themeicon,
   .jstree-default-responsive .jstree-checkbox {
     background-size: 120px 240px;
   }
-
   .jstree-default-responsive .jstree-leaf > .jstree-ocl,
   .jstree-default-responsive.jstree-rtl .jstree-leaf > .jstree-ocl {
     background: transparent;
   }
-
   .jstree-default-responsive .jstree-open > .jstree-ocl {
     background-position: 0 0 !important;
   }
-
   .jstree-default-responsive .jstree-closed > .jstree-ocl {
     background-position: 0 -40px !important;
   }
-
   .jstree-default-responsive.jstree-rtl .jstree-closed > .jstree-ocl {
     background-position: -40px 0 !important;
   }
-
   .jstree-default-responsive .jstree-themeicon {
     background-position: -40px -40px;
   }
-
   .jstree-default-responsive .jstree-checkbox,
   .jstree-default-responsive .jstree-checkbox:hover {
     background-position: -40px -80px;
   }
-
   .jstree-default-responsive.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox,
   .jstree-default-responsive.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox:hover,
   .jstree-default-responsive .jstree-checked > .jstree-checkbox,
   .jstree-default-responsive .jstree-checked > .jstree-checkbox:hover {
     background-position: 0 -80px;
   }
-
   .jstree-default-responsive .jstree-anchor > .jstree-undetermined,
   .jstree-default-responsive .jstree-anchor > .jstree-undetermined:hover {
     background-position: 0 -120px;
   }
-
   .jstree-default-responsive .jstree-anchor {
     font-weight: bold;
     font-size: 1.1em;
     text-shadow: 1px 1px white;
   }
-
   .jstree-default-responsive > .jstree-striped {
     background: transparent;
   }
-
   .jstree-default-responsive .jstree-wholerow {
     border-top: 1px solid rgba(255, 255, 255, 0.7);
     border-bottom: 1px solid rgba(64, 64, 64, 0.2);
     background: #ebebeb;
     height: 40px;
   }
-
   .jstree-default-responsive .jstree-wholerow-hovered {
     background: #e7f4f9;
   }
-
   .jstree-default-responsive .jstree-wholerow-clicked {
     background: #beebff;
   }
-
   .jstree-default-responsive .jstree-children .jstree-last > .jstree-wholerow {
     box-shadow: inset 0 -6px 3px -5px #666666;
   }
-
   .jstree-default-responsive .jstree-children .jstree-open > .jstree-wholerow {
     box-shadow: inset 0 6px 3px -5px #666666;
     border-top: 0;
   }
-
   .jstree-default-responsive .jstree-children .jstree-open + .jstree-open {
     box-shadow: none;
   }
-
   .jstree-default-responsive .jstree-node,
   .jstree-default-responsive .jstree-icon,
   .jstree-default-responsive .jstree-node > .jstree-ocl,
@@ -1325,46 +1294,37 @@
     background-image: url("40px.png");
     background-size: 120px 240px;
   }
-
   .jstree-default-responsive .jstree-node {
     background-position: -80px 0;
     background-repeat: repeat-y;
   }
-
   .jstree-default-responsive .jstree-last {
     background-image: none;
   }
-
   .jstree-default-responsive .jstree-leaf > .jstree-ocl {
     background-position: -40px -120px;
   }
-
   .jstree-default-responsive .jstree-last > .jstree-ocl {
     background-position: -40px -160px;
   }
-
   .jstree-default-responsive .jstree-themeicon-custom {
     background-color: transparent;
     background-image: none;
     background-position: 0 0;
   }
-
   .jstree-default-responsive .jstree-file {
     background: url("40px.png") 0 -160px no-repeat;
     background-size: 120px 240px;
   }
-
   .jstree-default-responsive .jstree-folder {
     background: url("40px.png") -40px -40px no-repeat;
     background-size: 120px 240px;
   }
-
   .jstree-default-responsive > .jstree-container-ul > .jstree-node {
     margin-left: 0;
     margin-right: 0;
   }
 }
-
 /* jsTree default dark theme */
 .jstree-node,
 .jstree-children,
@@ -1499,8 +1459,6 @@
   /* disable selection/Copy of UIWebView */
   -webkit-touch-callout: none;
   /* disable the IOS popup when long-press on a link */
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -1599,7 +1557,6 @@
 }
 
 .vakata-context .vakata-contextmenu-disabled > a > i {
-  -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
 
@@ -1815,6 +1772,8 @@
 }
 
 .jstree-default-dark .jstree-wholerow {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -1824,6 +1783,7 @@
 
 .jstree-default-dark .jstree-wholerow-clicked {
   background: #5fa2db;
+  background: -webkit-linear-gradient(top, #5fa2db 0%, #5fa2db 100%);
   background: linear-gradient(to bottom, #5fa2db 0%, #5fa2db 100%);
 }
 
@@ -2524,25 +2484,21 @@
     font-size: 1.1em;
     text-shadow: 1px 1px white;
   }
-
   #jstree-dnd.jstree-dnd-responsive > i {
     background: transparent;
     width: 40px;
     height: 40px;
   }
-
   #jstree-dnd.jstree-dnd-responsive > .jstree-ok {
     background-image: url("40px.png");
     background-position: 0 -200px;
     background-size: 120px 240px;
   }
-
   #jstree-dnd.jstree-dnd-responsive > .jstree-er {
     background-image: url("40px.png");
     background-position: -40px -200px;
     background-size: 120px 240px;
   }
-
   #jstree-marker.jstree-dnd-responsive {
     border-left-width: 10px;
     border-top-width: 10px;
@@ -2550,7 +2506,6 @@
     margin-top: -10px;
   }
 }
-
 @media (max-width: 768px) {
   .jstree-default-dark-responsive {
     /*
@@ -2558,16 +2513,13 @@
     .jstree-closed > .jstree-ocl { border-radius:20px; background-color:white; }
     */
   }
-
   .jstree-default-dark-responsive .jstree-icon {
     background-image: url("40px.png");
   }
-
   .jstree-default-dark-responsive .jstree-node,
   .jstree-default-dark-responsive .jstree-leaf > .jstree-ocl {
     background: transparent;
   }
-
   .jstree-default-dark-responsive .jstree-node {
     min-height: 40px;
     line-height: 40px;
@@ -2575,115 +2527,92 @@
     min-width: 40px;
     white-space: nowrap;
   }
-
   .jstree-default-dark-responsive .jstree-anchor {
     line-height: 40px;
     height: 40px;
   }
-
   .jstree-default-dark-responsive .jstree-icon,
   .jstree-default-dark-responsive .jstree-icon:empty {
     width: 40px;
     height: 40px;
     line-height: 40px;
   }
-
   .jstree-default-dark-responsive > .jstree-container-ul > .jstree-node {
     margin-left: 0;
   }
-
   .jstree-default-dark-responsive.jstree-rtl .jstree-node {
     margin-left: 0;
     margin-right: 40px;
     background: transparent;
   }
-
   .jstree-default-dark-responsive.jstree-rtl .jstree-container-ul > .jstree-node {
     margin-right: 0;
   }
-
   .jstree-default-dark-responsive .jstree-ocl,
   .jstree-default-dark-responsive .jstree-themeicon,
   .jstree-default-dark-responsive .jstree-checkbox {
     background-size: 120px 240px;
   }
-
   .jstree-default-dark-responsive .jstree-leaf > .jstree-ocl,
   .jstree-default-dark-responsive.jstree-rtl .jstree-leaf > .jstree-ocl {
     background: transparent;
   }
-
   .jstree-default-dark-responsive .jstree-open > .jstree-ocl {
     background-position: 0 0 !important;
   }
-
   .jstree-default-dark-responsive .jstree-closed > .jstree-ocl {
     background-position: 0 -40px !important;
   }
-
   .jstree-default-dark-responsive.jstree-rtl .jstree-closed > .jstree-ocl {
     background-position: -40px 0 !important;
   }
-
   .jstree-default-dark-responsive .jstree-themeicon {
     background-position: -40px -40px;
   }
-
   .jstree-default-dark-responsive .jstree-checkbox,
   .jstree-default-dark-responsive .jstree-checkbox:hover {
     background-position: -40px -80px;
   }
-
   .jstree-default-dark-responsive.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox,
   .jstree-default-dark-responsive.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox:hover,
   .jstree-default-dark-responsive .jstree-checked > .jstree-checkbox,
   .jstree-default-dark-responsive .jstree-checked > .jstree-checkbox:hover {
     background-position: 0 -80px;
   }
-
   .jstree-default-dark-responsive .jstree-anchor > .jstree-undetermined,
   .jstree-default-dark-responsive .jstree-anchor > .jstree-undetermined:hover {
     background-position: 0 -120px;
   }
-
   .jstree-default-dark-responsive .jstree-anchor {
     font-weight: bold;
     font-size: 1.1em;
     text-shadow: 1px 1px white;
   }
-
   .jstree-default-dark-responsive > .jstree-striped {
     background: transparent;
   }
-
   .jstree-default-dark-responsive .jstree-wholerow {
     border-top: 1px solid #666;
     border-bottom: 1px solid #000;
     background: #333333;
     height: 40px;
   }
-
   .jstree-default-dark-responsive .jstree-wholerow-hovered {
     background: #555;
   }
-
   .jstree-default-dark-responsive .jstree-wholerow-clicked {
     background: #5fa2db;
   }
-
   .jstree-default-dark-responsive .jstree-children .jstree-last > .jstree-wholerow {
     box-shadow: inset 0 -6px 3px -5px #111111;
   }
-
   .jstree-default-dark-responsive .jstree-children .jstree-open > .jstree-wholerow {
     box-shadow: inset 0 6px 3px -5px #111111;
     border-top: 0;
   }
-
   .jstree-default-dark-responsive .jstree-children .jstree-open + .jstree-open {
     box-shadow: none;
   }
-
   .jstree-default-dark-responsive .jstree-node,
   .jstree-default-dark-responsive .jstree-icon,
   .jstree-default-dark-responsive .jstree-node > .jstree-ocl,
@@ -2692,46 +2621,37 @@
     background-image: url("40px.png");
     background-size: 120px 240px;
   }
-
   .jstree-default-dark-responsive .jstree-node {
     background-position: -80px 0;
     background-repeat: repeat-y;
   }
-
   .jstree-default-dark-responsive .jstree-last {
     background-image: none;
   }
-
   .jstree-default-dark-responsive .jstree-leaf > .jstree-ocl {
     background-position: -40px -120px;
   }
-
   .jstree-default-dark-responsive .jstree-last > .jstree-ocl {
     background-position: -40px -160px;
   }
-
   .jstree-default-dark-responsive .jstree-themeicon-custom {
     background-color: transparent;
     background-image: none;
     background-position: 0 0;
   }
-
   .jstree-default-dark-responsive .jstree-file {
     background: url("40px.png") 0 -160px no-repeat;
     background-size: 120px 240px;
   }
-
   .jstree-default-dark-responsive .jstree-folder {
     background: url("40px.png") -40px -40px no-repeat;
     background-size: 120px 240px;
   }
-
   .jstree-default-dark-responsive > .jstree-container-ul > .jstree-node {
     margin-left: 0;
     margin-right: 0;
   }
 }
-
 .jstree-default-dark {
   background: #333;
 }
@@ -2834,7 +2754,6 @@
     background-image: url('./themes/default/40px.png');
   }
 }
-
 .jstree-default .jstree-last,
 .jstree-default > .jstree-no-dots .jstree-node,
 .jstree-default > .jstree-no-dots .jstree-leaf > .jstree-ocl,
@@ -2888,7 +2807,6 @@
     background-image: url('./themes/default-dark/40px.png');
   }
 }
-
 .jstree-default-dark .jstree-last,
 .jstree-default-dark > .jstree-no-dots .jstree-node,
 .jstree-default-dark > .jstree-no-dots .jstree-leaf > .jstree-ocl,
@@ -2901,40 +2819,32 @@
 .light-style .jstree .jstree-container-ul .ion-ios-folder {
   color: #ff9f43;
 }
-
 .light-style .jstree .jstree-container-ul .jstree-icon.ti-file {
   color: #7367f0;
 }
-
 .light-style .vakata-context.jstree-contextmenu {
   background: #fff;
   border: 0;
   box-shadow: 0px 0px 50px 0px rgba(75, 70, 92, 0.1);
 }
-
 .light-style .vakata-context.jstree-contextmenu li a {
   padding: 0 1.5rem;
   text-shadow: none;
 }
-
 .light-style .vakata-context.jstree-contextmenu li a i {
   display: none;
 }
-
 .light-style .vakata-context.jstree-contextmenu li.vakata-context-hover a {
   box-shadow: none;
 }
-
 .light-style .vakata-context.jstree-contextmenu li.vakata-context-separator a {
   margin: 0;
 }
-
 .light-style .vakata-context.jstree-contextmenu li ul {
   background: #fff;
   border: 0;
   box-shadow: 0px 0px 50px 0px rgba(75, 70, 92, 0.1);
 }
-
 .light-style .vakata-context.jstree-contextmenu .vakata-contextmenu-sep {
   display: none;
 }
@@ -2943,40 +2853,32 @@
 .dark-style .jstree .jstree-container-ul .ion-ios-folder {
   color: #ff9f43;
 }
-
 .dark-style .jstree .jstree-container-ul .jstree-icon.ti-file {
   color: #7367f0;
 }
-
 .dark-style .vakata-context.jstree-contextmenu {
   background: #fff;
   border: 0;
   box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.1);
 }
-
 .dark-style .vakata-context.jstree-contextmenu li a {
   padding: 0 1.5rem;
   text-shadow: none;
 }
-
 .dark-style .vakata-context.jstree-contextmenu li a i {
   display: none;
 }
-
 .dark-style .vakata-context.jstree-contextmenu li.vakata-context-hover a {
   box-shadow: none;
 }
-
 .dark-style .vakata-context.jstree-contextmenu li.vakata-context-separator a {
   margin: 0;
 }
-
 .dark-style .vakata-context.jstree-contextmenu li ul {
   background: #fff;
   border: 0;
   box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.1);
 }
-
 .dark-style .vakata-context.jstree-contextmenu .vakata-contextmenu-sep {
   display: none;
 }

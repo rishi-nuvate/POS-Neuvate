@@ -23,16 +23,11 @@
 .leaflet-marker-shadow {
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
 }
 
 /* Prevents IE11 from highlighting tiles in blue */
-.leaflet-tile::-moz-selection {
-  background: transparent;
-}
-
 .leaflet-tile::selection {
   background: transparent;
 }
@@ -103,7 +98,6 @@
 }
 
 .leaflet-tile {
-  -webkit-filter: inherit;
   filter: inherit;
   visibility: hidden;
 }
@@ -115,6 +109,7 @@
 .leaflet-zoom-box {
   width: 0;
   height: 0;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   z-index: 800;
 }
@@ -230,6 +225,8 @@
 /* zoom and fade animations */
 .leaflet-fade-anim .leaflet-popup {
   opacity: 0;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
 
@@ -239,6 +236,7 @@
 
 .leaflet-zoom-animated {
   -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
   transform-origin: 0 0;
 }
 
@@ -247,13 +245,15 @@ svg.leaflet-zoom-animated {
 }
 
 .leaflet-zoom-anim .leaflet-zoom-animated {
-  transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -webkit-transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -moz-transition: -moz-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
-  transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1), -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
 }
 
 .leaflet-zoom-anim .leaflet-tile,
 .leaflet-pan-anim .leaflet-tile {
+  -webkit-transition: none;
+  -moz-transition: none;
   transition: none;
 }
 
@@ -268,6 +268,7 @@ svg.leaflet-zoom-animated {
 
 .leaflet-grab {
   cursor: -webkit-grab;
+  cursor: -moz-grab;
   cursor: grab;
 }
 
@@ -286,6 +287,7 @@ svg.leaflet-zoom-animated {
 .leaflet-dragging .leaflet-marker-draggable {
   cursor: move;
   cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
   cursor: grabbing;
 }
 
@@ -515,6 +517,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   line-height: 1.1;
   padding: 2px 5px 1px;
   white-space: nowrap;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.8);
   text-shadow: 1px 1px #fff;
@@ -586,6 +589,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   margin: -10px auto 0;
   pointer-events: auto;
   -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
@@ -736,11 +741,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
   /* Prevent printers from removing background-images of controls. */
   .leaflet-control {
     -webkit-print-color-adjust: exact;
-    color-adjust: exact;
     print-color-adjust: exact;
   }
 }
-
 .leaflet-map {
   height: 400px;
 }
@@ -753,18 +756,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
   right: 0;
   left: unset;
 }
-
 [dir=rtl] .leaflet-map .leaflet-control-container .leaflet-left .leaflet-control-zoom,
 [dir=rtl] .leaflet-map .leaflet-control-container .leaflet-left .leaflet-control-layers {
   margin-left: 0;
   margin-right: 10px;
 }
-
 [dir=rtl] .leaflet-map .leaflet-control-container .leaflet-right {
   left: 0;
   right: unset;
 }
-
 [dir=rtl] .leaflet-map .leaflet-control-container .leaflet-right .leaflet-control-zoom,
 [dir=rtl] .leaflet-map .leaflet-control-container .leaflet-right .leaflet-control-layers {
   margin-left: 10px;

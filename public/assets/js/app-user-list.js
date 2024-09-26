@@ -21,11 +21,11 @@ $(function () {
   // Variable declaration for table
   var dt_user_table = $('.datatables-users'),
     select2 = $('.select2'),
-    userView = baseUrl + 'app/user/view/account',
+    userView = 'app-user-view-account.html',
     statusObj = {
-      1: {title: 'Pending', class: 'bg-label-warning'},
-      2: {title: 'Active', class: 'bg-label-success'},
-      3: {title: 'Inactive', class: 'bg-label-secondary'}
+      1: { title: 'Pending', class: 'bg-label-warning' },
+      2: { title: 'Active', class: 'bg-label-success' },
+      3: { title: 'Inactive', class: 'bg-label-secondary' }
     };
 
   if (select2.length) {
@@ -42,13 +42,13 @@ $(function () {
       ajax: assetsPath + 'json/user-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'full_name'},
-        {data: 'role'},
-        {data: 'current_plan'},
-        {data: 'billing'},
-        {data: 'status'},
-        {data: 'action'}
+        { data: '' },
+        { data: 'full_name' },
+        { data: 'role' },
+        { data: 'current_plan' },
+        { data: 'billing' },
+        { data: 'status' },
+        { data: 'action' }
       ],
       columnDefs: [
         {
@@ -192,7 +192,7 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle mx-3',
+          className: 'btn btn-label-secondary dropdown-toggle mx-3 waves-effect waves-light',
           text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',
           buttons: [
             {
@@ -332,7 +332,7 @@ $(function () {
         },
         {
           text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add New User</span>',
-          className: 'add-new btn btn-primary',
+          className: 'add-new btn btn-primary waves-effect waves-light',
           attr: {
             'data-bs-toggle': 'offcanvas',
             'data-bs-target': '#offcanvasAddUser'
@@ -353,18 +353,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 
@@ -438,10 +438,10 @@ $(function () {
               .each(function (d, j) {
                 select.append(
                   '<option value="' +
-                  statusObj[d].title +
-                  '" class="text-capitalize">' +
-                  statusObj[d].title +
-                  '</option>'
+                    statusObj[d].title +
+                    '" class="text-capitalize">' +
+                    statusObj[d].title +
+                    '</option>'
                 );
               });
           });

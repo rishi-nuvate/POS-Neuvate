@@ -304,7 +304,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Email contacts (select2)
     // ? Using jquery vars due to select2 jQuery dependency
     let emailContacts = $('#emailContacts');
-
     function initSelect2() {
       if (emailContacts.length) {
         function renderContactsAvatar(option) {
@@ -325,7 +324,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
           return $avatar;
         }
-
         emailContacts.wrap('<div class="position-relative"></div>').select2({
           placeholder: 'Select value',
           dropdownParent: emailContacts.parent(),
@@ -338,7 +336,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
     }
-
     initSelect2();
 
     // Scroll to bottom on reply click

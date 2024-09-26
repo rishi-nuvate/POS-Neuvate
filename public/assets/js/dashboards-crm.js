@@ -581,7 +581,6 @@
     };
     return earningReportBarChartOpt;
   }
-
   var chartJson = 'earning-reports-charts.json';
   // Earning Chart JSON data
   var earningReportsChart = $.ajax({
@@ -775,7 +774,6 @@
     };
     return radialBarChartOpt;
   }
-
   // All progress chart
   const chartProgressList = document.querySelectorAll('.chart-progress');
   if (chartProgressList) {

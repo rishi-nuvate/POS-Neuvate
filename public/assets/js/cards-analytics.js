@@ -351,7 +351,7 @@
         parentHeightOffset: 0,
         stacked: true,
         type: 'bar',
-        toolbar: {show: false}
+        toolbar: { show: false }
       },
       tooltip: {
         enabled: false
@@ -553,8 +553,8 @@
     budgetChartOptions = {
       chart: {
         height: 100,
-        toolbar: {show: false},
-        zoom: {enabled: false},
+        toolbar: { show: false },
+        zoom: { enabled: false },
         type: 'line'
       },
       series: [
@@ -826,7 +826,6 @@
     };
     return earningReportBarChartOpt;
   }
-
   var chartJson = 'earning-reports-charts.json';
   // Earning Chart JSON data
   var earningReportsChart = $.ajax({
@@ -899,7 +898,7 @@
         parentHeightOffset: 0,
         stacked: true,
         type: 'bar',
-        toolbar: {show: false}
+        toolbar: { show: false }
       },
       tooltip: {
         enabled: false
@@ -1151,7 +1150,7 @@
         onDatasetHover: {
           highlightDataSeries: false
         },
-        custom: function ({series, seriesIndex, dataPointIndex, w}) {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
           return '<div class="px-3 py-2">' + '<span>' + series[seriesIndex][dataPointIndex] + '%</span>' + '</div>';
         }
       },

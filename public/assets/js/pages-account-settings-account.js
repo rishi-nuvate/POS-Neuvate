@@ -72,9 +72,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
               areFieldsValid
                 ? // Enable the submit button
                   // so user has a chance to submit the form again
-                deactivateButton.removeAttribute('disabled')
+                  deactivateButton.removeAttribute('disabled')
                 : // Disable the submit button
-                deactivateButton.setAttribute('disabled', 'disabled');
+                  deactivateButton.setAttribute('disabled', 'disabled');
             }
           }),
           // Submit the form when all fields are valid
@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             showCancelButton: true,
             confirmButtonText: 'Yes',
             customClass: {
-              confirmButton: 'btn btn-primary me-2',
-              cancelButton: 'btn btn-label-secondary'
+              confirmButton: 'btn btn-primary me-2 waves-effect waves-light',
+              cancelButton: 'btn btn-label-secondary waves-effect waves-light'
             },
             buttonsStyling: false
           }).then(function (result) {
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 title: 'Deleted!',
                 text: 'Your file has been deleted.',
                 customClass: {
-                  confirmButton: 'btn btn-success'
+                  confirmButton: 'btn btn-success waves-effect waves-light'
                 }
               });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 text: 'Deactivation Cancelled!!',
                 icon: 'error',
                 customClass: {
-                  confirmButton: 'btn btn-success'
+                  confirmButton: 'btn btn-success waves-effect waves-light'
                 }
               });
             }

@@ -136,7 +136,6 @@
         });
       }
     }
-
     // togglePrice Event Listener
     togglePrice();
 

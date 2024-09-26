@@ -253,10 +253,10 @@ $(function () {
 
   // Variable declaration for table
   var dt_customer_review = $('.datatables-review'),
-    customerView = baseUrl + 'app/ecommerce/customer/details/overview',
+    customerView = 'app-ecommerce-customer-details-overview.html',
     statusObj = {
-      Pending: {title: 'Pending', class: 'bg-label-warning'},
-      Published: {title: 'Published', class: 'bg-label-success'}
+      Pending: { title: 'Pending', class: 'bg-label-warning' },
+      Published: { title: 'Published', class: 'bg-label-success' }
     };
   // reviewer datatable
   if (dt_customer_review.length) {
@@ -264,14 +264,14 @@ $(function () {
       ajax: assetsPath + 'json/app-ecommerce-reviews.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'id'},
-        {data: 'product'},
-        {data: 'reviewer'},
-        {data: 'review'},
-        {data: 'date'},
-        {data: 'status'},
-        {data: ' '}
+        { data: '' },
+        { data: 'id' },
+        { data: 'product' },
+        { data: 'reviewer' },
+        { data: 'review' },
+        { data: 'date' },
+        { data: 'status' },
+        { data: ' ' }
       ],
       columnDefs: [
         {
@@ -448,7 +448,7 @@ $(function () {
           targets: 5,
           render: function (data, type, full, meta) {
             var date = new Date(full.date); // convert the date string to a Date object
-            var formattedDate = date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+            var formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             return '<span class="text-nowrap">' + formattedDate + '</span>';
           }
         },
@@ -512,7 +512,7 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle ms-2 me-3 mt-2 mt-sm-0',
+          className: 'btn btn-label-secondary dropdown-toggle ms-2 me-3 mt-2 mt-sm-0 waves-effect waves-light',
           text: '<i class="ti ti-download me-1"></i>Export',
           buttons: [
             {
@@ -665,18 +665,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

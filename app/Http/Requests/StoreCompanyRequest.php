@@ -24,12 +24,12 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'CompanyName' => 'required|string|max:255|unique:companies,CompanyName',
-            'BillingName' => 'required|string|max:255|unique:companies,BillingName',
-            'BillingMobileNo' => 'required|integer|unique:companies,BillingMobileNo',
-            'BillingEmail' => 'required|string|max:255|unique:companies,BillingEmail',
-            'AddLine1' => 'required|unique:companies,AddLine1',
-            'AddLine2' => 'required|unique:companies,AddLine2',
+//            'CompanyName' => 'required|string|max:255|unique:companies,CompanyName',
+//            'BillingName' => 'required|string|max:255|unique:companies,BillingName',
+//            'BillingMobileNo' => 'required|integer|unique:companies,BillingMobileNo',
+//            'BillingEmail' => 'required|string|max:255|unique:companies,BillingEmail',
+//            'AddLine1' => 'required|unique:companies,AddLine1',
+//            'AddLine2' => 'required|unique:companies,AddLine2',
         ];
     }
 }

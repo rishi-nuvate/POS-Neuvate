@@ -4,7 +4,6 @@
     width: 100%;
   }
 }
-
 @media (min-width: 768px) {
   .invoice-edit .repeater-title,
   .invoice-add .repeater-title {
@@ -12,12 +11,10 @@
     top: -1.75rem;
   }
 }
-
 .invoice-edit .invoice-preview-card .repeater-wrapper:not(:last-child),
 .invoice-add .invoice-preview-card .repeater-wrapper:not(:last-child) {
   margin-bottom: 1.5rem;
 }
-
 @media print {
   .invoice-edit hr,
   .invoice-add hr {

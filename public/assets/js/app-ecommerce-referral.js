@@ -20,11 +20,11 @@ $(function () {
 
   // Variable declaration for table
   var dt_user_table = $('.datatables-referral'),
-    customerView = baseUrl + 'app/ecommerce/customer/details/overview',
+    customerView = 'app-ecommerce-customer-details-overview.html',
     statusObj = {
-      1: {title: 'Paid', class: 'bg-label-success'},
-      2: {title: 'Unpaid', class: 'bg-label-warning'},
-      3: {title: 'Rejected', class: 'bg-label-danger'}
+      1: { title: 'Paid', class: 'bg-label-success' },
+      2: { title: 'Unpaid', class: 'bg-label-warning' },
+      3: { title: 'Rejected', class: 'bg-label-danger' }
     };
 
   // Users datatable
@@ -33,13 +33,13 @@ $(function () {
       ajax: assetsPath + 'json/ecommerce-referral.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        {data: ''},
-        {data: 'id'},
-        {data: 'user'},
-        {data: 'referred_id'},
-        {data: 'status'},
-        {data: 'value'},
-        {data: 'earning'}
+        { data: '' },
+        { data: 'id' },
+        { data: 'user' },
+        { data: 'referred_id' },
+        { data: 'status' },
+        { data: 'value' },
+        { data: 'earning' }
       ],
       columnDefs: [
         {
@@ -170,7 +170,7 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle',
+          className: 'btn btn-label-secondary dropdown-toggle waves-effect waves-light',
           text: '<i class="ti ti-download me-1"></i>Export',
           buttons: [
             {
@@ -323,18 +323,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

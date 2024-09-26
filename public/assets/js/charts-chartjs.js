@@ -364,7 +364,7 @@
             grid: {
               color: borderColor
             },
-            angleLines: {color: borderColor},
+            angleLines: { color: borderColor },
             pointLabels: {
               color: labelColor
             }

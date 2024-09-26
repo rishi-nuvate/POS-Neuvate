@@ -8,12 +8,12 @@
   const startBtn = document.querySelector('#shepherd-example');
 
   function setupTour(tour) {
-    const backBtnClass = 'btn btn-sm btn-label-secondary md-btn-flat',
-      nextBtnClass = 'btn btn-sm btn-primary btn-next';
+    const backBtnClass = 'btn btn-sm btn-label-secondary md-btn-flat waves-effect waves-light',
+      nextBtnClass = 'btn btn-sm btn-primary btn-next waves-effect waves-light';
     tour.addStep({
       title: 'Navbar',
       text: 'This is your navbar',
-      attachTo: {element: '.navbar', on: 'bottom'},
+      attachTo: { element: '.navbar', on: 'bottom' },
       buttons: [
         {
           action: tour.cancel,
@@ -30,7 +30,7 @@
     tour.addStep({
       title: 'Card',
       text: 'This is a card',
-      attachTo: {element: '.tour-card', on: 'top'},
+      attachTo: { element: '.tour-card', on: 'top' },
       buttons: [
         {
           text: 'Skip',
@@ -52,7 +52,7 @@
     tour.addStep({
       title: 'Footer',
       text: 'This is the Footer',
-      attachTo: {element: '.footer', on: 'top'},
+      attachTo: { element: '.footer', on: 'top' },
       buttons: [
         {
           text: 'Skip',
@@ -74,7 +74,7 @@
     tour.addStep({
       title: 'Upgrade',
       text: 'Click here to upgrade plan',
-      attachTo: {element: '.footer-link', on: 'top'},
+      attachTo: { element: '.footer-link', on: 'top' },
       buttons: [
         {
           text: 'Back',
@@ -113,12 +113,12 @@
   const startBtnDocs = document.querySelector('#shepherd-docs-example');
 
   function setupTourDocs(tour) {
-    const backBtnClass = 'btn btn-sm btn-label-secondary md-btn-flat',
-      nextBtnClass = 'btn btn-sm btn-primary btn-next';
+    const backBtnClass = 'btn btn-sm btn-label-secondary md-btn-flat waves-effect waves-light',
+      nextBtnClass = 'btn btn-sm btn-primary btn-next waves-effect waves-light';
     tour.addStep({
       title: 'Navbar',
       text: 'This is your navbar',
-      attachTo: {element: '.navbar', on: 'bottom'},
+      attachTo: { element: '.navbar', on: 'bottom' },
       buttons: [
         {
           action: tour.cancel,
@@ -135,7 +135,7 @@
     tour.addStep({
       title: 'Footer',
       text: 'This is the Footer',
-      attachTo: {element: '.footer', on: 'top'},
+      attachTo: { element: '.footer', on: 'top' },
       buttons: [
         {
           text: 'Skip',
@@ -157,7 +157,7 @@
     tour.addStep({
       title: 'Social Link',
       text: 'Click here share on social media',
-      attachTo: {element: '.footer-link', on: 'top'},
+      attachTo: { element: '.footer-link', on: 'top' },
       buttons: [
         {
           text: 'Back',

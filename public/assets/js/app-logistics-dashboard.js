@@ -335,13 +335,13 @@ $(function () {
     var dt_dashboard = dt_dashboard_table.DataTable({
       ajax: assetsPath + 'json/logistics-dashboard.json',
       columns: [
-        {data: 'id'},
-        {data: 'id'},
-        {data: 'location'},
-        {data: 'start_city'},
-        {data: 'end_city'},
-        {data: 'warnings'},
-        {data: 'progress'}
+        { data: 'id' },
+        { data: 'id' },
+        { data: 'location' },
+        { data: 'start_city' },
+        { data: 'end_city' },
+        { data: 'warnings' },
+        { data: 'progress' }
       ],
       columnDefs: [
         {
@@ -384,9 +384,7 @@ $(function () {
               '</div>' +
               '</div>' +
               '<div class="d-flex flex-column">' +
-              '<a class="text-body fw-medium" href="' +
-              baseUrl +
-              'app/logistics/fleet">VOL-' +
+              '<a class="text-body fw-medium" href="app-logistics-fleet.html">VOL-' +
               $location +
               '</a>' +
               '</div>' +
@@ -420,14 +418,14 @@ $(function () {
           render: function (data, type, full, meta) {
             var $status_number = full['warnings'];
             var $status = {
-              1: {title: 'No Warnings', class: 'bg-label-success'},
+              1: { title: 'No Warnings', class: 'bg-label-success' },
               2: {
                 title: 'Temperature Not Optimal',
                 class: 'bg-label-warning'
               },
-              3: {title: 'Ecu Not Responding', class: 'bg-label-danger'},
-              4: {title: 'Oil Leakage', class: 'bg-label-info'},
-              5: {title: 'fuel problems', class: 'bg-label-primary'}
+              3: { title: 'Ecu Not Responding', class: 'bg-label-danger' },
+              4: { title: 'Oil Leakage', class: 'bg-label-info' },
+              5: { title: 'fuel problems', class: 'bg-label-primary' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -479,18 +477,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 

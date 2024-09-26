@@ -108,13 +108,11 @@
     overflow: auto !important;
   }
 }
-
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .ps {
     overflow: auto !important;
   }
 }
-
 .ps {
   position: relative;
 }
@@ -166,7 +164,6 @@
 .light-style .ps__thumb-y {
   background-color: rgba(75, 70, 92, 0.4);
 }
-
 .light-style .ps__rail-x:hover,
 .light-style .ps__rail-y:hover,
 .light-style .ps__rail-x:focus,
@@ -175,7 +172,6 @@
 .light-style .ps__rail-y.ps--clicking {
   background-color: rgba(75, 70, 92, 0.2);
 }
-
 .light-style .ps__rail-x:hover > .ps__thumb-x,
 .light-style .ps__rail-y:hover > .ps__thumb-y,
 .light-style .ps__rail-x:focus > .ps__thumb-x,
@@ -184,7 +180,6 @@
 .light-style .ps__rail-y.ps--clicking > .ps__thumb-y {
   background-color: rgba(75, 70, 92, 0.7);
 }
-
 .light-style .ps-inverted .ps__rail-x:hover,
 .light-style .ps-inverted .ps__rail-y:hover,
 .light-style .ps-inverted .ps__rail-x:focus,
@@ -193,12 +188,10 @@
 .light-style .ps-inverted .ps__rail-y.ps--clicking {
   background-color: rgba(255, 255, 255, 0.5);
 }
-
 .light-style .ps-inverted .ps__thumb-x,
 .light-style .ps-inverted .ps__thumb-y {
   background-color: rgba(255, 255, 255, 0.7);
 }
-
 .light-style .ps-inverted .ps__rail-x:hover > .ps__thumb-x,
 .light-style .ps-inverted .ps__rail-y:hover > .ps__thumb-y,
 .light-style .ps-inverted .ps__rail-x:focus > .ps__thumb-x,
@@ -216,12 +209,10 @@
     padding-right: 0;
   }
 }
-
 .dark-style .ps__thumb-x,
 .dark-style .ps__thumb-y {
   background-color: rgba(255, 255, 255, 0.438133) !important;
 }
-
 .dark-style .ps__rail-x:hover,
 .dark-style .ps__rail-y:hover,
 .dark-style .ps__rail-x:focus,
@@ -230,7 +221,6 @@
 .dark-style .ps__rail-y.ps--clicking {
   background-color: rgba(255, 255, 255, 0.438133) !important;
 }
-
 .dark-style .ps__rail-x:hover > .ps__thumb-x,
 .dark-style .ps__rail-y:hover > .ps__thumb-y,
 .dark-style .ps__rail-x:focus > .ps__thumb-x,
@@ -239,7 +229,6 @@
 .dark-style .ps__rail-y.ps--clicking > .ps__thumb-y {
   background-color: rgba(0, 0, 0, 0.3);
 }
-
 .dark-style .ps-inverted .ps__rail-x:hover,
 .dark-style .ps-inverted .ps__rail-y:hover,
 .dark-style .ps-inverted .ps__rail-x:focus,
@@ -248,12 +237,10 @@
 .dark-style .ps-inverted .ps__rail-y.ps--clicking {
   background-color: rgba(255, 255, 255, 0.5);
 }
-
 .dark-style .ps-inverted .ps__thumb-x,
 .dark-style .ps-inverted .ps__thumb-y {
   background-color: rgba(255, 255, 255, 0.7);
 }
-
 .dark-style .ps-inverted .ps__rail-x:hover > .ps__thumb-x,
 .dark-style .ps-inverted .ps__rail-y:hover > .ps__thumb-y,
 .dark-style .ps-inverted .ps__rail-x:focus > .ps__thumb-x,

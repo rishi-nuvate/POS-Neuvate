@@ -111,9 +111,9 @@
                                 <a class="dropdown-item" href="{{ route('vendor.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-{{--                                <a class="dropdown-item" href=""><i--}}
-{{--                                        class="ti ti-eye me-1"></i>--}}
-{{--                                    View</a>--}}
+                                <a class="dropdown-item" href="{{ route('vendor.index') }}"><i
+                                        class="ti ti-eye me-1"></i>
+                                    View</a>
                             </div>
                         </div>
 

@@ -195,18 +195,17 @@
       role="option"
     >
       ${
-      tagData.avatar
-        ? `<div class='tagify__dropdown__item__avatar-wrap'>
+        tagData.avatar
+          ? `<div class='tagify__dropdown__item__avatar-wrap'>
           <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
         </div>`
-        : ''
-    }
+          : ''
+      }
       <div class="fw-medium">${tagData.name}</div>
       <span>${tagData.email}</span>
     </div>
   `;
   }
-
   function dropdownHeaderTemplate(suggestions) {
     return `
         <div class="${this.settings.classNames.dropdownItem} ${this.settings.classNames.dropdownItem}__addAll">
@@ -245,7 +244,7 @@
       TagifyUserList.dropdown.selectAll();
   }
 
-  function onEditStart({detail: {tag, data}}) {
+  function onEditStart({ detail: { tag, data } }) {
     TagifyUserList.setTagTextNode(tag, `${data.name} <${data.email}>`);
   }
 
