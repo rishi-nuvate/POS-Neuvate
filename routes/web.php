@@ -18,6 +18,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\master\basicInfo\BrandController;
 use App\Http\Controllers\master\basicInfo\CategoryController;
 use App\Http\Controllers\master\basicInfo\SeasonController;
+use App\Http\Controllers\master\basicInfo\SubCategoryController;
 use App\Http\Controllers\master\basicInfo\TagsController;
 use App\Http\Controllers\master\company\CompanyController;
 use App\Http\Controllers\master\EmployeeMasterController;
@@ -104,10 +105,15 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/brands/{brand}', [BrandController::class, 'destroy']);
     Route::post('/brandsData', [BrandController::class, 'getBrandData'])->name('getBrandData');
 
-// Brand Master
+// Category Master
     Route::resource('category', CategoryController::class);
     Route::post('/category/{category}', [CategoryController::class, 'destroy']);
     Route::post('/getCategory', [CategoryController::class, 'getCategory'])->name('getCategory');
+
+//    Sub-Category Master
+    Route::post('/getSubCategories', [SubCategoryController::class, 'getSubCategories'])->name('getSubCategories');
+
+
 
 // Company
     Route::resource('company', CompanyController::class);

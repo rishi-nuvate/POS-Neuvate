@@ -278,21 +278,22 @@
                                     <!-- Category -->
                                     <div class="mb-3 col ecommerce-select2-dropdown">
                                         <label class="form-label mb-1" for="productCategory">Category</label>
-                                        <select id="cat_id" class="select2 form-select"
+                                        <select onchange="getSubCategoriesData()"
+                                                class="select2 form-select" id="productCategory"
                                                 data-placeholder="Select Category" name="cat_id">
                                             <option value="">Select Category</option>
-
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->Name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <!-- Sub Category -->
                                     <div class="mb-3 col ecommerce-select2-dropdown">
                                         <label class="form-label mb-1" for="sub_cat_id">Sub Category </label>
-                                        <select id="sub_cat_id" name="sub_cat_id" class="select2 form-select"
+                                        <select id="subCategory" name="sub_cat_id" class="select2 form-select"
                                                 data-placeholder="Sub Category">
                                             <option value="">Collection</option>
                                             <option value="2">Men's Clothing</option>
-                                            <option value="3">Women's-clothing</option>
-                                            <option value="4">Kid's-clothing</option>
                                         </select>
                                     </div>
                                     <!-- Tags -->
@@ -300,32 +301,31 @@
                                         <label for="ecommerce-product-tags" class="form-label mb-1">Tags</label>
                                         <select name="tag_id[]" class="select2 form-select" id="tag_id" multiple>
                                             <optgroup label="Alaskan/Hawaiian Time Zone">
-                                                <option value="2">Jeans</option>
-                                                <option value="3">Shirt</option>
-                                                <option value="4">Kurtas</option>
-                                                <option value="4">T-Shirt</option>
-                                                <option value="5">Cargo</option>
-                                                <option value="6">Joggers</option>
+                                                <option value="">select Tag</option>
+                                                @foreach($tags as $tag)
+                                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                                @endforeach
                                             </optgroup>
-
                                         </select>
                                     </div>
                                     {{--Season--}}
                                     <div class="mb-3">
                                         <label for="select2Multiple" class="form-label">Season</label>
                                         <select name="season_id" id="season_id" class="select2 form-select">
-                                            <option value="">select umo</option>
-                                            <option value="1">Winter</option>
-                                            <option value="2">Summer</option>
+                                            <option value="">select Season</option>
+                                            @foreach($seasons as $season)
+                                                <option value="{{$season->id}}">{{$season->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     {{--Brand--}}
                                     <div class="mb-3">
                                         <label for="select2Multiple" class="form-label">Brand</label>
                                         <select name="brand_id" id="brand_id" class="select2 form-select">
-                                            <option value="">select umo</option>
-                                            <option value="4">NEW</option>
-                                            <option value="5">REPEAT</option>
+                                            <option value="">select Brand</option>
+                                            @foreach($brands as $brand)
+                                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -347,7 +347,8 @@
     <!-- Content wrapper -->
 @endsection
 
-@section('page-script')
+{{--@section('page-script')--}}
+
     <script>
         var counter1 = 0;
 
@@ -443,6 +444,9 @@
                                 <div>
                                     <button type="button" class="btn btn-primary" onclick="addAnotherSize(${counter1})">Add another Size
                                     </button>
+                                    <button type="button" onclick="removeItem(${counter1})" class="btn rounded-pill btn-icon btn-label-danger waves-effect mx-2">
+                                          <span class="ti ti-trash"></span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -467,31 +471,34 @@
             }
         }
     </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
-        window.onload = function() {
-            console.log(1);
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('getCategory') }}',
-                data: {
-                    'X-CSRF-TOKEN': "{{ csrf_token()}}",
-                },
-                dataType: 'json',
-                success: function (response) {
-                    console.log(response);
-                    $.each(response, function (key, value) {
-                        $('#cat_id').append('<option value="' + value.id + '">' + value
-                            .Name + '</option>');
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.log(1);
-                    console.error('Error:', xhr.responseText);
-                    console.error('Status:', status);
-                    console.error('Error:', error);
-                }
-            });
-        };
+
+        function getSubCategoriesData() {
+            var categoryId = document.getElementById('productCategory').value;
+            if (categoryId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('getSubCategories') }}',
+                    data: {
+                        categoryId: categoryId,
+                        '_token': "{{ csrf_token() }}",
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#subCategory').empty().append(
+                            '<option value="">Select Sub Category</option>');
+                        $.each(response, function (key, value) {
+                            $('#subCategory').append('<option value="' + value.id + '">' + value
+                                .Name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#subCategory').empty().append('<option value="">Select Sub Category</option>');
+            }
+        }
     </script>
-@endsection
+{{--@endsection--}}

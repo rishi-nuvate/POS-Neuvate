@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductVariant;
+use App\Models\Season;
+use App\Models\Tags;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use phpDocumentor\Reflection\DocBlock\Tag;
 
 class ProductController extends Controller
 {
@@ -24,7 +29,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('content.master.product.create');
+        $categories = Category::all();
+        $tags = Tags::all();
+        $seasons = Season::all();
+        $brands = Brand::all();
+        return view('content.master.product.create',compact('categories','tags','seasons','brands'));
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
 use App\Models\SubCategory;
+use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
@@ -63,5 +64,13 @@ class SubCategoryController extends Controller
     public function destroy(SubCategory $subCategory)
     {
         //
+    }
+
+    public function getSubCategories(Request $request )
+    {
+        $categoryId = $request->input('categoryId');
+        $subCategories = SubCategory::where('CatId', $categoryId)->get();
+
+        return response()->json($subCategories);
     }
 }
