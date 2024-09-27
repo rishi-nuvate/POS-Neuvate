@@ -11,7 +11,14 @@ class SubCategory extends Model
 
     use HasFactory;
 
-    public function category(){
-        return $this->belongsTo(Category::class,'CatId','id');
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'CatId', 'id');
     }
+
+    function product()
+    {
+        return $this->belongsTo(Product::class,'sub_cat_id', 'id');
+    }
+
 }

@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('content.master.product.index');
     }
 
     /**
@@ -33,7 +33,7 @@ class ProductController extends Controller
         $tags = Tags::all();
         $seasons = Season::all();
         $brands = Brand::all();
-        return view('content.master.product.create',compact('categories','tags','seasons','brands'));
+        return view('content.master.product.create', compact('categories', 'tags', 'seasons', 'brands'));
     }
 
     /**
@@ -134,5 +134,33 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function getProduct()
+    {
+        $products = Product::with('category','subCategory')->get();
+
+//        dd($products);
+        $num = 1;
+        $result = ['data' => []];
+        foreach ($products as $product) {
+
+            $id = $product->id;
+            $name = $product->product_name;
+            $product_code = $product->product_code;
+            $category = $product->category->Name;
+            $subCategory = $product->subCategory->Name;
+            $status = $product->status;
+
+            $action =
+                ' <a href="brand/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+            <button onclick="deleteBlog(' .
+                $product->id .
+                ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
+            array_push($result['data'], [$num, $name,$product_code, $category,$subCategory,$status, $action]);
+            $num++;
+        }
+        echo json_encode($result);
+
     }
 }

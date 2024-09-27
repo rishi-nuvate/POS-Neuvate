@@ -126,7 +126,7 @@ Route::middleware('auth:web')->group(callback: function () {
 
     // SKU Master
     Route::resource('product', ProductController::class);
-//    Route::get('product/add', [ProductMasterController::class, 'create'])->name('add-product');
+    Route::post('getProduct', [ProductController::class, 'getProduct'])->name('getProduct');
 //    Route::get('product/view', [ProductMasterController::class, 'index'])->name(('view-product'));
 
     // Employee
