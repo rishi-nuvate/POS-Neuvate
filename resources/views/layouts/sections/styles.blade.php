@@ -37,6 +37,7 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css') }}" />
 
+
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}" />

@@ -127,6 +127,9 @@ Route::middleware('auth:web')->group(callback: function () {
     // SKU Master
     Route::resource('product', ProductController::class);
     Route::post('getProduct', [ProductController::class, 'getProduct'])->name('getProduct');
+    Route::post('/product/{product}', [ProductController::class, 'destroy']);
+    Route::post('deleteVariant', [ProductController::class, 'deleteVariant'])->name('deleteVariant');
+
 //    Route::get('product/view', [ProductMasterController::class, 'index'])->name(('view-product'));
 
     // Employee

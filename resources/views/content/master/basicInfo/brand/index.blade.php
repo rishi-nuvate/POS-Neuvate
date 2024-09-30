@@ -57,6 +57,10 @@
 
 @section('page-script')
     <script>
+        console.log(1);
+    </script>
+
+    <script>
 
         function deleteBlog(blogId) {
             Swal.fire({

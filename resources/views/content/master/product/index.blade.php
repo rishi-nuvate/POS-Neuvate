@@ -11,12 +11,6 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}"/>
 @endsection
 
-@section('page-script')
-    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
-@endsection
-
 @section('vendor-script')
     <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
@@ -44,27 +38,18 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                {{--                <tbody>--}}
-                {{--                        <tr>--}}
-                {{--                            <td class="text-bold"><a href="">1</a></td>--}}
-                {{--                            <td>Jeans</td>--}}
-                {{--                            <td>#98765</td>--}}
-                {{--                            <td>Black</td>--}}
-                {{--                            <td>--}}
-                {{--                                <a class="btn btn-icon btn-label-primary mx-2" href=""><i--}}
-                {{--                                        class="ti ti-edit mx-2 ti-sm"></i></a>--}}
-                {{--                                <button type="button" class="btn btn-icon btn-label-danger mx-2"><i--}}
-                {{--                                        class="ti ti-trash mx-2 ti-sm"></i></button>--}}
-                {{--                            </td>--}}
-                {{--                        </tr>--}}
-                {{--                </tbody>--}}
             </table>
         </div>
     </div>
 
 @endsection
 
-{{--@section('page-script')--}}
+
+@section('page-script')
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
+
     <script>
         window.onload = function () {
             getProduct();
@@ -98,4 +83,39 @@
             });
         }
     </script>
-{{--@endsection--}}
+
+
+    <script>
+
+        function deleteProduct(productId) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonText: "Yes, Approve it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#overlay").fadeIn(100);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/product/' + productId,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            blogId: blogId,
+                            "_token": "<?php echo e(csrf_token()); ?>"
+                        },
+                        success: function (resultData) {
+                            Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
+                                location.reload();
+                                $("#overlay").fadeOut(100);
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+@endsection

@@ -12,6 +12,7 @@ use App\Models\Season;
 use App\Models\Tags;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
 class ProductController extends Controller
@@ -117,7 +118,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        $tags = Tags::all();
+        $seasons = Season::all();
+        $brands = Brand::all();
+        $product = $product->with('category','subCategory','brand','season','productVariant')->first();
+        return view('content.master.product.edit', compact('product','categories', 'tags', 'seasons', 'brands'));
+
     }
 
     /**
@@ -133,34 +140,77 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if (Gate::allows('delete', $product)) {
+            $product->delete();
+            return redirect()->route('product.index')->with('success', 'Product deleted.');
+        }else{
+            return redirect()->route('product.index')->with('error', 'You can not delete this product.');
+        }
+
+
     }
 
     public function getProduct()
     {
-        $products = Product::with('category','subCategory')->get();
+        $products = Product::with('category', 'subCategory')->get();
 
 //        dd($products);
         $num = 1;
         $result = ['data' => []];
+        $allTags = Tags::all();
+        $htmlDetails = '';
+
         foreach ($products as $product) {
+            if (!empty($product->tag_id)) {
+                $tags = explode(',', $product->tag_id);
+
+                // Loop through the tags
+                foreach ($tags as $tag) {
+                    $tagName = $allTags->where('id', $tag)->first()->name;
+                    $htmlDetails .= '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $tagName . '</button>';
+                }
+            }
+
+//            dd($htmlDetails);
 
             $id = $product->id;
             $name = $product->product_name;
             $product_code = $product->product_code;
             $category = $product->category->Name;
             $subCategory = $product->subCategory->Name;
-            $status = $product->status;
+            if ($product->status == 0){
+                $status = '<button class="btn btn-sm btn-outline-success waves-effect">
+                                            Active
+                                        </button>';
+            }else{
+                $status = '<button class="btn btn-sm btn-outline-success waves-effect">
+                                            Deactive
+                                        </button>';
+            }
 
             $action =
-                ' <a href="brand/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
-            <button onclick="deleteBlog(' .
+                ' <a href="product/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+            <button onclick="deleteProduct(' .
                 $product->id .
                 ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
-            array_push($result['data'], [$num, $name,$product_code, $category,$subCategory,$status, $action]);
+            array_push($result['data'], [$num, $name, $product_code, $category, $subCategory, $htmlDetails, $status, $action]);
             $num++;
         }
         echo json_encode($result);
+
+    }
+
+    function deleteVariant(Request $request)
+    {
+        $color = $request->input('color');
+        $productId = $request->input('productId');
+
+
+        $product = ProductVariant::where('product_id', $productId)->where('color', $color)->delete();
+
+//        $product->delete();
+
+        return redirect()->back()->with('success', 'Product variant deleted.');
 
     }
 }

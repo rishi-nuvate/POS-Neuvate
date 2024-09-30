@@ -3,6 +3,18 @@
 @section('title', 'Add-Product')
 
 @section('vendor-style')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css') }}"/>
 
     <style>
         .fade-in {
@@ -21,6 +33,9 @@
         }
     </style>
 @endsection
+
+
+{{--@endsection--}}
 
 
 @section('content')
@@ -43,10 +58,6 @@
                             <h4 class="mb-1 mt-3">Add a new Product</h4>
                         </div>
                         <div class="d-flex align-content-center flex-wrap gap-3">
-                            {{--                            <div class="d-flex gap-3">--}}
-                            {{--                                <button class="btn btn-label-secondary">Discard</button>--}}
-                            {{--                                <button class="btn btn-label-primary">Save draft</button>--}}
-                            {{--                            </div>--}}
                             <button type="submit" class="btn btn-primary">Save Product</button>
                         </div>
                     </div>
@@ -67,7 +78,7 @@
                                             id="product_name"
                                             placeholder="Product title"
                                             name="product_name"
-                                            aria-label="Product title"/>
+                                            aria-label="Product title" value="{{$product->product_name}}"/>
                                     </div>
                                     <div class="row mb-3 col-md-12">
                                         <div class="col-md-4 mt-1">
@@ -78,7 +89,7 @@
                                                 id="product_code"
                                                 placeholder="Product Code"
                                                 name="product_code"
-                                                aria-label="productCode"/>
+                                                aria-label="productCode" value="{{$product->product_code}}"/>
                                         </div>
                                         <div class="col-md-4 mt-1">
                                             <label class="form-label" for="hsn_code">HSN Code</label>
@@ -88,7 +99,7 @@
                                                 id="hsn_code"
                                                 placeholder="Product HSN Code"
                                                 name="hsn_code"
-                                                aria-label="productHSNCode"/>
+                                                aria-label="productHSNCode" value="{{$product->hsn_code}}"/>
                                         </div>
                                         <div class="col-md-4 mt-1">
                                             <label class="form-label" for="material">Material</label>
@@ -98,7 +109,7 @@
                                                 id="material"
                                                 placeholder="Material Name"
                                                 name="material"
-                                                aria-label="Product title"/>
+                                                aria-label="Product title" value="{{$product->material}}"/>
                                         </div>
 
                                     </div>
@@ -111,64 +122,97 @@
                                                       id="bootstrap-maxlength-example2"
                                                       class="form-control bootstrap-maxlength-example"
                                                       rows="3"
-                                                      maxlength="255"></textarea>
+                                                      maxlength="255">{{$product->product_description}}</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- /Product Information -->
 
+
                             <!-- Variants -->
+                            @php
+                                $colors = $product->productVariant->groupBy('color');
+                                $color_num = 0;
+                            @endphp
 
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Variants</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div id="productSKU0">
-                                        <div class="row">
-                                            <div class="mb-3 col-3">
-                                                <label class="form-label" for="productSKU">Color</label>
-                                                <input type="text" name="productColor[0][color]" id="color0"
-                                                       placeholder="Color"
-                                                       class="form-control">
-                                            </div>
+                            @foreach($colors as $color => $sizes)
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Variants</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="productSKU{{$color_num}}">
 
-                                            <div class="mb-3 col-6">
-                                                <label class="form-label" for="productSKU">Media</label>
-                                                <input type="file" name="productColor[0][media]" id="media0"
-                                                       placeholder="Color"
-                                                       class="form-control">
+                                            {{--                                        {{dd($color)}}--}}
+
+                                            <div class="row">
+                                                <div class="mb-3 col-3">
+                                                    <label class="form-label" for="productSKU">Color</label>
+                                                    <input type="text" name="productColor[{{$color_num}}][color]"
+                                                           id="color{{$color_num}}"
+                                                           placeholder="Color"
+                                                           class="form-control" value="{{$color}}">
+                                                </div>
+
+                                                <div class="mb-3 col-6">
+                                                    <label class="form-label" for="productSKU">Media</label>
+                                                    <input type="file" name="productColor[{{$color_num}}][media]"
+                                                           id="media0"
+                                                           placeholder="Color"
+                                                           class="form-control">
+                                                </div>
                                             </div>
+                                            @php $size_num = 0 @endphp
+                                            @foreach($sizes as $size)
+                                                <div class="row">
+
+                                                    <div class="mb-3 col-3">
+                                                        <label class="form-label" for="productSKU">Size</label>
+                                                        <input type="text"
+                                                               name="optionValueSize[{{$color_num}}][{{$size_num}}][size]"
+                                                               id="size0"
+                                                               placeholder="Size"
+                                                               class="form-control" value="{{$size->size}}">
+                                                    </div>
+
+                                                    <div class="mb-3 col-6">
+                                                        <label class="form-label" for="productSKU">SKU</label>
+                                                        <input
+                                                            type="text"
+                                                            id="productSKU"
+                                                            name="optionValueSize[{{$color_num}}][{{$size_num}}][sku]"
+                                                            class="form-control"
+                                                            placeholder="SKU" value="{{$size->sku}}"/>
+                                                    </div>
+                                                    <div class="col-3 align-item-center">
+                                                        <button type="button" onclick="deleteSize()" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
+                                                            <span class="ti ti-trash"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                @php $size_num++ ; @endphp
+                                            @endforeach
+
                                         </div>
+                                        <input type="hidden" id="sizeVariantStart{{$color_num}}" value="{{$size_num}}">
 
-                                        <div class="row">
-
-                                            <div class="mb-3 col-3">
-                                                <label class="form-label" for="productSKU">Size</label>
-                                                <input type="text" name="optionValueSize[0][0][size]" id="size0"
-                                                       placeholder="Size"
-                                                       class="form-control">
-                                            </div>
-
-                                            <div class="mb-3 col-6">
-                                                <label class="form-label" for="productSKU">SKU</label>
-                                                <input
-                                                    type="text"
-                                                    id="productSKU"
-                                                    name="optionValueSize[0][0][sku]"
-                                                    class="form-control"
-                                                    placeholder="SKU"/>
-                                            </div>
+                                        <div>
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="addAnotherSize({{$color_num}})">
+                                                Add
+                                                another Size
+                                            </button>
+                                            <button type="button" class="btn btn-outline-danger waves-effect mx-2"
+                                                    onclick="deleteVariant({{$color_num}},{{$product->id}})">
+                                                delete variant
+                                            </button>
                                         </div>
                                     </div>
-                                    <div>
-                                        <button type="button" class="btn btn-primary" onclick="addAnotherSize(0)">Add
-                                            another Size
-                                        </button>
-                                    </div>
                                 </div>
-                            </div>
+                                @php $color_num ++ ; @endphp
+                            @endforeach
+
                             <div id="colorVariant">
                             </div>
                             <div class="m-4">
@@ -177,7 +221,6 @@
                                 </button>
                             </div>
 
-                            <!-- /Variants -->
                             <div class="card mb-4">
                                 <h5 class="card-header">Price</h5>
                                 <div class="card-body">
@@ -192,7 +235,7 @@
                                                 id="ecommerce-cost_price"
                                                 placeholder="Price"
                                                 name="cost_price"
-                                                aria-label="Product price"/>
+                                                aria-label="Product price" value="{{$product->cost_price}}"/>
                                         </div>
                                         <!-- Discounted Price -->
                                         <div class=" col-md-4 mb-3">
@@ -204,7 +247,7 @@
                                                 id="ecommerce-sell_price"
                                                 placeholder="Discounted Price"
                                                 name="sell_price"
-                                                aria-label="Product discounted price"/>
+                                                aria-label="Product discounted price" value="{{$product->sell_price}}"/>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label" for="ecommerce-product-mrp-price">MRP
@@ -215,7 +258,7 @@
                                                 id="product_mrp"
                                                 placeholder="Mrp Price"
                                                 name="product_mrp"
-                                                aria-label="Product mrp price"/>
+                                                aria-label="Product mrp price" value="{{$product->product_mrp}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -234,8 +277,10 @@
                                     <div class="mb-3">
                                         <select name="status" class="select2 form-select">
                                             <option value="">select umo</option>
-                                            <option value="0">Active</option>
-                                            <option value="1">Deactive</option>
+                                            <option value="0" {{$product->status == '0' ? 'selected' :'' }}>Active
+                                            </option>
+                                            <option value="1" {{$product->status == '1' ? 'selected' :'' }}>Deactive
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -254,7 +299,8 @@
                                                 data-placeholder="Select Category" name="cat_id">
                                             <option value="">Select Category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{$category->Name}}</option>
+                                                <option
+                                                    value="{{$category->id}}" {{$product->cat_id == $category->id ? 'selected' :'' }}>{{$category->Name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -264,7 +310,6 @@
                                         <select id="subCategory" name="sub_cat_id" class="select2 form-select"
                                                 data-placeholder="Sub Category">
                                             <option value="">Collection</option>
-                                            <option value="2">Men's Clothing</option>
                                         </select>
                                     </div>
                                     <!-- Tags -->
@@ -285,7 +330,8 @@
                                         <select name="season_id" id="season_id" class="select2 form-select">
                                             <option value="">select Season</option>
                                             @foreach($seasons as $season)
-                                                <option value="{{$season->id}}">{{$season->name}}</option>
+                                                <option
+                                                    value="{{$season->id}}" {{$product->season_id == $season->id ? 'selected' :'' }}>{{$season->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -295,7 +341,8 @@
                                         <select name="brand_id" id="brand_id" class="select2 form-select">
                                             <option value="">select Brand</option>
                                             @foreach($brands as $brand)
-                                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                <option
+                                                    value="{{$brand->id}}" {{$product->brand_id == $brand->id ? 'selected' :'' }}>{{$brand->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -303,9 +350,7 @@
                             </div>
                             <!-- /Organize Card -->
 
-
                         </div>
-                        <input type="hidden" id="sizeVariantStart0" value="0">
                         <!-- /Second column -->
                     </div>
                 </form>
@@ -319,19 +364,13 @@
 @endsection
 
 @section('page-script')
-{{--    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/app-ecommerce-product-add.js') }}"></script>--}}
-
 
     <script>
-        var counter1 = 0;
+        var counter1 = {{$color_num}};
 
         function addAnotherSize(colorVariantStart) {
             let productSKU = document.querySelector(`#productSKU${colorVariantStart}`);
             var sizeVariantStart = document.getElementById(`sizeVariantStart${colorVariantStart}`).value;
-            sizeVariantStart++;
             let newIndex = sizeVariantStart;
 
 
@@ -357,6 +396,7 @@
             // document.querySelector(`#productSKU${colorVariantStart}`)
 
             document.getElementById(`productSKU${colorVariantStart}`).appendChild(newDiv)
+            sizeVariantStart++;
 
             document.getElementById(`sizeVariantStart${colorVariantStart}`).value = sizeVariantStart;
         }
@@ -448,6 +488,7 @@
         }
     </script>
 
+
     <script>
 
         function getSubCategoriesData() {
@@ -473,6 +514,76 @@
             } else {
                 $('#subCategory').empty().append('<option value="">Select Sub Category</option>');
             }
+        }
+    </script>
+
+    <script>
+        function deleteVariant(colorId, productId) {
+            var color = document.getElementById('color' + colorId).value;
+            console.log(color);
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonText: "Yes, Approve it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#overlay").fadeIn(100);
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{route('deleteVariant')}}',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            productId: productId,
+                            color: color,
+                            "_token": "<?php echo e(csrf_token()); ?>"
+                        },
+                        success: function (resultData) {
+                            Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
+                                location.reload();
+                                $("#overlay").fadeOut(100);
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function deleteSize(sizeId) {
+            var color = document.getElementById('color' + colorId).value;
+            console.log(color);
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonText: "Yes, Approve it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#overlay").fadeIn(100);
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{route('deleteVariant')}}',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            productId: productId,
+                            color: color,
+                            "_token": "<?php echo e(csrf_token()); ?>"
+                        },
+                        success: function (resultData) {
+                            Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
+                                location.reload();
+                                $("#overlay").fadeOut(100);
+                            });
+                        }
+                    });
+                }
+            });
         }
     </script>
 @endsection
