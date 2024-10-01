@@ -21,4 +21,12 @@ class SubCategory extends Model
         return $this->belongsTo(Product::class,'sub_cat_id', 'id');
     }
 
+    public function fit()
+    {
+        return $this->belongsTo(Fit::class,'sub_cat_id','id');
+    }
+    public function slim()
+    {
+        return $this->belongsTo(Slim::class,'sub_cat_id','id');
+    }
 }

@@ -1,4 +1,3 @@
-
 @extends('layouts/layoutMaster')
 
 @section('title', 'Master Menu')
@@ -199,7 +198,36 @@
                                     View</a>
                             </div>
                         </div>
-
+                        {{--                        FIT--}}
+                        <div class="btn-group mb-2">
+                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <i class="menu-icon tf-icons ti ti-truck"></i>Fit
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" href="{{ route('fit.create') }}"><i
+                                        class="ti ti-pencil me-1"></i>
+                                    Add</a>
+                                <a class="dropdown-item" href="{{ route('fit.index') }}"><i
+                                        class="ti ti-eye me-1"></i>
+                                    View</a>
+                            </div>
+                        </div>
+                        {{--                        SLIM--}}
+                        <div class="btn-group mb-2">
+                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <i class="menu-icon tf-icons ti ti-truck"></i>Slim
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" href="{{ route('slim.create') }}"><i
+                                        class="ti ti-pencil me-1"></i>
+                                    Add</a>
+                                <a class="dropdown-item" href="{{ route('slim.index') }}"><i
+                                        class="ti ti-eye me-1"></i>
+                                    View</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -339,23 +367,23 @@
 
 
         {{--Role & Permissinon --}}
-{{--        Admin--}}
-{{--        <div class="col-xl-4 col-12">--}}
-{{--            <div class="card mb-4" id="page-block">--}}
-{{--                <h5 class="card-header">Role & Permission</h5>--}}
-{{--                <div class="card-body">--}}
-{{--                    <div class="block-ui-btn demo-inline-spacing">--}}
+        {{--        Admin--}}
+        {{--        <div class="col-xl-4 col-12">--}}
+        {{--            <div class="card mb-4" id="page-block">--}}
+        {{--                <h5 class="card-header">Role & Permission</h5>--}}
+        {{--                <div class="card-body">--}}
+        {{--                    <div class="block-ui-btn demo-inline-spacing">--}}
 
-{{--                        <div class="btn-group mb-2">--}}
-{{--                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"--}}
-{{--                                    aria-expanded="false">--}}
-{{--                                <i class="menu-icon tf-icons ti ti-truck"></i>Category--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--                        <div class="btn-group mb-2">--}}
+        {{--                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"--}}
+        {{--                                    aria-expanded="false">--}}
+        {{--                                <i class="menu-icon tf-icons ti ti-truck"></i>Category--}}
+        {{--                            </button>--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
         {{--Role & permission--}}
 
 

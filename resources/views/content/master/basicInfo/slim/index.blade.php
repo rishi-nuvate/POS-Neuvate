@@ -1,6 +1,6 @@
 @extends('layouts.layoutMaster')
 
-@section('title', 'List-Brands')
+@section('title', 'List-Slim')
 
 @section('content')
 
@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active">Brand</li>
+            <li class="breadcrumb-item active">Slim</li>
             <li class="breadcrumb-item active">View</li>
         </ol>
     </nav>
@@ -21,7 +21,9 @@
                 <thead>
                 <tr>
                     <th>SR No.</th>
-                    <th>Brand Name</th>
+                    <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Slim Name</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -34,7 +36,7 @@
 @section('page-script')
     <script>
 
-        function deleteBlog(blogId) {
+        function deleteSlim(slimId) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -46,12 +48,12 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-                        url: '/brands/' + blogId,
+                        url: '/slimDelete/' + slimId,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: {
-                            blogId: blogId,
+                            slimId: slimId,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function (resultData) {
@@ -66,10 +68,10 @@
         }
 
         window.onload = function () {
-            getBrandData();
+            getSlimData();
         }
 
-        function getBrandData() {
+        function getSlimData() {
             $("#overlay").fadeIn(100);
             $('#datatable-list').DataTable({
                 autoWidth: false,
@@ -82,7 +84,7 @@
                     [0, 'asc']
                 ],
                 "ajax": {
-                    "url": "{{ route('getBrandData') }}",
+                    "url": "{{ route('getSlimData') }}",
                     "type": "POST",
                     "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
                     "data": {

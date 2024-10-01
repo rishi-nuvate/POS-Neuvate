@@ -8,7 +8,7 @@
         .fade-in {
             animation: fadeIn 0.8s ease-in-out forwards;
         }
- 
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -28,9 +28,15 @@
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <!-- Content -->
-        <h4 class="ml-4">
-            <span class="text-muted fw-light float-left">Master / Product /</span> Add
-        </h4>
+        <nav aria-label="breadcrumb" style="font-size: 20px">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('/master') }}">Master</a>
+                </li>
+                <li class="breadcrumb-item active">Product</li>
+                <li class="breadcrumb-item active">Add</li>
+            </ol>
+        </nav>
         <div class="flex-grow-1">
             <div class="app-ecommerce">
                 <!-- Add Product -->

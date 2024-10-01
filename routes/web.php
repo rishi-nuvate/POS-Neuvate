@@ -17,7 +17,9 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\master\basicInfo\BrandController;
 use App\Http\Controllers\master\basicInfo\CategoryController;
+use App\Http\Controllers\master\basicInfo\FitController;
 use App\Http\Controllers\master\basicInfo\SeasonController;
+use App\Http\Controllers\master\basicInfo\SlimController;
 use App\Http\Controllers\master\basicInfo\SubCategoryController;
 use App\Http\Controllers\master\basicInfo\TagsController;
 use App\Http\Controllers\master\company\CompanyController;
@@ -41,6 +43,7 @@ use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 use App\Http\Controllers\VenderController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use App\Models\Employee;
+use App\Models\Fit;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -104,6 +107,17 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('brand', BrandController::class);
     Route::post('/brands/{brand}', [BrandController::class, 'destroy']);
     Route::post('/brandsData', [BrandController::class, 'getBrandData'])->name('getBrandData');
+
+//    Fit Master
+    Route::resource('fit', FitController::class);
+    Route::post('/getFitData', [FitController::class,'getFitData'])->name('getFitData');
+    Route::post('/deleteFit/{fit}', [FitController::class,'destroy']);
+
+//    Slim Master
+    Route::resource('slim', SlimController::class);
+    Route::post('/getSlimData', [SlimController::class,'getSlimData'])->name('getSlimData');
+    Route::post('/slimDelete/{slim}', [SlimController::class,'destroy']);
+
 
 // Category Master
     Route::resource('category', CategoryController::class);
