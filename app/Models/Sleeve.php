@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fit extends Model
+class Sleeve extends Model
 {
     protected $guarded = [];
 
@@ -21,8 +21,9 @@ class Fit extends Model
         return $this->hasOne(Category::class, 'id', 'cat_id');
     }
 
-    function fit()
+    function sleeve()
     {
-        return $this->belongsTo(Product::class, 'id', 'fit_id');
+        return $this->belongsTo(Product::class, 'id', 'sleeve_id');
     }
+
 }

@@ -267,10 +267,10 @@
                                     <!-- Sub Category -->
                                     <div class="mb-3 col ecommerce-select2-dropdown">
                                         <label class="form-label mb-1" for="sub_cat_id">Sub Category </label>
-                                        <select id="subCategory" name="sub_cat_id" class="select2 form-select"
+                                        <select id="subCategory" name="sub_cat_id" onchange="getSleeveFit()"
+                                                class="select2 form-select"
                                                 data-placeholder="Sub Category">
                                             <option value="">Collection</option>
-                                            <option value="2">Men's Clothing</option>
                                         </select>
                                     </div>
                                     <!-- Tags -->
@@ -305,6 +305,26 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    {{--                                    Fit--}}
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Fit</label>
+                                        <select name="fit_id" id="fit_id" class="select2 form-select">
+                                            <option value="">select Fit</option>
+                                            @foreach($fits as $fit)
+                                                <option value="{{$fit->id}}">{{$fit->fit_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    {{--                                    Sleeve--}}
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Sleeve</label>
+                                        <select name="sleeve_id" id="sleeve_id" class="select2 form-select">
+                                            <option value="">select Sleeve</option>
+                                            @foreach($sleeves as $sleeve)
+                                                <option value="{{$sleeve->id}}">{{$sleeve->sleeve_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /Organize Card -->
@@ -325,10 +345,10 @@
 @endsection
 
 @section('page-script')
-{{--    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/app-ecommerce-product-add.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/app-ecommerce-product-add.js') }}"></script>--}}
 
 
     <script>
@@ -452,9 +472,6 @@
                 elementToRemove.remove();
             }
         }
-    </script>
-
-    <script>
 
         function getSubCategoriesData() {
             var categoryId = document.getElementById('productCategory').value;
@@ -473,6 +490,44 @@
                         $.each(response, function (key, value) {
                             $('#subCategory').append('<option value="' + value.id + '">' + value
                                 .Name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#subCategory').empty().append('<option value="">Select Sub Category</option>');
+            }
+        }
+
+        function getSleeveFit(){
+            var categoryId = document.getElementById('productCategory').value;
+            var subCategoryId = document.getElementById('subCategory').value;
+
+            if (subCategoryId && categoryId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('getSleeveFit') }}',
+                    data: {
+                        categoryId: categoryId,
+                        subCategoryId: subCategoryId,
+                        '_token': "{{ csrf_token() }}",
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+
+                        $('#fit_id').empty().append(
+                            '<option value="">Select Sub Category</option>');
+
+                        $('#sleeve_id').empty().append(
+                            '<option value="">Select Sub Category</option>');
+
+                        $.each(response.fit, function (key, value) {
+                            $('#fit_id').append('<option value="' + value.id + '">' + value
+                                .fit_name + '</option>');
+                        });
+
+                        $.each(response.sleeve, function (key, value) {
+                            $('#sleeve_id').append('<option value="' + value.id + '">' + value
+                                .sleeve_name + '</option>');
                         });
                     }
                 });

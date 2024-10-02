@@ -5,6 +5,8 @@ namespace App\Http\Controllers\master\basicInfo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Models\Fit;
+use App\Models\Sleeve;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -66,11 +68,24 @@ class SubCategoryController extends Controller
         //
     }
 
-    public function getSubCategories(Request $request )
+    public function getSubCategories(Request $request)
     {
         $categoryId = $request->input('categoryId');
         $subCategories = SubCategory::where('CatId', $categoryId)->get();
 
         return response()->json($subCategories);
+    }
+
+    public function getSleeveFit(Request $request)
+    {
+        $categoryId = $request->input('categoryId');
+        $subCategoryId = $request->input('subCategoryId');
+
+        $fit = Fit::where('cat_id', $categoryId)->where('sub_cat_id', $subCategoryId)->get();
+        $sleeve = Sleeve::where('cat_id', $categoryId)->where('sub_cat_id', $subCategoryId)->get();
+        return response()->json([
+            'fit' => $fit,
+            'sleeve' => $sleeve,
+        ]);
     }
 }

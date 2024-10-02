@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slims', function (Blueprint $table) {
+        Schema::create('sleeves', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cat_id')->nullable()->constrained('categories'); // Category ID
             $table->foreignId('sub_cat_id')->nullable()->constrained('sub_categories'); // Sub-category ID
-            $table->string('slim_name');
+            $table->string('sleeve_name');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slims');
+        Schema::dropIfExists('sleeves');
     }
 };

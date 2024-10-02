@@ -27,9 +27,9 @@ class Category extends Model
         return $this->belongsTo(Fit::class, 'cat_id', 'id');
     }
 
-    public function slim()
+    public function sleeve()
     {
-        return $this->belongsTo(Slim::class, 'cat_id', 'id');
+        return $this->belongsTo(Sleeve::class, 'cat_id', 'id');
     }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.layoutMaster')
 
-@section('title', 'List-Slim')
+@section('title', 'List-Sleeve')
 
 @section('content')
 
@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active">Slim</li>
+            <li class="breadcrumb-item active">Sleeve</li>
             <li class="breadcrumb-item active">View</li>
         </ol>
     </nav>
@@ -23,7 +23,7 @@
                     <th>SR No.</th>
                     <th>Category</th>
                     <th>Sub Category</th>
-                    <th>Slim Name</th>
+                    <th>Sleeve Name</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -36,7 +36,7 @@
 @section('page-script')
     <script>
 
-        function deleteSlim(slimId) {
+        function deleteSleeve(sleeveId) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -48,12 +48,12 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-                        url: '/slimDelete/' + slimId,
+                        url: '/sleeveDelete/' + sleeveId,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: {
-                            slimId: slimId,
+                            sleeveId: sleeveId,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function (resultData) {
@@ -68,10 +68,10 @@
         }
 
         window.onload = function () {
-            getSlimData();
+            getSleeveData();
         }
 
-        function getSlimData() {
+        function getSleeveData() {
             $("#overlay").fadeIn(100);
             $('#datatable-list').DataTable({
                 autoWidth: false,
@@ -84,7 +84,7 @@
                     [0, 'asc']
                 ],
                 "ajax": {
-                    "url": "{{ route('getSlimData') }}",
+                    "url": "{{ route('getSleeveData') }}",
                     "type": "POST",
                     "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
                     "data": {

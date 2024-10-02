@@ -36,4 +36,13 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 
+    function fit()
+    {
+        return $this->hasOne(Fit::class, 'id', 'fit_id');
+    }
+    function sleeve()
+    {
+        return $this->hasOne(Sleeve::class, 'id', 'sleeve_id');
+    }
+
 }

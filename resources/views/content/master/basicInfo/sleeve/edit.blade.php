@@ -1,6 +1,6 @@
-@extends('layouts/layoutMaster')
+@extends('layouts.layoutMaster')
 
-@section('title', 'Edit-Slim')
+@section('title', 'Edit-Sleeve')
 
 
 @section('content')
@@ -10,7 +10,7 @@
                 <a href="{{ url('/master') }}">Master</a>
             </li>
             <li class="breadcrumb-item active">
-               <a href="{{route('slim.index')}}"> Slim </a>
+                <a href="{{route('sleeve.index')}}"> Sleeve </a>
             </li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
@@ -22,9 +22,9 @@
         <div class="card-body">
             <div class="content">
                 <div class="content-header mb-4">
-                    <h3 class="mb-1">Edit Slim</h3>
+                    <h3 class="mb-1">Edit Sleeve</h3>
                 </div>
-                <form method="post" action="{{route('slim.update',[$slim->id])}}" enctype="multipart/form-data">
+                <form method="post" action="{{route('sleeve.update',[$sleeve->id])}}" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
 
@@ -40,7 +40,8 @@
                                     data-placeholder="Select Category" name="cat_id">
                                 <option value="">Select Category</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}" {{$slim->category->id == $category->id ? 'selected':''}}>{{$category->Name}}</option>
+                                    <option
+                                        value="{{$category->id}}" {{$sleeve->category->id == $category->id ? 'selected':''}}>{{$category->Name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -50,11 +51,12 @@
                             <select id="subCategory" name="sub_cat_id" class="select2 form-select"
                                     data-placeholder="Sub Category">
                                 <option value="">Collection</option>
-                                <option value="{{$slim->subCategory->id}}" selected>{{$slim->subCategory->Name}}</option>
+                                <option value="{{$sleeve->subCategory->id}}"
+                                        selected>{{$sleeve->subCategory->Name}}</option>
                             </select>
                         </div>
 
-                        {!! textInputField('col-md-4', 'Slim Name', 'text', 'slim_name', 'slim_name', 'Slim Name', '', '',$slim->slim_name ,'','') !!}
+                        {!! textInputField('col-md-4', 'Sleeve Name', 'text', 'sleeve_name', 'sleeve_name', 'Slim Name', '', '',$sleeve->sleeve_name ,'','') !!}
 
                     </div>
                     <br>

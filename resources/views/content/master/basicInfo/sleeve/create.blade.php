@@ -1,6 +1,6 @@
-@extends('layouts/layoutMaster')
+@extends('layouts.layoutMaster')
 
-@section('title', 'Add-Slim')
+@section('title', 'Add-Sleeve')
 
 
 @section('content')
@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active">Slim</li>
+            <li class="breadcrumb-item active">Sleeve</li>
             <li class="breadcrumb-item active">Add</li>
         </ol>
     </nav>
@@ -20,9 +20,9 @@
         <div class="card-body">
             <div class="content">
                 <div class="content-header mb-4">
-                    <h3 class="mb-1">Add Slim</h3>
+                    <h3 class="mb-1">Add Sleeve</h3>
                 </div>
-                <form method="post" action="{{route('slim.store')}}" enctype="multipart/form-data">
+                <form method="post" action="{{route('sleeve.store')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
@@ -50,7 +50,7 @@
                             </select>
                         </div>
 
-                        {!! textInputField('col-md-4', 'Slim Name', 'text', 'slim_name', 'slim_name', 'Slim Name', '', '',old('slim_name') ,'','') !!}
+                        {!! textInputField('col-md-4', 'Sleeve Name', 'text', 'sleeve_name', 'sleeve_name', 'Sleeve Name', '', '',old('sleeve_name') ,'','') !!}
 
                     </div>
                     <br>

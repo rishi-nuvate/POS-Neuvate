@@ -194,7 +194,8 @@
                                                             placeholder="SKU" value="{{$size->sku}}"/>
                                                     </div>
                                                     <div class="col-3 align-item-center">
-                                                        <button type="button" onclick="deleteSize()" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
+                                                        <button type="button" onclick="deleteSize()"
+                                                                class="btn rounded-pill btn-icon btn-label-danger waves-effect">
                                                             <span class="ti ti-trash"></span>
                                                         </button>
                                                     </div>
@@ -318,6 +319,7 @@
                                         <select id="subCategory" name="sub_cat_id" class="select2 form-select"
                                                 data-placeholder="Sub Category">
                                             <option value="">Collection</option>
+                                            <option value="{{$product->subCategory->id}}" selected> {{$product->subCategory->Name}}</option>
                                         </select>
                                     </div>
                                     <!-- Tags -->
@@ -354,6 +356,25 @@
                                             @endforeach
                                         </select>
                                     </div>
+
+                                    {{--Fit--}}
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Fit</label>
+                                        <select name="fit_id" id="fit_id" class="select2 form-select">
+                                            <option value="">select Fit</option>
+                                            <option value="{{$product->fit->id ?? ''}}">{{$product->fit->fit_name ?? ''}}</option>
+                                        </select>
+                                    </div>
+                                    {{--Sleeve--}}
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Sleeve</label>
+                                        <select name="sleeve_id" id="sleeve_id" class="select2 form-select">
+                                            <option value="">select Sleeve</option>
+                                            <option
+                                                value="{{$product->sleeve->id ?? ''}}">{{$product->sleeve->sleeve_name ?? ''}}</option>
+                                        </select>
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- /Organize Card -->
@@ -593,5 +614,45 @@
                 }
             });
         }
+
+
+        function getSleeveFit() {
+            var categoryId = document.getElementById('productCategory').value;
+            var subCategoryId = document.getElementById('subCategory').value;
+
+            if (subCategoryId && categoryId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('getSleeveFit') }}',
+                    data: {
+                        categoryId: categoryId,
+                        subCategoryId: subCategoryId,
+                        '_token': "{{ csrf_token() }}",
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+
+                        $('#fit_id').empty().append(
+                            '<option value="">Select Sub Category</option>');
+
+                        $('#sleeve_id').empty().append(
+                            '<option value="">Select Sub Category</option>');
+
+                        $.each(response.fit, function (key, value) {
+                            $('#fit_id').append('<option value="' + value.id + '">' + value
+                                .fit_name + '</option>');
+                        });
+
+                        $.each(response.sleeve, function (key, value) {
+                            $('#sleeve_id').append('<option value="' + value.id + '">' + value
+                                .sleeve_name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#subCategory').empty().append('<option value="">Select Sub Category</option>');
+            }
+        }
+
     </script>
 @endsection

@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Fit;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductVariant;
 use App\Models\Season;
+use App\Models\Sleeve;
+use App\Models\Slim;
 use App\Models\Tags;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -34,7 +37,9 @@ class ProductController extends Controller
         $tags = Tags::all();
         $seasons = Season::all();
         $brands = Brand::all();
-        return view('content.master.product.create', compact('categories', 'tags', 'seasons', 'brands'));
+        $sleeves = Sleeve::all();
+        $fits = Fit::all();
+        return view('content.master.product.create', compact('categories', 'tags', 'seasons', 'brands', 'fits', 'sleeves'));
     }
 
     /**
@@ -122,7 +127,7 @@ class ProductController extends Controller
         $tags = Tags::all();
         $seasons = Season::all();
         $brands = Brand::all();
-        $product = $product->with('category','subCategory','brand','season','productVariant')->first();
+        $product = $product->with('category','subCategory','brand','season','productVariant','fit','sleeve')->first();
         return view('content.master.product.edit', compact('product','categories', 'tags', 'seasons', 'brands'));
 
     }

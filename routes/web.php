@@ -19,6 +19,7 @@ use App\Http\Controllers\master\basicInfo\BrandController;
 use App\Http\Controllers\master\basicInfo\CategoryController;
 use App\Http\Controllers\master\basicInfo\FitController;
 use App\Http\Controllers\master\basicInfo\SeasonController;
+use App\Http\Controllers\master\basicInfo\SleeveController;
 use App\Http\Controllers\master\basicInfo\SlimController;
 use App\Http\Controllers\master\basicInfo\SubCategoryController;
 use App\Http\Controllers\master\basicInfo\TagsController;
@@ -110,13 +111,18 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Fit Master
     Route::resource('fit', FitController::class);
-    Route::post('/getFitData', [FitController::class,'getFitData'])->name('getFitData');
-    Route::post('/deleteFit/{fit}', [FitController::class,'destroy']);
+    Route::post('/getFitData', [FitController::class, 'getFitData'])->name('getFitData');
+    Route::post('/deleteFit/{fit}', [FitController::class, 'destroy']);
 
 //    Slim Master
     Route::resource('slim', SlimController::class);
-    Route::post('/getSlimData', [SlimController::class,'getSlimData'])->name('getSlimData');
-    Route::post('/slimDelete/{slim}', [SlimController::class,'destroy']);
+    Route::post('/getSlimData', [SlimController::class, 'getSlimData'])->name('getSlimData');
+    Route::post('/slimDelete/{slim}', [SlimController::class, 'destroy']);
+
+//    Sleeve
+    Route::resource('sleeve', SleeveController::class);
+    Route::post('/getSleeveData', [SleeveController::class,'getSleeveData'])->name('getSleeveData');
+    Route::post('/sleeveDelete/{sleeve}', [SleeveController::class,'destroy']);
 
 
 // Category Master
@@ -126,7 +132,7 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Sub-Category Master
     Route::post('/getSubCategories', [SubCategoryController::class, 'getSubCategories'])->name('getSubCategories');
-
+    Route::post('/getSleeveFit', [SubCategoryController::class, 'getSleeveFit'])->name('getSleeveFit');
 
 
 // Company

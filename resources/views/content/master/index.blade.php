@@ -217,13 +217,13 @@
                         <div class="btn-group mb-2">
                             <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                <i class="menu-icon tf-icons ti ti-truck"></i>Slim
+                                <i class="menu-icon tf-icons ti ti-truck"></i>Sleeve
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('slim.create') }}"><i
+                                <a class="dropdown-item" href="{{ route('sleeve.create') }}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href="{{ route('slim.index') }}"><i
+                                <a class="dropdown-item" href="{{ route('sleeve.index') }}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>
