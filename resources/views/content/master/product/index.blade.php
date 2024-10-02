@@ -105,7 +105,7 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-                        url: '/product/' + productId,
+                        url: '/deleteProduct/' + productId,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

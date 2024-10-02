@@ -35,7 +35,7 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>P.O.
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{ route('create-po')}}"><i
+                                <a class="dropdown-item" href="{{ route('po.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
                                 <a class="dropdown-item" href=""><i

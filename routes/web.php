@@ -35,6 +35,7 @@ use App\Http\Controllers\pages\ExpenseController;
 use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\storeInventory\StockInController;
 use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
@@ -143,7 +144,7 @@ Route::middleware('auth:web')->group(callback: function () {
     // SKU Master
     Route::resource('product', ProductController::class);
     Route::post('getProduct', [ProductController::class, 'getProduct'])->name('getProduct');
-    Route::post('/product/{product}', [ProductController::class, 'destroy']);
+    Route::post('/deleteProduct/{product}', [ProductController::class, 'destroy']);
     Route::post('deleteVariant', [ProductController::class, 'deleteVariant'])->name('deleteVariant');
 
 //    Route::get('product/view', [ProductMasterController::class, 'index'])->name(('view-product'));
@@ -168,6 +169,8 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class, 'create'])->name('create-design');
 
 //    PO
+    Route::resource('po', PurchaseOrderController::class);
+
     Route::get('/supplyChain/po/create', [POMasterController::class, 'create'])->name('create-po');
 
 //    Barcode

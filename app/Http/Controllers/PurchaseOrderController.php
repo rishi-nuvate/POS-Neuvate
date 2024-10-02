@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyShipAddress;
+use App\Models\Product;
 use App\Models\PurchaseOrder;
 use App\Http\Requests\StorePurchaseOrderRequest;
 use App\Http\Requests\UpdatePurchaseOrderRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class PurchaseOrderController extends Controller
 {
@@ -29,7 +32,11 @@ class PurchaseOrderController extends Controller
 
         $vendors = User::where('role', 'vendor')->get();
 
-        return view('content.supplyChain.po.create', compact('companies','vendors'));
+        $products = Product::get();
+
+//        dd(1);
+
+        return view('content.supplyChain.po.create', compact('companies', 'vendors', 'products'));
     }
 
     /**
@@ -71,4 +78,22 @@ class PurchaseOrderController extends Controller
     {
         //
     }
+
+    public function getShipAddressByCompany(Request $request)
+    {
+        $company = $request->input('company_id');
+        $shipAdd = CompanyShipAddress::where('company_id', $company)->get();
+
+        return response()->json($shipAdd);
+
+//        $company = Company::with('ShipAdd');
+//        $data = [];
+//        $company->where('id', $request->company_id)->get();
+//
+//        $addressArray[] = $company->ShipAdd;
+//        $data["address"] = $addressArray;
+//
+//        return response()->json($data);
+    }
+
 }

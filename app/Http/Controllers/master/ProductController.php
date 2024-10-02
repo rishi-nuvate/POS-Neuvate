@@ -126,8 +126,8 @@ class ProductController extends Controller
         $tags = Tags::all();
         $seasons = Season::all();
         $brands = Brand::all();
-        $product = $product->with('category','subCategory','brand','season','productVariant','fit','sleeve')->first();
-        return view('content.master.product.edit', compact('product','categories', 'tags', 'seasons', 'brands'));
+        $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant', 'fit', 'sleeve')->first();
+        return view('content.master.product.edit', compact('product', 'categories', 'tags', 'seasons', 'brands'));
 
     }
 
@@ -136,7 +136,83 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+
+//        $product->update([
+//            'product_name' => $request->product_name,
+//            'product_code' => $request->product_code,
+//            'hsn_code' => $request->hsn_code,
+//            'material' => $request->material,
+//            'product_description' => $request->product_description,
+//            'cost_price' => $request->cost_price,
+//            'sell_price' => $request->sell_price,
+//            'product_mrp' => $request->product_mrp,
+//            'status' => $request->status,
+//            'cat_id' => $request->cat_id,
+//            'sub_cat_id' => $request->sub_cat_id,
+//            'season_id' => $request->season_id,
+//            'brand_id' => $request->brand_id,
+//            'fit_id' => $request->fit_id,
+//            'sleeve_id' => $request->sleeve_id
+//        ]);
+
+//        if (!empty($request->productColor)) {
+//            foreach ($request->productColor as $key => $color) {
+//                if (!empty($color['color'])) {
+//                    foreach ($request->optionValueSize[$key] as $size) {
+//                        if (!empty($size['size'])) {
+//                            $variant = ProductVariant::where('product_id', $product->id)
+//                                ->where('id', $size['size_id'])
+//                                ->update([
+//                                    'size' => $size['size'],
+//                                    'sku' => $size['sku'],
+//                                ]);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
+
+        if (!empty($request->productColor)) {
+            foreach ($request->productColor as $key => $color) {
+                if (!empty($color['color'])) {
+                    foreach ($request->newOptionValueSize[$key] as $size) {
+                        if (!empty($size['size'])) {
+                            $variant = new ProductVariant([
+                                'product_id' => $product->id,
+                                'color' => $color['color'],
+                                'size' => $size['size'],
+                                'sku' => $size['sku'],
+                            ]);
+                        }
+                        $variant->save();
+                    }
+                }
+            }
+        }
+
+//        dd(request()->all());
+
+        if (!empty($request->newProductColor)) {
+            foreach ($request->newProductColor as $key => $color) {
+                if (!empty($color['color'])) {
+                    foreach ($request->newOptionValueSize[$key] as $size) {
+                        if (!empty($size['size'])) {
+                            $variant = new ProductVariant([
+                                'product_id' => $product->id,
+                                'color' => $color['color'],
+                                'size' => $size['size'],
+                                'sku' => $size['sku'],
+                            ]);
+                        }
+                        $variant->save();
+                    }
+                }
+            }
+        }
+
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully');
     }
 
     /**
@@ -147,7 +223,7 @@ class ProductController extends Controller
         if (Gate::allows('delete', $product)) {
             $product->delete();
             return redirect()->route('product.index')->with('success', 'Product deleted.');
-        }else{
+        } else {
             return redirect()->route('product.index')->with('error', 'You can not delete this product.');
         }
 
@@ -182,11 +258,11 @@ class ProductController extends Controller
             $product_code = $product->product_code;
             $category = $product->category->Name;
             $subCategory = $product->subCategory->Name;
-            if ($product->status == 0){
+            if ($product->status == 0) {
                 $status = '<button class="btn btn-sm btn-outline-success waves-effect">
                                             Active
                                         </button>';
-            }else{
+            } else {
                 $status = '<button class="btn btn-sm btn-outline-success waves-effect">
                                             Deactive
                                         </button>';
@@ -204,11 +280,12 @@ class ProductController extends Controller
 
     }
 
-    function deleteVariant(Request $request)
+    public function deleteVariant(Request $request)
     {
         $color = $request->input('color');
         $productId = $request->input('productId');
 
+        dd($color);
 
         $product = ProductVariant::where('product_id', $productId)->where('color', $color)->delete();
 

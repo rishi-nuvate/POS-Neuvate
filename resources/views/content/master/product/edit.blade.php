@@ -59,6 +59,7 @@
                 <!-- Add Product -->
 
                 <form method="post" action="{{route('product.update',[$product->id])}}" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <div
                         class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
@@ -152,15 +153,13 @@
                                     <div class="card-body">
                                         <div id="productSKU{{$color_num}}">
 
-                                            {{--                                        {{dd($color)}}--}}
-
                                             <div class="row">
                                                 <div class="mb-3 col-3">
                                                     <label class="form-label" for="productSKU">Color</label>
                                                     <input type="text" name="productColor[{{$color_num}}][color]"
                                                            id="color{{$color_num}}"
                                                            placeholder="Color"
-                                                           class="form-control" value="{{$color}}">
+                                                           class="form-control" value="{{$color}}" readonly>
                                                 </div>
 
                                                 <div class="mb-3 col-6">
@@ -175,6 +174,7 @@
                                             @foreach($sizes as $size)
                                                 <div class="row">
 
+                                                    <input type="hidden" name="optionValueSize[{{$color_num}}][{{$size_num}}][size_id]" value="{{$size->id}}">
                                                     <div class="mb-3 col-3">
                                                         <label class="form-label" for="productSKU">Size</label>
                                                         <input type="text"
@@ -408,12 +408,12 @@
             newDiv.id = "sizeItem_" + colorVariantStart + sizeVariantStart;
             newDiv.innerHTML = `
           <div class="mb-3 col-3">
-              <label class="form-label" for="optionValueSize_${colorVariantStart}">Size</label>
-              <input type="text" name="optionValueSize[${colorVariantStart}][${newIndex}][size]" id="size_${colorVariantStart}" placeholder="Size" class="form-control">
+              <label class="form-label" for="newOptionValueSize_${colorVariantStart}">Size</label>
+              <input type="text" name="newOptionValueSize[${colorVariantStart}][${newIndex}][size]" id="size_${colorVariantStart}" placeholder="Size" class="form-control">
           </div>
           <div class="mb-3 col-8">
-              <label class="form-label" for="optionValueSize_${colorVariantStart}">SKU</label>
-              <input type="text" id="optionValueSize_${colorVariantStart}" name="optionValueSize[${colorVariantStart}][${newIndex}][sku]" class="form-control" placeholder="SKU" />
+              <label class="form-label" for="newOptionValueSize_${colorVariantStart}">SKU</label>
+              <input type="text" id="newOptionValueSize_${colorVariantStart}" name="newOptionValueSize[${colorVariantStart}][${newIndex}][sku]" class="form-control" placeholder="SKU" />
           </div>
           <div class="col-1 mt-4">
               <button type="button" onclick="removeSize(${colorVariantStart},${newIndex})" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
@@ -447,7 +447,7 @@
             newDiv.className = "row fade-in";
             newDiv.id = "item_" + counter1;
             newDiv.innerHTML = `
-<div class="card mb-4">
+                        <div class="card mb-4">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">Variants</h5>
                             </div>
@@ -455,14 +455,14 @@
                                 <div id="productSKU${counter1}">
                                     <div class="row">
                                         <div class="mb-3 col-3">
-                                            <label class="form-label" for="productSKU">Color</label>
-                                            <input type="text" name="productColor[${counter1}][color]" id="color${counter1}" placeholder="Color"
+                                            <label class="form-label" for="newProductColor">Color</label>
+                                            <input type="text" name="newProductColor[${counter1}][color]" id="color${counter1}" placeholder="Color"
                                                    class="form-control">
                                         </div>
 
                                         <div class="mb-3 col-6">
-                                            <label class="form-label" for="productSKU">Media</label>
-                                            <input type="file" name="productColor[${counter1}][media]" id="media" placeholder="Color"
+                                            <label class="form-label" for="newProductColor">Media</label>
+                                            <input type="file" name="newProductColor[${counter1}][media]" id="media" placeholder="Color"
                                                    class="form-control">
                                         </div>
                                     </div>
@@ -471,15 +471,15 @@
 
                                         <div class="mb-3 col-3">
                                             <label class="form-label" for="productSKU">Size</label>
-                                            <input type="text" name="optionValueSize[${counter1}][0][size]" id="size" placeholder="Size"
+                                            <input type="text" name="newOptionValueSize[${counter1}][0][size]" id="size" placeholder="Size"
                                                    class="form-control">
                                         </div>
-                                        <input type="hidden" id="sizeVariantStart${counter1}" value="0">
+                                        <input type="hidden" id="sizeVariantStart${counter1}" value="1">
                                         <div class="mb-3 col-6">
                                             <label class="form-label" for="productSKU">SKU</label>
                                             <input
                                                 type="text"
-                                                name="optionValueSize[${counter1}][0][sku]"
+                                                name="newOptionValueSize[${counter1}][0][sku]"
                                                 id="productSKU"
                                                 class="form-control"
                                                 placeholder="SKU"/>

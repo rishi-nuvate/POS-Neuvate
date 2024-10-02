@@ -45,4 +45,9 @@ class Product extends Model
         return $this->hasOne(Sleeve::class, 'id', 'sleeve_id');
     }
 
+    public function purchaseOrderItem()
+    {
+        $this->hasMany(PurchaseOrderItem::class);
+    }
+
 }
