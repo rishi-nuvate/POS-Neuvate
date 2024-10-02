@@ -58,7 +58,7 @@
             <div class="app-ecommerce">
                 <!-- Add Product -->
 
-                <form method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
+                <form method="post" action="{{route('product.update',[$product->id])}}" enctype="multipart/form-data">
                     @csrf
                     <div
                         class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
@@ -317,7 +317,7 @@
                                     <div class="mb-3 col ecommerce-select2-dropdown">
                                         <label class="form-label mb-1" for="sub_cat_id">Sub Category </label>
                                         <select id="subCategory" name="sub_cat_id" class="select2 form-select"
-                                                data-placeholder="Sub Category">
+                                                data-placeholder="Sub Category" onchange="getSleeveFit()">
                                             <option value="">Collection</option>
                                             <option value="{{$product->subCategory->id}}" selected> {{$product->subCategory->Name}}</option>
                                         </select>

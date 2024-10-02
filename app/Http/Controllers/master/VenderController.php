@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
+use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\User;
 use App\Models\UserAddress;
 use App\Models\UserBank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class VenderController extends Controller

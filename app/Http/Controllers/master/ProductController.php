@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Fit;
 use App\Models\Product;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductVariant;
 use App\Models\Season;
 use App\Models\Sleeve;
-use App\Models\Slim;
 use App\Models\Tags;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
-use phpDocumentor\Reflection\DocBlock\Tag;
 
 class ProductController extends Controller
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
-use App\Models\Company;
-use App\Models\Employee;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
