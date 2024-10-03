@@ -23,6 +23,7 @@ use App\Http\Controllers\master\basicInfo\SlimController;
 use App\Http\Controllers\master\basicInfo\SubCategoryController;
 use App\Http\Controllers\master\basicInfo\TagsController;
 use App\Http\Controllers\master\company\CompanyController;
+use App\Http\Controllers\master\company\CompanyShipAddressController;
 use App\Http\Controllers\master\EmployeeController;
 use App\Http\Controllers\master\InventoryMasterController;
 use App\Http\Controllers\master\MasterController;
@@ -118,8 +119,8 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Sleeve
     Route::resource('sleeve', SleeveController::class);
-    Route::post('/getSleeveData', [SleeveController::class,'getSleeveData'])->name('getSleeveData');
-    Route::post('/sleeveDelete/{sleeve}', [SleeveController::class,'destroy']);
+    Route::post('/getSleeveData', [SleeveController::class, 'getSleeveData'])->name('getSleeveData');
+    Route::post('/sleeveDelete/{sleeve}', [SleeveController::class, 'destroy']);
 
 
 // Category Master
@@ -135,6 +136,12 @@ Route::middleware('auth:web')->group(callback: function () {
 // Company
     Route::resource('company', CompanyController::class);
     Route::post('/company/{company}', [CompanyController::class, 'destroy']);
+    Route::post('/getCompanyAddress', [CompanyController::class, 'getCompanyAddress'])->name('getCompanyAddress');
+
+//    Shipping Address
+    Route::post('/shipAddressByCompany', [CompanyShipAddressController::class, 'shipAddressByCompany'])->name('shipAddressByCompany');
+    Route::post('/getShippingAddress', [CompanyShipAddressController::class, 'getShippingAddress'])->name('getShippingAddress');
+
 
 //    Vendor
     Route::resource('vendors', VenderController::class);
@@ -157,21 +164,24 @@ Route::middleware('auth:web')->group(callback: function () {
     //Inventory Master
     Route::resource('/storeInventory', InventoryMasterController::class);
 
-//    Stock In
-    Route::get('/storeInventory/stockIn/pending', [StockInController::class, 'pending'])->name('pending-stock-in');
-    Route::get('/storeInventory/stockIn/create', [StockInController::class, 'create'])->name('create-stock-in');
-
-
     //Supply Chain
     Route::resource('/supplyChain', SupplyChainMasterController::class);
+
 
 //    Design Library
     Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class, 'create'])->name('create-design');
 
 //    PO
     Route::resource('po', PurchaseOrderController::class);
+    Route::post('/po/getSkuByProduct', [PurchaseOrderController::class, 'getSkuByProduct'])->name('getSkuByProduct');
+    Route::post('/po/getProductVariant', [PurchaseOrderController::class, 'getProductVariant'])->name('getProductVariant');
+    Route::post('/po/getVendorAddress', [PurchaseOrderController::class, 'getVendorAddress'])->name('getVendorAddress');
 
-    Route::get('/supplyChain/po/create', [POMasterController::class, 'create'])->name('create-po');
+
+//    Stock In
+    Route::get('/storeInventory/stockIn/pending', [StockInController::class, 'pending'])->name('pending-stock-in');
+    Route::get('/storeInventory/stockIn/create', [StockInController::class, 'create'])->name('create-stock-in');
+
 
 //    Barcode
     Route::get('/supplyChain/barcode/create', [BarcodeMasterController::class, 'create'])->name('create-barcode');

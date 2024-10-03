@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\CompanyShipAddress;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
@@ -168,5 +169,14 @@ class CompanyController extends Controller
                 'message' => 'Company deleted successfully!'
             ]);
         }
+    }
+
+    public function getCompanyAddress(Request $request)
+    {
+        $company_id =  $request->input('company_id');
+        $companyAdd = Company::where('id', $company_id)->first();
+//        dd($companyAdd);
+
+        return response()->json($companyAdd);
     }
 }

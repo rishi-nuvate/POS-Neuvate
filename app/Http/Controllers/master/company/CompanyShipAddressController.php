@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCompanyShipAddressRequest;
 use App\Http\Requests\UpdateCompanyShipAddressRequest;
 use App\Models\CompanyShipAddress;
+use Illuminate\Http\Request;
+
 
 class CompanyShipAddressController extends Controller
 {
@@ -64,4 +66,21 @@ class CompanyShipAddressController extends Controller
     {
         //
     }
+
+    public function shipAddressByCompany( Request $request)
+    {
+        $companyId = $request->input('company_id');
+        $shipAddress = CompanyShipAddress::where('company_id', $companyId)->get();
+        return response()->json($shipAddress);
+    }
+
+    public function getShippingAddress(Request $request)
+    {
+        $shipId = $request->input('ship_id');
+        $shipAddress = CompanyShipAddress::where('id', $shipId)->first();
+
+        return response()->json($shipAddress);
+
+    }
+
 }

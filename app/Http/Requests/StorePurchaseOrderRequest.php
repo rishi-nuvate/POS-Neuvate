@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\PurchaseOrder;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StorePurchaseOrderRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StorePurchaseOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('create', PurchaseOrder::class);
     }
 
     /**
