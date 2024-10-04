@@ -14,4 +14,8 @@ class CompanyShipAddress extends Model
     public function Company(){
         return $this->belongsTo(Company::class);
     }
+
+    public function purchaseOrder(){
+        return $this->belongsTo(PurchaseOrder::class,'company_shipping_id','id');
+    }
 }

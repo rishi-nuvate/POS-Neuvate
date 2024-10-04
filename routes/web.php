@@ -176,6 +176,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/po/getSkuByProduct', [PurchaseOrderController::class, 'getSkuByProduct'])->name('getSkuByProduct');
     Route::post('/po/getProductVariant', [PurchaseOrderController::class, 'getProductVariant'])->name('getProductVariant');
     Route::post('/po/getVendorAddress', [PurchaseOrderController::class, 'getVendorAddress'])->name('getVendorAddress');
+    Route::post('/po/poListAjax', [PurchaseOrderController::class, 'poListAjax'])->name('poListAjax');
 
 
 //    Stock In

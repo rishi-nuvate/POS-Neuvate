@@ -38,7 +38,7 @@
                                 <a class="dropdown-item" href="{{ route('po.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{ route('po.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     List</a>
                             </div>

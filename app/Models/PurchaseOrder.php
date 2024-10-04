@@ -15,7 +15,7 @@ class PurchaseOrder extends Model
     use HasFactory;
 
     public function purchaseOrderItem(){
-        return $this->hasMany(PurchaseOrderItem::class);
+        return $this->hasMany(PurchaseOrderItem::class,'po_id','id');
     }
 
     public function purchaseOrderItemParameter(){
@@ -27,11 +27,11 @@ class PurchaseOrder extends Model
     }
 
     public  function shipAddress(){
-        return $this->belongsTo(CompanyShipAddress::class);
+        return $this->belongsTo(CompanyShipAddress::class,'company_shipping_id','id');
     }
 
     public function vendor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 }

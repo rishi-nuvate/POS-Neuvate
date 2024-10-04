@@ -19,11 +19,12 @@ class PurchaseOrderController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $Pos = PurchaseOrder::with('Company', 'ShipAddress', 'Vendor')->get();
-        $vendors = User::where('role', 'vendor')->get();
-        return view('content.supplyChain.po.list', compact('Pos', 'vendors'));
+//        $Pos = PurchaseOrder::with('Company', 'ShipAddress', 'Vendor')->get();
+//        $vendors = User::where('role', 'vendor')->get();
+        return view('content.supplyChain.po.index');
     }
 
     /**
@@ -179,12 +180,171 @@ class PurchaseOrderController extends Controller
         return response()->json($data);
     }
 
-    public function getVendorAddress(Request $request){
+    public function getVendorAddress(Request $request)
+    {
         $vendor_id = $request->input('vendorId');
         $vendor = User::with('UserAddress')->where('id', $vendor_id)->first();
 
         return response()->json($vendor);
 
 //        dd($vendor);
+    }
+
+    public function poListAjax(Request $request)
+    {
+        $totalData = 0;
+
+        $columns = array(
+            0 => 'purchase_orders.id',
+            1 => 'purchase_orders.po_no',
+            2 => 'id',
+            3 => 'id',
+            4 => 'id',
+            5 => 'id',
+            6 => 'id',
+            7 => 'id',
+            8 => 'id',
+        );
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $dir = $request->input('order.0.dir') ?? "desc";
+        $order = $columns[$request->input('order.0.column')];
+
+        $PoQuery = PurchaseOrder::query();
+
+        if (!empty($request['startDate']) && !empty($request['endDate'])) {
+            $startDate = date('Y-m-d', strtotime($request['startDate']));
+            $endDate = date('Y-m-d', strtotime($request['endDate']));
+            $PoQuery->whereBetween('purchase_orders.po_date', [$startDate, $endDate]);
+        }
+
+        if (!empty($request->input('search.value'))) {
+            $search = $request->input('search.value');
+
+            $PoQuery->where(function ($query) use ($search) {
+                $query->where('po_no', 'LIKE', "%{$search}%");
+            });
+            $totalFiltered = count($PoQuery->get());
+            $allPos = $PoQuery->get();
+            $PoQuery->offset($start)->limit($limit);
+        } else {
+            $totalFiltered = count($PoQuery->get());
+            $allPos = $PoQuery->get();
+            $PoQuery->offset($start)->limit($limit);
+
+            if ($totalFiltered <= 0) {
+                $totalFiltered = $totalData;
+            }
+        }
+
+        $PoQuery->orderBy($order, $dir);
+
+        $Pos = $PoQuery->get();
+
+        $result = [];
+
+        if ($Pos != null) {
+            $num = count($allPos);
+            $num = $num - $start;
+            foreach ($Pos as $Po) {
+//                dd();
+                $companyHtml = "";
+                if (!empty($Po->company->CompanyName)) {
+                    $companyHtml .= '<div class="d-flex justify-content-start align-items-center">
+                                          <div class="avatar-wrapper">
+                                            <div class="avatar me-2"><span
+                                                class="avatar-initial rounded-circle bg-label-info">' . substr($Po->company->CompanyName ?? '-', 0, 2) . '</span>
+                                            </div>
+                                          </div>
+                                          <div class="d-flex flex-column"><span
+                                              class="fw-medium small">' . ($Po->company->CompanyName ?? '') . '</span>
+                                          </div>
+                                    </div>';
+                } else {
+                    $companyHtml .= '<span class="badge rounded bg-label-danger">-</span>';
+                }
+
+                $Address = "";
+//                dd($Po->shipAddress);
+                if (!empty($Po->shipAddress->ShipAddLine1)) {
+                    $Address .= '<div class="d-flex justify-content-start align-items-center">
+                                    <div class="d-flex flex-column">
+                                        <span class="fw-medium">
+                                        ' . $Po->shipAddress->ShipAddLine1 . '
+                                        </span>
+                                    </div>
+                                </div>';
+                } else {
+                    $Address .= '<span class="badge rounded bg-label-danger">-</span>';
+                }
+                if (isset($Po->vendor) && $Po->vendor->role == "Vendor") {
+                    $vendorPersonName = $Po->vendor->name;
+                    $vendorAvatar = substr($Po->vendor->name, 0, 2);
+                } else {
+                    $vendorPersonName = "-";
+                    $vendorAvatar = "-";
+                }
+
+                $vendor = "";
+
+                $vendor = '<div class="d-flex justify-content-start align-items-center">
+                                    <div class="avatar-wrapper">
+                                        <div class="avatar me-2">
+                                            <span class="avatar-initial rounded-circle bg-label-primary">
+                                            ' . $vendorAvatar . '
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <span class="fw-medium small">
+                                        ' . $vendorPersonName . '
+                                        </span>
+                                    </div>
+                                </div>';
+
+                $PoNo = '<span class="badge rounded bg-label-primary m-1">' . ($Po->po_no ?? '-') . '</span>';
+
+
+                $productNames = '';
+                $unitPrices = '';
+                $totalQtys = '';
+                $taxAmounts = '';
+
+                if (!empty($Po->purchaseOrderItem)) {
+                    foreach ($Po->purchaseOrderItem as $POItem) {
+                        $productNames .= '<span class="badge rounded bg-label-warning m-1">' . ($POItem->product->product_name ?? '-') . '</span>';
+                        $unitPrices .= '<span class="badge rounded bg-label-info m-1">' . ($POItem->unit_price ?? '-') . '</span>';
+                        $totalQtys .= '<span class="badge rounded bg-label-dark m-1">' . ($POItem->total_quantity ?? '-') . '</span>';
+                        $taxAmounts .= '<span class="badge rounded bg-label-primary m-1">' . ($POItem->tax_amount) . '</span>';
+                    }
+                } else {
+                    $productNames = '<span class="badge rounded bg-label-warning m-1">-</span>';
+                    $unitPrices = '<span class="badge rounded bg-label-info m-1">-</span>';
+                    $totalQtys = '<span class="badge rounded bg-label-dark m-1">-</span>';
+                    $taxAmounts = '<span class="badge rounded bg-label-primary m-1">-</span>';
+                }
+
+                $actionHtml = "";
+
+//                $actionHtml .= ' <a class="btn btn-icon btn-label-primary mt-1 waves-effect mx-1"
+//                 href="' . route('po-edit', $Po->id) . '"><i
+//                 class="ti ti-edit mx-2 ti-sm"></i></a>';
+
+                $actionHtml .= ' <button type="button" class="btn btn-icon mt-1 btn-label-danger mx-1"
+                onclick="daletePo(' . $Po->id . ')"><i class="ti ti-trash ti-sm"></i></button>';
+
+                $result[] = array($num, $companyHtml, $Address, $vendor, $PoNo, $productNames, $unitPrices, $totalQtys, $taxAmounts, $actionHtml);
+                $num--;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($request->input('draw')),
+            "recordsTotal" => intval($totalFiltered),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => array_values($result)
+        );
+        echo json_encode($json_data);
     }
 }
