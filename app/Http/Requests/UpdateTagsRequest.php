@@ -13,7 +13,7 @@ class UpdateTagsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-       return Gate::allows('update', $this->route('tags'));
+       return Gate::allows('update', $this->route('tag'));
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateTagsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string ', Rule::unique('tags')->ignore($this->route('tags')->id, 'id')],
+            'name' => ['required', 'string ', Rule::unique('tags')->ignore($this->route('tag')->id, 'id')],
         ];
     }
 }

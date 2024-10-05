@@ -64,6 +64,29 @@ class EmployeeController extends Controller
                 ]);
 
                 $employee->save();
+
+                $aadharCard = $request->emp_aadhar_file->getClientOriginalName();
+                $panCard = $request->emp_pan_file->getClientOriginalName();
+                $profilePic = $request->emp_profile_pic->getClientOriginalName();
+
+                $aadharDestination = public_path('/employee /' . $employee->id . '/ aadharCard /');
+                $panDestination = public_path('/company / ' . $employee->id . '/ panCard /');
+                $profileDestination = public_path('/company / ' . $employee->id . '/ profilePic /');
+
+//                if (!is_dir(public_path('/company / pan_gst '))) {
+//                    mkdir(public_path('/company / pan_gst '), 0755, true);
+//                }
+
+                $request->emp_aadhar_file->move($aadharDestination, $aadharCard);
+                $request->emp_pan_file->move($panDestination, $panCard);
+                $request->emp_profile_pic->move($profileDestination, $profilePic);
+
+                $employee->update([
+                    'emp_aadhar_file' => $aadharCard,
+                    'emp_pan_file' => $panCard,
+                    'emp_profile_pic'=> $profilePic,
+                ]);
+
                 DB::commit();
                 return redirect()->route('content.master.users.employee.create')->with('success', 'Employee added successfully.');
 
@@ -143,7 +166,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        if(Gate::allows('delete', $employee)){
+        if (Gate::allows('delete', $employee)) {
             $employee->delete();
             return redirect()->route('content.master.users.employee.index')->with('success', 'Employee deleted successfully.');
         }
@@ -165,11 +188,11 @@ class EmployeeController extends Controller
             $store = $employee->store_id;
             $role = $employee->emp_role;
             $action =
-                ' <a href="/employee/'.$id.'/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+                ' <a href="/employee/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
             <button onclick="daleteEmployee(' .
                 $employee->id .
                 ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
-            array_push($result['data'], [$num, $name,$company,$store,$role, $action]);
+            array_push($result['data'], [$num, $name, $company, $store, $role, $action]);
             $num++;
         }
         echo json_encode($result);

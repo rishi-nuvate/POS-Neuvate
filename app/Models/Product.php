@@ -50,4 +50,8 @@ class Product extends Model
         $this->hasMany(PurchaseOrderItem::class);
     }
 
+    public function barcode(){
+        return $this->belongsTo(Barcode::class,'id','product_id');
+    }
+
 }

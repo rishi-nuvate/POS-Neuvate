@@ -13,16 +13,12 @@
             <li class="breadcrumb-item active">Add</li>
         </ol>
     </nav>
-{{--    <h4 class="py-3 mb-4">--}}
-{{--        <span class="text-muted fw-light float-left">Master / Brand /</span> Add--}}
-{{--    </h4>--}}
+
     <!-- Invoice List Widget -->
 
     <div class="card">
-        {{-- <h5 class="card-header">Applicable Categories</h5> --}}
         <div class="card-body">
             <div class="content">
-
 
                 <div class="content-header mb-4">
                     <h3 class="mb-1">Add Brand</h3>

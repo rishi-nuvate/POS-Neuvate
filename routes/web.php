@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\LoginRegistrationController;
 use App\Http\Controllers\authenticate\AuthLogin;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\CategoryMasterController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
 use App\Http\Controllers\centralWarehouse\GRNMasterController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\centralWarehouse\PackMasterController;
 use App\Http\Controllers\centralWarehouse\PickMasterController;
 use App\Http\Controllers\centralWarehouse\ShelfMasterController;
 use App\Http\Controllers\centralWarehouse\StockInMasterController;
+use App\Http\Controllers\CentralWarehouseController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\master\basicInfo\BrandController;
@@ -99,7 +101,7 @@ Route::middleware('auth:web')->group(callback: function () {
 
     // Tags Master
     Route::resource('tags', TagsController::class);
-    Route::post('/tags/{tag}', [TagsController::class, 'destroy']);
+    Route::post('/tagsDelete/{tag}', [TagsController::class, 'destroy']);
     Route::post('/tagsData/', [TagsController::class, 'getTagData'])->name('getTagData');
 
 // Brand Master
@@ -134,7 +136,7 @@ Route::middleware('auth:web')->group(callback: function () {
 
 
 // Company
-    Route::resource('company', CompanyController::class);
+    Route::resource('/company', CompanyController::class);
     Route::post('/company/{company}', [CompanyController::class, 'destroy']);
     Route::post('/getCompanyAddress', [CompanyController::class, 'getCompanyAddress'])->name('getCompanyAddress');
 
@@ -142,6 +144,9 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/shipAddressByCompany', [CompanyShipAddressController::class, 'shipAddressByCompany'])->name('shipAddressByCompany');
     Route::post('/getShippingAddress', [CompanyShipAddressController::class, 'getShippingAddress'])->name('getShippingAddress');
 
+//    Master Central Warehouse
+
+    Route::resource('/centralWarehouseMaster',CentralWarehouseController::class);
 
 //    Vendor
     Route::resource('vendors', VenderController::class);
@@ -160,6 +165,8 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('employee', EmployeeController::class);
     Route::post('/employeeData', [EmployeeController::class, 'getEmployeeData'])->name('getEmployeeData');
     Route::post('/employee/{employee}', [EmployeeController::class, 'destroy']);
+
+
 
     //Inventory Master
     Route::resource('/storeInventory', InventoryMasterController::class);
@@ -185,6 +192,13 @@ Route::middleware('auth:web')->group(callback: function () {
 
 
 //    Barcode
+
+    Route::resource('barcode', BarcodeController::class);
+    Route::post('productData', [BarcodeController::class,'productData'])->name('productData');
+    Route::post('productVariantBarcode', [BarcodeController::class,'productVariantBarcode'])->name('productVariantBarcode');
+    Route::post('getBarcode', [BarcodeController::class,'getBarcode'])->name('getBarcode');
+
+
     Route::get('/supplyChain/barcode/create', [BarcodeMasterController::class, 'create'])->name('create-barcode');
 
 

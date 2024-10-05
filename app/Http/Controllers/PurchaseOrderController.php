@@ -13,6 +13,7 @@ use App\Models\PurchaseOrderItem;
 use App\Models\PurchaseOrderItemParameter;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseOrderController extends Controller
 {
@@ -49,52 +50,60 @@ class PurchaseOrderController extends Controller
     public function store(StorePurchaseOrderRequest $request)
     {
 
-//        dd($request->all());
+        dd($request->all());
         $count = count($request->unitPrice);
         $sku_count = count($request->sku);
 
-        if (!empty($request->vendor) && !empty($request->company) && !empty($request->shippingAddress)) {
-            $Po = new PurchaseOrder([
-                'user_id' => $request->vendor,
-                'company_id' => $request->company,
-                'company_shipping_id' => $request->shippingAddress,
-            ]);
+        DB::beginTransaction();
+//        try {
+            if (!empty($request->vendor) && !empty($request->company) && !empty($request->shippingAddress)) {
+                $Po = new PurchaseOrder([
+                    'user_id' => $request->vendor,
+                    'company_id' => $request->company,
+                    'company_shipping_id' => $request->shippingAddress,
+                ]);
 
-            if ($Po->save()) {
-                for ($i = 0; $i < $count; $i++) {
-                    $PoItems = new PurchaseOrderItem([
-                        'po_id' => $Po->id,
-                        'product_id' => $request->product_id[$i],
-                        'product_description' => $request->description[$i],
-                        'unit_price' => $request->unitPrice[$i],
-                        'tax_amount' => $request->tax[$i],
-                        'total_quantity' => $request->TotalQty[$i],
-                    ]);
+                if ($Po->save()) {
+                    for ($i = 0; $i < $count; $i++) {
+                        $PoItems = new PurchaseOrderItem([
+                            'po_id' => $Po->id,
+                            'product_id' => $request->product_id[$i],
+                            'product_description' => $request->description[$i],
+                            'unit_price' => $request->unitPrice[$i],
+                            'tax_amount' => $request->tax[$i],
+                            'total_quantity' => $request->TotalQty[$i],
+                        ]);
 
-                    if ($PoItems->save()) {
-                        for ($j = 0; $j < $sku_count; $j++) {
-                            $PoItemParameters = new PurchaseOrderItemParameter([
-                                'po_id' => $Po->id,
-                                'po_item_id' => $PoItems->id,
-                                'item_sku' => $request->sku[$j],
-                                'item_color' => $request->color[$j],
-                                'item_size' => $request->size[$j],
-                                'item_qty' => $request->quantity[$j],
-                            ]);
-                            if (!$PoItemParameters->save()) {
-                                return redirect()->route('po.create')->withErrors('Error saving POItemParameters.');
+                        if ($PoItems->save()) {
+                            for ($j = 0; $j < $sku_count; $j++) {
+                                $PoItemParameters = new PurchaseOrderItemParameter([
+                                    'po_id' => $Po->id,
+                                    'po_item_id' => $PoItems->id,
+                                    'item_sku' => $request->sku[$j],
+                                    'item_color' => $request->color[$j],
+                                    'item_size' => $request->size[$j],
+                                    'item_qty' => $request->quantity[$j],
+                                ]);
+                                if (!$PoItemParameters->save()) {
+                                    return redirect()->route('po.create')->withErrors('Error saving POItemParameters.');
+                                }
                             }
+                        } else {
+                            return redirect()->route('po.create')->withErrors('Error saving POItems.');
                         }
-                    } else {
-                        return redirect()->route('po.create')->withErrors('Error saving POItems.');
                     }
+                    DB::commit();
+
+                    return redirect()->route('po.create')->withSuccess('Successfully Saved');
+                } else {
+                    return redirect()->route('po.create')->withErrors('Error saving PO.');
                 }
-                return redirect()->route('po.create')->withSuccess('Successfully Saved');
-            } else {
-                return redirect()->route('po.create')->withErrors('Error saving PO.');
             }
-        }
-        return redirect()->route('po.create')->withSuccess('Validation Failed');
+//        } catch (\Exception $e) {
+//            DB::rollback();
+//            return redirect()->route('po.create')->withErrors('Error saving PO.');
+//        }
+//        return redirect()->route('po.create')->withSuccess('Validation Failed');
     }
 
     /**

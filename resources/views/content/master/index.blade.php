@@ -61,10 +61,10 @@
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Central Warehouse
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('centralWarehouseMaster.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('centralWarehouseMaster.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     List</a>
                             </div>

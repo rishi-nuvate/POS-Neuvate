@@ -139,7 +139,7 @@ class CategoryController extends Controller
     public function getCategory()
     {
         $categories = Category::get();
-        dd($categories);
+//        dd($categories);
         return response()->json($categories);
 
     }

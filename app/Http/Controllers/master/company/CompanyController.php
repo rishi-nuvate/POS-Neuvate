@@ -43,36 +43,53 @@ class CompanyController extends Controller
             DB::beginTransaction();
 
             try {
-                $company = new Company();
-                $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode']));
-                $company->save();
-                $id = $company->id;
-                if (!empty($request->ShipCompName)) {
-                    foreach ($request->ShipCompName as $key => $company) {
-//                        dd($company);
-                        $shipping = new CompanyShipAddress([
-                            'company_id' => $id,
-                            'ShipCompName' => $request->ShipCompName[$key],
-                            'ShipPersonNo' => $request->ShipPersonNo[$key],
-                            'ShipPersonEmail' => $request->ShipPersonEmail[$key],
-                            'ShipGstNo' => $request->ShipGstNo[$key],
-                            'ShipAddLine1' => $request->ShipAddLine1[$key],
-                            'ShipAddLine2' => $request->ShipAddLine2[$key],
-                            'ShipCity' => $request->ShipCity[$key],
-                            'ShipState' => $request->ShipState[$key],
-                            'ShipPinCode' => $request->ShipPinCode[$key],
-                        ]);
-                        $shipping->save();
-                    }
+            $company = new Company();
+            $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode', 'PanGstNo']));
+            $company->save();
+            if ($request->PanGstFile) {
+
+                $name = $request->PanGstFile->getClientOriginalName();
+                $destination_path = public_path('/AllCompany/pan_gst/' . $company->id);
+
+                if (!is_dir(public_path('/AllCompany/pan_gst'))) {
+                    mkdir(public_path('/AllCompany/pan_gst'), 0755, true);
                 }
+                $request->PanGstFile->move($destination_path, $name);
+
+                $company->update([
+                    'PanGstFile' => $name,
+                ]);
+            }
 
 
-                DB::commit();
+//            $id = $company->id;
+//            if (!empty($request->ShipCompName)) {
+//                foreach ($request->ShipCompName as $key => $company) {
+////                        dd($company);
+//                    $shipping = new CompanyShipAddress([
+//                        'company_id' => $id,
+//                        'ShipCompName' => $request->ShipCompName[$key],
+//                        'ShipPersonNo' => $request->ShipPersonNo[$key],
+//                        'ShipPersonEmail' => $request->ShipPersonEmail[$key],
+//                        'ShipGstNo' => $request->ShipGstNo[$key],
+//                        'ShipAddLine1' => $request->ShipAddLine1[$key],
+//                        'ShipAddLine2' => $request->ShipAddLine2[$key],
+//                        'ShipCity' => $request->ShipCity[$key],
+//                        'ShipState' => $request->ShipState[$key],
+//                        'ShipPinCode' => $request->ShipPinCode[$key],
+//                    ]);
+//                    $shipping->save();
+//                }
+//            }
+
+
+            DB::commit();
 //                dd($company);
-                return redirect()->route('company.index')->with('success', 'successfully created');
+            return redirect()->route('company.index')->with('success', 'successfully created');
+
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect()->back()->with('error', $e->getMessage());
+                return redirect()->back()->withErrors($e->getMessage());
             }
         }
     }
@@ -109,41 +126,41 @@ class CompanyController extends Controller
                 $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode']));
                 $company->save();
 
-                if (!empty($request->shipId)) {
-                    foreach ($request->shipId as $key => $value) {
-                        $shipping = CompanyShipAddress::where('id', $value)->first();
-                        $shipping->update([
-                            'ShipCompName' => $request->ShipCompName[$key],
-                            'ShipPersonNo' => $request->ShipPersonNo[$key],
-                            'ShipPersonEmail' => $request->ShipPersonEmail[$key],
-                            'ShipGstNo' => $request->ShipGstNo[$key],
-                            'ShipAddLine1' => $request->ShipAddLine1[$key],
-                            'ShipAddLine2' => $request->ShipAddLine2[$key],
-                            'ShipCity' => $request->ShipCity[$key],
-                            'ShipState' => $request->ShipState[$key],
-                            'ShipPinCode' => $request->ShipPinCode[$key],
-                        ]);
-                    }
-                }
+//                if (!empty($request->shipId)) {
+//                    foreach ($request->shipId as $key => $value) {
+//                        $shipping = CompanyShipAddress::where('id', $value)->first();
+//                        $shipping->update([
+//                            'ShipCompName' => $request->ShipCompName[$key],
+//                            'ShipPersonNo' => $request->ShipPersonNo[$key],
+//                            'ShipPersonEmail' => $request->ShipPersonEmail[$key],
+//                            'ShipGstNo' => $request->ShipGstNo[$key],
+//                            'ShipAddLine1' => $request->ShipAddLine1[$key],
+//                            'ShipAddLine2' => $request->ShipAddLine2[$key],
+//                            'ShipCity' => $request->ShipCity[$key],
+//                            'ShipState' => $request->ShipState[$key],
+//                            'ShipPinCode' => $request->ShipPinCode[$key],
+//                        ]);
+//                    }
+//                }
 
-                if (!empty($request->NewShipCompName)) {
-                    foreach ($request->NewShipCompName as $key => $company) {
-//                        dd($company);
-                        $shipping = new CompanyShipAddress([
-                            'company_id' => $id,
-                            'ShipCompName' => $request->NewShipCompName[$key],
-                            'ShipPersonNo' => $request->NewShipPersonNo[$key],
-                            'ShipPersonEmail' => $request->NewShipPersonEmail[$key],
-                            'ShipGstNo' => $request->NewShipGstNo[$key],
-                            'ShipAddLine1' => $request->NewShipAddLine1[$key],
-                            'ShipAddLine2' => $request->NewShipAddLine2[$key],
-                            'ShipCity' => $request->NewShipCity[$key],
-                            'ShipState' => $request->NewShipState[$key],
-                            'ShipPinCode' => $request->NewShipPinCode[$key],
-                        ]);
-                        $shipping->save();
-                    }
-                }
+//                if (!empty($request->NewShipCompName)) {
+//                    foreach ($request->NewShipCompName as $key => $company) {
+////                        dd($company);
+//                        $shipping = new CompanyShipAddress([
+//                            'company_id' => $id,
+//                            'ShipCompName' => $request->NewShipCompName[$key],
+//                            'ShipPersonNo' => $request->NewShipPersonNo[$key],
+//                            'ShipPersonEmail' => $request->NewShipPersonEmail[$key],
+//                            'ShipGstNo' => $request->NewShipGstNo[$key],
+//                            'ShipAddLine1' => $request->NewShipAddLine1[$key],
+//                            'ShipAddLine2' => $request->NewShipAddLine2[$key],
+//                            'ShipCity' => $request->NewShipCity[$key],
+//                            'ShipState' => $request->NewShipState[$key],
+//                            'ShipPinCode' => $request->NewShipPinCode[$key],
+//                        ]);
+//                        $shipping->save();
+//                    }
+//                }
 
                 DB::commit();
 
@@ -173,7 +190,7 @@ class CompanyController extends Controller
 
     public function getCompanyAddress(Request $request)
     {
-        $company_id =  $request->input('company_id');
+        $company_id = $request->input('company_id');
         $companyAdd = Company::where('id', $company_id)->first();
 //        dd($companyAdd);
 

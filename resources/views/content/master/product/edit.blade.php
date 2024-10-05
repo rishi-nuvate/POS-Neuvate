@@ -374,13 +374,25 @@
                                                 value="{{$product->sleeve->id ?? ''}}">{{$product->sleeve->sleeve_name ?? ''}}</option>
                                         </select>
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Fashion</label>
+                                        <input type="text" name="fashion_id" id="fashion_id" class="form-control">
+                                    </div>
 
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Pattern</label>
+                                        <input type="text" name="pattern_id" id="pattern_id" class="form-control" >
+
+                                    </div>
                                 </div>
                             </div>
                             <!-- /Organize Card -->
 
                         </div>
                         <!-- /Second column -->
+                        <div class="d-flex align-content-center flex-wrap gap-3">
+                            <button type="submit" class="btn btn-primary">Save Product</button>
+                        </div>
                     </div>
                 </form>
 

@@ -15,4 +15,8 @@ class Company extends Model
     public function ShipAdd(){
         return $this->hasMany(CompanyShipAddress::class);
     }
+
+    public function warehouse(){
+        return $this->belongsTo(CentralWarehouse::class,'id','company_id');
+    }
 }

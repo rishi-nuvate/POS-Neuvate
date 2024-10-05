@@ -62,7 +62,6 @@ class TagsController extends Controller
      */
     public function update(UpdateTagsRequest $request, Tags $tag)
     {
-//        dd($tag);
         $tag->update($request->validated());
 //
         return redirect()->route('tags.index')->with('success', 'Tags updated.');
@@ -77,6 +76,7 @@ class TagsController extends Controller
         if(Gate::allows('delete', $tags)){
             $tags->delete();
         }
+
         return redirect()->route('tags.index')->with('success', 'Tags Deleted.');
     }
 

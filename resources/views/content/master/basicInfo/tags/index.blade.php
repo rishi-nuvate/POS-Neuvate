@@ -69,7 +69,7 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-                        url: '/tags/' + tagId,
+                        url: '/tagsDelete/' + tagId,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

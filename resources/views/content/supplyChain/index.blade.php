@@ -50,10 +50,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Barcodes
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{route('create-barcode')}}"><i
+                                <a class="dropdown-item" href="{{route('barcode.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('barcode.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     List</a>
                             </div>

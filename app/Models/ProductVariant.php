@@ -11,4 +11,9 @@ class ProductVariant extends Model
     public $guarded = [];
 
     use HasFactory;
+
+    function barcodeItem()
+    {
+        return $this->belongsTo(BarcodeItem::class, 'id','sku_id');
+    }
 }

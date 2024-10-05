@@ -52,7 +52,6 @@ class ProductController extends Controller
 
 //dd($request->all());
 
-
             try {
 
                 if (!empty($request->tag_id)) {
@@ -82,6 +81,17 @@ class ProductController extends Controller
                 if (!empty($request->productColor)) {
                     foreach ($request->productColor as $key => $color) {
                         if (!empty($color['color'])) {
+
+//                            if (!empty($color['media'])) {
+//
+//                                $name = $color['media']->getClientOriginalName();
+//                                $destination_path = public_path('/product / ' . $product->id . ' /' . $color['color'] . '/');
+//
+//                                if (!is_dir(public_path('/gallery/portfolio'))) {
+//                                    mkdir(public_path('/gallery/portfolio'), 0755, true);
+//                                }
+//                                $color['media']->move($destination_path, $name);
+//                            }
                             foreach ($request->optionValueSize[$key] as $size) {
                                 if (!empty($size['size'])) {
                                     $variant = new ProductVariant([
@@ -89,6 +99,7 @@ class ProductController extends Controller
                                         'color' => $color['color'],
                                         'size' => $size['size'],
                                         'sku' => $size['sku'],
+//                                        'image' => $name ?? null,
                                     ]);
                                     $variant->save();
                                 }
@@ -112,7 +123,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public
+    function show(Product $product)
     {
         //
     }
@@ -120,7 +132,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public
+    function edit(Product $product)
     {
         $categories = Category::all();
         $tags = Tags::all();
@@ -134,7 +147,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public
+    function update(UpdateProductRequest $request, Product $product)
     {
 
 //        $product->update([
@@ -218,7 +232,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public
+    function destroy(Product $product)
     {
         if (Gate::allows('delete', $product)) {
             $product->delete();
@@ -230,7 +245,8 @@ class ProductController extends Controller
 
     }
 
-    public function getProduct()
+    public
+    function getProduct()
     {
         $products = Product::with('category', 'subCategory')->get();
 
@@ -280,7 +296,8 @@ class ProductController extends Controller
 
     }
 
-    public function deleteVariant(Request $request)
+    public
+    function deleteVariant(Request $request)
     {
         $color = $request->input('color');
         $productId = $request->input('productId');

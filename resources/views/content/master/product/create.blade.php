@@ -73,7 +73,7 @@
                                             id="product_name"
                                             placeholder="Product title"
                                             name="product_name"
-                                            aria-label="Product title"/>
+                                            aria-label="Product title" required/>
                                     </div>
                                     <div class="row mb-3 col-md-12">
                                         <div class="col-md-4 mt-1">
@@ -84,7 +84,7 @@
                                                 id="product_code"
                                                 placeholder="Product Code"
                                                 name="product_code"
-                                                aria-label="productCode"/>
+                                                aria-label="productCode" required/>
                                         </div>
                                         <div class="col-md-4 mt-1">
                                             <label class="form-label" for="hsn_code">HSN Code</label>
@@ -94,7 +94,7 @@
                                                 id="hsn_code"
                                                 placeholder="Product HSN Code"
                                                 name="hsn_code"
-                                                aria-label="productHSNCode"/>
+                                                aria-label="productHSNCode" required/>
                                         </div>
                                         <div class="col-md-4 mt-1">
                                             <label class="form-label" for="material">Material</label>
@@ -104,7 +104,7 @@
                                                 id="material"
                                                 placeholder="Material Name"
                                                 name="material"
-                                                aria-label="Product title"/>
+                                                aria-label="Product title" required/>
                                         </div>
 
                                     </div>
@@ -198,7 +198,7 @@
                                                 id="ecommerce-cost_price"
                                                 placeholder="Price"
                                                 name="cost_price"
-                                                aria-label="Product price"/>
+                                                aria-label="Product price" required/>
                                         </div>
                                         <!-- Discounted Price -->
                                         <div class=" col-md-4 mb-3">
@@ -210,7 +210,7 @@
                                                 id="ecommerce-sell_price"
                                                 placeholder="Discounted Price"
                                                 name="sell_price"
-                                                aria-label="Product discounted price"/>
+                                                aria-label="Product discounted price" required/>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label" for="ecommerce-product-mrp-price">MRP
@@ -221,7 +221,7 @@
                                                 id="product_mrp"
                                                 placeholder="Mrp Price"
                                                 name="product_mrp"
-                                                aria-label="Product mrp price"/>
+                                                aria-label="Product mrp price" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <select name="status" class="select2 form-select">
+                                        <select name="status" class="select2 form-select" required>
                                             <option value="">select umo</option>
                                             <option value="0">Active</option>
                                             <option value="1">Deactive</option>
@@ -257,7 +257,7 @@
                                         <label class="form-label mb-1" for="productCategory">Category</label>
                                         <select onchange="getSubCategoriesData()"
                                                 class="select2 form-select" id="productCategory"
-                                                data-placeholder="Select Category" name="cat_id">
+                                                data-placeholder="Select Category" name="cat_id" required>
                                             <option value="">Select Category</option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->Name}}</option>
@@ -269,7 +269,7 @@
                                         <label class="form-label mb-1" for="sub_cat_id">Sub Category </label>
                                         <select id="subCategory" name="sub_cat_id" onchange="getSleeveFit()"
                                                 class="select2 form-select"
-                                                data-placeholder="Sub Category">
+                                                data-placeholder="Sub Category" required>
                                             <option value="">Collection</option>
                                         </select>
                                     </div>
@@ -277,12 +277,10 @@
                                     <div class="mb-3">
                                         <label for="ecommerce-product-tags" class="form-label mb-1">Tags</label>
                                         <select name="tag_id[]" class="select2 form-select" id="tag_id" multiple>
-                                            <optgroup label="Alaskan/Hawaiian Time Zone">
                                                 <option value="">select Tag</option>
                                                 @foreach($tags as $tag)
                                                     <option value="{{$tag->id}}">{{$tag->name}}</option>
                                                 @endforeach
-                                            </optgroup>
                                         </select>
                                     </div>
                                     {{--Season--}}
@@ -325,6 +323,17 @@
                                             @endforeach
                                         </select>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Fashion</label>
+                                        <input type="text" name="fashion_id" id="fashion_id" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="select2Multiple" class="form-label">Pattern</label>
+                                        <input type="text" name="pattern_id" id="pattern_id" class="form-control" >
+
+                                    </div>
                                 </div>
                             </div>
                             <!-- /Organize Card -->
@@ -345,10 +354,6 @@
 @endsection
 
 @section('page-script')
-    {{--    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>--}}
-    {{--    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>--}}
-    {{--    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>--}}
-    {{--    <script src="{{ asset('assets/js/app-ecommerce-product-add.js') }}"></script>--}}
 
 
     <script>

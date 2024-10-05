@@ -1,6 +1,6 @@
 @extends('layouts.layoutMaster')
 
-@section('title', 'List-Fit')
+@section('title', 'List-Brands')
 
 @section('content')
 
@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active">Fit</li>
+            <li class="breadcrumb-item active">Brand</li>
             <li class="breadcrumb-item active">View</li>
         </ol>
     </nav>
@@ -21,12 +21,31 @@
                 <thead>
                 <tr>
                     <th>SR No.</th>
-                    <th>Category</th>
-                    <th>Sub Category</th>
-                    <th>Fit Name</th>
+                    <th>Company Name</th>
+                    <th>Warehouse Name</th>
+                    <th>Contact Person Name</th>
+                    <th>Contact Person Email</th>
+                    <th>City</th>
                     <th>Action</th>
                 </tr>
                 </thead>
+                @php
+                    $num = 1 @endphp
+
+                @foreach($warehouses as $warehouse)
+                    <tr>
+                        <th>{{$num}}</th>
+                        <th>{{$warehouse->company->CompanyName}}</th>
+                        <th>{{$warehouse->warehouse_name}}</th>
+                        <th>{{$warehouse->contact_person_name}}</th>
+                        <th>{{$warehouse->contact_person_email}}</th>
+                        <th>{{$warehouse->city}}</th>
+                        <th><a href="" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+                            <button onclick="deleteBlog({{$warehouse->id}})" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button></th>
+                    </tr>
+                    @php
+                        $num++ @endphp
+                @endforeach
             </table>
         </div>
     </div>
@@ -36,7 +55,7 @@
 @section('page-script')
     <script>
 
-        function deleteFit(fitId) {
+        function deleteBlog(blogId) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -48,12 +67,12 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-                        url: '/deleteFit/' + fitId,
+                        url: '/brands/' + blogId,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: {
-                            fitId: fitId,
+                            blogId: blogId,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function (resultData) {
@@ -67,36 +86,16 @@
             });
         }
 
-        window.onload = function () {
-            getFitData();
-        }
+        $('#datatable-list').DataTable({
+            autoWidth: false,
+            lengthMenu: [
+                [10, 20, 100, 500],
+                [10, 20, 100, "All"]
+            ],
 
-        function getFitData() {
-            $("#overlay").fadeIn(100);
-            $('#datatable-list').DataTable({
-                autoWidth: false,
-                lengthMenu: [
-                    [10, 20, 100, 500],
-                    [10, 20, 100, "All"]
-                ],
-
-                order: [
-                    [0, 'asc']
-                ],
-                "ajax": {
-                    "url": "{{ route('getFitData') }}",
-                    "type": "POST",
-                    "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
-                    "data": {
-                        "_token": "{{ csrf_token() }}"
-                    },
-                },
-
-                "initComplete": function (setting, json) {
-                    $("#overlay").fadeOut(100);
-                },
-                bDestroy: true
-            });
-        }
+            order: [
+                [0, 'asc']
+            ],
+        });
     </script>
 @endsection
