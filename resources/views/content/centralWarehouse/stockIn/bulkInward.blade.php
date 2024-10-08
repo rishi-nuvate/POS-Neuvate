@@ -192,11 +192,9 @@
         function addProduct() {
             var num = document.getElementById('number').value;
             num++;
-            const productOptions = `
-        @foreach($products as $product)
-            <option value="{{$product->id}}">{{$product->product_name}}</option>
-                                        @endforeach
-            `;
+            const productOptions = ` @foreach($products as $product)
+                                        <option value="{{$product->id}}">{{$product->product_name}}</option>
+                                     @endforeach `;
 
             $('#productItemContainer').append('' +
                 `<div class="row " id="productItem_${num}">
