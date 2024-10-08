@@ -31,7 +31,16 @@
                         {{-- Example --}}
                         {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star', 'defaultValue', 'required')}} --}}
 
-                        {!! textInputField('col-md-3 mt-3', 'Barcode', 'text', 'barcode', 'barcode', 'barcode', '', '', '','') !!}
+
+                        <div class="col-md-3">
+                            <label for="Scan">Scan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Item Barcode scan"
+                                       aria-label="Item" aria-describedby="button-addon2" />
+                                <button class="btn btn-outline-primary" type="button" id="button-addon2"><i
+                                        class="ti ti-scan mx-2 ti-sm"></i></button>
+                            </div>
+                        </div>
 
                     </div>
 

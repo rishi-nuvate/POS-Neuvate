@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\supplyChain;
 
-use App\Models\BarcodeItem;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBarcodeItemRequest;
 use App\Http\Requests\UpdateBarcodeItemRequest;
+use App\Models\BarcodeItem;
 
 class BarcodeItemController extends Controller
 {

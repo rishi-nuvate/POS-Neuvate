@@ -129,6 +129,12 @@
 
                                 {!! textInputField('col-md-4', 'PinCode', 'number', 'PinCode', 'PinCode', 'PinCode', '*', 'form-control',old('PinCode'),'required','') !!}
 
+                                {!! textInputField('col-md-4', 'Customer Care Number', 'number', 'customer_care_num', 'customer_care_num', 'customer_care_num', '*', 'form-control',old('customer_care_num'),'required','') !!}
+
+                                {!! textInputField('col-md-4', 'Customer Care Email', 'email', 'customer_care_email', 'customer_care_email', 'customer_care_email', '*', 'form-control',old('customer_care_email'),'required','') !!}
+
+
+
                             </div>
                         </div>
                     </div>

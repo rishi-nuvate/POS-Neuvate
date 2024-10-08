@@ -4,7 +4,6 @@
 use App\Http\Controllers\Auth\LoginRegistrationController;
 use App\Http\Controllers\authenticate\AuthLogin;
 use App\Http\Controllers\BalanceController;
-use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\CategoryMasterController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
 use App\Http\Controllers\centralWarehouse\GRNMasterController;
@@ -40,9 +39,9 @@ use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\storeInventory\StockInController;
+use App\Http\Controllers\supplyChain\BarcodeController;
 use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
-use App\Http\Controllers\supplyChain\POMasterController;
 use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use Illuminate\Support\Facades\Artisan;
@@ -146,7 +145,8 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Master Central Warehouse
 
-    Route::resource('/centralWarehouseMaster',CentralWarehouseController::class);
+    Route::resource('centralWarehouse',CentralWarehouseController::class);
+    Route::post('/deleteCentralWarehouse/{centralWarehouse}',[CentralWarehouseController::class,'destroy']);
 
 //    Vendor
     Route::resource('vendors', VenderController::class);
@@ -197,13 +197,16 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('productData', [BarcodeController::class,'productData'])->name('productData');
     Route::post('productVariantBarcode', [BarcodeController::class,'productVariantBarcode'])->name('productVariantBarcode');
     Route::post('getBarcode', [BarcodeController::class,'getBarcode'])->name('getBarcode');
+    Route::post('/deleteBarcode/{barcode}', [BarcodeController::class,'destroy']);
+
+    Route::get('/generateBarcode', [BarcodeController::class,'generateBarcode']);
 
 
     Route::get('/supplyChain/barcode/create', [BarcodeMasterController::class, 'create'])->name('create-barcode');
 
 
     //Central Warehouse
-    Route::resource('/centralWarehouse', CentralWarehouseMasterController::class);
+    Route::resource('centralWarehouseMaster', CentralWarehouseMasterController::class);
 
 //    GRN
     Route::get('/centralWarehouse/grn/create', [GRNMasterController::class, 'create'])->name('create-grn');
@@ -211,6 +214,8 @@ Route::middleware('auth:web')->group(callback: function () {
 //Stock In
     Route::get('/centralWarehouse/stockIn/bulkInward', [StockInMasterController::class, 'bulkInward'])->name('bulkInward');
     Route::get('/centralWarehouse/stockIn/singleInward', [StockInMasterController::class, 'singleInward'])->name('singleInward');
+    Route::post('/centralWarehouse/stockIn/getAllPOItem', [StockInMasterController::class, 'getAllPOItem'])->name('getAllPOItem');
+    Route::post('/centralWarehouse/getProductSku', [StockInMasterController::class, 'getProductSku'])->name('getProductSku');
 
 //Shelf
     Route::get('/centralWarehouse/shelf/create', [ShelfMasterController::class, 'create'])->name('create-shelf');

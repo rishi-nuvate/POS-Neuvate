@@ -358,11 +358,12 @@
                                     </div>
 
                                     {{--Fit--}}
+{{--                                    {{dd($product->fit_id)}}--}}
                                     <div class="mb-3">
                                         <label for="select2Multiple" class="form-label">Fit</label>
                                         <select name="fit_id" id="fit_id" class="select2 form-select">
                                             <option value="">select Fit</option>
-                                            <option value="{{$product->fit->id ?? ''}}">{{$product->fit->fit_name ?? ''}}</option>
+                                            <option value="{{$product->fit->id ?? ''}}" selected>{{$product->fit->fit_name ?? ''}}</option>
                                         </select>
                                     </div>
                                     {{--Sleeve--}}
@@ -371,7 +372,7 @@
                                         <select name="sleeve_id" id="sleeve_id" class="select2 form-select">
                                             <option value="">select Sleeve</option>
                                             <option
-                                                value="{{$product->sleeve->id ?? ''}}">{{$product->sleeve->sleeve_name ?? ''}}</option>
+                                                value="{{$product->sleeve->id ?? ''}}" selected>{{$product->sleeve->sleeve_name ?? ''}}</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">

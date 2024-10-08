@@ -20,6 +20,6 @@ class PurchaseOrderItemParameter extends Model
     }
 
     public function purchaseOrderItem(){
-        return $this->hasMany(PurchaseOrderItem::class);
+        return $this->hasMany(PurchaseOrderItem::class,'po_item_id','id');
     }
 }

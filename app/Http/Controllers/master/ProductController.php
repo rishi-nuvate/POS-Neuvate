@@ -135,11 +135,17 @@ class ProductController extends Controller
     public
     function edit(Product $product)
     {
+
+//        dd($product);
+
         $categories = Category::all();
         $tags = Tags::all();
         $seasons = Season::all();
         $brands = Brand::all();
-        $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant', 'fit', 'sleeve')->first();
+        $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant', 'fit', 'sleeve')->where('id',$product->id)->first();
+
+//        dd($product);
+
         return view('content.master.product.edit', compact('product', 'categories', 'tags', 'seasons', 'brands'));
 
     }

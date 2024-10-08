@@ -20,9 +20,9 @@
     <nav aria-label="breadcrumb" style="font-size: 20px">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ url('/master') }}">Master</a>
+                <a href="{{ url('/supplyChain') }}">Supply Chain</a>
             </li>
-            <li class="breadcrumb-item active">Product</li>
+            <li class="breadcrumb-item active">Barcode</li>
             <li class="breadcrumb-item active">Add</li>
         </ol>
     </nav>
@@ -36,11 +36,10 @@
                 <tr>
                     <th>SR No.</th>
                     <th>Product Name</th>
-                    <th>Product Code</th>
-                    <th>Category</th>
-                    <th>Sub Category</th>
-                    <th>Tags</th>
-                    <th>Status</th>
+                    <th>Packing Date</th>
+                    <th>SKU</th>
+                    <th>Total Quantity</th>
+                    <th>Barcode Print</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -90,35 +89,35 @@
         }
 
 
-        {{--function deleteProduct(productId) {--}}
-        {{--    Swal.fire({--}}
-        {{--        title: "Are you sure?",--}}
-        {{--        text: "You won't be able to revert this!",--}}
-        {{--        icon: "warning",--}}
-        {{--        showCancelButton: false,--}}
-        {{--        confirmButtonText: "Yes, Approve it!"--}}
-        {{--    }).then((result) => {--}}
-        {{--        if (result.isConfirmed) {--}}
-        {{--            $("#overlay").fadeIn(100);--}}
-        {{--            $.ajax({--}}
-        {{--                type: 'POST',--}}
-        {{--                url: '/deleteProduct/' + productId,--}}
-        {{--                headers: {--}}
-        {{--                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-        {{--                },--}}
-        {{--                data: {--}}
-        {{--                    blogId: blogId,--}}
-        {{--                    "_token": "<?php echo e(csrf_token()); ?>"--}}
-        {{--                },--}}
-        {{--                success: function (resultData) {--}}
-        {{--                    Swal.fire('Done', 'Successfully! Done', 'success').then(() => {--}}
-        {{--                        location.reload();--}}
-        {{--                        $("#overlay").fadeOut(100);--}}
-        {{--                    });--}}
-        {{--                }--}}
-        {{--            });--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--}--}}
+        function deleteBarcode(barcodeId) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonText: "Yes, Approve it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#overlay").fadeIn(100);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/deleteBarcode/' + barcodeId,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            barcodeId: barcodeId,
+                            "_token": "<?php echo e(csrf_token()); ?>"
+                        },
+                        success: function (resultData) {
+                            Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
+                                location.reload();
+                                $("#overlay").fadeOut(100);
+                            });
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endsection

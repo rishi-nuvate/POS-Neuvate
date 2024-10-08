@@ -44,7 +44,7 @@ class CompanyController extends Controller
 
             try {
             $company = new Company();
-            $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode', 'PanGstNo']));
+            $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode', 'PanGstNo','customer_care_num','customer_care_email']));
             $company->save();
             if ($request->PanGstFile) {
 
@@ -123,7 +123,7 @@ class CompanyController extends Controller
             try {
                 $id = $company->id;
                 $company = Company::find($id); // Assuming you have the company ID
-                $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode']));
+                $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode','customer_care_num','customer_care_email']));
                 $company->save();
 
 //                if (!empty($request->shipId)) {

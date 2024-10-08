@@ -24,7 +24,7 @@
         </ol>
     </nav>
 
-    <form method="post" action="{{route('centralWarehouseMaster.store')}}" enctype="multipart/form-data">
+    <form method="post" action="{{route('centralWarehouse.store')}}" enctype="multipart/form-data">
         @csrf
         <div class="row invoice-add">
             <!-- Invoice Add-->

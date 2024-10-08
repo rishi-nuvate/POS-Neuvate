@@ -29,7 +29,8 @@ class BarcodePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role === "Super Admin";
+
     }
 
     /**
@@ -37,7 +38,8 @@ class BarcodePolicy
      */
     public function update(User $user, Barcode $barcode): bool
     {
-        //
+        return $user->role === "Super Admin";
+
     }
 
     /**
@@ -45,7 +47,8 @@ class BarcodePolicy
      */
     public function delete(User $user, Barcode $barcode): bool
     {
-        //
+        return $user->role === "Super Admin";
+
     }
 
     /**

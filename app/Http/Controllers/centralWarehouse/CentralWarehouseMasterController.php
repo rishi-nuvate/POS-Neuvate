@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\centralWarehouse;
 
 use App\Http\Controllers\Controller;
+use App\Models\CentralWarehouse;
 use Illuminate\Http\Request;
 
 class CentralWarehouseMasterController extends Controller
@@ -45,7 +46,10 @@ class CentralWarehouseMasterController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $warehouse = CentralWarehouse::with('company')->where('id', $id)->first();
+
+        dd($warehouse);
+        return view('content.centralWarehouse.edit', compact('warehouse'));
     }
 
     /**

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Barcode;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreBarcodeRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreBarcodeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('create',Barcode::class);
     }
 
     /**

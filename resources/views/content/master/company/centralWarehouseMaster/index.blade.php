@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/master') }}">Master</a>
             </li>
-            <li class="breadcrumb-item active">Brand</li>
+            <li class="breadcrumb-item active">Central Warehouse</li>
             <li class="breadcrumb-item active">View</li>
         </ol>
     </nav>
@@ -40,8 +40,8 @@
                         <th>{{$warehouse->contact_person_name}}</th>
                         <th>{{$warehouse->contact_person_email}}</th>
                         <th>{{$warehouse->city}}</th>
-                        <th><a href="" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
-                            <button onclick="deleteBlog({{$warehouse->id}})" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button></th>
+                        <th><a href="{{route('centralWarehouse.edit',['centralWarehouse'=>$warehouse->id])}}" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+                            <button onclick="deleteWarehouse({{$warehouse->id}})" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button></th>
                     </tr>
                     @php
                         $num++ @endphp
@@ -55,7 +55,7 @@
 @section('page-script')
     <script>
 
-        function deleteBlog(blogId) {
+        function deleteWarehouse(Id) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -67,12 +67,12 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-                        url: '/brands/' + blogId,
+                        url: '/deleteCentralWarehouse/' + Id,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: {
-                            blogId: blogId,
+                            Id: Id,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function (resultData) {

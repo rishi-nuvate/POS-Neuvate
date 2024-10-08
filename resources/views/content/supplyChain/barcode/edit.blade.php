@@ -24,7 +24,8 @@
                 <div class="content-header mb-4">
                     <h3 class="mb-1">Create Barcode</h3>
                 </div>
-                <form method="post" action="{{route('barcode.store')}}" enctype="multipart/form-data">
+                <form method="post" action="{{route('barcode.update',['barcode'=>$barcode->id])}}" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
 
                     <div class="row">
@@ -35,9 +36,9 @@
                         </div> --}}
 
                         {{-- Example --}}
-                        {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star', 'defaultValue', 'required')}} --}}
+                        {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star', 'defaultValue', 'required','readOnly')}} --}}
 
-                        {!! textInputField('col-md-3 mt-3', 'Pack on Date', 'date', 'pack_date', 'pack_date', 'Description', '', '', '','') !!}
+                        {!! textInputField('col-md-3 mt-3', 'Pack on Date', 'date', 'pack_date', 'pack_date', 'Description', '', '', $barcode->packing_date,'',' readonly') !!}
 
 
                         <div class="col-md-3 mt-3" id="po_number">
@@ -50,13 +51,16 @@
                             </select>
                         </div>
 
+                        <input type="hidden" name="barcode_id" id="barcode_id" value="{{$barcode->id}}">
+
                         <div class="col-md-6 mt-3">
                             <label class="form-label" for="Document">Select Method</label><br>
                             <input type="radio" value="with_po" name="Document" id="Document" class=""
-                                   onchange="productData(this)"/>
+                                   onchange="productData(this)" {{$barcode->po_id != null ? 'checked' : ''}} disabled/>
                             With P.O.
                             <input type="radio" value="without_po" name="Document" id="Document" class="mx-2"
-                                   onchange="productData(this)"/> Without P.O.
+                                   onchange="productData(this)" {{$barcode->po_id == null ? 'checked' : ''}} /> Without
+                            P.O.
                         </div>
 
                     </div>
@@ -106,14 +110,12 @@
                         {{--                        Barcode QTY--}}
                         {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
 
-
                     </div>
 
                     <div class="row" id="without_po" style="display: none">
                         <div class="col-md-6 mb-3">
                             <label for="select2Multiple" class="form-label">Product</label>
-                            <select name="products" id="products" class="select2 form-select"
-                                    onchange="productVariantBarcode()">
+                            <select name="products" id="products" class="select2 form-select" disabled>
                                 <option value="">select Product</option>
 
                             </select>
@@ -142,6 +144,17 @@
     <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
 
     <script>
+
+
+        window.onload = function () {
+            const selectedRadio = document.querySelector('input[name="Document"]:checked');
+
+            if (selectedRadio) {
+                productData(selectedRadio);
+            }
+        }
+
+
         function productData(element) {
 
             console.log(element.value);
@@ -164,30 +177,36 @@
                 dataType: 'json',
                 success: function (response) {
 
+                    var selectedProductId = {{$barcode->product->id}};
+
                     $('#products').empty();
                     $.each(response, function (key, value) {
-                        $('#products').append('<option value="' + value.id + '">' + value
-                            .product_name + '</option>');
+                        $('#products').append('<option value="' + value.id + '" ' + (selectedProductId === value.id ? 'selected' : ' ') + '  >' + value.product_name + '</option>');
                     });
+
+                    productVariantBarcode();
                 }
             });
         }
 
+
         function productVariantBarcode() {
 
             const productId = document.getElementById('products').value;
+            const barcode_id = document.getElementById('barcode_id').value;
             $.ajax({
                 type: 'POST',
                 url: '{{ route('productVariantBarcode') }}',
                 data: {
                     'productId': productId,
-                    'barcodeId': '',
+                    'barcodeId': barcode_id,
                     '_token': "{{ csrf_token() }}",
                 },
                 dataType: 'json',
                 success: function (response) {
 
                     $('#product_variant').empty();
+
                     $.each(response, function (key, value) {
                         $('#product_variant').append('<p class = "my-4"> ' + key + '</p>');
                         $.each(value, function (key, value1) {
@@ -197,17 +216,11 @@
                                 '<input type="hidden" id="date" name="sku_id[]" class="form-control" value="' + value1.id + '"> ' +
                                 '</div> <div class="col-md-4 mt-3"> ' +
                                 '<label class="form-label" for="sku_quantity">Quantity</label> ' +
-                                '<input type="text" id="sku_quantity" name="sku_quantity[]" class="form-control" placeholder="enter quantity" value="" > ' +
+                                '<input type="text" id="sku_quantity" name="sku_quantity[]" class="form-control" placeholder="enter quantity" value="' + value1.sku_quantity + '" > ' +
                                 '</div> </div>');
+
                         });
                     });
-
-                    //
-                    // $.each(response.sleeve, function (key, value) {
-                    //     $('#sleeve_id').append('<option value="' + value.id + '">' + value
-                    //         .sleeve_name + '</option>');
-                    // });
-
                 }
             });
         }

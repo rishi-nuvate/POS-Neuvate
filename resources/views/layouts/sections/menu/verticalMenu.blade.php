@@ -89,7 +89,7 @@
         @endif
         @if (Auth::user()->role == 'Super Admin')
             <li class="menu-item ">
-                <a href="{{ url('/centralWarehouse') }}" class="menu-link">
+                <a href="{{ url('/centralWarehouseMaster') }}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-building-warehouse"></i>
                     <div>Central Warehouse</div>
                 </a>

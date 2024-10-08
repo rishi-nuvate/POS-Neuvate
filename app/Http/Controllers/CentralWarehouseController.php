@@ -6,6 +6,7 @@ use App\Models\CentralWarehouse;
 use App\Http\Requests\StoreCentralWarehouseRequest;
 use App\Http\Requests\UpdateCentralWarehouseRequest;
 use App\Models\Company;
+use Illuminate\Support\Facades\Gate;
 
 class CentralWarehouseController extends Controller
 {
@@ -65,7 +66,14 @@ class CentralWarehouseController extends Controller
      */
     public function edit(CentralWarehouse $centralWarehouse)
     {
-        //
+
+//        dd($centralWarehouse);
+//        $warehouse = CentralWarehouse::with('company')->where('id', $id)->first();
+//
+//        dd($warehouse);
+        $companies = Company::get();
+
+        return view('content.master.company.centralWarehouseMaster.edit', compact('centralWarehouse','companies'));
     }
 
     /**
@@ -73,7 +81,21 @@ class CentralWarehouseController extends Controller
      */
     public function update(UpdateCentralWarehouseRequest $request, CentralWarehouse $centralWarehouse)
     {
-        //
+//        dd($centralWarehouse);
+
+        $centralWarehouse->update([
+            'company_id' => $request->company_id,
+            'warehouse_name' => $request->warehouse_name,
+            'contact_person_name' => $request->contact_person_name,
+            'contact_person_email' => $request->contact_person_email,
+            'address_line_1' => $request->address_line_1,
+            'address_line_2' => $request->address_line_2,
+            'city' => $request->city,
+            'state' => $request->state,
+            'pincode' => $request->pincode,
+        ]);
+
+        return redirect()->route('centralWarehouse.index')->with('success', 'Successfully Updated');
     }
 
     /**
@@ -81,6 +103,12 @@ class CentralWarehouseController extends Controller
      */
     public function destroy(CentralWarehouse $centralWarehouse)
     {
-        //
+        if(Gate::allows('delete', $centralWarehouse)){
+//            dd($centralWarehouse);
+
+            $centralWarehouse->delete();
+
+            return redirect()->back()->with('success', 'Successfully Deleted');
+        }
     }
 }

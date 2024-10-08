@@ -98,6 +98,7 @@
                                     <select required id="State" name="State" class="select2 form-select"
                                             data-allow-clear="true">
                                         <option value="">Select</option>
+                                        <option value="{{$company->State}}" selected>{{$company->State}}</option>
                                         <option value="Andra Pradesh">Andra Pradesh</option>
                                         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                         <option value="Assam">Assam</option>
@@ -140,6 +141,10 @@
                                 </div>
 
                                 {!! textInputField('col-md-4', 'PinCode', 'number', 'PinCode', 'PinCode', 'PinCode', '*', 'form-control',$company->PinCode,'required','') !!}
+
+                                {!! textInputField('col-md-4', 'Customer Care Number', 'number', 'customer_care_num', 'customer_care_num', 'customer_care_num', '*', 'form-control',$company->customer_care_num,'required','') !!}
+
+                                {!! textInputField('col-md-4', 'Customer Care Email', 'email', 'customer_care_email', 'customer_care_email', 'customer_care_email', '*', 'form-control',$company->customer_care_email,'required','') !!}
 
                             </div>
                         </div>
