@@ -16,4 +16,9 @@ class ProductVariant extends Model
     {
         return $this->belongsTo(BarcodeItem::class, 'id','sku_id');
     }
+
+    function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id','id');
+    }
 }

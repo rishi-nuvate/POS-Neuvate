@@ -42,74 +42,78 @@
                 </div>
                 <form method="post" action="{{route('barcode.store')}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-2">
-                            <p>S</p>
-                            <p class="mb-2">
-                                <img style="border-radius: 0px !important;width: 135px;height: 25px;"
-                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAAeCAQAAAC1DCusAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAJxJREFUaN7t0TsOwzAQxNBR7n/nTZFUA62TnnyNDX1sCTyZfJwk832m3lNjU+O3PVNzWdac5bvbf/pcvbfnsoz3nqe73c51u+ftf/Pnd7a1v870dN+60yvCMDaIsUGMDWJsEGODGBvE2CDGBjE2iLFBjA1ibBBjgxgbxNggxgYxNoixQYwNYmwQY4MYG8TYIMYGMTaIsUGMDWJskDcrryI7VuRp+gAAAABJRU5ErkJggg=="
-                                     style="height:0.8cm; width:3.8cm;"></p>
-                            <p class="mb-2" style=" margin: 0;padding: 0;">4567291</p>
+                    @foreach($allSku as $sku)
 
-                            <table>
-                                <tr>
-                                    <td>SKU :</td>
-                                    <td>sk3456-S</td>
-                                </tr>
-                                <tr>
-                                    <td>Product :</td>
-                                    <td>Name</td>
-                                </tr>
-                                <tr>
-                                    <td>Color :</td>
-                                    <td>Blue</td>
-                                </tr>
-                                <tr>
-                                    <td>Size :</td>
-                                    <td>S</td>
-                                </tr>
+                        <div class="row">
+                            @for($i = 0; $i < $sku->sku_quantity; $i++)
+                                <div class="col-md-2">
 
-                            </table>
-                            {{--                            <p style=" margin: 0;padding: 0;"> - </p>--}}
+                                    <p>{{$sku->productVariant->size}}</p>
+                                    <p class="mb-2">
+                                        <img style="border-radius: 0px !important;width: 135px;height: 25px;"
+                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAAeCAQAAAC1DCusAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAJxJREFUaN7t0TsOwzAQxNBR7n/nTZFUA62TnnyNDX1sCTyZfJwk832m3lNjU+O3PVNzWdac5bvbf/pcvbfnsoz3nqe73c51u+ftf/Pnd7a1v870dN+60yvCMDaIsUGMDWJsEGODGBvE2CDGBjE2iLFBjA1ibBBjgxgbxNggxgYxNoixQYwNYmwQY4MYG8TYIMYGMTaIsUGMDWJskDcrryI7VuRp+gAAAABJRU5ErkJggg=="
+                                             style="height:0.8cm; width:3.8cm;"></p>
+                                    <p class="mb-2" style=" margin: 0;padding: 0;">4567291</p>
 
-                            {{--                            <p style="margin: 0;padding: 0;">--}}
-                            {{--                                : </p>--}}
-                            {{--                            <p style="margin: 0;padding: 0;">Color--}}
-                            {{--                                : blue</p>--}}
-                            {{--                            <p style="margin: 0;padding: 0;">Size--}}
-                            {{--                                : S</p>--}}
-                            {{--                            <p style="margin: 0;padding: 0;">Product--}}
-                            {{--                                : blue</p>--}}
-                            <p style="margin: 0;padding: 0;font-weight: bold">MRP :
-                                <img src="https://labelfy.finserveinfotech.com/images/rupee-indian.png"
-                                     height="12px"
-                                     width="12px"><b>540.00</b>
-                            </p>
-                            <p class="mt-1" style="margin: 0;padding: 0;font-weight: bold;font-size: small">PKD
-                                : October-2024</p>
-                            <p style="margin: 0;padding: 0;font-weight: bold; font-size: small">Net Qty :
-                                1N</p>
-                            <p class="mt-2" style="margin: 0;padding: 0;font-weight: bold">Inclusive
-                                of all Taxes</p>
-                            <p class="mt-2" style="margin: 0;padding: 0; font-size: small">Manufactured
-                                by : </p>
-                            <p style="margin: 0;padding: 0; font-size: small">SINCE99 APPAREL PVT LTD</p>
+                                    <table>
+                                        <tr>
+                                            <td>SKU :</td>
+                                            <td>{{$sku->productVariant->sku}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Product :</td>
+                                            <td>{{$sku->productVariant->product->product_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Color :</td>
+                                            <td>{{$sku->productVariant->color}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Size :</td>
+                                            <td>{{$sku->productVariant->size}}</td>
+                                        </tr>
 
-                            <p style="margin: 0;padding: 0; font-weight: bold;font-size: small ">Block No. 756,Plot No
-                                109-110,Devraj Industrial
-                                Park,Ahmedabad,GJ</p>
-                            <p class="mt-1" style="margin: 0;padding: 0;font-size: small">For Customer Complains :</p>
-                            <!--<p style="font-size: 12px;margin: 0;padding: 0;"></p>
-                            <p style="font-size: 12px;margin: 0;padding: 0;">Email
-                                : </p>-->
-                            <p style="margin: 0;padding: 0;font-weight: bold;font-size: small">Tel no
-                                : 07969066900</p>
-                            <p style="margin: 0;padding: 0;font-weight: bold;font-size: small">Email
-                                : example@gmail.com</p>
+                                    </table>
+                                    <p style="margin: 0;padding: 0;font-weight: bold">MRP :
+                                        <img src="https://labelfy.finserveinfotech.com/images/rupee-indian.png"
+                                             height="12px"
+                                             width="12px"><b>{{$sku->productVariant->product->cost_price}}</b>
+                                    </p>
+                                    <p class="mt-1" style="margin: 0;padding: 0;font-weight: bold;font-size: small">PKD
+                                        : October-2024</p>
+                                    <p style="margin: 0;padding: 0;font-weight: bold; font-size: small">Net Qty :
+                                        1N</p>
+                                    <p class="mt-2" style="margin: 0;padding: 0;font-weight: bold">Inclusive
+                                        of all Taxes</p>
+                                    <p class="mt-2" style="margin: 0;padding: 0; font-size: small">Manufactured
+                                        by : </p>
+                                    <p style="margin: 0;padding: 0; font-size: small">{{$company->CompanyName}}</p>
+
+                                    <p style="margin: 0;padding: 0; font-weight: bold;font-size: small ">
+                                       {{$company->AddLine1}}
+                                       {{$company->AddLine2}}
+                                        </p>
+                                    <p class="mt-1" style="margin: 0;padding: 0;font-size: small">For Customer Complains
+                                        :</p>
+                                    <!--<p style="font-size: 12px;margin: 0;padding: 0;"></p>
+                                    <p style="font-size: 12px;margin: 0;padding: 0;">Email
+                                    : </p>-->
+                                    <p style="margin: 0;padding: 0;font-weight: bold;font-size: small">Tel no :
+                                        {{$company->customer_care_num}}
+                                        </p>
+                                    <p style="margin: 0;padding: 0;font-weight: bold;font-size: small">Email :
+                                        {{$company->customer_care_email}}
+                                        </p>
 
 
+                                </div>@php
+                                    if (($i % 2 == 0)) {
+                                        echo '</div><div>';
+                                    } @endphp
+                            @endfor
                         </div>
-                    </div>
+                    @endforeach
+
 
                     <table style="height:auto ;width:322px;" cellspacing="0" cellpadding="0">
 

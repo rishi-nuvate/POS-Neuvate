@@ -23,7 +23,7 @@
                 <div class="content-header mb-4">
                     <h3 class="mb-1">Create Single Inward</h3>
                 </div>
-                <form method="post" action="" enctype="multipart/form-data">
+                <form method="post" action="{{route('WarehouseInventory.store')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
@@ -35,7 +35,7 @@
                         <div class="col-md-3">
                             <label for="Scan">Scan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Item Barcode scan"
+                                <input type="text" name="barcode_number" class="form-control" placeholder="Item Barcode scan"
                                        aria-label="Item" aria-describedby="button-addon2" />
                                 <button class="btn btn-outline-primary" type="button" id="button-addon2"><i
                                         class="ti ti-scan mx-2 ti-sm"></i></button>

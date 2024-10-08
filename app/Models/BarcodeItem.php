@@ -18,7 +18,7 @@ class BarcodeItem extends Model
         return $this->belongsTo(Barcode::class, 'barcode_id','id');
     }
 
-    function productVariant()
+    public function productVariant()
     {
         return $this->hasOne(ProductVariant::class, 'id','sku_id');
     }

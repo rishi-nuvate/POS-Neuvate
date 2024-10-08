@@ -93,8 +93,7 @@
                                     <label class="form-label" for="text">Inward</label>
                                     <span class="text-danger"><strong></strong></span>
                                     <input type="text" id="text" name="text" class="form-control  " placeholder="5"
-                                           value=""
-                                           readonly/>
+                                           value=""/>
                                 </div>
 
 

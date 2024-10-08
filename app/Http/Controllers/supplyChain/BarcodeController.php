@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBarcodeRequest;
 use App\Http\Requests\UpdateBarcodeRequest;
 use App\Models\Barcode;
 use App\Models\BarcodeItem;
+use App\Models\Company;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use Illuminate\Http\Request;
@@ -205,7 +206,7 @@ class BarcodeController extends Controller
             }
             $total_quantity = $value->sum('sku_quantity');
 
-            $barcode = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect"><a  href="/generateBarcode"> Generate Barcode </a> </button>';
+            $barcode = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect"><a  href="/generateBarcode/' . $value[0]['id'] . '"> Generate Barcode </a> </button>';
 
             $action = ' <a href="barcode/' . $value[0]['id'] . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
             <button onclick="deleteBarcode(' . $value[0]['id'] . ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
@@ -217,8 +218,11 @@ class BarcodeController extends Controller
 
     }
 
-    public function generateBarcode()
+    public function generateBarcode($barcode_id)
     {
-        return view('content.supplyChain.barcode.barcodeGenerate');
+        $company = Company::where('id', 14)->first();
+        $allSku = BarcodeItem::where('barcode_id', $barcode_id)->with('productVariant.product')->get();
+//        dd($sku);
+        return view('content.supplyChain.barcode.barcodeGenerate', compact('allSku','company'));
     }
 }

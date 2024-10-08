@@ -43,6 +43,7 @@ use App\Http\Controllers\supplyChain\BarcodeController;
 use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
 use App\Http\Controllers\supplyChain\SupplyChainMasterController;
+use App\Http\Controllers\WarehouseInventoryController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -145,8 +146,8 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Master Central Warehouse
 
-    Route::resource('centralWarehouse',CentralWarehouseController::class);
-    Route::post('/deleteCentralWarehouse/{centralWarehouse}',[CentralWarehouseController::class,'destroy']);
+    Route::resource('centralWarehouse', CentralWarehouseController::class);
+    Route::post('/deleteCentralWarehouse/{centralWarehouse}', [CentralWarehouseController::class, 'destroy']);
 
 //    Vendor
     Route::resource('vendors', VenderController::class);
@@ -165,7 +166,6 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('employee', EmployeeController::class);
     Route::post('/employeeData', [EmployeeController::class, 'getEmployeeData'])->name('getEmployeeData');
     Route::post('/employee/{employee}', [EmployeeController::class, 'destroy']);
-
 
 
     //Inventory Master
@@ -194,12 +194,16 @@ Route::middleware('auth:web')->group(callback: function () {
 //    Barcode
 
     Route::resource('barcode', BarcodeController::class);
-    Route::post('productData', [BarcodeController::class,'productData'])->name('productData');
-    Route::post('productVariantBarcode', [BarcodeController::class,'productVariantBarcode'])->name('productVariantBarcode');
-    Route::post('getBarcode', [BarcodeController::class,'getBarcode'])->name('getBarcode');
-    Route::post('/deleteBarcode/{barcode}', [BarcodeController::class,'destroy']);
+    Route::post('productData', [BarcodeController::class, 'productData'])->name('productData');
+    Route::post('productVariantBarcode', [BarcodeController::class, 'productVariantBarcode'])->name('productVariantBarcode');
+    Route::post('getBarcode', [BarcodeController::class, 'getBarcode'])->name('getBarcode');
+    Route::post('/deleteBarcode/{barcode}', [BarcodeController::class, 'destroy']);
 
-    Route::get('/generateBarcode', [BarcodeController::class,'generateBarcode']);
+//    Warehouse Inventory
+
+    Route::resource('WarehouseInventory', WarehouseInventoryController::class);
+
+    Route::get('/generateBarcode/{barcode_id}', [BarcodeController::class, 'generateBarcode']);
 
 
     Route::get('/supplyChain/barcode/create', [BarcodeMasterController::class, 'create'])->name('create-barcode');
