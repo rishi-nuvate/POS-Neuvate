@@ -199,35 +199,33 @@
             `;
 
             $('#productItemContainer').append('' +
-                '<div class="row">' +
-                '<div class="col-md-2 mt-3"> <label class="form-label" for="productId${num}">Product</label>' +
-                '<select class="select2 form-select" id="productId' + num + '" data-placeholder="Select Product" name="product_id[]" onchange="getProductSku(' + num + ')"> <option value="">Select Product</option>' +
-                productOptions +
-                ' </select>' +
-                '</div>' +
-                `
-<div class="col-md-2 mt-3">
-                                    <label class="form-label" for="sku_id">Product Sku</label>
-                                    <select class="select2 form-select" id="skuId${num}"
-                                            data-placeholder="Select Product" name="sku_id[]">
-                                        <option value="">Select Sku</option>
-                                    </select>
-                                </div>
-` +
-                '<div class="col-md-2 mt-3"> <label class="form-label" for="text">Inward</label> <span class="text-danger"><strong></strong></span> <input type="text" id="text" name="text" class="form-control" placeholder="5" value="" readonly/> </div> ' +
-                `<div class="col-1 mt-4">
-              <button type="button" onclick="" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
-                  <span class="ti ti-trash"></span>
-              </button>
-          </div>` +
-                '</div>'
-            )
-            ;
+                `<div class="row " id="productItem_${num}">
+                <div class="col-md-2 mt-3"> <label class="form-label" for="productId${num}">Product</label>
+                <select class="select2 form-select" id="productId${num}" data-placeholder="Select Product" name="product_id[${num}]" onchange="getProductSku(${num})"> <option value="">Select Product</option>
+            ${productOptions}
+                 </select>
+                </div>
+                <div class="col-md-2 mt-3">
+                    <label class="form-label" for="sku_id">Product Sku</label>
+                    <select class="select2 form-select" id="skuId${num}"
+                            data-placeholder="Select Product" name="sku_id[${num}]">
+                        <option value="">Select Sku</option>
+                    </select>
+                </div> <div class="col-md-2 mt-3"> <label class="form-label" for="text">Inward</label> <span class="text-danger"><strong></strong></span> <input type="text" id="text" name="text" class="form-control" placeholder="5" value="" /> </div>
+                <div class="col-1 mt-4">
+                 <button type="button" onclick="removeSize(${num})" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
+                    <span class="ti ti-trash"></span>
+                 </button>
+                    </div>
+                </div>`
+            );
+
             document.getElementById('number').value = num;
+            $('.select2').select2();
         }
 
-        function removeSize(colorId, sizeId) {
-            var elementToRemove = document.getElementById("sizeItem_" + colorId + sizeId);
+        function removeSize(Id) {
+            var elementToRemove = document.getElementById("productItem_" + Id);
 
             if (elementToRemove) {
                 elementToRemove.remove();
@@ -236,7 +234,6 @@
 
         function getProductSku(id) {
             const productId = document.getElementById('productId' + id).value;
-            console.log(productId);
             $.ajax({
                 type: 'POST',
                 url: '{{ route('getProductSku') }}',
