@@ -320,7 +320,7 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-{{--                        url: '{{ route('deletePurchaseOrder') }}',--}}
+                        url: "{{ route('deletePurchaseOrder') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

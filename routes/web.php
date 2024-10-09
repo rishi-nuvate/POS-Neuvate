@@ -38,13 +38,16 @@ use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\StoreGenerateController;
 use App\Http\Controllers\storeInventory\StockInController;
+use App\Http\Controllers\StoreTypeController;
 use App\Http\Controllers\supplyChain\BarcodeController;
 use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
 use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 use App\Http\Controllers\WarehouseInventoryController;
 use App\Http\Middleware\EnsureTokenIsValid;
+use App\Models\StoreGenerate;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -178,11 +181,22 @@ Route::middleware('auth:web')->group(callback: function () {
 //    Design Library
     Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class, 'create'])->name('create-design');
 
-//    PO
+////    PO
+//    Route::resource('po', PurchaseOrderController::class);
+//    Route::post('/po/getSkuByProduct', [PurchaseOrderController::class, 'getSkuByProduct'])->name('getSkuByProduct');
+//    Route::post('/po/getProductVariant', [PurchaseOrderController::class, 'getProductVariant'])->name('getProductVariant');
+//    Route::post('/po/getVendorAddress', [PurchaseOrderController::class, 'getVendorAddress'])->name('getVendorAddress');
+//    Route::post('/po/poListAjax', [PurchaseOrderController::class, 'poListAjax'])->name('poListAjax');
+
+
+    //    PO
     Route::resource('po', PurchaseOrderController::class);
+    Route::post('/po/delete', [PurchaseOrderController::class, 'deletePurchaseOrder'])->name('deletePurchaseOrder');
+    Route::post('/po/deletePoItem', [PurchaseOrderController::class, 'deletePurchaseOrderItemRow'])->name('deletePurchaseOrderItemRow');
     Route::post('/po/getSkuByProduct', [PurchaseOrderController::class, 'getSkuByProduct'])->name('getSkuByProduct');
     Route::post('/po/getProductVariant', [PurchaseOrderController::class, 'getProductVariant'])->name('getProductVariant');
     Route::post('/po/getVendorAddress', [PurchaseOrderController::class, 'getVendorAddress'])->name('getVendorAddress');
+    Route::post('/po/getSelectedParameters', [PurchaseOrderController::class, 'getSelectedParameters'])->name('getSelectedParameters');
     Route::post('/po/poListAjax', [PurchaseOrderController::class, 'poListAjax'])->name('poListAjax');
 
 
@@ -199,14 +213,25 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('getBarcode', [BarcodeController::class, 'getBarcode'])->name('getBarcode');
     Route::post('/deleteBarcode/{barcode}', [BarcodeController::class, 'destroy']);
 
+//    Store Master
+
+//    Store Type
+    Route::resource('storeType', StoreTypeController::class);
+    Route::post('/getStoreType',[StoreTypeController::class,'getStoreType'])->name('getStoreType');
+
+//    Store Generate
+    Route::resource('storeGenerate', StoreGenerateController::class);
+    Route::post('/storeGenerate/store',[StoreGenerateController::class,'store'])->name('storeGenerate.store');
+    Route::post('getAllStoreData', [StoreGenerateController::class,'getAllStoreData'])->name('getAllStoreData');
+
 //    Warehouse Inventory
 
     Route::resource('WarehouseInventory', WarehouseInventoryController::class);
+    Route::post('bulkInwardStore', [WarehouseInventoryController::class,'bulkInwardStore'])->name('bulkInwardStore');
+    Route::post('getInventory', [WarehouseInventoryController::class,'getInventory'])->name('getInventory');
+
 
     Route::get('/generateBarcode/{barcode_id}', [BarcodeController::class, 'generateBarcode']);
-
-
-    Route::get('/supplyChain/barcode/create', [BarcodeMasterController::class, 'create'])->name('create-barcode');
 
 
     //Central Warehouse
@@ -220,6 +245,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('/centralWarehouse/stockIn/singleInward', [StockInMasterController::class, 'singleInward'])->name('singleInward');
     Route::post('/centralWarehouse/stockIn/getAllPOItem', [StockInMasterController::class, 'getAllPOItem'])->name('getAllPOItem');
     Route::post('/centralWarehouse/getProductSku', [StockInMasterController::class, 'getProductSku'])->name('getProductSku');
+//    Route::post('/centralWarehouse/stockIn/bulkInward/store', [StockInMasterController::class, 'bulkInwardStore'])->name('bulkInwardStore');
 
 //Shelf
     Route::get('/centralWarehouse/shelf/create', [ShelfMasterController::class, 'create'])->name('create-shelf');

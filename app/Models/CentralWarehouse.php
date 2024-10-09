@@ -17,4 +17,9 @@ class CentralWarehouse extends Model
     public function company(){
         return $this->hasOne(Company::class,'id','company_id');
     }
+
+    public function warehouseInventory()
+    {
+        return $this->hasMany(WarehouseInventory::class,'warehouse_id','id');
+    }
 }

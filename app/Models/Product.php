@@ -54,4 +54,9 @@ class Product extends Model
         return $this->belongsTo(Barcode::class,'id','product_id');
     }
 
+    public function warehouseInventory()
+    {
+        return $this->hasOne(WarehouseInventory::class,'id','product_id');
+    }
+
 }

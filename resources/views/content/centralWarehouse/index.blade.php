@@ -59,7 +59,7 @@
                                 <i class="menu-icon tf-icons ti ti-building-warehouse"></i>Inventory Management
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="#"><i
+                                <a class="dropdown-item" href="{{route('WarehouseInventory.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     Inventory List</a>
                                 <a class="dropdown-item" href="#"><i

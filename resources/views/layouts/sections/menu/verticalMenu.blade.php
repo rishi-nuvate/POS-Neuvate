@@ -100,7 +100,7 @@
             <li class="menu-item ">
                 <a href="{{ url('/orderRequisition') }}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-building-warehouse"></i>
-                    <div>Order Requisition</div>
+                    <div>Stock Allocation</div>
                 </a>
             </li>
         @endif

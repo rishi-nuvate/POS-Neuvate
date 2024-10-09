@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\orderRequisition;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SalesOrderController extends Controller
@@ -20,7 +21,8 @@ class SalesOrderController extends Controller
      */
     public function create()
     {
-        return view('content.orderRequisition.salesOrder.create');
+        $products = Product::all();
+        return view('content.orderRequisition.salesOrder.create', compact('products'));
     }
 
     /**

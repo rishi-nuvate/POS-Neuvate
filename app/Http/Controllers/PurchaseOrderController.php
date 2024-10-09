@@ -13,7 +13,6 @@ use App\Models\PurchaseOrderItem;
 use App\Models\PurchaseOrderItemParameter;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PurchaseOrderController extends Controller
 {
@@ -49,61 +48,100 @@ class PurchaseOrderController extends Controller
      */
     public function store(StorePurchaseOrderRequest $request)
     {
+//        $request->validate([
+//            'company' => 'required|exists:companies,id',
+//            'shippingAddress' => 'required|exists:company_ship_addresses,id',
+//            'vendor' => 'required|exists:users,id',
+//            'product_id' => 'required',
+//            'unitPrice' => 'required',
+//            'tax' => 'required',
+//        ]);
+//        dd($request->all());
+        if (!empty($request->vendor) && !empty($request->company) && !empty($request->shippingAddress) && !empty($request->poNumber)) {
+            $Po = new PurchaseOrder([
+                'user_id' => $request->vendor,
+                'company_id' => $request->company,
+                'company_shipping_id' => $request->shippingAddress,
+                'po_no' => $request->poNumber,
+            ]);
 
-        dd($request->all());
-        $count = count($request->unitPrice);
-        $sku_count = count($request->sku);
+            if ($Po->save()) {
+                foreach ($request->product_id as $i => $productId) {
+                    $PoItems = new PurchaseOrderItem([
+                        'po_id' => $Po->id,
+                        'product_id' => $productId,
+                        'product_description' => $request->description[$i],
+                        'unit_price' => $request->unitPrice[$i],
+                        'tax_amount' => $request->tax[$i],
+                        'total_quantity' => $request->TotalQty[$i],
+                    ]);
 
-        DB::beginTransaction();
-//        try {
-            if (!empty($request->vendor) && !empty($request->company) && !empty($request->shippingAddress)) {
-                $Po = new PurchaseOrder([
-                    'user_id' => $request->vendor,
-                    'company_id' => $request->company,
-                    'company_shipping_id' => $request->shippingAddress,
-                ]);
-
-                if ($Po->save()) {
-                    for ($i = 0; $i < $count; $i++) {
-                        $PoItems = new PurchaseOrderItem([
-                            'po_id' => $Po->id,
-                            'product_id' => $request->product_id[$i],
-                            'product_description' => $request->description[$i],
-                            'unit_price' => $request->unitPrice[$i],
-                            'tax_amount' => $request->tax[$i],
-                            'total_quantity' => $request->TotalQty[$i],
-                        ]);
-
-                        if ($PoItems->save()) {
-                            for ($j = 0; $j < $sku_count; $j++) {
+                    if ($PoItems->save()) {
+                        if (isset($request->sku[$i])) {
+                            foreach ($request->sku[$i] as $key => $skuValue) {
                                 $PoItemParameters = new PurchaseOrderItemParameter([
                                     'po_id' => $Po->id,
                                     'po_item_id' => $PoItems->id,
-                                    'item_sku' => $request->sku[$j],
-                                    'item_color' => $request->color[$j],
-                                    'item_size' => $request->size[$j],
-                                    'item_qty' => $request->quantity[$j],
+                                    'item_sku' => $skuValue,
+                                    'item_color' => $request->color[$i][$key],
+                                    'item_size' => $request->size[$i][$key],
+                                    'item_qty' => $request->quantity[$i][$key],
                                 ]);
                                 if (!$PoItemParameters->save()) {
                                     return redirect()->route('po.create')->withErrors('Error saving POItemParameters.');
                                 }
                             }
-                        } else {
-                            return redirect()->route('po.create')->withErrors('Error saving POItems.');
                         }
+                    } else {
+                        return redirect()->route('po.create')->withErrors('Error saving POItems.');
                     }
-                    DB::commit();
+                }
+                return redirect()->route('po.create')->withSuccess('Successfully Saved');
+            } else {
+                return redirect()->route('po.create')->withErrors('Error saving PO.');
+            }
+        }
+        return redirect()->route('po.create')->withErrors('Validation Failed');
+    }
 
-                    return redirect()->route('po.create')->withSuccess('Successfully Saved');
-                } else {
-                    return redirect()->route('po.create')->withErrors('Error saving PO.');
+    public function deletePurchaseOrder(Request $request){
+        $Po = PurchaseOrder::find($request->PoId);
+        $PoItems = PurchaseOrderItem::where('po_id', $request->PoId)->get();
+        $PoItemParameters = PurchaseOrderItemParameter::where('po_id', $request->PoId)->get();
+        if ($Po) {
+            foreach ($PoItems as $PoItem){
+                foreach ($PoItemParameters as $PoItemParameter) {
+                    if (!$PoItemParameter->delete()) {
+                        return response()->json(['success' => false]);
+                    }
+                }
+                if (!$PoItem->delete()) {
+                    return response()->json(['success' => false]);
                 }
             }
-//        } catch (\Exception $e) {
-//            DB::rollback();
-//            return redirect()->route('po.create')->withErrors('Error saving PO.');
-//        }
-//        return redirect()->route('po.create')->withSuccess('Validation Failed');
+            if ($Po->delete()) {
+                return response()->json(['success' => true]);
+            }
+            return response()->json(['success' => false]);
+        }
+        return response()->json(['success' => false]);
+    }
+
+    public function deletePurchaseOrderItemRow(Request $request){
+        $PoItemId = PurchaseOrderItem::find($request->poItemId);
+        $PoItemParameters = PurchaseOrderItemParameter::where('po_item_id', $request->poItemId)->get();
+        if ($PoItemId){
+            foreach ($PoItemParameters as $PoItemParameter){
+                    if (!$PoItemParameter->delete()) {
+                        return response()->json(['success' => false]);
+                    }
+            }
+            if ($PoItemId->delete()) {
+                return response()->json(['success' => true]);
+            }
+            return response()->json(['success' => false]);
+        }
+        return response()->json(['success' => false]);
     }
 
     /**
@@ -117,9 +155,50 @@ class PurchaseOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PurchaseOrder $purchaseOrder)
+    public function edit(PurchaseOrder $purchaseOrder, string $id)
     {
-        //
+        $Po = PurchaseOrder::with('company', 'shipAddress', 'purchaseOrderItem', 'purchaseOrderItemParameter', 'vendor')
+            ->findOrFail($id);
+        $PoParameters = PurchaseOrderItemParameter::get();
+        $companies = Company::get();
+        $shipAddresses = CompanyShipAddress::get();
+        $vendors = User::where('role', 'vendor')->get();
+        $products = Product::get();
+        return view('content.supplyChain.po.edit', compact('Po','companies', 'shipAddresses', 'vendors', 'products', 'PoParameters'));
+    }
+
+    public function getSelectedParameters(Request $request){
+        $product_id = $request->product_id;
+        $po_id = $request->po_id;
+        $po_item_id = $request->po_item_id;
+
+        $purchaseOrderItem = PurchaseOrderItem::with( 'purchaseOrderItemParameter')
+                            ->where('id', $po_item_id)
+                            ->get();
+
+        $data = [];
+
+        $productColorArray = [];
+        $productSizeArray = [];
+        $productSkuArray = [];
+        $productQtyArray = [];
+            foreach ($purchaseOrderItem as $PoItem) {
+                if ($PoItem->purchaseOrderItemParameter) {
+                    foreach ($PoItem->purchaseOrderItemParameter as $Parameter) {
+                        $productColorArray[] = $Parameter->item_color;
+                        $productSizeArray[] = $Parameter->item_size;
+                        $productSkuArray[] = $Parameter->item_sku;
+                        $productQtyArray[] = $Parameter->item_qty;
+                    }
+                }
+            }
+
+        $data["productColors"] = $productColorArray;
+        $data["productSize"] = $productSizeArray;
+        $data["productSkus"] = $productSkuArray;
+        $data["productQty"] = $productQtyArray;
+
+        return response()->json($data);
     }
 
     /**
@@ -127,7 +206,99 @@ class PurchaseOrderController extends Controller
      */
     public function update(UpdatePurchaseOrderRequest $request, PurchaseOrder $purchaseOrder)
     {
-        //
+//        dd($request->all());
+
+        if (!empty($request->vendor) && !empty($request->company) && !empty($request->shippingAddress) && !empty($request->poNumber)) {
+            $Po = PurchaseOrder::where('user_id', $request->vendor)
+                ->orwhere('company_id', $request->company)
+                ->orwhere('id', $request->purchaseOrderId)
+                ->first();
+
+            if ($Po) {
+                $Po->company_shipping_id = $request->shippingAddress;
+                $Po->po_no = $request->poNumber;
+                $Po->save();
+            } else {
+                $Po = new PurchaseOrder([
+                    'user_id' => $request->vendor,
+                    'company_id' => $request->company,
+                    'company_shipping_id' => $request->shippingAddress,
+                    'po_no' => $request->poNumber,
+                ]);
+                $Po->save();
+            }
+        }else{
+            return redirect()->route('po.index')->withErrors('Validation Failed');
+        }
+
+            if ($Po->save()) {
+                foreach ($request->product_id as $i => $productId) {
+                    if (isset($request->poItemId[$i])){
+                        $PoItem = PurchaseOrderItem::where('id', $request->poItemId[$i])->first();
+                        if ($PoItem) {
+                            echo $request->poItemId[$i] . '<br>';
+
+                            $PoItem->product_description = $request->description[$i];
+                            $PoItem->unit_price = $request->unitPrice[$i];
+                            $PoItem->tax_amount = $request->tax[$i];
+                            $PoItem->total_quantity = $request->TotalQty[$i];
+
+                            if (!$PoItem->save()) {
+                                return redirect()->route('po.edit')->withErrors('Error updating POItems.');
+                            }
+                        }
+                    } else {
+                        $PoItem = new PurchaseOrderItem([
+                            'po_id' => $Po->id,
+                            'product_id' => $productId,
+                            'product_description' => $request->description[$i],
+                            'unit_price' => $request->unitPrice[$i],
+                            'tax_amount' => $request->tax[$i],
+                            'total_quantity' => $request->TotalQty[$i],
+                        ]);
+
+                        if (!$PoItem->save()) {
+                            return redirect()->route('po.edit')->withErrors('Error saving POItems.');
+                        }
+
+                    }
+//                    dd($request->sku[$i]);
+                    if (isset($request->sku[$i])) {
+                        foreach ($request->sku[$i] as $key => $skuValue) {
+                            $PoItemParameter = PurchaseOrderItemParameter::where('po_id', $Po->id)
+                                ->where('po_item_id', $PoItem->id)
+                                ->where('item_sku', $skuValue)
+                                ->first();
+
+                            if ($PoItemParameter) {
+                                $PoItemParameter->item_color = $request->color[$i][$key];
+                                $PoItemParameter->item_size = $request->size[$i][$key];
+                                $PoItemParameter->item_qty = $request->quantity[$i][$key];
+
+                                if (!$PoItemParameter->save()) {
+                                    return redirect()->route('po.edit')->withErrors('Error updating POItemParameters.');
+                                }
+                            } else {
+                                $PoItemParameter = new PurchaseOrderItemParameter([
+                                    'po_id' => $Po->id,
+                                    'po_item_id' => $PoItem->id,
+                                    'item_sku' => $skuValue,
+                                    'item_color' => $request->color[$i][$key],
+                                    'item_size' => $request->size[$i][$key],
+                                    'item_qty' => $request->quantity[$i][$key],
+                                ]);
+                                if (!$PoItemParameter->save()) {
+                                    return redirect()->route('po.edit')->withErrors('Error saving POItemParameters.');
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return redirect()->route('po.index')->withSuccess('Successfully Saved');
+            } else {
+                return redirect()->route('po.edit')->withErrors('Error saving PO.');
+            }
     }
 
     /**
@@ -336,9 +507,9 @@ class PurchaseOrderController extends Controller
 
                 $actionHtml = "";
 
-//                $actionHtml .= ' <a class="btn btn-icon btn-label-primary mt-1 waves-effect mx-1"
-//                 href="' . route('po-edit', $Po->id) . '"><i
-//                 class="ti ti-edit mx-2 ti-sm"></i></a>';
+                $actionHtml .= ' <a class="btn btn-icon btn-label-primary mt-1 waves-effect mx-1"
+                 href="' . route('po.edit', $Po->id) . '"><i
+                 class="ti ti-edit mx-2 ti-sm"></i></a>';
 
                 $actionHtml .= ' <button type="button" class="btn btn-icon mt-1 btn-label-danger mx-1"
                 onclick="daletePo(' . $Po->id . ')"><i class="ti ti-trash ti-sm"></i></button>';

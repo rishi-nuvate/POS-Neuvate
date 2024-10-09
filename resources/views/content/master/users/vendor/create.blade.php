@@ -308,10 +308,10 @@
 
                                         <div class="row g-3">
                                             <div class="col-12 d-flex justify-content-between mt-4">
-                        <span class="btn btn-label-secondary btn-prev"><i
-                                class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i>
-                          <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                        </span>
+                                                <span class="btn btn-label-secondary btn-prev"><i
+                                                        class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i>
+                                                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                                </span>
                                                 <button class="btn btn-primary btn-next"><span
                                                         class="align-middle d-sm-inline-block d-none me-sm-1 me-0">Next</span>
                                                     <i
@@ -365,10 +365,10 @@
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-between mt-4">
-                      <span class="btn btn-label-secondary btn-prev"><i
-                              class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i>
-                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                      </span>
+                                            <span class="btn btn-label-secondary btn-prev"><i
+                                                    class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i>
+                                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                            </span>
                                             <button type="submit" class="btn btn-success btn-next btn-submit">Submit
                                             </button>
                                         </div>

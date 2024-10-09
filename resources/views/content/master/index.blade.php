@@ -278,10 +278,10 @@
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Store Type
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('storeType.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('storeType.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>
@@ -309,10 +309,10 @@
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Store Generate
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('storeGenerate.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Add</a>
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('storeGenerate.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
                             </div>

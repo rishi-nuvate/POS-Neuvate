@@ -15,17 +15,17 @@ class WarehouseInventory extends Model
 
     public function warehouse()
     {
-        return $this->belongsTo(CentralWarehouse::class);
+        return $this->belongsTo(CentralWarehouse::class,'warehouse_id','id');
     }
 
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->hasOne(Product::class,'id','product_id');
     }
 
     public function productVariant()
     {
-        $this->hasOne(ProductVariant::class);
+        return $this->hasOne(ProductVariant::class,'id','sku_id');
     }
 
     use HasFactory;

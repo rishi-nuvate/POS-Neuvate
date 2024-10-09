@@ -22,9 +22,10 @@
                            onchange="toggleTableVisibility()" value="1" id="WithOutPO">
                     <label class="form-check-label" for="customCheckPrimary">Without PO</label>
                 </div>
-                <form method="post" action="" enctype="multipart/form-data">
+                <form method="post" action="{{route('bulkInwardStore')}}" enctype="multipart/form-data">
                     @csrf
 
+                    <input type="hidden" name="inward_type">
                     <div class="row">
 
                         {{-- Example --}}
@@ -90,9 +91,9 @@
                                 </div>
 
                                 <div class="col-md-2 mt-3">
-                                    <label class="form-label" for="text">Inward</label>
+                                    <label class="form-label" for="inward_quantity">Inward</label>
                                     <span class="text-danger"><strong></strong></span>
-                                    <input type="text" id="text" name="text" class="form-control  " placeholder="5"
+                                    <input type="text" id="inward_quantity" name="inward_quantity[]" class="form-control  " placeholder="5"
                                            value=""/>
                                 </div>
 
@@ -208,7 +209,7 @@
                             data-placeholder="Select Product" name="sku_id[${num}]">
                         <option value="">Select Sku</option>
                     </select>
-                </div> <div class="col-md-2 mt-3"> <label class="form-label" for="text">Inward</label> <span class="text-danger"><strong></strong></span> <input type="text" id="text" name="text" class="form-control" placeholder="5" value="" /> </div>
+                </div> <div class="col-md-2 mt-3"> <label class="form-label" for="inward_quantity">Inward</label> <span class="text-danger"><strong></strong></span> <input type="text" id="inward_quantity" name="inward_quantity[]" class="form-control" placeholder="5" value="" /> </div>
                 <div class="col-1 mt-4">
                  <button type="button" onclick="removeSize(${num})" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
                     <span class="ti ti-trash"></span>

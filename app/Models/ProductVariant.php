@@ -21,4 +21,9 @@ class ProductVariant extends Model
     {
         return $this->belongsTo(Product::class, 'product_id','id');
     }
+
+    public function warehouseInventory()
+    {
+        return $this->belongsTo(WarehouseInventory::class,'id','sku_id');
+    }
 }

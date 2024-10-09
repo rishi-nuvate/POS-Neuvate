@@ -2,11 +2,6 @@
 
 @section('title', 'Pending-List-Pick ')
 
-@section('page-script')
-    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
-@endsection
 
 @section('content')
     <h4 class="py-3 mb-4">
@@ -20,38 +15,7 @@
     <div class="card">
         <div class="card-datatable table-responsive pt-0">
             <div id="datatable-list_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                <div class="row me-2">
-                    <div class="col-md-2">
-                        <div class="me-3">
-                            <div class="dataTables_length" id="datatable-list_length"><label><select
-                                        name="datatable-list_length" aria-controls="datatable-list" class="form-select">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select></label></div>
-                        </div>
-                    </div>
-                    <div class="col-md-10">
-                        <div
-                            class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
-                            <div id="datatable-list_filter" class="dataTables_filter"><label><input type="search"
-                                                                                                    class="form-control"
-                                                                                                    placeholder="Search.."
-                                                                                                    aria-controls="datatable-list"></label>
-                            </div>
-                            <div class="dt-buttons btn-group flex-wrap">
-                                <div class="btn-group">
-                                    <button
-                                        class="btn btn-secondary buttons-collection dropdown-toggle btn-label-primary mx-3"
-                                        tabindex="0" aria-controls="datatable-list" type="button" aria-haspopup="dialog"
-                                        aria-expanded="false"><span><i class="ti ti-screen-share me-1 ti-xs"></i>Export</span><span
-                                            class="dt-down-arrow"></span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <table class="datatables-basic table dataTable no-footer" id="datatable-list"
                        aria-describedby="datatable-list_info">
                     <thead>
@@ -95,15 +59,7 @@
                                             <li>
                                                 500-Sciencecity
                                             </li>
-                                            <li>
-                                                512-Prahladnagar
-                                            </li>
-                                            <li>
-                                                410-Narol
-                                            </li>
                                         </ul>
-
-
                                     </span>
                                 </div>
                             </div>
@@ -121,7 +77,7 @@
                         <td>29</td>
                         <td>2024-07-30</td>
                         <td>
-                            #4567
+                            #8436
                         </td>
                         <td>
                             <div class="d-flex justify-content-start align-items-center">
@@ -131,15 +87,7 @@
                                             <li>
                                                 342-Naranpura
                                             </li>
-                                            <li>
-                                                348-Prahladnagar
-                                            </li>
-                                            <li>
-                                                400-Narol
-                                            </li>
                                         </ul>
-
-
                                     </span>
                                 </div>
                             </div>
@@ -158,7 +106,7 @@
                         <td>29</td>
                         <td>2024-07-30</td>
                         <td>
-                            #4567
+                            #2567
                         </td>
                         <td>
                             <div class="d-flex justify-content-start align-items-center">
@@ -166,13 +114,7 @@
                                     <span class="fw-medium">
                                         <ul>
                                             <li>
-                                                342-Naranpura
-                                            </li>
-                                            <li>
-                                                348-Prahladnagar
-                                            </li>
-                                            <li>
-                                                400-Narol
+                                                342-Navrangpura
                                             </li>
                                         </ul>
 
@@ -195,7 +137,7 @@
                         <td>29</td>
                         <td>2024-07-30</td>
                         <td>
-                            #4567
+                            #8956
                         </td>
                         <td>
                             <div class="d-flex justify-content-start align-items-center">
@@ -203,13 +145,7 @@
                                     <span class="fw-medium">
                                         <ul>
                                             <li>
-                                                342-Naranpura
-                                            </li>
-                                            <li>
-                                                348-Prahladnagar
-                                            </li>
-                                            <li>
-                                                400-Narol
+                                                342-Prahladnagar
                                             </li>
                                         </ul>
 
@@ -266,5 +202,27 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('page-script')
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
+
+    <script>
+
+        $('#datatable-list').DataTable({
+            autoWidth: false,
+            lengthMenu: [
+                [10, 20, 100, 500],
+                [10, 20, 100, "All"]
+            ],
+
+            order: [
+                [0, 'asc']
+            ]
+        });
+    </script>
 
 @endsection

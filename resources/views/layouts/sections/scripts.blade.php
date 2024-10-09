@@ -17,6 +17,7 @@
 
 {{--Vendor Script--}}
 
+<script src="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/quill/katex.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/quill/quill.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
