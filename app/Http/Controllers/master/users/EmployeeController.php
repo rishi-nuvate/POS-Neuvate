@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\master;
+namespace App\Http\Controllers\master\users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeRequest;

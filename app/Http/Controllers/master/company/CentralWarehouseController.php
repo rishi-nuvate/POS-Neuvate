@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master\company;
 
-use App\Models\CentralWarehouse;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCentralWarehouseRequest;
 use App\Http\Requests\UpdateCentralWarehouseRequest;
+use App\Models\CentralWarehouse;
 use App\Models\Company;
 use Illuminate\Support\Facades\Gate;
 

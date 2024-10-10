@@ -19,7 +19,7 @@ class PurchaseOrder extends Model
     }
 
     public function purchaseOrderItemParameter(){
-        return $this->hasMany(PurchaseOrderItemParameter::class);
+        return $this->hasMany(PurchaseOrderItemParameter::class,'po_id','id');
     }
 
     public function company(){

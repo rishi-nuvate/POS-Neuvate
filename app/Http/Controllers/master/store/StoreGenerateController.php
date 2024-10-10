@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master\store;
 
-use App\Models\StoreGenerate;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStoreGenerateRequest;
 use App\Http\Requests\UpdateStoreGenerateRequest;
+use App\Models\StoreGenerate;
 use Illuminate\Support\Facades\DB;
 
 class StoreGenerateController extends Controller

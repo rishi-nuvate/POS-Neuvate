@@ -4,7 +4,6 @@
 use App\Http\Controllers\Auth\LoginRegistrationController;
 use App\Http\Controllers\authenticate\AuthLogin;
 use App\Http\Controllers\BalanceController;
-use App\Http\Controllers\CategoryMasterController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
 use App\Http\Controllers\centralWarehouse\GRNMasterController;
 use App\Http\Controllers\centralWarehouse\OutwardMasterController;
@@ -12,7 +11,6 @@ use App\Http\Controllers\centralWarehouse\PackMasterController;
 use App\Http\Controllers\centralWarehouse\PickMasterController;
 use App\Http\Controllers\centralWarehouse\ShelfMasterController;
 use App\Http\Controllers\centralWarehouse\StockInMasterController;
-use App\Http\Controllers\CentralWarehouseController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\master\basicInfo\BrandController;
@@ -23,14 +21,16 @@ use App\Http\Controllers\master\basicInfo\SleeveController;
 use App\Http\Controllers\master\basicInfo\SlimController;
 use App\Http\Controllers\master\basicInfo\SubCategoryController;
 use App\Http\Controllers\master\basicInfo\TagsController;
+use App\Http\Controllers\master\company\CentralWarehouseController;
 use App\Http\Controllers\master\company\CompanyController;
 use App\Http\Controllers\master\company\CompanyShipAddressController;
-use App\Http\Controllers\master\EmployeeController;
 use App\Http\Controllers\master\InventoryMasterController;
 use App\Http\Controllers\master\MasterController;
 use App\Http\Controllers\master\ProductController;
-use App\Http\Controllers\master\TagsMasterController;
-use App\Http\Controllers\master\VenderController;
+use App\Http\Controllers\master\store\StoreGenerateController;
+use App\Http\Controllers\master\store\StoreTypeController;
+use App\Http\Controllers\master\users\EmployeeController;
+use App\Http\Controllers\master\users\VenderController;
 use App\Http\Controllers\orderRequisition\OrderRequisitionMasterController;
 use App\Http\Controllers\orderRequisition\SalesOrderController;
 use App\Http\Controllers\pages\ExpenseController;
@@ -38,16 +38,12 @@ use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
-use App\Http\Controllers\StoreGenerateController;
 use App\Http\Controllers\storeInventory\StockInController;
-use App\Http\Controllers\StoreTypeController;
 use App\Http\Controllers\supplyChain\BarcodeController;
-use App\Http\Controllers\supplyChain\BarcodeMasterController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
 use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 use App\Http\Controllers\WarehouseInventoryController;
 use App\Http\Middleware\EnsureTokenIsValid;
-use App\Models\StoreGenerate;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -163,7 +159,6 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/deleteProduct/{product}', [ProductController::class, 'destroy']);
     Route::post('deleteVariant', [ProductController::class, 'deleteVariant'])->name('deleteVariant');
 
-//    Route::get('product/view', [ProductMasterController::class, 'index'])->name(('view-product'));
 
     // Employee
     Route::resource('employee', EmployeeController::class);

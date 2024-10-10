@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master\users;
 
-use App\Models\UserBank;
-use App\Http\Requests\StoreUserBankRequest;
-use App\Http\Requests\UpdateUserBankRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserAddressRequest;
+use App\Http\Requests\UpdateUserAddressRequest;
+use App\Models\UserAddress;
 
-class UserBankController extends Controller
+class UserAddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class UserBankController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserBankRequest $request)
+    public function store(StoreUserAddressRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class UserBankController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserBank $userBank)
+    public function show(UserAddress $userAddress)
     {
         //
     }
@@ -43,7 +44,7 @@ class UserBankController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserBank $userBank)
+    public function edit(UserAddress $userAddress)
     {
         //
     }
@@ -51,7 +52,7 @@ class UserBankController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserBankRequest $request, UserBank $userBank)
+    public function update(UpdateUserAddressRequest $request, UserAddress $userAddress)
     {
         //
     }
@@ -59,7 +60,7 @@ class UserBankController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserBank $userBank)
+    public function destroy(UserAddress $userAddress)
     {
         //
     }
