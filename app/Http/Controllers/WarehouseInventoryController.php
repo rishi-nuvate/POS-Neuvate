@@ -167,14 +167,49 @@ class WarehouseInventoryController extends Controller
 
 //            $warehouse = $inventory->warehouse->warehouse_name ?? null;
             $product = $item->product->product_name;
-            $total = $item->total_inventory;
-            $rate = $item->product->cost_price;
-            $goodInventory = $item->good_inventory;
+            $rate = '<div class="d-flex align-items-center">
+                    <div class="badge rounded-pill bg-label-dark me-3 p-2">
+                        <i class="ti ti-currency-rupee ti-sm"></i>
+                    </div>
+                    <div class="card-info">
+                        <h5 class="mb-0">'.$item->product->cost_price .'</h5>
+                        <small>Rate</small>
+                    </div>
+                </div>';
+            $total = '<div class="d-flex align-items-center">
+                <div class="badge rounded-pill bg-label-primary me-3 p-2">
+                    <i class="ti ti-shopping-cart ti-sm"></i>
+                </div>
+                <div class="card-info">
+                    <h5 class="mb-0"> '. $item->total_inventory .'</h5>
+                    <small>Total</small>
+                </div>
+            </div>';
+
+            $goodInventory = '<div class="d-flex align-items-center">
+                <div class="badge rounded-pill bg-label-success me-3 p-2">
+                    <i class="ti ti-shopping-cart ti-sm"></i>
+                </div>
+                <div class="card-info">
+                    <h5 class="mb-0"> '. $item->good_inventory .'</h5>
+                    <small>Total</small>
+                </div>
+            </div>';
+//            $goodInventory = $item->good_inventory;
             $badInventory = $item->bad_inventory ?? 0;
-            $action = '<p>';
+            $badInventory = '<div class="d-flex align-items-center">
+                <div class="badge rounded-pill bg-label-danger me-3 p-2">
+                    <i class="ti ti-shopping-cart ti-sm"></i>
+                </div>
+                <div class="card-info">
+                    <h5 class="mb-0"> '. $badInventory .'</h5>
+                    <small>Total</small>
+                </div>
+            </div>';
+            $action = '<a class="btn btn-icon btn-label-primary mt-1 waves-effect mx-1" href="#"><i class="ti ti-eye ti-sm"></i></a>';
 
             array_push($result["data"], array($num, $product, $total, $rate, $goodInventory, $badInventory, $action));
-
+            $num++;
         }
 
         echo json_encode($result);

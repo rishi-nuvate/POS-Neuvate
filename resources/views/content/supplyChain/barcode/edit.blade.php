@@ -9,7 +9,11 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/supplyChain') }}">Supply Chain</a>
             </li>
-            <li class="breadcrumb-item active">Barcode</li>
+            <li class="breadcrumb-item active">
+            <a href="{{route('barcode.index')}}">
+                Barcode
+            </a>
+            </li>
             <li class="breadcrumb-item active">Add</li>
         </ol>
     </nav>

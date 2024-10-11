@@ -29,7 +29,7 @@ class LoginRegistrationController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('authenticate-login')
+        return redirect()->route('login')
             ->withSuccess('You have successfully registered & logged in!');
     }
 
@@ -76,7 +76,7 @@ class LoginRegistrationController extends Controller
         // } else {
         //     $routeName = 'auth-login-cover';
         // }
-        return redirect()->route('authenticate-login')
-            ->withSuccess('You have logged out successfully!');;
+        return redirect()->route('login')
+            ->withSuccess('You have logged out successfully!');
     }
 }

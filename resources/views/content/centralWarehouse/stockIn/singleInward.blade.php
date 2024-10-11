@@ -9,9 +9,15 @@
 @endsection
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Central Warehouse/ Single Inward /</span> Create
-    </h4>
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/centralWarehouseMaster') }}">Central Warehouse</a>
+            </li>
+            <li class="breadcrumb-item active"> Single Inward</li>
+            <li class="breadcrumb-item active">Add</li>
+        </ol>
+    </nav>
     <!-- Invoice List Widget -->
 
 

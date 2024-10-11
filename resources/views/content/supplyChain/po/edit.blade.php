@@ -3,9 +3,19 @@
 @section('title', 'Edit-P.O.')
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Supply Chain/ P.O. /</span> Edit
-    </h4>
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/supplyChain') }}">Supply Chain</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a href="{{route('po.index')}}">
+                    P.O.
+                </a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ol>
+    </nav>
     <!-- Invoice List Widget -->
 
     <div class="card">
@@ -69,8 +79,8 @@
                                 <option value="">Select</option>
                                 @foreach($vendors as $vendor)
                                     <option value="{{ $vendor->id }}"
-                                    {{ $Po->Vendor->id == $vendor->id ? 'selected' : '' }}>
-                                    {{ $vendor->name }}
+                                        {{ $Po->Vendor->id == $vendor->id ? 'selected' : '' }}>
+                                        {{ $vendor->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -91,97 +101,112 @@
 
                     <input type="hidden" value="{{ $Po->id }}" name="purchaseOrderId">
                     @php
-                    $num = 0
+                        $num = 0
                     @endphp
                     <div class="row" id="po_table">
-                    @foreach($Po->PurchaseOrderItem as $PoItem)
+                        @foreach($Po->PurchaseOrderItem as $PoItem)
 
-                            <input type="hidden" value="{{ $PoItem->id }}" name="poItemId[{{ $num }}]" id="poItemId{{ $num }}">
-                        <div class="row" id="row_{{ $num }}">
-                            <hr class="mt-5">
-                            <div class="col-md-3 mt-3">
-                                <label class="form-label">Product</label>
-                                <select id="product_id[{{ $num }}]" name="product_id[{{ $num }}]"
-                                        class="select2 select21 form-select" data-allow-clear="true"
-                                        data-placeholder="Select Product" onchange="getSkuByProduct({{ $num }});">
-                                    <option value="">Select</option>
-                                    @foreach($products as $product)
-                                        <option value="{{ $product->id }}"
-                                        {{ $PoItem->product->id == $product->id ? 'selected' : '' }}>
-                                        {{ $product->product_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <input type="hidden" value="{{ $PoItem->id }}" name="poItemId[{{ $num }}]"
+                                   id="poItemId{{ $num }}">
+                            <div class="row" id="row_{{ $num }}">
+                                <hr class="mt-5">
+                                <div class="col-md-3 mt-3">
+                                    <label class="form-label">Product</label>
+                                    <select id="product_id[{{ $num }}]" name="product_id[{{ $num }}]"
+                                            class="select2 select21 form-select" data-allow-clear="true"
+                                            data-placeholder="Select Product" onchange="getSkuByProduct({{ $num }});">
+                                        <option value="">Select</option>
+                                        @foreach($products as $product)
+                                            <option value="{{ $product->id }}"
+                                                {{ $PoItem->product->id == $product->id ? 'selected' : '' }}>
+                                                {{ $product->product_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                            <div class="col-md-3 mt-3">
-                                <label class="form-label" for="description[{{ $num }}]">Description</label>
-                                <input type="text" id="description[{{ $num }}]" name="description[{{ $num }}]" class="form-control"
-                                       placeholder="Add Description" value="{{ $PoItem->product_description }}"/>
-                            </div>
+                                <div class="col-md-3 mt-3">
+                                    <label class="form-label" for="description[{{ $num }}]">Description</label>
+                                    <input type="text" id="description[{{ $num }}]" name="description[{{ $num }}]"
+                                           class="form-control"
+                                           placeholder="Add Description" value="{{ $PoItem->product_description }}"/>
+                                </div>
 
-                            <div class="col-md-3 mt-3">
-                                <label class="form-label" for="unitPrice[{{ $num }}]">Unit Price</label>
-                                <input type="number" id="unitPrice[{{ $num }}]" name="unitPrice[{{ $num }}]" class="form-control"
-                                       placeholder="Unit Price" value="{{ $PoItem->unit_price }}"/>
-                            </div>
+                                <div class="col-md-3 mt-3">
+                                    <label class="form-label" for="unitPrice[{{ $num }}]">Unit Price</label>
+                                    <input type="number" id="unitPrice[{{ $num }}]" name="unitPrice[{{ $num }}]"
+                                           class="form-control"
+                                           placeholder="Unit Price" value="{{ $PoItem->unit_price }}"/>
+                                </div>
 
-                            <div class="col-md-3 mt-3">
-                                <label class="form-label" for="tax[{{ $num }}]">Tax</label>
-                                <input type="number" id="tax[{{ $num }}]" name="tax[{{ $num }}]" class="form-control"
-                                       placeholder="Tax" value="{{ $PoItem->tax_amount }}"/>
-                            </div>
+                                <div class="col-md-3 mt-3">
+                                    <label class="form-label" for="tax[{{ $num }}]">Tax</label>
+                                    <input type="number" id="tax[{{ $num }}]" name="tax[{{ $num }}]"
+                                           class="form-control"
+                                           placeholder="Tax" value="{{ $PoItem->tax_amount }}"/>
+                                </div>
 
-                            <input type="hidden" value="{{ $PoItem->po_id ?? $Po->id }}" id="po_id{{ $num }}">
+                                <input type="hidden" value="{{ $PoItem->po_id ?? $Po->id }}" id="po_id{{ $num }}">
 
-                            @foreach($PoItem->purchaseOrderItemParameter as $Parameter)
-                                <input type="hidden" value="{{ $Parameter->po_item_id}}" id="po_item_id{{ $num }}">
-                            @endforeach
+                                @foreach($PoItem->purchaseOrderItemParameter as $Parameter)
+                                    <input type="hidden" value="{{ $Parameter->po_item_id}}" id="po_item_id{{ $num }}">
+                                @endforeach
 
-                            <div class="col-4 col-md-4 mt-3">
-                                <label class="form-label" for="TotalQty{{ $num }}">Total Qty</label>
-                                <div class="input-group">
-                                    <input required type="number" id="TotalQty{{ $num }}" name="TotalQty[{{ $num }}]"
-                                           class="form-control" placeholder="Total Qty" value="{{ $PoItem->total_quantity }}" readonly />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary waves-effect"
-                                                data-bs-toggle="modal" data-bs-target="#addQty{{ $num }}" type="button" onclick="getSelectedParameters({{ $num }});">
-                                            <i class="fa fa-plus"></i> Add Sku Wise
+                                <div class="col-4 col-md-4 mt-3">
+                                    <label class="form-label" for="TotalQty{{ $num }}">Total Qty</label>
+                                    <div class="input-group">
+                                        <input required type="number" id="TotalQty{{ $num }}"
+                                               name="TotalQty[{{ $num }}]"
+                                               class="form-control" placeholder="Total Qty"
+                                               value="{{ $PoItem->total_quantity }}" readonly/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary waves-effect"
+                                                    data-bs-toggle="modal" data-bs-target="#addQty{{ $num }}"
+                                                    type="button" onclick="getSelectedParameters({{ $num }});">
+                                                <i class="fa fa-plus"></i> Add Sku Wise
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-4 col-md-4 mt-3">
+                                    <label class="form-label" for="NetAmount{{ $num }}">Net Amount Of Total Qty</label>
+                                    <div class="input-group">
+                                        <input required type="number" id="NetAmount{{ $num }}"
+                                               name="NetAmount{{ $num }}"
+                                               class="form-control bg-light" placeholder="Net Amount" readonly/>
+                                    </div>
+                                </div>
+
+                                <div class="col-4 mt-4">
+                                    <div id="collapseButtonDiv[{{ $num }}]" hidden>
+                                        <button id="toggleCollapseButton"
+                                                class="btn btn-primary mt-3 waves-effect waves-light collapsed"
+                                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseTable"
+                                                aria-expanded="true" aria-controls="collapseExample">
+                                            <i class="fas fa-angle-double-down me-2"></i>View Parameters
                                         </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 mt-3">
+                                    <button type="button"
+                                            class="btn rounded-pill btn-icon btn-label-danger waves-effect"
+                                            onclick="confirmAction({{ $PoItem->id }})"><span class="ti ti-trash"></span>
+                                    </button>
+                                </div>
+
+                                <div class="col-12 mt-3" id="collapseTable">
+                                    <div class="table-responsive text-nowrap">
+                                        <table class="table table-bordered" id="selection-table[{{ $num }}]">
+                                        </table>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-4 col-md-4 mt-3">
-                                <label class="form-label" for="NetAmount{{ $num }}">Net Amount Of Total Qty</label>
-                                <div class="input-group">
-                                    <input required type="number" id="NetAmount{{ $num }}" name="NetAmount{{ $num }}"
-                                           class="form-control bg-light" placeholder="Net Amount" readonly />
-                                </div>
-                            </div>
-
-                            <div class="col-4 mt-4">
-                                <div id="collapseButtonDiv[{{ $num }}]" hidden>
-                                    <button id="toggleCollapseButton" class="btn btn-primary mt-3 waves-effect waves-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTable" aria-expanded="true" aria-controls="collapseExample">
-                                        <i class="fas fa-angle-double-down me-2"></i>View Parameters
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mt-3">
-                                <button type="button" class="btn rounded-pill btn-icon btn-label-danger waves-effect" onclick="confirmAction({{ $PoItem->id }})"><span class="ti ti-trash"></span></button>
-                            </div>
-
-                            <div class="col-12 mt-3" id="collapseTable">
-                                <div class="table-responsive text-nowrap">
-                                    <table class="table table-bordered" id="selection-table[{{ $num }}]">
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                            <div class="modal fade ValidateModelForTotalQty" id="addQty{{ $num }}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-xl modal-simple modal-edit-user modal-dialog-scrollable" >
+                            <div class="modal fade ValidateModelForTotalQty" id="addQty{{ $num }}" tabindex="-1"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-simple modal-edit-user modal-dialog-scrollable">
 
                                     <div class="modal-content p-1 p-md-0" style="min-height: 60vh;">
                                         <div class="modal-header text-white rounded-top bg-primary p-2">
@@ -190,11 +215,12 @@
                                         <div class="modal-body">
                                             <div class="row g-3">
                                                 <div class="form-text">
-                                                    <b>Note</b> :  All Quantity should be in comma separated
+                                                    <b>Note</b> : All Quantity should be in comma separated
                                                 </div>
                                                 <div class="col-md-12">
 
-                                                    <label class="form-label" for="sku_code{{ $num }}">Select SKUs</label>
+                                                    <label class="form-label" for="sku_code{{ $num }}">Select
+                                                        SKUs</label>
                                                     <select id="sku_code{{ $num }}" name="sku_code{{ $num }}" multiple
                                                             class="select2 select21 form-select" data-allow-clear="true"
                                                             data-placeholder="Select Product SKU">
@@ -218,7 +244,8 @@
                                         </div>
 
                                         <div class="col-12 m-4">
-                                            <button type="button" class="btn btn-label-success ml-3" data-bs-dismiss="modal"
+                                            <button type="button" class="btn btn-label-success ml-3"
+                                                    data-bs-dismiss="modal"
                                                     aria-label="Close" onclick="displaySelectionInTable({{ $num }})">
                                                 Done
                                             </button>
@@ -229,18 +256,20 @@
 
 
 
-                        @php
-                        $num++
-                        @endphp
-                    @endforeach
+                            @php
+                                $num++
+                            @endphp
+                        @endforeach
                     </div>
                     <div class="px-0 mt-3 row">
                         <div class="col-lg-2 col-md-12 col-sm-12">
-                            <button type="button" class="btn btn-outline-primary d-grid w-100 waves-effect" onclick="addItem()">Add another</button>
+                            <button type="button" class="btn btn-outline-primary d-grid w-100 waves-effect"
+                                    onclick="addItem()">Add another
+                            </button>
                         </div>
 
                         <div class="col-lg-2 col-md-12 col-sm-12">
-                            <button type="submit"  class="btn btn-primary d-grid w-100">Update</button>
+                            <button type="submit" class="btn btn-primary d-grid w-100">Update</button>
                         </div>
                     </div>
 
@@ -259,7 +288,7 @@
 
 
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
             getAllDetails();
             getCompanyAddress();
             getShippingAddress();
@@ -433,7 +462,7 @@
                             var selectedIndexes = $(this).val(); // Array of selected indices
 
                             if (selectedIndexes && selectedIndexes.length > 0) {
-                                displaySkuTable(selectedIndexes, skus, colors, sizes, qtys=0, currentRowId);
+                                displaySkuTable(selectedIndexes, skus, colors, sizes, qtys = 0, currentRowId);
                             } else {
                                 $(`#table-container${currentRowId}`).empty();
                             }
@@ -682,8 +711,8 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     data: {
                         product_id: product_id,
-                        po_id : po_id,
-                        po_item_id : po_item_id,
+                        po_id: po_id,
+                        po_item_id: po_item_id,
                         '_token': "{{ csrf_token() }}"
                     },
                     dataType: 'json',

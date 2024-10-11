@@ -3,9 +3,16 @@
 @section('title', 'Create-P.O.')
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Supply Chain/ P.O. /</span> Add
-    </h4>
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/supplyChain') }}">Supply Chain</a>
+            </li>
+            <li class="breadcrumb-item active"> P.O. </li>
+            <li class="breadcrumb-item active">Add</li>
+        </ol>
+    </nav>
+
     <!-- Invoice List Widget -->
 
     <div class="card">
@@ -161,6 +168,7 @@
                         </div>
 
                     </div>
+
                     <div class="px-0 mt-3 row">
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <button type="button" class="btn btn-outline-primary d-grid w-100 waves-effect"
@@ -222,6 +230,7 @@
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
+
     <script>
         var products = @json($products);
         var counter = 0;
@@ -342,6 +351,7 @@
 
             // Append the content to the table body
             $('#po_table').append(htmlContent);
+            $('.select2').select2();
 
         }
 
