@@ -228,6 +228,21 @@
                                     View</a>
                             </div>
                         </div>
+{{--                        Color--}}
+                        <div class="btn-group mb-2">
+                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <i class="menu-icon tf-icons ti ti-truck"></i>Color
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" href="{{ route('color.create') }}"><i
+                                        class="ti ti-pencil me-1"></i>
+                                    Add</a>
+                                <a class="dropdown-item" href="{{ route('color.index') }}"><i
+                                        class="ti ti-eye me-1"></i>
+                                    View</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

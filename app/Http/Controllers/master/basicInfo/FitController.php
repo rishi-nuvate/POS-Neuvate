@@ -93,8 +93,8 @@ class FitController extends Controller
 
             $id = $fit->id;
             $name = $fit->fit_name;
-            $category = $fit->category->Name;
-            $subCategory = $fit->subCategory->Name;
+            $category = $fit->category->name;
+            $subCategory = $fit->subCategory->name;
 
             $action =
                 ' <a href="fit/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>

@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('CompanyName');
-            $table->enum('Document', ['pan', 'gst']);
-            $table->string('PanGstNo', length: 20);
-            $table->string('PanGstFile');
-            $table->string('BillingName');
-            $table->integer('BillingMobileNo');
+            $table->string('company_name');
+            $table->enum('document', ['pan', 'gst']);
+            $table->string('gst_no', length: 20);
+            $table->string('gst_file');
+            $table->string('billing_name');
+            $table->integer('billing_mobile_no');
             $table->string('BillingEmail');
-            $table->text('AddLine1');
+            $table->text('add_line1');
             $table->text('AddLine2');
             $table->string('City');
             $table->string('State');

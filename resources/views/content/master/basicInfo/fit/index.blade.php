@@ -95,7 +95,22 @@
                 "initComplete": function (setting, json) {
                     $("#overlay").fadeOut(100);
                 },
-                bDestroy: true
+                bDestroy: true,
+                "drawCallback": function(settings) {
+                    var api = this.api();
+                    var rows = api.rows({ page: 'current' }).nodes();
+                    var last = null;
+
+                    // Loop through the rows and group them
+                    api.column(1, { page: 'current' }).data().each(function(group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before(
+                                '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                            );
+                            last = group;
+                        }
+                    });
+                },
             });
         }
     </script>

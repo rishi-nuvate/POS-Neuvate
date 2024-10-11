@@ -24,7 +24,6 @@
                     <th>Store Name</th>
                     <th>Store Code</th>
                     <th>Store Type</th>
-                    <th>Manager</th>
                     <th>Action</th>
                 </tr>
                 </thead>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('ShipPersonNo');
             $table->string('ShipPersonEmail');
             $table->string('ShipGstNo');
-            $table->text('AddLine1');
+            $table->text('add_line1');
             $table->text('AddLine2');
             $table->string('City');
             $table->string('State');

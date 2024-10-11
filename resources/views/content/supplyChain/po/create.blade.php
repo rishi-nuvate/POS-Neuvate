@@ -33,7 +33,7 @@
                                     data-placeholder="Select Company" onchange="getAllDetails()">
                                 <option value="">Select</option>
                                 @foreach($companies as $company)
-                                    <option value="{{ $company->id }}">{{ $company->CompanyName }}</option>
+                                    <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -647,12 +647,12 @@
                     dataType: 'json',
                     success: function (response) {
                         $('#compAdd').empty().append('<h5>Company address :</h5>' +
-                            '<p>' + response.CompanyName + '</p> ' +
-                            '<p class="mb-0">' + response.AddLine1 + ' ' + response.AddLine2 + '</p>' +
+                            '<p>' + response.company_name + '</p> ' +
+                            '<p class="mb-0">' + response.add_line1 + ' ' + response.AddLine2 + '</p>' +
                             '<p class="mb-2">' + response.City + ', ' + response.State + ', ' + response.PinCode + '</p>' +
-                            '<p class="mb-0">' + response.BillingMobileNo + '</p>' +
-                            '<p class="mb-2">' + response.BillingEmail + ' </p>' +
-                            '<p class="mb-2">GST No. : ' + response.PanGstNo + ' </p>');
+                            '<p class="mb-0">' + response.billing_mobile_no + '</p>' +
+                            '<p class="mb-2">' + response.billing_email + ' </p>' +
+                            '<p class="mb-2">GST No. : ' + response.gst_no + ' </p>');
                         $('#shipAdd').empty();
                     }
                 });

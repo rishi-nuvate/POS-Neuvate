@@ -65,15 +65,28 @@
                                     <h5 class="card-tile mb-0">Product information</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="product_name">Name</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="product_name"
-                                            placeholder="Product title"
-                                            name="product_name"
-                                            aria-label="Product title" required/>
+                                    <div class="row">
+
+
+                                        <div class="mb-3 col-md-8">
+                                            <label class="form-label" for="product_name">Name</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="product_name"
+                                                placeholder="Product title"
+                                                name="product_name"
+                                                aria-label="Product title" required/>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="productSizeCm">Size(CM)</label>
+                                            <input
+                                                type="text"
+                                                id="productSizeCm"
+                                                name="size_cm"
+                                                class="form-control"
+                                                placeholder="Size"/>
+                                        </div>
                                     </div>
                                     <div class="row mb-3 col-md-12">
                                         <div class="col-md-4 mt-1">
@@ -135,9 +148,18 @@
                                         <div class="row">
                                             <div class="mb-3 col-3">
                                                 <label class="form-label" for="productSKU">Color</label>
-                                                <input type="text" name="productColor[0][color]" id="color0"
-                                                       placeholder="Color"
-                                                       class="form-control">
+                                                {{--                                                <input type="text" name="productColor[0][color]" id="color0"--}}
+                                                {{--                                                       placeholder="Color"--}}
+                                                {{--                                                       class="form-control">--}}
+
+                                                <select class="select2 form-select" id="color0"
+                                                        data-placeholder="Select Color" name="productColor[0][color]"
+                                                        required>
+                                                    <option value="">Select Category</option>
+                                                    @foreach($colors as $color)
+                                                        <option value="{{$color->id}}">{{$color->color}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="mb-3 col-6">
@@ -150,14 +172,14 @@
 
                                         <div class="row">
 
-                                            <div class="mb-3 col-3">
+                                            <div class="mb-3 col-md-3">
                                                 <label class="form-label" for="productSKU">Size</label>
                                                 <input type="text" name="optionValueSize[0][0][size]" id="size0"
                                                        placeholder="Size"
                                                        class="form-control">
                                             </div>
 
-                                            <div class="mb-3 col-6">
+                                            <div class="mb-3 col-md-4">
                                                 <label class="form-label" for="productSKU">SKU</label>
                                                 <input
                                                     type="text"
@@ -165,6 +187,16 @@
                                                     name="optionValueSize[0][0][sku]"
                                                     class="form-control"
                                                     placeholder="SKU"/>
+                                            </div>
+
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label" for="productBarcode">Barcode</label>
+                                                <input
+                                                    type="text"
+                                                    id="productBarcode"
+                                                    name="optionValueSize[0][0][barcode]"
+                                                    class="form-control"
+                                                    placeholder="Barcode"/>
                                             </div>
                                         </div>
                                     </div>
@@ -260,7 +292,7 @@
                                                 data-placeholder="Select Category" name="cat_id" required>
                                             <option value="">Select Category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{$category->Name}}</option>
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -277,10 +309,10 @@
                                     <div class="mb-3">
                                         <label for="ecommerce-product-tags" class="form-label mb-1">Tags</label>
                                         <select name="tag_id[]" class="select2 form-select" id="tag_id" multiple>
-                                                <option value="">select Tag</option>
-                                                @foreach($tags as $tag)
-                                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                                @endforeach
+                                            <option value="">select Tag</option>
+                                            @foreach($tags as $tag)
+                                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     {{--Season--}}
@@ -331,7 +363,7 @@
 
                                     <div class="mb-3">
                                         <label for="select2Multiple" class="form-label">Pattern</label>
-                                        <input type="text" name="pattern_id" id="pattern_id" class="form-control" >
+                                        <input type="text" name="pattern_id" id="pattern_id" class="form-control">
 
                                     </div>
                                 </div>
@@ -355,7 +387,6 @@
 
 @section('page-script')
 
-
     <script>
         var counter1 = 0;
 
@@ -370,14 +401,17 @@
             newDiv.className = "row";
             newDiv.id = "sizeItem_" + colorVariantStart + sizeVariantStart;
             newDiv.innerHTML = `
-          <div class="mb-3 col-3">
+          <div class="mb-3 col-md-3">
               <label class="form-label" for="optionValueSize_${colorVariantStart}">Size</label>
               <input type="text" name="optionValueSize[${colorVariantStart}][${newIndex}][size]" id="size_${colorVariantStart}" placeholder="Size" class="form-control">
           </div>
-          <div class="mb-3 col-8">
+          <div class="mb-3 col-md-4">
               <label class="form-label" for="optionValueSize_${colorVariantStart}">SKU</label>
               <input type="text" id="optionValueSize_${colorVariantStart}" name="optionValueSize[${colorVariantStart}][${newIndex}][sku]" class="form-control" placeholder="SKU" />
           </div>
+          <div class="mb-3 col-md-4">
+            <label class="form-label" for="productBarcode_${colorVariantStart}">Barcode</label>
+            <input type="text" id="productBarcode_${colorVariantStart}" name="optionValueSize[${colorVariantStart}][${newIndex}][barcode]" class="form-control" placeholder="Barcode"/> </div>
           <div class="col-1 mt-4">
               <button type="button" onclick="removeSize(${colorVariantStart},${newIndex})" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
                   <span class="ti ti-trash"></span>
@@ -404,6 +438,10 @@
 
         function addAnotherColor() {
             counter1++;
+
+            var colors = `@foreach($colors as $color)
+            <option value="{{$color->id}}">{{$color->color}}</option>
+                                                    @endforeach`;
             // Create a new div element with the specified HTML code
             var newDiv = document.createElement("div");
             newDiv.className = "row fade-in";
@@ -418,8 +456,11 @@
                                     <div class="row">
                                         <div class="mb-3 col-3">
                                             <label class="form-label" for="productSKU">Color</label>
-                                            <input type="text" name="productColor[${counter1}][color]" id="color${counter1}" placeholder="Color"
-                                                   class="form-control">
+                                            <select class="select2 form-select" id="color${counter1}"
+                                                        data-placeholder="Select Color" name="productColor[${counter1}][color]" required>
+                                                    <option value="">Select Color</option>
+                                                    ${colors}
+                                            </select>
                                         </div>
 
                                         <div class="mb-3 col-6">
@@ -431,13 +472,13 @@
 
                                     <div class="row">
 
-                                        <div class="mb-3 col-3">
+                                        <div class="mb-3 col-md-3">
                                             <label class="form-label" for="productSKU">Size</label>
                                             <input type="text" name="optionValueSize[${counter1}][0][size]" id="size" placeholder="Size"
                                                    class="form-control">
                                         </div>
                                         <input type="hidden" id="sizeVariantStart${counter1}" value="0">
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-md-4">
                                             <label class="form-label" for="productSKU">SKU</label>
                                             <input
                                                 type="text"
@@ -446,6 +487,15 @@
                                                 class="form-control"
                                                 placeholder="SKU"/>
                                         </div>
+                                        <div class="mb-3 col-md-4">
+                                                <label class="form-label" for="productBarcode">Barcode</label>
+                                                <input
+                                                    type="text"
+                                                    id="productBarcode"
+                                                    name="optionValueSize[${counter1}][0][barcode]"
+                                                    class="form-control"
+                                                    placeholder="Barcode"/>
+                                            </div>
                                     </div>
                                 </div>
                                 <div>
@@ -462,6 +512,9 @@
             // Append the new div to the container
             document.getElementById("colorVariant").appendChild(newDiv);
 
+            $('.select2').select2();
+
+
             // Set focus to the input field
             newDiv.querySelector("input").focus();
 
@@ -469,6 +522,7 @@
             newDiv.addEventListener('animationend', () => {
                 newDiv.classList.remove('fade-in');
             });
+
         }
 
         function removeItem(counter1) {
@@ -494,7 +548,7 @@
                             '<option value="">Select Sub Category</option>');
                         $.each(response, function (key, value) {
                             $('#subCategory').append('<option value="' + value.id + '">' + value
-                                .Name + '</option>');
+                                .name + '</option>');
                         });
                     }
                 });
@@ -503,7 +557,7 @@
             }
         }
 
-        function getSleeveFit(){
+        function getSleeveFit() {
             var categoryId = document.getElementById('productCategory').value;
             var subCategoryId = document.getElementById('subCategory').value;
 

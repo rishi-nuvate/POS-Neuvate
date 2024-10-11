@@ -54,12 +54,6 @@
 @endsection
 
 
-@section('page-script')
-    <script src="{{asset('assets/js/form-wizard-validation.js')}}"></script>
-    <script src="{{asset('assets/js/form-wizard-numbered.js')}}"></script>
-@endsection
-
-
 <div id="overlay">
     <div class="cv-spinner">
         <span class="spinner"></span>
@@ -68,14 +62,10 @@
 @section('content')
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form Wizard/</span> Numbered</h4>
         <!-- Default -->
         <div class="row">
 
-
-            <!-- Validation Wizard -->
             <div class="col-12 mb-4">
-                <small class="text-light fw-medium">Validation</small>
                 <div id="wizard-validation" class="bs-stepper mt-2">
                     <div class="bs-stepper-header">
                         <div class="step" data-target="#account-details-validation">
@@ -114,16 +104,21 @@
                             @csrf
                             <!-- Account Details -->
                             <div id="account-details-validation" class="content">
-                                <div class="content-header mb-3">
-                                    <h6 class="mb-0">Account Details</h6>
-                                    <small>Enter Your Account Details.</small>
-                                </div>
+
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <label class="form-label" for="store_type">Store Type </label>
-                                        <input type="text" name="store_type" id="store_type"
-                                               class="form-control"
-                                               placeholder="enter company name"/>
+                                        {{--                                        <input type="text" name="store_type" id="store_type"--}}
+                                        {{--                                               class="form-control"--}}
+                                        {{--                                               placeholder="enter company name"/>--}}
+
+                                        <select id="store_type" name="store_type" class="select2 form-select"
+                                                data-allow-clear="true">
+                                            <option value=""> Select</option>
+                                            @foreach($storeTypes as $storeType)
+                                                <option value="{{$storeType->id}}"> {{$storeType->store_type}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -148,12 +143,25 @@
                                     </div>
 
                                     <div class="col-sm-6">
+                                        <label class="form-label" for="store_add_line_1">Address Line 1 </label>
+                                        <input type="text" name="store_add_line_1" id="store_add_line_1"
+                                               class="form-control"
+                                               placeholder="enter Address Line 1"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_add_line_2">Address Line 2 </label>
+                                        <input type="text" name="store_add_line_2" id="store_add_line_2"
+                                               class="form-control"
+                                               placeholder="enter address line 2"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
                                         <label class="form-label" for="store_city">City </label>
                                         <input type="text" name="store_city" id="store_city"
                                                class="form-control"
                                                placeholder="enter City"/>
                                     </div>
-
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="store_state">State </label>
@@ -191,7 +199,8 @@
                                             <option value="West Bengal">West Bengal</option>
                                             <option disabled style="background-color:#aaa; color:#fff">UNION Territories
                                             </option>
-                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                            </option>
                                             <option value="Chandigarh">Chandigarh</option>
                                             <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
                                             <option value="Daman and Diu">Daman and Diu</option>
@@ -244,52 +253,22 @@
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <label class="form-label" for="franchise">Franchise</label>
-                                        <input
-                                            type="text"
-                                            id="franchise"
-                                            name="franchise"
-                                            class="form-control"
-                                            placeholder="John"/>
+                                        <select id="franchise" name="franchise" class="select2 form-select"
+                                                data-allow-clear="true">
+                                            <option value=""> Select</option>
+                                        </select>
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="master_franchise">Franchise</label>
+                                        <label class="form-label" for="square_fit">Square Feet</label>
                                         <input
                                             type="text"
-                                            id="master_franchise"
-                                            name="master_franchise"
+                                            id="square_feet"
+                                            name="square_feet"
                                             class="form-control"
-                                            placeholder="John"/>
+                                            placeholder="Square Feet"/>
                                     </div>
 
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="manager_name">Manager Name</label>
-                                        <input
-                                            type="text"
-                                            id="manager_name"
-                                            name="manager_name"
-                                            class="form-control"
-                                            placeholder="John"/>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="manager_number">Manager Phone num.</label>
-                                        <input
-                                            type="text"
-                                            id="manager_number"
-                                            name="manager_number"
-                                            class="form-control"
-                                            placeholder="Doe"/>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="manager_email">Manager Email</label>
-                                        <input
-                                            type="email"
-                                            id="manager_email"
-                                            name="manager_email"
-                                            class="form-control"
-                                            placeholder="Doe"/>
-                                    </div>
 
                                     <div class="col-12 d-flex justify-content-between">
                                         <button class="btn btn-label-secondary btn-prev">
@@ -325,7 +304,8 @@
                                             <i class="ti ti-arrow-left me-sm-1 me-0"></i>
                                             <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                         </button>
-                                        <button type="submit" class="btn btn-success btn-next btn-submit">Submit</button>
+                                        <button type="submit" class="btn btn-success btn-next btn-submit">Submit
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -341,3 +321,12 @@
     </div>
 
 @endsection
+
+
+@section('page-script')
+    <script src="{{asset('assets/js/form-wizard-validation.js')}}"></script>
+    <script src="{{asset('assets/js/form-wizard-numbered.js')}}"></script>
+
+@endsection
+
+{{--<option value="${value.id}">${value.name}</option>--}}

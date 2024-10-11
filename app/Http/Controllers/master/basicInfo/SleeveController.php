@@ -86,8 +86,8 @@ class SleeveController extends Controller
 
             $id = $sleeve->id;
             $name = $sleeve->sleeve_name;
-            $category = $sleeve->category->Name;
-            $subCategory = $sleeve->subCategory->Name;
+            $category = $sleeve->category->name;
+            $subCategory = $sleeve->subCategory->name;
 
             $action =
                 ' <a href="sleeve/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>

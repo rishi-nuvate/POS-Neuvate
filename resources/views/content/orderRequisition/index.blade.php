@@ -17,13 +17,13 @@
                         <div class="btn-group mb-2">
                             <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                <i class="menu-icon tf-icons ti ti-users"></i>Sales Order
+                                <i class="menu-icon tf-icons ti ti-users"></i>Stock Allocation
                             </button>
                             <div class="dropdown-menu" style="">
                                 <a class="dropdown-item" href="{{route('create-salesOrder')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
-                                <a class="dropdown-item" href=""><i
+                                <a class="dropdown-item" href="{{route('stockAllocation.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     List</a>
                                 <a class="dropdown-item" href=""><i

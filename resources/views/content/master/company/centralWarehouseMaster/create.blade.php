@@ -52,7 +52,7 @@
                                                 data-allow-clear="true">
                                             <option value="">Select</option>
                                             @foreach($companies as $company)
-                                            <option value="{{$company->id}}">{{$company->CompanyName}}</option>
+                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
                                             @endforeach
 
                                         </select>

@@ -37,7 +37,7 @@
                                     data-placeholder="Select Category" name="cat_id">
                                 <option value="">Select Category</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->Name}}</option>
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -84,7 +84,7 @@
                             '<option value="">Select Sub Category</option>');
                         $.each(response, function (key, value) {
                             $('#subCategory').append('<option value="' + value.id + '">' + value
-                                .Name + '</option>');
+                                .name + '</option>');
                         });
                     }
                 });

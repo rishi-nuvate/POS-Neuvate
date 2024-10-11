@@ -93,8 +93,9 @@
                 "initComplete": function (setting, json) {
                     $("#overlay").fadeOut(100);
                 },
-                bDestroy: true
+                bDestroy: true,
             });
+
         }
     </script>
 @endsection

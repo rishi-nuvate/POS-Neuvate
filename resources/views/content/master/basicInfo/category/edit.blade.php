@@ -52,7 +52,7 @@
                     <div class="row">
                         {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','inputClass', 'defaultValue', 'required','readonly')}} --}}
 
-                        {!! textInputField('col-md-6', 'Category Name', 'text', 'CategoryName', 'categoryName', 'Category Name', '*', '',$category->Name ,'required','') !!}
+                        {!! textInputField('col-md-6', 'Category Name', 'text', 'CategoryName', 'categoryName', 'Category Name', '*', '',$category->name ,'required','') !!}
 
                     </div>
                     <br>
@@ -64,7 +64,7 @@
                     <div class="row" id="SubCategoryContainer">
                         @foreach($category->subCategory as $subCat)
 
-                            {!! textInputField('col-md-5', 'SubCategory Name', 'text', 'SubCatName[]', 'SubCatName', 'Sub Category Name', '*', '',$subCat->Name ,'required','') !!}
+                            {!! textInputField('col-md-5', 'SubCategory Name', 'text', 'SubCatName[]', 'SubCatName', 'Sub Category Name', '*', '',$subCat->name ,'required','') !!}
                             <input type="hidden" name="SubCatId[]" value="{{$subCat->id}}">
                         @endforeach
                     </div>

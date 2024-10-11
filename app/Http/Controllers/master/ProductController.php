@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Fit;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -38,7 +39,8 @@ class ProductController extends Controller
         $brands = Brand::all();
         $sleeves = Sleeve::all();
         $fits = Fit::all();
-        return view('content.master.product.create', compact('categories', 'tags', 'seasons', 'brands', 'fits', 'sleeves'));
+        $colors = Color::all();
+        return view('content.master.product.create', compact('categories', 'tags', 'seasons', 'brands', 'fits', 'sleeves', 'colors'));
     }
 
     /**
@@ -82,16 +84,17 @@ class ProductController extends Controller
                     foreach ($request->productColor as $key => $color) {
                         if (!empty($color['color'])) {
 
-//                            if (!empty($color['media'])) {
-//
-//                                $name = $color['media']->getClientOriginalName();
-//                                $destination_path = public_path('/product / ' . $product->id . ' /' . $color['color'] . '/');
-//
-//                                if (!is_dir(public_path('/gallery/portfolio'))) {
-//                                    mkdir(public_path('/gallery/portfolio'), 0755, true);
-//                                }
-//                                $color['media']->move($destination_path, $name);
-//                            }
+                            if (!empty($color['media'])) {
+
+                                $name = $color['media']->getClientOriginalName();
+                                $destination_path = public_path('productImage/' . $product->id . '/' . $color['color']);
+
+                                if (!is_dir($destination_path)) {
+                                    mkdir($destination_path, 0777, true);
+                                }
+                                $color['media']->move($destination_path, $name);
+                            }
+
                             foreach ($request->optionValueSize[$key] as $size) {
                                 if (!empty($size['size'])) {
                                     $variant = new ProductVariant([
@@ -99,7 +102,7 @@ class ProductController extends Controller
                                         'color' => $color['color'],
                                         'size' => $size['size'],
                                         'sku' => $size['sku'],
-//                                        'image' => $name ?? null,
+                                        'image' => $name ?? null,
                                     ]);
                                     $variant->save();
                                 }
@@ -123,8 +126,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public
-    function show(Product $product)
+    public function show(Product $product)
     {
         //
     }
@@ -132,8 +134,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public
-    function edit(Product $product)
+    public function edit(Product $product)
     {
 
 //        dd($product);
@@ -142,7 +143,7 @@ class ProductController extends Controller
         $tags = Tags::all();
         $seasons = Season::all();
         $brands = Brand::all();
-        $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant', 'fit', 'sleeve')->where('id',$product->id)->first();
+        $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant', 'fit', 'sleeve')->where('id', $product->id)->first();
 
 //        dd($product);
 
@@ -153,8 +154,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public
-    function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
 
 //        $product->update([
@@ -238,8 +238,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public
-    function destroy(Product $product)
+    public function destroy(Product $product)
     {
         if (Gate::allows('delete', $product)) {
             $product->delete();
@@ -251,8 +250,7 @@ class ProductController extends Controller
 
     }
 
-    public
-    function getProduct()
+    public function getProduct()
     {
         $products = Product::with('category', 'subCategory')->get();
 
@@ -278,8 +276,8 @@ class ProductController extends Controller
             $id = $product->id;
             $name = $product->product_name;
             $product_code = $product->product_code;
-            $category = $product->category->Name;
-            $subCategory = $product->subCategory->Name;
+            $category = $product->category->name;
+            $subCategory = $product->subCategory->name;
             if ($product->status == 0) {
                 $status = '<button class="btn btn-sm btn-outline-success waves-effect">
                                             Active
@@ -302,17 +300,22 @@ class ProductController extends Controller
 
     }
 
-    public
-    function deleteVariant(Request $request)
+    public function deleteVariant(Request $request)
     {
         $color = $request->input('color');
         $productId = $request->input('productId');
 
-        dd($color);
-
         $product = ProductVariant::where('product_id', $productId)->where('color', $color)->delete();
 
-//        $product->delete();
+        return redirect()->back()->with('success', 'Product variant deleted.');
+
+    }
+
+    public function deleteSize(Request $request)
+    {
+        $id = $request->input('sizeId');
+
+        $product = ProductVariant::where('id', $id)->delete();
 
         return redirect()->back()->with('success', 'Product variant deleted.');
 

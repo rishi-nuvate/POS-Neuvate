@@ -38,7 +38,7 @@
                                     data-placeholder="Select Category" name="cat_id">
                                 <option value="">Select Category</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}"  {{$fits->cat_id == $category->id ? 'selected':''}}>{{$category->Name}}</option>
+                                    <option value="{{$category->id}}"  {{$fits->cat_id == $category->id ? 'selected':''}}>{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -48,7 +48,7 @@
                             <select id="subCategory" name="sub_cat_id" class="select2 form-select"
                                     data-placeholder="Sub Category">
                                 <option value="">Collection</option>
-                                <option value="{{$fits->sub_cat_id}}" selected>{{$fits->subCategory->Name}}</option>
+                                <option value="{{$fits->sub_cat_id}}" selected>{{$fits->subCategory->name}}</option>
                             </select>
                         </div>
 

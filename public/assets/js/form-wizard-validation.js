@@ -85,6 +85,20 @@
                         },
                     }
                 },
+                store_add_line_1: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Address Line 1'
+                        },
+                    }
+                },
+                store_add_line_2: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Address Line 2'
+                        },
+                    }
+                },
                 // formValidationUsername: {
                 //     validators: {
                 //         notEmpty: {

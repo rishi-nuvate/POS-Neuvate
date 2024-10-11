@@ -57,7 +57,7 @@ class CompanyController extends Controller
                 $request->PanGstFile->move($destination_path, $name);
 
                 $company->update([
-                    'PanGstFile' => $name,
+                    'gst_file' => $name,
                 ]);
             }
 

@@ -85,8 +85,8 @@ class SlimController extends Controller
 
             $id = $slim->id;
             $name = $slim->slim_name;
-            $category = $slim->category->Name;
-            $subCategory = $slim->subCategory->Name;
+            $category = $slim->category->name;
+            $subCategory = $slim->subCategory->name;
 
             $action =
                 ' <a href="slim/' . $id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>

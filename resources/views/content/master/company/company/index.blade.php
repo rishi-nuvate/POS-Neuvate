@@ -32,23 +32,23 @@
                 @foreach($companies as $company)
                     <tr>
                         <td class="text-bold">{{$num}}</td>
-                        <td>{{$company->CompanyName}}</td>
+                        <td>{{$company->company_name}}</td>
                         <td>
                             <div class="d-flex justify-content-start align-items-center">
                                 <div class="avatar-wrapper">
                                     <div class="avatar me-2"><span
-                                            class="avatar-initial rounded-circle bg-label-info">{{ substr($company->BillingName, 0, 2) }}</span>
+                                            class="avatar-initial rounded-circle bg-label-info">{{ substr($company->billing_name, 0, 2) }}</span>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column"><span
-                                        class="fw-medium">{{ $company->BillingName }}</span><small
-                                        class="text-truncate text-muted">{{ $company->BillingMobileNo }}</small></div>
+                                        class="fw-medium">{{ $company->billing_name }}</span><small
+                                        class="text-truncate text-muted">{{ $company->billing_mobile_no }}</small></div>
                             </div>
                         </td>
                         <td>
-                            {{$company->BillingEmail}}
+                            {{$company->billing_email}}
                         </td>
-                        <td><?= $company->AddLine1 . '<br>' . $company->AddLine2 . '<br>' . $company->City . '<br>' . $company->State . '<br>' . $company->PinCode ?></td>
+                        <td><?= $company->add_line1 . '<br>' . $company->AddLine2 . '<br>' . $company->City . '<br>' . $company->State . '<br>' . $company->PinCode ?></td>
                         <td>
                             <a class="btn btn-icon btn-label-primary mx-2"
                                href="{{route('company.edit',['company' => $company->id])}}"

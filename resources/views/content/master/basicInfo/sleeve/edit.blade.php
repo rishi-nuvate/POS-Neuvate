@@ -41,7 +41,7 @@
                                 <option value="">Select Category</option>
                                 @foreach($categories as $category)
                                     <option
-                                        value="{{$category->id}}" {{$sleeve->category->id == $category->id ? 'selected':''}}>{{$category->Name}}</option>
+                                        value="{{$category->id}}" {{$sleeve->category->id == $category->id ? 'selected':''}}>{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -52,7 +52,7 @@
                                     data-placeholder="Sub Category">
                                 <option value="">Collection</option>
                                 <option value="{{$sleeve->subCategory->id}}"
-                                        selected>{{$sleeve->subCategory->Name}}</option>
+                                        selected>{{$sleeve->subCategory->name}}</option>
                             </select>
                         </div>
 

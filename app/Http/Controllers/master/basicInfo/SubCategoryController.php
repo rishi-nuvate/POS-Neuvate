@@ -71,7 +71,7 @@ class SubCategoryController extends Controller
     public function getSubCategories(Request $request)
     {
         $categoryId = $request->input('categoryId');
-        $subCategories = SubCategory::where('CatId', $categoryId)->get();
+        $subCategories = SubCategory::where('cat_id', $categoryId)->get();
 
         return response()->json($subCategories);
     }

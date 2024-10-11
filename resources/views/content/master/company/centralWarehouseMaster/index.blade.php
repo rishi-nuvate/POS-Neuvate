@@ -35,7 +35,7 @@
                 @foreach($warehouses as $warehouse)
                     <tr>
                         <th>{{$num}}</th>
-                        <th>{{$warehouse->company->CompanyName}}</th>
+                        <th>{{$warehouse->company->company_name}}</th>
                         <th>{{$warehouse->warehouse_name}}</th>
                         <th>{{$warehouse->contact_person_name}}</th>
                         <th>{{$warehouse->contact_person_email}}</th>

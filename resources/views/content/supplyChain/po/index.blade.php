@@ -3,7 +3,7 @@
 @section('title', 'List-Company')
 
 @section('vendor-style')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 @endsection
 
 @section('content')
@@ -13,7 +13,10 @@
         <!-- DataTable with Buttons -->
         <div class="card mb-2">
             <div class="border-bottom d-none" id="filter-search">
-                <div class="text-white rounded-top bg-primary p-2 cursor-pointer" title="click here to close filters" onclick="$('#filter-search').toggleClass('d-none');"><i class="fa fa-search"></i> Search &amp; Filters</div>
+                <div class="text-white rounded-top bg-primary p-2 cursor-pointer" title="click here to close filters"
+                     onclick="$('#filter-search').toggleClass('d-none');"><i class="fa fa-search"></i> Search &amp;
+                    Filters
+                </div>
                 <div class="card-body row">
                     <div class="col-md-3 col-lg-3">
                         <label class="form-label" for="type">Date range</label>
@@ -29,7 +32,8 @@
                     </div>
                 </div>
             </div>
-            <div title="click here to view filters" class="bg-primary text-white p-1 cursor-pointer" onclick="$('#filter-search').toggleClass('d-none');">
+            <div title="click here to view filters" class="bg-primary text-white p-1 cursor-pointer"
+                 onclick="$('#filter-search').toggleClass('d-none');">
         <span><b><i class="ti ti-filter"></i>Applied Filter</b> :-
           <small class="m-2" id="dateFilterShow"></small>
         </span>
@@ -133,7 +137,7 @@
                     scrollX: true,
                     processing: true,
                     serverSide: true,
-                    order: [[ 0, "desc" ]],
+                    order: [[0, "desc"]],
                     ajax: {
                         'url': "{{ route('poListAjax') }}",
                         'type': 'POST',
@@ -144,7 +148,7 @@
                             '_token': "{{ csrf_token() }}"
                         }
                     },
-                    'initComplete': function(setting, json) {
+                    'initComplete': function (setting, json) {
                         $('.dataTables_filter input').removeClass('form-control-sm');
                         $('.dataTables_length select').removeClass('form-select-sm');
                         $('#overlay').fadeOut(100);
@@ -176,11 +180,11 @@
                                     className: 'dropdown-item',
                                     exportOptions: {
                                         format: {
-                                            body: function(inner, coldex, rowdex) {
+                                            body: function (inner, coldex, rowdex) {
                                                 if (inner.length <= 0) return inner;
                                                 var el = $.parseHTML(inner);
                                                 var result = '';
-                                                $.each(el, function(index, item) {
+                                                $.each(el, function (index, item) {
                                                     if (item.classList !== undefined && item.classList.contains('user-name')) {
                                                         result = result + item.lastChild.firstChild.textContent;
                                                     } else if (item.innerText === undefined) {
@@ -191,7 +195,7 @@
                                             }
                                         }
                                     },
-                                    customize: function(win) {
+                                    customize: function (win) {
                                         //customize print view for dark
                                         $(win.document.body)
                                             .css('color', headingColor)
@@ -211,11 +215,11 @@
                                     className: 'dropdown-item',
                                     exportOptions: {
                                         format: {
-                                            body: function(inner, coldex, rowdex) {
+                                            body: function (inner, coldex, rowdex) {
                                                 if (inner.length <= 0) return inner;
                                                 var el = $.parseHTML(inner);
                                                 var result = '';
-                                                $.each(el, function(index, item) {
+                                                $.each(el, function (index, item) {
                                                     if (item.classList !== undefined && item.classList.contains('user-name')) {
                                                         result = result + item.lastChild.firstChild.textContent;
                                                     } else if (item.innerText === undefined) {
@@ -233,11 +237,11 @@
                                     className: 'dropdown-item',
                                     exportOptions: {
                                         format: {
-                                            body: function(inner, coldex, rowdex) {
+                                            body: function (inner, coldex, rowdex) {
                                                 if (inner.length <= 0) return inner;
                                                 var el = $.parseHTML(inner);
                                                 var result = '';
-                                                $.each(el, function(index, item) {
+                                                $.each(el, function (index, item) {
                                                     if (item.classList !== undefined && item.classList.contains('user-name')) {
                                                         result = result + item.lastChild.firstChild.textContent;
                                                     } else if (item.innerText === undefined) {
@@ -255,11 +259,11 @@
                                     className: 'dropdown-item',
                                     exportOptions: {
                                         format: {
-                                            body: function(inner, coldex, rowdex) {
+                                            body: function (inner, coldex, rowdex) {
                                                 if (inner.length <= 0) return inner;
                                                 var el = $.parseHTML(inner);
                                                 var result = '';
-                                                $.each(el, function(index, item) {
+                                                $.each(el, function (index, item) {
                                                     if (item.classList !== undefined && item.classList.contains('user-name')) {
                                                         result = result + item.lastChild.firstChild.textContent;
                                                     } else if (item.innerText === undefined) {
@@ -277,11 +281,11 @@
                                     className: 'dropdown-item',
                                     exportOptions: {
                                         format: {
-                                            body: function(inner, coldex, rowdex) {
+                                            body: function (inner, coldex, rowdex) {
                                                 if (inner.length <= 0) return inner;
                                                 var el = $.parseHTML(inner);
                                                 var result = '';
-                                                $.each(el, function(index, item) {
+                                                $.each(el, function (index, item) {
                                                     if (item.classList !== undefined && item.classList.contains('user-name')) {
                                                         result = result + item.lastChild.firstChild.textContent;
                                                     } else if (item.innerText === undefined) {
@@ -298,7 +302,7 @@
                         {
                             text: '<i class="ti ti-filter me-md-1"></i><span class="d-md-inline-block d-none"></span>',
                             className: 'btn btn-primary',
-                            action: function(e, dt, button, config) {
+                            action: function (e, dt, button, config) {
                                 $('#filter-search').toggleClass('d-none');
                             }
                         }

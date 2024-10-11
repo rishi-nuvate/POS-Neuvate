@@ -48,7 +48,7 @@
 
                                 {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','inputClass', 'defaultValue', 'required','readonly')}} --}}
 
-                                {!! textInputField('col-md-6', 'Company Name', 'text', 'CompanyName', 'CompanyName', 'Company Name', '*', 'form-control',$company->CompanyName ,'required','') !!}
+                                {!! textInputField('col-md-6', 'Company Name', 'text', 'CompanyName', 'CompanyName', 'Company Name', '*', 'form-control',$company->company_name ,'required','') !!}
 
 
 {{--                                <div class="col-md-6">--}}
@@ -57,7 +57,7 @@
 {{--                                    <input type="radio" value="gst" name="Document" class=""/> GST--}}
 {{--                                </div>--}}
 
-                                {!! textInputField('col-md-6', 'Pan Card / Gst No', 'text', 'PanGstNo', 'PanGstNo', 'Pan Card / Gst No', '', 'form-control',$company->PanGstNo ?? null ,'','') !!}
+                                {!! textInputField('col-md-6', 'Pan Card / Gst No', 'text', 'PanGstNo', 'PanGstNo', 'Pan Card / Gst No', '', 'form-control',$company->gst_no ?? null ,'','') !!}
 
                                 {!! textInputField('col-md-6', 'Pan Card / Gst File', 'file', 'PanGstFile', 'PanGstFile', 'Pan Card / Gst No', '', 'form-control','','','') !!}
 
@@ -71,9 +71,9 @@
 
                             <div class="row g-3">
 
-                                {!! textInputField('col-md-6', 'Billing Name', 'text', 'BillingName', 'BillingName', 'Billing Name', '*', 'form-control',$company->BillingName,'required','') !!}
+                                {!! textInputField('col-md-6', 'Billing Name', 'text', 'BillingName', 'BillingName', 'Billing Name', '*', 'form-control',$company->billing_name,'required','') !!}
 
-                                {!! textInputField('col-md-3', 'Billing Mobile No.', 'text', 'BillingMobileNo', 'BillingMobileNo', 'Mobile No.', '*', 'form-control',$company->BillingMobileNo,'required','') !!}
+                                {!! textInputField('col-md-3', 'Billing Mobile No.', 'text', 'BillingMobileNo', 'BillingMobileNo', 'Mobile No.', '*', 'form-control',$company->billing_mobile_no,'required','') !!}
 
                                 {!! textInputField('col-md-3', 'Billing Email', 'email', 'BillingEmail', 'BillingEmail', 'Email', '*', 'form-control',$company->BillingEmail,'required','') !!}
 
@@ -81,13 +81,13 @@
                                     <label class="form-label" for="AddLine1">Address Line 1</label>
 
                                     <textarea required id="AddLine1" name="AddLine1" class="form-control"
-                                              placeholder="Address Line 1"> {{$company->AddLine1}}</textarea>
+                                              placeholder="Address Line 1"> {{$company->add_line1}}</textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="AddLine2">Address Line 2</label>
 
                                     <textarea required id="AddLine2" name="AddLine2" class="form-control"
-                                              placeholder="Address Line 2"> {{$company->AddLine2}} </textarea>
+                                              placeholder="Address Line 2"> {{$company->add_line1}} </textarea>
                                 </div>
 
                                 {!! textInputField('col-md-4', 'City', 'text', 'City', 'City', 'City', '*', 'form-control',$company->City,'required','') !!}

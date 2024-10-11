@@ -194,7 +194,7 @@
                                                             placeholder="SKU" value="{{$size->sku}}"/>
                                                     </div>
                                                     <div class="col-3 align-item-center">
-                                                        <button type="button" onclick="deleteSize()"
+                                                        <button type="button" onclick="deleteSize({{$size->id}})"
                                                                 class="btn rounded-pill btn-icon btn-label-danger waves-effect">
                                                             <span class="ti ti-trash"></span>
                                                         </button>
@@ -319,7 +319,7 @@
                                         <select id="subCategory" name="sub_cat_id" class="select2 form-select"
                                                 data-placeholder="Sub Category" onchange="getSleeveFit()">
                                             <option value="">Collection</option>
-                                            <option value="{{$product->subCategory->id}}" selected> {{$product->subCategory->Name}}</option>
+                                            <option value="{{$product->subCategory->id}}" selected> {{$product->subCategory->name}}</option>
                                         </select>
                                     </div>
                                     <!-- Tags -->
@@ -528,10 +528,6 @@
                 elementToRemove.remove();
             }
         }
-    </script>
-
-
-    <script>
 
         function getSubCategoriesData() {
             var categoryId = document.getElementById('productCategory').value;
@@ -557,9 +553,11 @@
                 $('#subCategory').empty().append('<option value="">Select Sub Category</option>');
             }
         }
+
     </script>
 
     <script>
+
         function deleteVariant(colorId, productId) {
             var color = document.getElementById('color' + colorId).value;
             console.log(color);
@@ -595,8 +593,8 @@
         }
 
         function deleteSize(sizeId) {
-            var color = document.getElementById('color' + colorId).value;
-            console.log(color);
+            // var color = document.getElementById('color' + colorId).value;
+            // console.log(color);
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -608,13 +606,12 @@
                     $("#overlay").fadeIn(100);
                     $.ajax({
                         type: 'POST',
-                        url: '{{route('deleteVariant')}}',
+                        url: '{{route('deleteSize')}}',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: {
-                            productId: productId,
-                            color: color,
+                            sizeId: sizeId,
                             "_token": "<?php echo e(csrf_token()); ?>"
                         },
                         success: function (resultData) {

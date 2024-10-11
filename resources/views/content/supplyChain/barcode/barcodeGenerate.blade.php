@@ -87,7 +87,7 @@
                                         of all Taxes</p>
                                     <p class="mt-2" style="margin: 0;padding: 0; font-size: small">Manufactured
                                         by : </p>
-                                    <p style="margin: 0;padding: 0; font-size: small">{{$company->CompanyName}}</p>
+                                    <p style="margin: 0;padding: 0; font-size: small">{{$company->company_name}}</p>
 
                                     <p style="margin: 0;padding: 0; font-weight: bold;font-size: small ">
                                        {{$company->AddLine1}}

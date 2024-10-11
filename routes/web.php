@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\master\basicInfo\BrandController;
 use App\Http\Controllers\master\basicInfo\CategoryController;
+use App\Http\Controllers\master\basicInfo\ColorController;
 use App\Http\Controllers\master\basicInfo\FitController;
 use App\Http\Controllers\master\basicInfo\SeasonController;
 use App\Http\Controllers\master\basicInfo\SleeveController;
@@ -38,6 +39,7 @@ use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\StockAllocationController;
 use App\Http\Controllers\storeInventory\StockInController;
 use App\Http\Controllers\supplyChain\BarcodeController;
 use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
@@ -123,6 +125,10 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/getSleeveData', [SleeveController::class, 'getSleeveData'])->name('getSleeveData');
     Route::post('/sleeveDelete/{sleeve}', [SleeveController::class, 'destroy']);
 
+//    Color
+    Route::resource('color', ColorController::class);
+    Route::post('getColorData', [ColorController::class,'getColorData'])->name('getColorData');
+    Route::post('/deleteColor/{color}', [ColorController::class,'destroy'])->name('deleteColor');
 
 // Category Master
     Route::resource('category', CategoryController::class);
@@ -158,6 +164,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('getProduct', [ProductController::class, 'getProduct'])->name('getProduct');
     Route::post('/deleteProduct/{product}', [ProductController::class, 'destroy']);
     Route::post('deleteVariant', [ProductController::class, 'deleteVariant'])->name('deleteVariant');
+    Route::post('deleteSize', [ProductController::class, 'deleteSize'])->name('deleteSize');
 
 
     // Employee
@@ -212,22 +219,27 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Store Type
     Route::resource('storeType', StoreTypeController::class);
-    Route::post('/getStoreType',[StoreTypeController::class,'getStoreType'])->name('getStoreType');
+    Route::post('/getStoreType', [StoreTypeController::class, 'getStoreType'])->name('getStoreType');
 
 //    Store Generate
     Route::resource('storeGenerate', StoreGenerateController::class);
-    Route::post('/storeGenerate/store',[StoreGenerateController::class,'store'])->name('storeGenerate.store');
-    Route::post('getAllStoreData', [StoreGenerateController::class,'getAllStoreData'])->name('getAllStoreData');
+    Route::post('/storeGenerate/store', [StoreGenerateController::class, 'store'])->name('storeGenerate.store');
+    Route::post('getAllStoreData', [StoreGenerateController::class, 'getAllStoreData'])->name('getAllStoreData');
+    Route::post('/storeGenerate/baseStock/{baseStock}', [StoreGenerateController::class, 'baseStock'])->name('baseStock');
 
 //    Warehouse Inventory
 
     Route::resource('WarehouseInventory', WarehouseInventoryController::class);
-    Route::post('bulkInwardStore', [WarehouseInventoryController::class,'bulkInwardStore'])->name('bulkInwardStore');
-    Route::post('getInventory', [WarehouseInventoryController::class,'getInventory'])->name('getInventory');
+    Route::post('bulkInwardStore', [WarehouseInventoryController::class, 'bulkInwardStore'])->name('bulkInwardStore');
+    Route::post('getInventory', [WarehouseInventoryController::class, 'getInventory'])->name('getInventory');
 
 
     Route::get('/generateBarcode/{barcode_id}', [BarcodeController::class, 'generateBarcode']);
 
+//    Stock Allocation
+    Route::resource('stockAllocation', StockAllocationController::class);
+    Route::post('stockAllocation/getAllFilters', [StockAllocationController::class,'getAllFilters'])->name('getAllFilters');
+    Route::post('getStockAllocation', [StockAllocationController::class,'getStockAllocation'])->name('getStockAllocation');
 
     //Central Warehouse
     Route::resource('centralWarehouseMaster', CentralWarehouseMasterController::class);

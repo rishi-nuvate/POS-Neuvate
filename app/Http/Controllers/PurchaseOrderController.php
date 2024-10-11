@@ -430,7 +430,7 @@ class PurchaseOrderController extends Controller
             foreach ($Pos as $Po) {
 //                dd();
                 $companyHtml = "";
-                if (!empty($Po->company->CompanyName)) {
+                if (!empty($Po->company->company_name)) {
                     $companyHtml .= '<div class="d-flex justify-content-start align-items-center">
                                           <div class="avatar-wrapper">
                                             <div class="avatar me-2"><span
@@ -438,7 +438,7 @@ class PurchaseOrderController extends Controller
                                             </div>
                                           </div>
                                           <div class="d-flex flex-column"><span
-                                              class="fw-medium small">' . ($Po->company->CompanyName ?? '') . '</span>
+                                              class="fw-medium small">' . ($Po->company->company_name ?? '') . '</span>
                                           </div>
                                     </div>';
                 } else {

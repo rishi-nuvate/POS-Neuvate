@@ -100,7 +100,7 @@ class CategoryController extends Controller
                 if (!empty($subcategoryId)) {
                     for ($i = 0; $i < count($subcategoryId); $i++) {
                         $subCategory = SubCategory::where('id', $subcategoryId[$i])
-                            ->where('CatId', $category->id)
+                            ->where('cat_id', $category->id)
                             ->update([
                                 'name' => $request->SubCatName[$i],
                             ]);
