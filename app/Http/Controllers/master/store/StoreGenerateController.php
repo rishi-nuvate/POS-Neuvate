@@ -29,7 +29,8 @@ class StoreGenerateController extends Controller
     {
 
         $storeTypes = StoreType::get();
-        return view('content.master.store.storeGenerate.create', compact('storeTypes',));
+        $categories = Category::get();
+        return view('content.master.store.storeGenerate.create', compact('storeTypes','categories'));
     }
 
     /**

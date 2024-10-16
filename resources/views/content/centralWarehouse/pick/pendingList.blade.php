@@ -5,7 +5,7 @@
 
 @section('content')
     <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Central Warehouse/ </span> Pending List
+        <span class="text-muted fw-light float-left">Central Warehouse/ </span> Pick List
     </h4>
     <!-- Invoice List Widget -->
 
@@ -20,27 +20,13 @@
                        aria-describedby="datatable-list_info">
                     <thead>
                     <tr>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-list" rowspan="1" colspan="1"
-                            aria-label="SR No.: activate to sort column ascending" style="width: 48.8438px;">SR No.
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-list" rowspan="1" colspan="1"
-                            aria-label="Date: activate to sort column ascending" style="width: 38.9688px;">Date
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-list" rowspan="1" colspan="1"
-                            aria-label="Customer / Buyer Name: activate to sort column ascending"
-                            style="width: 189.891px;">Sales Order No.
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-list" rowspan="1" colspan="1"
-                            aria-label="Merchandiser: activate to sort column ascending" style="width: 117.422px;">
-                            Shop Name
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-list" rowspan="1" colspan="1"
-                            aria-label="Brand / Season: activate to sort column ascending" style="width: 125.031px;">
-                            Total Quantity
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-list" rowspan="1" colspan="1"
-                            aria-label="Action: activate to sort column ascending" style="width: 115.078px;">Action
-                        </th>
+                        <th>SR No.</th>
+                        <th>Date</th>
+                        <th>Sales Order No.</th>
+                        <th>Shop Name</th>
+                        <th>Total Quantity</th>
+                        <th>Picker</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -65,6 +51,15 @@
                             </div>
                         </td>
                         <td>300</td>
+                        <td>
+                            <div class="mb-3">
+                                <select name="status" class="select2 form-select" required>
+                                    <option value="">select picker</option>
+                                    <option value="0">Active</option>
+                                    <option value="1">Deactive</option>
+                                </select>
+                            </div>
+                        </td>
                         <td>
                             <a href="{{route('create-pick')}}" type="button"
                                class="btn btn-outline-success waves-effect">
@@ -93,6 +88,13 @@
                             </div>
                         </td>
                         <td>300</td>
+                        <td><div class="mb-3">
+                                <select name="status" class="select2 form-select" required>
+                                    <option value="">select picker</option>
+                                    <option value="0">Active</option>
+                                    <option value="1">Deactive</option>
+                                </select>
+                            </div></td>
                         <td>
                             <a href="#" type="button"
                                class="btn btn-outline-success waves-effect">
@@ -124,6 +126,13 @@
                             </div>
                         </td>
                         <td>500</td>
+                        <td><div class="mb-3">
+                                <select name="status" class="select2 form-select" required>
+                                    <option value="">select picker</option>
+                                    <option value="0">Active</option>
+                                    <option value="1">Deactive</option>
+                                </select>
+                            </div></td>
                         <td>
                             <a href="#" type="button"
                                class="btn btn-outline-success waves-effect">
@@ -155,6 +164,13 @@
                             </div>
                         </td>
                         <td>1000</td>
+                        <td><div class="mb-3">
+                                <select name="status" class="select2 form-select" required>
+                                    <option value="">select picker</option>
+                                    <option value="0">Active</option>
+                                    <option value="1">Deactive</option>
+                                </select>
+                            </div></td>
                         <td>
                             <a href="#" type="button"
                                class="btn btn-outline-success waves-effect">
@@ -166,39 +182,6 @@
 
                     </tbody>
                 </table>
-                <div class="row mx-2">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_info" id="datatable-list_info" role="status" aria-live="polite">Showing 1
-                            to 10 of 29 entries
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-list_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="datatable-list_previous"><a
-                                        aria-controls="datatable-list" aria-disabled="true" aria-role="link"
-                                        data-dt-idx="previous" tabindex="0" class="page-link">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="datatable-list"
-                                                                                aria-role="link" aria-current="page"
-                                                                                data-dt-idx="0" tabindex="0"
-                                                                                class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="datatable-list"
-                                                                          aria-role="link" data-dt-idx="1" tabindex="0"
-                                                                          class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="datatable-list"
-                                                                          aria-role="link" data-dt-idx="2" tabindex="0"
-                                                                          class="page-link">3</a></li>
-                                <li class="paginate_button page-item next" id="datatable-list_next"><a href="#"
-                                                                                                       aria-controls="datatable-list"
-                                                                                                       aria-role="link"
-                                                                                                       data-dt-idx="next"
-                                                                                                       tabindex="0"
-                                                                                                       class="page-link">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

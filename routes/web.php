@@ -39,6 +39,7 @@ use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\ShelfManageController;
 use App\Http\Controllers\StockAllocationController;
 use App\Http\Controllers\storeInventory\StockInController;
 use App\Http\Controllers\supplyChain\BarcodeController;
@@ -127,8 +128,8 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Color
     Route::resource('color', ColorController::class);
-    Route::post('getColorData', [ColorController::class,'getColorData'])->name('getColorData');
-    Route::post('/deleteColor/{color}', [ColorController::class,'destroy'])->name('deleteColor');
+    Route::post('getColorData', [ColorController::class, 'getColorData'])->name('getColorData');
+    Route::post('/deleteColor/{color}', [ColorController::class, 'destroy'])->name('deleteColor');
 
 // Category Master
     Route::resource('category', CategoryController::class);
@@ -179,6 +180,8 @@ Route::middleware('auth:web')->group(callback: function () {
     //Supply Chain
     Route::resource('/supplyChain', SupplyChainMasterController::class);
 
+//    Shelf Management
+    Route::resource('shelfManage', ShelfManageController::class);
 
 //    Design Library
     Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class, 'create'])->name('create-design');
@@ -225,7 +228,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('storeGenerate', StoreGenerateController::class);
     Route::post('/storeGenerate/store', [StoreGenerateController::class, 'store'])->name('storeGenerate.store');
     Route::post('getAllStoreData', [StoreGenerateController::class, 'getAllStoreData'])->name('getAllStoreData');
-    Route::post('/storeGenerate/baseStock/{baseStock}', [StoreGenerateController::class, 'baseStock'])->name('baseStock');
+    Route::get('/storeGenerate/baseStock/{baseStock}', [StoreGenerateController::class, 'baseStock'])->name('baseStock');
 
 //    Warehouse Inventory
 
@@ -238,8 +241,8 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Stock Allocation
     Route::resource('stockAllocation', StockAllocationController::class);
-    Route::post('stockAllocation/getAllFilters', [StockAllocationController::class,'getAllFilters'])->name('getAllFilters');
-    Route::post('getStockAllocation', [StockAllocationController::class,'getStockAllocation'])->name('getStockAllocation');
+    Route::post('stockAllocation/getAllFilters', [StockAllocationController::class, 'getAllFilters'])->name('getAllFilters');
+    Route::post('getStockAllocation', [StockAllocationController::class, 'getStockAllocation'])->name('getStockAllocation');
 
     //Central Warehouse
     Route::resource('centralWarehouseMaster', CentralWarehouseMasterController::class);

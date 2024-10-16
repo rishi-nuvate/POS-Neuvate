@@ -174,7 +174,9 @@
                                             @foreach($sizes as $size)
                                                 <div class="row">
 
-                                                    <input type="hidden" name="optionValueSize[{{$color_num}}][{{$size_num}}][size_id]" value="{{$size->id}}">
+                                                    <input type="hidden"
+                                                           name="optionValueSize[{{$color_num}}][{{$size_num}}][size_id]"
+                                                           value="{{$size->id}}">
                                                     <div class="mb-3 col-3">
                                                         <label class="form-label" for="productSKU">Size</label>
                                                         <input type="text"
@@ -307,9 +309,10 @@
                                                 class="select2 form-select" id="productCategory"
                                                 data-placeholder="Select Category" name="cat_id">
                                             <option value="">Select Category</option>
+{{--                                            {{dd($categories)}}--}}
                                             @foreach($categories as $category)
                                                 <option
-                                                    value="{{$category->id}}" {{$product->cat_id == $category->id ? 'selected' :'' }}>{{$category->Name}}</option>
+                                                    value="{{$category->id}}" {{$product->category->id == $category->id ? 'selected' :'' }}>{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -319,7 +322,8 @@
                                         <select id="subCategory" name="sub_cat_id" class="select2 form-select"
                                                 data-placeholder="Sub Category" onchange="getSleeveFit()">
                                             <option value="">Collection</option>
-                                            <option value="{{$product->subCategory->id}}" selected> {{$product->subCategory->name}}</option>
+                                            <option value="{{$product->subCategory->id}}"
+                                                    selected> {{$product->subCategory->name}}</option>
                                         </select>
                                     </div>
                                     <!-- Tags -->
@@ -358,12 +362,14 @@
                                     </div>
 
                                     {{--Fit--}}
-{{--                                    {{dd($product->fit_id)}}--}}
+                                    {{--                                    {{dd($product->fit_id)}}--}}
                                     <div class="mb-3">
                                         <label for="select2Multiple" class="form-label">Fit</label>
                                         <select name="fit_id" id="fit_id" class="select2 form-select">
                                             <option value="">select Fit</option>
-                                            <option value="{{$product->fit->id ?? ''}}" selected>{{$product->fit->fit_name ?? ''}}</option>
+
+                                            <option value="{{$product->fit->id ?? ''}}"
+                                                    selected>{{$product->fit->fit_name ?? ''}}</option>
                                         </select>
                                     </div>
                                     {{--Sleeve--}}
@@ -372,7 +378,8 @@
                                         <select name="sleeve_id" id="sleeve_id" class="select2 form-select">
                                             <option value="">select Sleeve</option>
                                             <option
-                                                value="{{$product->sleeve->id ?? ''}}" selected>{{$product->sleeve->sleeve_name ?? ''}}</option>
+                                                value="{{$product->sleeve->id ?? ''}}"
+                                                selected>{{$product->sleeve->sleeve_name ?? ''}}</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
@@ -382,7 +389,7 @@
 
                                     <div class="mb-3">
                                         <label for="select2Multiple" class="form-label">Pattern</label>
-                                        <input type="text" name="pattern_id" id="pattern_id" class="form-control" >
+                                        <input type="text" name="pattern_id" id="pattern_id" class="form-control">
 
                                     </div>
                                 </div>

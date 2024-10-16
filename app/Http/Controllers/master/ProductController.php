@@ -145,7 +145,7 @@ class ProductController extends Controller
         $brands = Brand::all();
         $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant', 'fit', 'sleeve')->where('id', $product->id)->first();
 
-//        dd($product);
+//        dd($product->category);
 
         return view('content.master.product.edit', compact('product', 'categories', 'tags', 'seasons', 'brands'));
 

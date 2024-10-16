@@ -29,9 +29,15 @@
 @endsection
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light">User / View /</span> Account
-    </h4>
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/master') }}">Master</a>
+            </li>
+            <li class="breadcrumb-item active">Store Generate</li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ol>
+    </nav>
     <div class="row">
         <!-- User Sidebar -->
         <div class="col-xl-12 col-lg-12 col-md-12 order-1 order-md-0">

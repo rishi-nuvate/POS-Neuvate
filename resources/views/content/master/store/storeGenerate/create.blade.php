@@ -268,6 +268,44 @@
                                             class="form-control"
                                             placeholder="Square Feet"/>
                                     </div>
+                                    @php $num = 1 @endphp
+                                    @foreach($categories as $category)
+
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="franchise">Category</label>
+                                            <input
+                                                type="hidden"
+                                                id="category_id[{{$num}}]"
+                                                name="category_id[{{$num}}]"
+                                                class="form-control" value="{{$category->id}}"/>
+                                            <input
+                                                type="text"
+                                                id="category[{{$num}}]"
+                                                name="category[{{$num}}]"
+                                                class="form-control"
+                                                placeholder="Square Feet" value="{{$category->name}}" readonly/>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="square_fit">Square Feet</label>
+                                            <input
+                                                type="text"
+                                                id="category_qty[{{$num}}]"
+                                                name="category_qty[{{$num}}]"
+                                                class="form-control"
+                                                placeholder="Square Feet"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary waves-effect"
+                                                        data-bs-toggle="modal" data-bs-target="#addQty0" type="button"
+                                                        onclick="getSubCategory({{$num}})">
+                                                    <i class="fa fa-plus"></i> Add Sku Wise
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @php $num++ @endphp
+                                    @endforeach
 
 
                                     <div class="col-12 d-flex justify-content-between">
@@ -309,6 +347,36 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="modal fade ValidateModelForTotalQty" id="addQty0" tabindex="-1"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-simple modal-edit-user modal-dialog-scrollable">
+
+                                    <div class="modal-content p-1 p-md-0" style="min-height: 60vh;">
+                                        <div class="modal-header text-white rounded-top bg-primary p-2">
+                                            Parameter Information
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row g-3">
+                                                <div class="form-text">
+                                                    <b>Note</b> : All Quantity should be in comma separated
+                                                </div>
+                                                <div id="subCategory">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 m-4">
+                                            <button type="button" class="btn btn-label-success ml-3"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                Done
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -317,6 +385,10 @@
 
         </div>
         <hr class="container-m-nx mb-5"/>
+{{--        <div class="row g-3">--}}
+
+{{--        </div>--}}
+
 
     </div>
 
@@ -327,6 +399,38 @@
     <script src="{{asset('assets/js/form-wizard-validation.js')}}"></script>
     <script src="{{asset('assets/js/form-wizard-numbered.js')}}"></script>
 
+    <script>
+
+        function getSubCategory(id) {
+            var categoryId = document.getElementById(`category_id[${id}]`).value;
+            if (categoryId) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('getSubCategories') }}",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: {categoryId: categoryId, '_token': "{{ csrf_token() }}"},
+                    dataType: 'json',
+                    success: function (response) {
+                        $.each(response, function (key, value) {
+                            console.log(value);
+                            $('#subCategory').append('' +
+                                ` <div class="col-md-12 m-4">
+                                            <button type="button" class="btn btn-label-success ml-3"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                Done
+                                            </button>
+                                        </div>`
+                            )
+                        });
+                    }
+                });
+            } else {
+                $(`#table-container${counter}`).empty();
+            }
+        }
+
+    </script>
 @endsection
 
 {{--<option value="${value.id}">${value.name}</option>--}}

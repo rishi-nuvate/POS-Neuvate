@@ -53,8 +53,11 @@
                             {{--                                <button class="btn btn-label-secondary">Discard</button>--}}
                             {{--                                <button class="btn btn-label-primary">Save draft</button>--}}
                             {{--                            </div>--}}
+                            <button type="button" class="btn btn-primary">import Products</button>
                             <button type="submit" class="btn btn-primary">Save Product</button>
+
                         </div>
+
                     </div>
                     <div class="row">
                         <!-- First column-->

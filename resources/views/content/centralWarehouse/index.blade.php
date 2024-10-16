@@ -88,7 +88,7 @@
                                 <i class="menu-icon tf-icons ti ti-building-warehouse"></i>Shelf Manage
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{route('create-shelf')}}"><i
+                                <a class="dropdown-item" href="{{route('shelfManage.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
                                 <a class="dropdown-item" href="#"><i

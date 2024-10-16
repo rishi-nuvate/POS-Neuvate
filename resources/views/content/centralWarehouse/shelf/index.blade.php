@@ -1,15 +1,15 @@
 @extends('layouts.layoutMaster')
 
-@section('title', 'List-Brands')
+@section('title', 'List-Shelf')
 
 @section('content')
 
     <nav aria-label="breadcrumb" style="font-size: 20px">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ url('/master') }}">Master</a>
+                <a href="">Central Warehouse</a>
             </li>
-            <li class="breadcrumb-item active">Brand</li>
+            <li class="breadcrumb-item active">Shelf</li>
             <li class="breadcrumb-item active">View</li>
         </ol>
     </nav>
@@ -21,7 +21,9 @@
                 <thead>
                 <tr>
                     <th>SR No.</th>
-                    <th>Brand Name</th>
+                    <th>Warehouse Name</th>
+                    <th>Row</th>
+                    <th>No. of Columns </th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -33,37 +35,6 @@
 
 @section('page-script')
     <script>
-
-        function deleteBlog(blogId) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: false,
-                confirmButtonText: "Yes, Approve it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $("#overlay").fadeIn(100);
-                    $.ajax({
-                        type: 'POST',
-                        url: '/brands/' + blogId,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            blogId: blogId,
-                            "_token": "{{ csrf_token() }}"
-                        },
-                        success: function (resultData) {
-                            Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
-                                location.reload();
-                                $("#overlay").fadeOut(100);
-                            });
-                        }
-                    });
-                }
-            });
-        }
 
         window.onload = function () {
             getBrandData();
@@ -82,7 +53,7 @@
                     [0, 'asc']
                 ],
                 "ajax": {
-                    "url": "{{ route('getBrandData') }}",
+                    "url": "{{ route('getShelfData') }}",
                     "type": "POST",
                     "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
                     "data": {
