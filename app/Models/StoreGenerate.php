@@ -18,4 +18,8 @@ class StoreGenerate extends Model
     {
         return $this->hasOne(StoreType::class, 'id', 'store_type_id');
     }
+
+    public function baseStock(){
+       return $this->hasMany(BaseStockCategory::class,'store_id', 'id');
+    }
 }

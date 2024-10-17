@@ -22,4 +22,9 @@ class CentralWarehouse extends Model
     {
         return $this->hasMany(WarehouseInventory::class,'warehouse_id','id');
     }
+
+    public function shelf(){
+        return $this->hasMany(ShelfManage::class,'warehouse_id','id');
+    }
+
 }

@@ -31,5 +31,8 @@ class Category extends Model
     {
         return $this->belongsTo(Sleeve::class, 'cat_id', 'id');
     }
+    public function baseStock(){
+       return $this->belongsTo(BaseStockCategory::class, 'id','cat_id');
+    }
 
 }

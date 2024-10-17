@@ -30,7 +30,6 @@ class BarcodePolicy
     public function create(User $user): bool
     {
         return $user->role === "Super Admin";
-
     }
 
     /**

@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\LoginRegistrationController;
 use App\Http\Controllers\authenticate\AuthLogin;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\BaseStockCategoryController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
 use App\Http\Controllers\centralWarehouse\GRNMasterController;
 use App\Http\Controllers\centralWarehouse\OutwardMasterController;
@@ -39,6 +40,7 @@ use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\ShelfController;
 use App\Http\Controllers\ShelfManageController;
 use App\Http\Controllers\StockAllocationController;
 use App\Http\Controllers\storeInventory\StockInController;
@@ -181,7 +183,11 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('/supplyChain', SupplyChainMasterController::class);
 
 //    Shelf Management
-    Route::resource('shelfManage', ShelfManageController::class);
+    Route::resource('shelf', ShelfController::class);
+    Route::post('getShelfData', [ShelfController::class, 'getShelfData'])->name('getShelfData');
+    Route::get('/shelfProduct/{row}/{warehouse}', [ShelfController::class, 'shelfProduct'])->name('shelfProduct');
+    Route::post('shelf/shelfProduct/store', [ShelfController::class, 'shelfProductStore'])->name('shelfProductStore');
+
 
 //    Design Library
     Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class, 'create'])->name('create-design');
@@ -230,11 +236,17 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('getAllStoreData', [StoreGenerateController::class, 'getAllStoreData'])->name('getAllStoreData');
     Route::get('/storeGenerate/baseStock/{baseStock}', [StoreGenerateController::class, 'baseStock'])->name('baseStock');
 
+    Route::resource('baseStock', BaseStockCategoryController::class);
+    Route::post('getBaseStock', [BaseStockCategoryController::class, 'getBaseStock'])->name('getBaseStock');
+
+
 //    Warehouse Inventory
 
     Route::resource('WarehouseInventory', WarehouseInventoryController::class);
     Route::post('bulkInwardStore', [WarehouseInventoryController::class, 'bulkInwardStore'])->name('bulkInwardStore');
     Route::post('getInventory', [WarehouseInventoryController::class, 'getInventory'])->name('getInventory');
+    Route::get('importInventory', [WarehouseInventoryController::class, 'importInventory'])->name('importInventory');
+    Route::post('importInventoryStore', [WarehouseInventoryController::class, 'importInventoryStore'])->name('importInventoryStore');
 
 
     Route::get('/generateBarcode/{barcode_id}', [BarcodeController::class, 'generateBarcode']);

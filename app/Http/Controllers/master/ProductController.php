@@ -54,7 +54,7 @@ class ProductController extends Controller
 
 //dd($request->all());
 
-            try {
+//            try {
 
                 if (!empty($request->tag_id)) {
                     $tag = implode(',', $request->tag_id);
@@ -67,6 +67,7 @@ class ProductController extends Controller
                     'product_code' => $request->product_code,
                     'hsn_code' => $request->hsn_code,
                     'material' => $request->material,
+                    'size_cm' => $request->size_cm,
                     'product_description' => $request->product_description,
                     'cat_id' => $request->cat_id,
                     'sub_cat_id' => $request->sub_cat_id,
@@ -96,12 +97,14 @@ class ProductController extends Controller
                             }
 
                             foreach ($request->optionValueSize[$key] as $size) {
+//                                dd($size);
                                 if (!empty($size['size'])) {
                                     $variant = new ProductVariant([
                                         'product_id' => $product->id,
                                         'color' => $color['color'],
                                         'size' => $size['size'],
                                         'sku' => $size['sku'],
+                                        'barcode' => $size['barcode'],
                                         'image' => $name ?? null,
                                     ]);
                                     $variant->save();
@@ -113,10 +116,10 @@ class ProductController extends Controller
 
                 DB::commit();
                 return redirect()->back()->with('success', 'Product added successfully');
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return redirect()->back()->with('error', $e->getMessage());
-            }
+//            } catch (\Exception $e) {
+//                DB::rollBack();
+//                return redirect()->back()->with('error', $e->getMessage());
+//            }
 
 //            dd($request->all());
         }
@@ -157,40 +160,40 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
 
-//        $product->update([
-//            'product_name' => $request->product_name,
-//            'product_code' => $request->product_code,
-//            'hsn_code' => $request->hsn_code,
-//            'material' => $request->material,
-//            'product_description' => $request->product_description,
-//            'cost_price' => $request->cost_price,
-//            'sell_price' => $request->sell_price,
-//            'product_mrp' => $request->product_mrp,
-//            'status' => $request->status,
-//            'cat_id' => $request->cat_id,
-//            'sub_cat_id' => $request->sub_cat_id,
-//            'season_id' => $request->season_id,
-//            'brand_id' => $request->brand_id,
-//            'fit_id' => $request->fit_id,
-//            'sleeve_id' => $request->sleeve_id
-//        ]);
+        $product->update([
+            'product_name' => $request->product_name,
+            'product_code' => $request->product_code,
+            'hsn_code' => $request->hsn_code,
+            'material' => $request->material,
+            'product_description' => $request->product_description,
+            'cost_price' => $request->cost_price,
+            'sell_price' => $request->sell_price,
+            'product_mrp' => $request->product_mrp,
+            'status' => $request->status,
+            'cat_id' => $request->cat_id,
+            'sub_cat_id' => $request->sub_cat_id,
+            'season_id' => $request->season_id,
+            'brand_id' => $request->brand_id,
+            'fit_id' => $request->fit_id,
+            'sleeve_id' => $request->sleeve_id
+        ]);
 
-//        if (!empty($request->productColor)) {
-//            foreach ($request->productColor as $key => $color) {
-//                if (!empty($color['color'])) {
-//                    foreach ($request->optionValueSize[$key] as $size) {
-//                        if (!empty($size['size'])) {
-//                            $variant = ProductVariant::where('product_id', $product->id)
-//                                ->where('id', $size['size_id'])
-//                                ->update([
-//                                    'size' => $size['size'],
-//                                    'sku' => $size['sku'],
-//                                ]);
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        if (!empty($request->productColor)) {
+            foreach ($request->productColor as $key => $color) {
+                if (!empty($color['color'])) {
+                    foreach ($request->optionValueSize[$key] as $size) {
+                        if (!empty($size['size'])) {
+                            $variant = ProductVariant::where('product_id', $product->id)
+                                ->where('id', $size['size_id'])
+                                ->update([
+                                    'size' => $size['size'],
+                                    'sku' => $size['sku'],
+                                ]);
+                        }
+                    }
+                }
+            }
+        }
 
 
         if (!empty($request->productColor)) {
@@ -295,6 +298,7 @@ class ProductController extends Controller
                 ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
             array_push($result['data'], [$num, $name, $product_code, $category, $subCategory, $htmlDetails, $status, $action]);
             $num++;
+            $htmlDetails = '';
         }
         echo json_encode($result);
 

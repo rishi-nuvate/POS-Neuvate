@@ -65,6 +65,13 @@
                                 <a class="dropdown-item" href="#"><i
                                         class="ti ti-eye me-1"></i>
                                     History</a>
+                                <a class="dropdown-item" href="{{route('importInventory')}}"><i
+                                        class="ti ti-eye me-1"></i>
+                                    Import Inventory</a>
+
+                                <a class="dropdown-item" href="#"><i
+                                        class="ti ti-eye me-1"></i>
+                                    Replace Inventory</a>
                             </div>
                         </div>
 
@@ -88,10 +95,10 @@
                                 <i class="menu-icon tf-icons ti ti-building-warehouse"></i>Shelf Manage
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{route('shelfManage.create')}}"><i
+                                <a class="dropdown-item" href="{{route('shelf.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
-                                <a class="dropdown-item" href="#"><i
+                                <a class="dropdown-item" href="{{route('shelf.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     List</a>
                                 <a class="dropdown-item" href="#"><i

@@ -13,4 +13,8 @@ class ShelfManage extends Model
     protected $guarded =[];
 
     use HasFactory;
+
+    public function warehouse(){
+        return $this->belongsTo(CentralWarehouse::class,'warehouse_id','id');
+    }
 }

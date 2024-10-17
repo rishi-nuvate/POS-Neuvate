@@ -20,7 +20,7 @@
     <nav aria-label="breadcrumb" style="font-size: 20px">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Central Warehouse</a>
+                <a href="{{url('/centralWarehouseMaster')}}">Central Warehouse</a>
             </li>
             <li class="breadcrumb-item active">Inventory</li>
             <li class="breadcrumb-item active">Add</li>
@@ -37,6 +37,7 @@
                     <th>SR No.</th>
                     <th>Product Name</th>
                     <th>SKU Num</th>
+                    <th>Total Inventory</th>
                     <th>PRICE</th>
                     <th>Good Inventory</th>
                     <th>Bad Inventory</th>

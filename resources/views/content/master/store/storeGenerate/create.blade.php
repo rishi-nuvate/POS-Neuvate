@@ -72,13 +72,26 @@
                             <button type="button" class="step-trigger">
                                 <span class="bs-stepper-circle">1</span>
                                 <span class="bs-stepper-label mt-1">
-                            <span class="bs-stepper-title">Store Details</span>
+                            <span class="bs-stepper-title">Statutory info</span>
+                          </span>
+                            </button>
+                        </div>
+
+                        <div class="line">
+                            <i class="ti ti-chevron-right"></i>
+                        </div>
+                        <div class="step" data-target="#commertial-info-validation">
+                            <button type="button" class="step-trigger">
+                                <span class="bs-stepper-circle">2</span>
+                                <span class="bs-stepper-label">
+                            <span class="bs-stepper-title">Commercials</span>
                           </span>
                             </button>
                         </div>
                         <div class="line">
                             <i class="ti ti-chevron-right"></i>
                         </div>
+
                         <div class="step" data-target="#personal-info-validation">
                             <button type="button" class="step-trigger">
                                 <span class="bs-stepper-circle">2</span>
@@ -90,6 +103,7 @@
                         <div class="line">
                             <i class="ti ti-chevron-right"></i>
                         </div>
+
                         <div class="step" data-target="#social-links-validation">
                             <button type="button" class="step-trigger">
                                 <span class="bs-stepper-circle">3</span>
@@ -98,6 +112,7 @@
                           </span>
                             </button>
                         </div>
+
                     </div>
                     <div class="bs-stepper-content">
                         <form id="wizard-validation-form" onSubmit="return false">
@@ -122,28 +137,71 @@
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="store_name">Store Name </label>
+                                        <label class="form-label" for="op_date">Op. Date</label>
+                                        <input type="date" name="op_date" id="op_date"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_name">Store Name</label>
                                         <input type="text" name="store_name" id="store_name"
                                                class="form-control"
                                                placeholder="enter Store name"/>
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="store_code">Store Code </label>
+                                        <label class="form-label" for="store_code">Store Code</label>
                                         <input type="text" name="store_code" id="store_code"
                                                class="form-control"
                                                placeholder="enter Store code"/>
                                     </div>
 
+
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="store_rating">Store Rating </label>
-                                        <input type="text" name="store_rating" id="store_rating"
+                                        <label class="form-label" for="store_status">store status</label>
+                                        <input type="text" name="store_status" id="store_status"
                                                class="form-control"
                                                placeholder="enter Store Rating"/>
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="store_add_line_1">Address Line 1 </label>
+                                        <label class="form-label" for="format_name">Format</label>
+                                        <input type="text" name="format_name" id="format_name"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="firm">Firm</label>
+                                        <input type="text" name="firm" id="firm"
+                                               class="form-control"
+                                               placeholder="enter firm"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="gst">GST No.</label>
+                                        <input type="text" name="gst" id="gst"
+                                               class="form-control"
+                                               placeholder="enter firm"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_phone">Store Phone</label>
+                                        <input type="text" name="store_phone" id="store_phone"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_email">Store Email</label>
+                                        <input type="text" name="store_email" id="store_email"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_add_line_1">Address Line 1</label>
                                         <input type="text" name="store_add_line_1" id="store_add_line_1"
                                                class="form-control"
                                                placeholder="enter Address Line 1"/>
@@ -154,6 +212,13 @@
                                         <input type="text" name="store_add_line_2" id="store_add_line_2"
                                                class="form-control"
                                                placeholder="enter address line 2"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_area">Zone </label>
+                                        <input type="text" name="store_area" id="store_area"
+                                               class="form-control"
+                                               placeholder="enter Area"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -217,18 +282,53 @@
                                                placeholder="enter PinCode"/>
                                     </div>
 
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="store_area">Area </label>
-                                        <input type="text" name="store_area" id="store_area"
-                                               class="form-control"
-                                               placeholder="enter Area"/>
-                                    </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="map_link">Map Link</label>
+                                        <label class="form-label" for="map_link">GMap Link</label>
                                         <input type="text" name="map_link" id="map_link"
                                                class="form-control"
                                                placeholder="enter Area"/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="franchise_name">Franchise Name</label>
+                                        <input type="text" name="franchise_name" id="franchise_name"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="franchise_phone">Franchise Phone</label>
+                                        <input type="text" name="franchise_phone" id="franchise_phone"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="franchise_email">Franchise Email</label>
+                                        <input type="email" name="franchise_email" id="franchise_email"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="datanote_name">Datanote name</label>
+                                        <input type="text" name="datanote_name" id="datanote_name"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="seller_ware_1seller_ware_1">Sellerware1 name</label>
+                                        <input type="text" name="seller_ware_1" id="seller_ware_1"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="seller_ware_2">Sellerware2 name</label>
+                                        <input type="text" name="seller_ware_2" id="seller_ware_2"
+                                               class="form-control"
+                                               placeholder="enter Store Rating"/>
                                     </div>
 
 
@@ -244,6 +344,161 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="commertial-info-validation" class="content">
+                                <div class="content-header mb-3">
+                                    <h6 class="mb-0">Personal Info</h6>
+                                    <small>Enter Your Personal Info.</small>
+                                </div>
+                                <div class="row g-3">
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="sba_sqft">SBA Sqft</label>
+                                        <input
+                                            type="text"
+                                            id="sba_sqft"
+                                            name="sba_sqft"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="ca_sqft">CA Sqft</label>
+                                        <input
+                                            type="text"
+                                            id="ca_sqft"
+                                            name="ca_sqft"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_rating">Store Rating </label>
+
+                                        <select id="store_rating" name="store_rating" class="select2 form-select"
+                                                data-allow-clear="true">
+                                            <option value=""> Select</option>
+                                            <option value="platinum"> P</option>
+                                            <option value="a++"> A++</option>
+                                            <option value="a+"> A+</option>
+                                            <option value="a"> A</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="commercial_model">Commercial model</label>
+                                        <input
+                                            type="text"
+                                            id="commercial_model"
+                                            name="commercial_model"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="margin">Margin</label>
+                                        <input
+                                            type="text"
+                                            id="margin"
+                                            name="margin"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="add_support">Additional support</label>
+                                        <input
+                                            type="text"
+                                            id="add_support"
+                                            name="add_support"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="security_deposit">Security Deposit</label>
+                                        <input
+                                            type="text"
+                                            id="security_deposit"
+                                            name="security_deposit"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="capex">Capex</label>
+                                        <input
+                                            type="text"
+                                            id="capex"
+                                            name="capex"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="rent">Rent</label>
+                                        <input
+                                            type="text"
+                                            id="rent"
+                                            name="rent"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="bep">BEP</label>
+                                        <input
+                                            type="text"
+                                            id="bep"
+                                            name="bep"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="mf">MF</label>
+                                        <input
+                                            type="text"
+                                            id="mf"
+                                            name="mf"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="mf_percent">MF %</label>
+                                        <input
+                                            type="text"
+                                            id="mf_percent"
+                                            name="mf_percent"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="asm">ASM</label>
+                                        <input
+                                            type="text"
+                                            id="asm"
+                                            name="asm"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <button class="btn btn-label-secondary btn-prev">
+                                            <i class="ti ti-arrow-left me-sm-1 me-0"></i>
+                                            <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                        </button>
+                                        <button class="btn btn-primary btn-next">
+                                            <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                            <i class="ti ti-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Social Links -->
+
                             <!-- Personal Info -->
                             <div id="personal-info-validation" class="content">
                                 <div class="content-header mb-3">
@@ -251,61 +506,75 @@
                                     <small>Enter Your Personal Info.</small>
                                 </div>
                                 <div class="row g-3">
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="franchise">Franchise</label>
-                                        <select id="franchise" name="franchise" class="select2 form-select"
-                                                data-allow-clear="true">
-                                            <option value=""> Select</option>
-                                        </select>
-                                    </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="square_fit">Square Feet</label>
+                                        <label class="form-label" for="store_manager">Store Manager</label>
                                         <input
                                             type="text"
-                                            id="square_feet"
-                                            name="square_feet"
+                                            id="store_manager"
+                                            name="store_manager"
                                             class="form-control"
                                             placeholder="Square Feet"/>
                                     </div>
-                                    @php $num = 1 @endphp
-                                    @foreach($categories as $category)
 
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="franchise">Category</label>
-                                            <input
-                                                type="hidden"
-                                                id="category_id[{{$num}}]"
-                                                name="category_id[{{$num}}]"
-                                                class="form-control" value="{{$category->id}}"/>
-                                            <input
-                                                type="text"
-                                                id="category[{{$num}}]"
-                                                name="category[{{$num}}]"
-                                                class="form-control"
-                                                placeholder="Square Feet" value="{{$category->name}}" readonly/>
-                                        </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_manager_phone">Store Manager Phone number</label>
+                                        <input
+                                            type="text"
+                                            id="store_manager_phone"
+                                            name="store_manager_phone"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
 
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="square_fit">Square Feet</label>
-                                            <input
-                                                type="text"
-                                                id="category_qty[{{$num}}]"
-                                                name="category_qty[{{$num}}]"
-                                                class="form-control"
-                                                placeholder="Square Feet"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary waves-effect"
-                                                        data-bs-toggle="modal" data-bs-target="#addQty0" type="button"
-                                                        onclick="getSubCategory({{$num}})">
-                                                    <i class="fa fa-plus"></i> Add Sku Wise
-                                                </button>
-                                            </div>
-                                        </div>
-                                        @php $num++ @endphp
-                                    @endforeach
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="store_manager_email">Store Manager Email</label>
+                                        <input
+                                            type="text"
+                                            id="store_manager_email"
+                                            name="store_manager_email"
+                                            class="form-control"
+                                            placeholder="Square Feet"/>
+                                    </div>
+
+{{--                                    @php $num = 1 @endphp--}}
+{{--                                    @foreach($categories as $category)--}}
+
+{{--                                        <div class="col-md-4">--}}
+{{--                                            <label class="form-label" for="franchise">Category</label>--}}
+{{--                                            <input--}}
+{{--                                                type="hidden"--}}
+{{--                                                id="category_id[{{$num}}]"--}}
+{{--                                                name="category_id[{{$num}}]"--}}
+{{--                                                class="form-control" value="{{$category->id}}"/>--}}
+{{--                                            <input--}}
+{{--                                                type="text"--}}
+{{--                                                id="category[{{$num}}]"--}}
+{{--                                                name="category[{{$num}}]"--}}
+{{--                                                class="form-control"--}}
+{{--                                                placeholder="Square Feet" value="{{$category->name}}" readonly/>--}}
+{{--                                        </div>--}}
+
+{{--                                        <div class="col-md-4">--}}
+{{--                                            <label class="form-label" for="square_fit">Square Feet</label>--}}
+{{--                                            <input--}}
+{{--                                                type="text"--}}
+{{--                                                id="category_qty[{{$num}}]"--}}
+{{--                                                name="category_qty[{{$num}}]"--}}
+{{--                                                class="form-control"--}}
+{{--                                                placeholder="Square Feet"/>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-md-4">--}}
+{{--                                            <div class="input-group-append">--}}
+{{--                                                <button class="btn btn-primary waves-effect"--}}
+{{--                                                        data-bs-toggle="modal" data-bs-target="#addQty0" type="button"--}}
+{{--                                                        onclick="getSubCategory({{$num}})">--}}
+{{--                                                    <i class="fa fa-plus"></i> Add Sku Wise--}}
+{{--                                                </button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        @php $num++ @endphp--}}
+{{--                                    @endforeach--}}
 
 
                                     <div class="col-12 d-flex justify-content-between">
@@ -321,18 +590,85 @@
                                 </div>
                             </div>
                             <!-- Social Links -->
+
                             <div id="social-links-validation" class="content">
                                 <div class="content-header mb-3">
                                     <h6 class="mb-0">Payment Type</h6>
                                 </div>
                                 <div class="row g-3">
+
                                     <div class="col-sm-6">
                                         <label class="form-label"
-                                               for="store_payment_type">Payment Type</label>
+                                               for="loi">LOI</label>
                                         <input
-                                            type="text"
-                                            name="store_payment_type"
-                                            id="store_payment_type"
+                                            type="file"
+                                            name="loi"
+                                            id="loi"
+                                            class="form-control"
+                                            placeholder=""/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label"
+                                               for="agreement">Agreement</label>
+                                        <input
+                                            type="file"
+                                            name="agreement"
+                                            id="agreement"
+                                            class="form-control"
+                                            placeholder=""/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label"
+                                               for="architecture_draw">Architecture drawing</label>
+                                        <input
+                                            type="file"
+                                            name="architecture_draw"
+                                            id="architecture_draw"
+                                            class="form-control"
+                                            placeholder=""/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label"
+                                               for="photo">Photographs</label>
+                                        <input
+                                            type="file"
+                                            name="photo"
+                                            id="photo"
+                                            class="form-control"
+                                            placeholder=""/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label"
+                                               for="aadhar_file">Aadhar</label>
+                                        <input
+                                            type="file"
+                                            name="aadhar_file"
+                                            id="aadhar_file"
+                                            class="form-control"
+                                            placeholder=""/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label"
+                                               for="pan_file">Pan</label>
+                                        <input
+                                            type="file"
+                                            name="pan_file"
+                                            id="pan_file"
+                                            class="form-control"
+                                            placeholder=""/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="form-label"
+                                               for="gst_file">GST</label>
+                                        <input
+                                            type="file"
+                                            name="gst_file"
+                                            id="gst_file"
                                             class="form-control"
                                             placeholder=""/>
                                     </div>
@@ -385,9 +721,9 @@
 
         </div>
         <hr class="container-m-nx mb-5"/>
-{{--        <div class="row g-3">--}}
+        {{--        <div class="row g-3">--}}
 
-{{--        </div>--}}
+        {{--        </div>--}}
 
 
     </div>
@@ -396,41 +732,43 @@
 
 
 @section('page-script')
+
     <script src="{{asset('assets/js/form-wizard-validation.js')}}"></script>
-    <script src="{{asset('assets/js/form-wizard-numbered.js')}}"></script>
 
-    <script>
+{{--    <script>--}}
 
-        function getSubCategory(id) {
-            var categoryId = document.getElementById(`category_id[${id}]`).value;
-            if (categoryId) {
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('getSubCategories') }}",
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    data: {categoryId: categoryId, '_token': "{{ csrf_token() }}"},
-                    dataType: 'json',
-                    success: function (response) {
-                        $.each(response, function (key, value) {
-                            console.log(value);
-                            $('#subCategory').append('' +
-                                ` <div class="col-md-12 m-4">
-                                            <button type="button" class="btn btn-label-success ml-3"
-                                                    data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                Done
-                                            </button>
-                                        </div>`
-                            )
-                        });
-                    }
-                });
-            } else {
-                $(`#table-container${counter}`).empty();
-            }
-        }
+{{--        function getSubCategory(id) {--}}
+{{--            var categoryId = document.getElementById(`category_id[${id}]`).value;--}}
+{{--            if (categoryId) {--}}
+{{--                $.ajax({--}}
+{{--                    type: 'POST',--}}
+{{--                    url: "{{ route('getSubCategories') }}",--}}
+{{--                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},--}}
+{{--                    data: {categoryId: categoryId, '_token': "{{ csrf_token() }}"},--}}
+{{--                    dataType: 'json',--}}
+{{--                    success: function (response) {--}}
+{{--                        $('#subCategory').empty();--}}
+{{--                        $.each(response, function (key, value) {--}}
+{{--                            console.log(value);--}}
+{{--                            $('#subCategory').append('' +--}}
+{{--                                ` <div class="col-md-12 m-4">--}}
+{{--                                            <button type="button" class="btn btn-label-success ml-3"--}}
+{{--                                                    data-bs-dismiss="modal"--}}
+{{--                                                    aria-label="Close">--}}
+{{--                                                Done--}}
+{{--                                            </button>--}}
+{{--                                        </div>`--}}
+{{--                            )--}}
+{{--                        });--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            } else {--}}
+{{--                $(`#table-container${counter}`).empty();--}}
+{{--            }--}}
+{{--        }--}}
 
-    </script>
+{{--    </script>--}}
+
 @endsection
 
 {{--<option value="${value.id}">${value.name}</option>--}}
