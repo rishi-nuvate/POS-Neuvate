@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shelf_manages', function (Blueprint $table) {
+        Schema::create('shelves', function (Blueprint $table) {
             $table->id();
             $table->foreignId('warehouse_id')->constrained('central_warehouses')->onDelete('cascade');
             $table->integer('row_num')->nullable();
             $table->integer('column_num')->nullable();
+            $table->integer('column_name')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shelf_manages');
+        Schema::dropIfExists('shelves');
     }
 };
