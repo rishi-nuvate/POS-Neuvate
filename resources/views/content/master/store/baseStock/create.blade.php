@@ -74,7 +74,7 @@
                             <div class="col-md-4">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary waves-effect"
-                                            data-bs-toggle="modal" data-bs-target="#addQty0" type="button"
+                                            data-bs-toggle="modal" data-bs-target="#addQty{{$num}}" type="button"
                                             onclick="sizeQuantity({{$num}})">
                                         <i class="fa fa-plus"></i> Add Sku Wise
                                     </button>
@@ -90,7 +90,10 @@
                             <button type="submit" class="btn btn-primary d-grid w-100">Save</button>
                         </div>
                     </div>
-                    <div class="modal fade ValidateModelForTotalQty" id="addQty0" tabindex="-1" aria-hidden="true">
+
+                    @php $num = 1 @endphp
+                    @foreach($categories as $category)
+                    <div class="modal fade ValidateModelForTotalQty" id="addQty{{$num}}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-simple modal-edit-user modal-dialog-scrollable">
 
                             <div class="modal-content p-1 p-md-0" style="min-height: 60vh;">
@@ -107,12 +110,12 @@
                                             <label class="form-label" for="size">Enter Size</label>
                                             <input
                                                 type="text"
-                                                id="size"
-                                                name="size"
+                                                id="allSizes"
+                                                name="allSizes"
                                                 class="form-control"
                                                 placeholder="Total Quantity" onkeyup="allSize(this.value)"/>
 
-                                            <div id="table-container"></div>
+                                            <div id="table-container{{$category->id}}"></div>
                                         </div>
 
                                     </div>
@@ -120,14 +123,15 @@
                                 <div class="col-md-12 m-4">
                                     <button type="button" class="btn btn-label-success ml-3"
                                             data-bs-dismiss="modal"
-                                            aria-label="Close" onclick="displaySelectionInTable(0)">
+                                            aria-label="Close" onclick="">
                                         Done
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                        @php $num++ @endphp
+                    @endforeach
                 </form>
             </div>
         </div>
@@ -144,20 +148,16 @@
 
         function sizeQuantity(id) {
             cat_id = document.getElementById(`category_id[${id}]`).value
-            console.log(cat_id);
         }
 
         function allSize(input) {
 
-            console.log(cat_id);
-
             const numbers = input.split(',');
-            $('#table-container').empty();
+            $('#table-container'+ cat_id).empty();
             $.each(numbers, function (key, value) {
-                console.log(value);
                 if (value !== '') {
 
-                    $('#table-container').append('' +
+                    $('#table-container' + cat_id).append('' +
                         `<div class="row">
                             <div class="col-md-4 mt-3">
                             <label class="form-label" for="size">Size</label>

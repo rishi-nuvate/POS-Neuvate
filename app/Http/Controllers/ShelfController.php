@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CentralWarehouse;
+use App\Models\Product;
 use App\Models\Shelf;
 use App\Http\Requests\StoreShelfRequest;
 use App\Http\Requests\UpdateShelfRequest;
@@ -125,7 +126,7 @@ class ShelfController extends Controller
 
         $result = ['data' => []];
         $num = 1;
-//dd($shelves);
+
         foreach ($shelves as $warehouseName => $rows) {
             $warehouse = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $warehouseName . '</button>';
 //            dd($rows);
@@ -148,20 +149,19 @@ class ShelfController extends Controller
     {
         $warehouseId = CentralWarehouse::where('warehouse_name', $warehouse)->first()->id;
 
-        $shelves = shelf::with('warehouse')->where('warehouse_id', $warehouseId)->where('row_num', $row_num)->get();
+        $products = Product::with('sheshelfProductlf')->get();
 
-        return view('content.centralWarehouse.shelf.shelfProduct', compact('shelves', 'warehouse'));
+        $shelves = shelf::with('shelfProduct.product')->where('warehouse_id', $warehouseId)->where('row_num', $row_num)->get();
+//dd($shelves);
+        return view('content.centralWarehouse.shelf.shelfProduct', compact('shelves', 'warehouse','products'));
     }
 
     public function shelfProductStore(Request $request)
     {
-//        dd($request->all());
         foreach ($request->products_id as $key => $product) {
-
             foreach ($product as $productId) {
-//                dd($productId);
                 $shelfProduct = new ShelfRelation([
-                    'shelf_id' => $request->shelf_id[0],
+                    'shelf_id' => $request->shelf_id[$key],
                     'product_id' => $productId,
                 ]);
 

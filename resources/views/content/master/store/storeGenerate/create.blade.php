@@ -94,7 +94,7 @@
 
                         <div class="step" data-target="#personal-info-validation">
                             <button type="button" class="step-trigger">
-                                <span class="bs-stepper-circle">2</span>
+                                <span class="bs-stepper-circle">3</span>
                                 <span class="bs-stepper-label">
                             <span class="bs-stepper-title">Manager Info</span>
                           </span>
@@ -106,9 +106,9 @@
 
                         <div class="step" data-target="#social-links-validation">
                             <button type="button" class="step-trigger">
-                                <span class="bs-stepper-circle">3</span>
+                                <span class="bs-stepper-circle">4</span>
                                 <span class="bs-stepper-label">
-                            <span class="bs-stepper-title">Payment Details</span>
+                            <span class="bs-stepper-title">Attachments</span>
                           </span>
                             </button>
                         </div>

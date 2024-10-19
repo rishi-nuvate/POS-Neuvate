@@ -13,4 +13,13 @@ class ShelfRelation extends Model
     protected $guarded=[];
 
     use HasFactory;
+
+    public function shelf(){
+        return $this->belongsTo(Shelf::class,'shelf_id','id');
+    }
+
+    public function product(){
+        return $this->belongsTo(Product::class,'product_id','id');
+    }
+
 }

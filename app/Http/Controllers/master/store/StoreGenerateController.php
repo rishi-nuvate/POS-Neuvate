@@ -70,7 +70,7 @@ class StoreGenerateController extends Controller
             'seller_ware_1' => $request->seller_ware_1,
             'seller_ware_2' => $request->seller_ware_2,
         ]);
-//        dd($storeGenerate);
+
         $storeGenerate->save();
 
         $id = $storeGenerate->id;
@@ -103,19 +103,78 @@ class StoreGenerateController extends Controller
 
         $inventoryDetails->save();
 
+//        dd($request->loi);
 
-//        $attachments = new StoreAttachment([
-//            'store_id' => $id,
-//            'loi' => $request->loi,
-//            'agreement' => $request->agreement,
-//            'architecture_draw' => $request->architecture_draw,
-//            'photo' => $request->photo,
-//            'aadhar_file' => $request->aadhar_file,
-//            'pan_file' => $request->pan_file,
-//            'gst_file' => $request->gst_file,
-//        ]);
-//        $attachments->save();
+        $path = public_path('/storeAttachment/' . $id . '/');
 
+        if (!is_dir(public_path('/storeAttachment/'))) {
+            mkdir(public_path('/storeAttachment/'), 0755, true);
+        }
+
+        $loi = $request->loi->getClientOriginalName();
+        $loi_extention = $request->loi->getClientOriginalExtension();
+        $loiName = $id . '_loi_' . date('md') . '.' . $loi_extention;
+
+
+        $request->loi->move($path, $loiName);
+
+
+        $agreement = $request->agreement->getClientOriginalName();
+        $agreement_extention = $request->agreement->getClientOriginalExtension();
+        $agreementName = $id . '_agreement_' . date('md') . '.' . $agreement_extention;
+
+        $request->agreement->move($path, $agreementName);
+
+
+        $architectureDraw = $request->architecture_draw->getClientOriginalName();
+        $architectureDraw_extention = $request->architecture_draw->getClientOriginalExtension();
+        $architectureDrawName = $id . '_loi_' . date('md') . '.' . $architectureDraw_extention;
+
+        $request->architecture_draw->move($path, $architectureDrawName);
+
+
+        $photograph = $request->photo->getClientOriginalName();
+        $photograph_extention = $request->photo->getClientOriginalExtension();
+        $photographName = $id . '_loi_' . date('md') . '.' . $photograph_extention;
+
+        $request->photo->move($path, $photographName);
+
+
+        $aadhar = $request->aadhar_file->getClientOriginalName();
+        $aadhar_extention = $request->aadhar_file->getClientOriginalExtension();
+        $aadharName = $id . '_loi_' . date('md') . '.' . $aadhar_extention;
+
+        $request->aadhar_file->move($path, $aadharName);
+
+
+        $pan = $request->pan_file->getClientOriginalName();
+        $pan_extention = $request->pan_file->getClientOriginalExtension();
+        $panName = $id . '_loi_' . date('md') . '.' . $pan_extention;
+
+        $request->pan_file->move($path, $panName);
+
+
+        $gst = $request->gst_file->getClientOriginalName();
+        $gst_extention = $request->gst_file->getClientOriginalExtension();
+        $gstName = $id . '_loi_' . date('md') . '.' . $gst_extention;
+
+        $request->gst_file->move($path, $gstName);
+
+//        dd(2);
+        $attachments = new StoreAttachment([
+            'store_id' => $id,
+            'loi' => $loiName,
+            'agreement' => $agreementName,
+            'architecture_draw' =>$architectureDrawName,
+            'photo' => $photographName,
+            'aadhar_file' =>$aadharName,
+            'pan_file' => $panName,
+            'gst_file' => $gstName,
+        ]);
+//        dd($attachments);
+
+        $attachments->save();
+//        dd(1);
 
         DB::commit();
 

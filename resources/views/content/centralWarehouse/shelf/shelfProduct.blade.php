@@ -58,6 +58,9 @@
                                         class="products-select select2 select21 form-select" data-allow-clear="true"
                                         data-placeholder="Select Company" multiple>
                                     <option value="">Select</option>
+                                    @foreach($products as $product)
+                                        <option value="{{$product->id}}">{{$product->product_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             @php $num++ @endphp
@@ -84,33 +87,34 @@
     <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
 
     <script>
-        function productData() {
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('productData') }}',
-                data: {
-                    '_token': "{{ csrf_token() }}",
-                },
-                dataType: 'json',
-                success: function (response) {
+        {{--function productData() {--}}
+        {{--    $.ajax({--}}
+        {{--        type: 'POST',--}}
+        {{--        url: '{{ route('productData') }}',--}}
+        {{--        data: {--}}
+        {{--            '_token': "{{ csrf_token() }}",--}}
+        {{--        },--}}
+        {{--        dataType: 'json',--}}
+        {{--        success: function (response) {--}}
 
-                    $('.products-select').each(function () {
-                        $(this).empty(); // Clear existing options
-                        $(this).append('<option value="">Select</option>'); // Default option
-                        $.each(response, function (key, value) {
-                            $(this).append('<option value="' + value.id + '">' + value.product_name + '</option>');
-                        }.bind(this)); // Use .bind(this) to ensure 'this' refers to the current select element
-                    });
+        {{--            $('.products-select').each(function () {--}}
+        {{--                $(this).empty(); // Clear existing options--}}
+        {{--                $(this).append('<option value="">Select</option>');--}}
+        {{--                $.each(response, function (key, value) {--}}
+        {{--                    console.log(value);--}}
+        {{--                    $(this).append('<option value="' + value.id + '">' + value.product_name + '</option>');--}}
+        {{--                }.bind(this));--}}
+        {{--            });--}}
 
-                    // $('#products_id').empty();
-                    // $.each(response, function (key, value) {
-                    //     $('#products_id').append('<option value="' + value.id + '">' + value
-                    //         .product_name + '</option>');
-                    // });
-                }
-            });
-        }
+        {{--            // $('#products_id').empty();--}}
+        {{--            // $.each(response, function (key, value) {--}}
+        {{--            //     $('#products_id').append('<option value="' + value.id + '">' + value--}}
+        {{--            //         .product_name + '</option>');--}}
+        {{--            // });--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--}--}}
 
-        productData();
+        {{--productData();--}}
     </script>
 @endsection

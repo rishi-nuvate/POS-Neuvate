@@ -49,21 +49,25 @@ class BaseStockCategoryController extends Controller
                 ]);
 
                 $categoryStore->save();
-                foreach ($request->size[$catId] as $index => $size) {
+                if ($request->size[$catId]) {
+                    foreach ($request->size[$catId] as $index => $size) {
 
-                    $sizeQuantity = new BaseStockSize([
-                        'base_stock_cat_id' => $categoryStore->id,
-                        'size' => $size,
-                        'qty' => $request->size_qty[$catId][$index],
-                        'ratio' => $request->size_ratio[$catId][$index],
-                    ]);
-                    $sizeQuantity->save();
+                        $sizeQuantity = new BaseStockSize([
+                            'base_stock_cat_id' => $categoryStore->id,
+                            'size' => $size,
+                            'qty' => $request->size_qty[$catId][$index],
+                            'ratio' => $request->size_ratio[$catId][$index],
+                        ]);
+                        $sizeQuantity->save();
+                    }
                 }
-
             }
         }
 
         DB::commit();
+
+        return redirect()->route('baseStock.index');
+
     }
 
     /**
@@ -79,8 +83,10 @@ class BaseStockCategoryController extends Controller
      */
     public function edit(BaseStockCategory $baseStockCategory, Request $request)
     {
-        $baseStock = BaseStockCategory::where('id',$request->baseStock)->get();
-        return view('content.master.store.baseStock.edit', compact('baseStock'));
+        $stores = StoreGenerate::all();
+        $baseStock = BaseStockCategory::where('store_id', $request->baseStock)->with('category')->get();
+//        dd($baseStock);
+        return view('content.master.store.baseStock.edit', compact('baseStock', 'stores'));
     }
 
     /**
@@ -88,7 +94,38 @@ class BaseStockCategoryController extends Controller
      */
     public function update(UpdateBaseStockCategoryRequest $request, BaseStockCategory $baseStockCategory)
     {
-        //
+        $storeId = $request->store_id;
+
+        DB::beginTransaction();
+        foreach ($request->old_size as $key => $oldSize) {
+            $baseStockSize = BaseStockSize::where('id', $key)->update([
+                'size' => $oldSize,
+                'ratio' => $request->old_size_ratio[$key],
+                'qty' => $request->old_size_qty[$key],
+            ]);
+        }
+        foreach ($request->category_id as $key1 => $catId) {
+            $baseStock = BaseStockCategory::where('store_id', $storeId)->where('cat_id', $catId)->first();
+            $baseStock->update([
+                'cat_qty' => $request->category_qty[$key1],
+            ]);
+//            dd($request->all());
+            if (!empty($request->size[$catId]) ) {
+                foreach ($request->size[$catId] as $index => $size) {
+
+                    $sizeQuantity = new BaseStockSize([
+                        'base_stock_cat_id' => $baseStock->id,
+                        'size' => $size,
+                        'qty' => $request->size_qty[$catId][$index],
+                        'ratio' => $request->size_ratio[$catId][$index],
+
+                    ]);
+                    $sizeQuantity->save();
+                }
+            }
+        }
+        DB::commit();
+
     }
 
     /**
@@ -101,21 +138,33 @@ class BaseStockCategoryController extends Controller
 
     public function getBaseStock()
     {
-        $baseStock = BaseStockCategory::with('store', 'category', 'size')->get();
+
+        $baseStock = BaseStockCategory::with('store', 'category', 'size')->select('store_id')
+            ->distinct()
+            ->get();
+
 //        dd($baseStock);
+
         $result = array();
         $result['data'] = array();
         $num = 1;
         foreach ($baseStock as $store) {
             $storeName = $store->store->store_name;
             $action =
-                ' <a href="baseStock/'.$store->id.'/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+                ' <a href="baseStock/' . $store->store_id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
             <button onclick="deleteBlog(' .
-                $store->id .
+                $store->store_id .
                 ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
             array_push($result['data'], [$num, $storeName, $action]);
             $num++;
         }
         return response()->json($result);
+    }
+
+    public function getBaseStockSize(Request $request)
+    {
+        $Id = $request->input('Id');
+        $baseStockSize = BaseStockSize::where('base_stock_cat_id', $Id)->get();
+        return response()->json($baseStockSize);
     }
 }

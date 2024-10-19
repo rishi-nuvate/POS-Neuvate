@@ -24,7 +24,7 @@ class CentralWarehouse extends Model
     }
 
     public function shelf(){
-        return $this->hasMany(ShelfManage::class,'warehouse_id','id');
+        return $this->hasMany(Shelf::class,'warehouse_id','id');
     }
 
 }

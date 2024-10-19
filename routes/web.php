@@ -238,6 +238,7 @@ Route::middleware('auth:web')->group(callback: function () {
 
     Route::resource('baseStock', BaseStockCategoryController::class);
     Route::post('getBaseStock', [BaseStockCategoryController::class, 'getBaseStock'])->name('getBaseStock');
+    Route::post('getBaseStockSize', [BaseStockCategoryController::class, 'getBaseStockSize'])->name('getBaseStockSize');
 
 
 //    Warehouse Inventory

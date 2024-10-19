@@ -30,163 +30,163 @@
         // Account details
         const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
             fields: {
-                // store_type: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select Store Type'
-                //         }
-                //     }
-                // },
-                // op_date: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please Enter Date'
-                //         }
-                //     }
-                // },
-                // store_name: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Store name'
-                //         }
-                //     }
-                // },
-                // store_code: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Store Code'
-                //         }
-                //     }
-                // },
-                // store_status: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter store Status'
-                //         },
-                //     }
-                // },
-                //
-                // format: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter format'
-                //         },
-                //     }
-                // },
-                //
-                // firm: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter firm'
-                //         },
-                //     }
-                // },
-                //
-                // gst: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter gst number'
-                //         },
-                //     }
-                // },
-                // store_phone: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter store Phone number'
-                //         },
-                //     }
-                // },
-                // store_email: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter store email id'
-                //         },
-                //     }
-                // },
-                // store_city: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter City'
-                //         },
-                //     }
-                // },
-                // store_state: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select State'
-                //         },
-                //     }
-                // },
-                // store_pincode: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter PinCode'
-                //         },
-                //     }
-                // },
-                // store_area: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Area'
-                //         },
-                //     }
-                // },
-                // store_add_line_1: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Address Line 1'
-                //         },
-                //     }
-                // },
-                // store_add_line_2: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Address Line 2'
-                //         },
-                //     }
-                // }, map_link: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Map link'
-                //         },
-                //     }
-                // }, franchise_name: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Franchise Name '
-                //         },
-                //     }
-                // }, franchise_phone: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Franchise Phone number'
-                //         },
-                //     }
-                // }, franchise_email: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Franchise Email'
-                //         },
-                //     }
-                // }, datanote_name: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Data Note Name'
-                //         },
-                //     }
-                // }, seller_ware_1: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter SellerWare 1'
-                //         },
-                //     }
-                // }, seller_ware_2: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter SellerWare 2'
-                //         },
-                //     }
-                // },
+                store_type: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select Store Type'
+                        }
+                    }
+                },
+                op_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please Enter Date'
+                        }
+                    }
+                },
+                store_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Store name'
+                        }
+                    }
+                },
+                store_code: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Store Code'
+                        }
+                    }
+                },
+                store_status: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter store Status'
+                        },
+                    }
+                },
+
+                format: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter format'
+                        },
+                    }
+                },
+
+                firm: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter firm'
+                        },
+                    }
+                },
+
+                gst: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter gst number'
+                        },
+                    }
+                },
+                store_phone: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter store Phone number'
+                        },
+                    }
+                },
+                store_email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter store email id'
+                        },
+                    }
+                },
+                store_city: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter City'
+                        },
+                    }
+                },
+                store_state: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select State'
+                        },
+                    }
+                },
+                store_pincode: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter PinCode'
+                        },
+                    }
+                },
+                store_area: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Area'
+                        },
+                    }
+                },
+                store_add_line_1: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Address Line 1'
+                        },
+                    }
+                },
+                store_add_line_2: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Address Line 2'
+                        },
+                    }
+                }, map_link: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Map link'
+                        },
+                    }
+                }, franchise_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Franchise Name '
+                        },
+                    }
+                }, franchise_phone: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Franchise Phone number'
+                        },
+                    }
+                }, franchise_email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Franchise Email'
+                        },
+                    }
+                }, datanote_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Data Note Name'
+                        },
+                    }
+                }, seller_ware_1: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter SellerWare 1'
+                        },
+                    }
+                }, seller_ware_2: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter SellerWare 2'
+                        },
+                    }
+                },
             },
             plugins: {
                 trigger: new FormValidation.plugins.Trigger(),
@@ -215,109 +215,109 @@
         // Personal info
         const FormValidation2 = FormValidation.formValidation(wizardValidationFormStep2, {
             fields: {
-                // sba_sqft: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Name'
-                //         },
-                //     }
-                // },
-                // ca_sqft: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Phone number'
-                //         },
-                //     }
-                // },
-                //
-                // store_rating: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select Store Rating'
-                //         },
-                //     }
-                // },
-                // commercial_model: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter commercial model'
-                //         },
-                //     }
-                // },
-                // margin: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter margin'
-                //         },
-                //     }
-                // },
-                // add_support: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Additional Support'
-                //         },
-                //     }
-                // },
-                // security_deposit: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Security Deposit'
-                //         },
-                //     }
-                // },
-                // capex: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter CAPEX'
-                //         },
-                //     }
-                // },
-                // rent: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Rent Amount'
-                //         },
-                //     }
-                // },
-                // bep: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter BEP'
-                //         },
-                //     }
-                // },
-                // mf: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter MF'
-                //         },
-                //     }
-                // },
-                // mf_percent: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter MF Percentage'
-                //         },
-                //     }
-                // },
-                // asm: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter ASM'
-                //         },
-                //     }
-                // },
-                //
-                // manager_email: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please enter Email'
-                //         },
-                //         emailAddress: {
-                //             message: 'The value is not a valid email address'
-                //         }
-                //     }
-                // },
+                sba_sqft: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Name'
+                        },
+                    }
+                },
+                ca_sqft: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Phone number'
+                        },
+                    }
+                },
+
+                store_rating: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select Store Rating'
+                        },
+                    }
+                },
+                commercial_model: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter commercial model'
+                        },
+                    }
+                },
+                margin: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter margin'
+                        },
+                    }
+                },
+                add_support: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Additional Support'
+                        },
+                    }
+                },
+                security_deposit: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Security Deposit'
+                        },
+                    }
+                },
+                capex: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter CAPEX'
+                        },
+                    }
+                },
+                rent: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Rent Amount'
+                        },
+                    }
+                },
+                bep: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter BEP'
+                        },
+                    }
+                },
+                mf: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter MF'
+                        },
+                    }
+                },
+                mf_percent: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter MF Percentage'
+                        },
+                    }
+                },
+                asm: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter ASM'
+                        },
+                    }
+                },
+
+                manager_email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter Email'
+                        },
+                        emailAddress: {
+                            message: 'The value is not a valid email address'
+                        }
+                    }
+                },
 
             },
             plugins: {
@@ -411,84 +411,84 @@
         const FormValidation4 = FormValidation.formValidation(wizardValidationFormStep4, {
             fields: {
 
-                // loi: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select a file for LOI'
-                //         },
-                //         file: {
-                //             extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
-                //             type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
-                //             maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
-                //             message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
-                //         }
-                //     }
-                // },
-                // agreement: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select a file for Agreement'
-                //         },
-                //         file: {
-                //             extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
-                //             type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
-                //             maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
-                //             message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
-                //         }
-                //     }
-                // },
-                // architecture_draw: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select a file for Architectural Drawing'
-                //         },
-                //         file: {
-                //             extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
-                //             type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
-                //             maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
-                //             message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
-                //         }
-                //     }
-                // },
-                // photo: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select a file for photo'
-                //         },
-                //         file: {
-                //             extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
-                //             type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
-                //             maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
-                //             message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
-                //         }
-                //     }
-                // },
-                // aadhar_file: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select a file for SellerWare 2'
-                //         },
-                //         file: {
-                //             extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
-                //             type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
-                //             maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
-                //             message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
-                //         }
-                //     }
-                // },
-                // pan_file: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Please select a file for SellerWare 2'
-                //         },
-                //         file: {
-                //             extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
-                //             type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
-                //             maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
-                //             message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
-                //         }
-                //     }
-                // },
+                loi: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a file for LOI'
+                        },
+                        file: {
+                            extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
+                            type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
+                            maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
+                            message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
+                        }
+                    }
+                },
+                agreement: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a file for Agreement'
+                        },
+                        file: {
+                            extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
+                            type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
+                            maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
+                            message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
+                        }
+                    }
+                },
+                architecture_draw: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a file for Architectural Drawing'
+                        },
+                        file: {
+                            extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
+                            type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
+                            maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
+                            message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
+                        }
+                    }
+                },
+                photo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a file for photo'
+                        },
+                        file: {
+                            extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
+                            type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
+                            maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
+                            message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
+                        }
+                    }
+                },
+                aadhar_file: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a file for SellerWare 2'
+                        },
+                        file: {
+                            extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
+                            type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
+                            maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
+                            message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
+                        }
+                    }
+                },
+                pan_file: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a file for SellerWare 2'
+                        },
+                        file: {
+                            extension: 'jpeg,jpg,png,pdf', // Allowed file extensions
+                            type: 'image/jpeg,image/png,application/pdf', // Allowed file MIME types
+                            maxSize: 2097152, // 2 MB in bytes (2 * 1024 * 1024)
+                            message: 'Please choose a valid file (jpeg, jpg, png, or pdf) and the size must not exceed 2MB'
+                        }
+                    }
+                },
                 gst_file: {
                     validators: {
                         notEmpty: {

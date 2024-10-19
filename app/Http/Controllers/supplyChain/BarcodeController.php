@@ -108,7 +108,7 @@ class BarcodeController extends Controller
 
     public function productData()
     {
-        $products = Product::all();
+        $products = Product::with('sheshelfProductlf')->get();
         return json_encode($products);
     }
 

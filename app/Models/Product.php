@@ -59,4 +59,7 @@ class Product extends Model
         return $this->hasOne(WarehouseInventory::class,'id','product_id');
     }
 
+    public function sheshelfProductlf(){
+        return $this->hasMany(ShelfRelation::class,'product_id','id');
+    }
 }

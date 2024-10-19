@@ -18,4 +18,8 @@ class Shelf extends Model
         return $this->belongsTo(CentralWarehouse::class,'warehouse_id','id');
     }
 
+    public function shelfProduct(){
+        return $this->hasMany(ShelfRelation::class,'shelf_id','id');
+    }
+
 }
