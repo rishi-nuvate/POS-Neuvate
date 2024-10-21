@@ -63,6 +63,7 @@ class PurchaseOrderController extends Controller
                 'company_id' => $request->company,
                 'company_shipping_id' => $request->shippingAddress,
                 'po_no' => $request->poNumber,
+                'po_date' => $request->po_date,
             ]);
 
             if ($Po->save()) {
@@ -104,12 +105,13 @@ class PurchaseOrderController extends Controller
         return redirect()->route('po.create')->withErrors('Validation Failed');
     }
 
-    public function deletePurchaseOrder(Request $request){
+    public function deletePurchaseOrder(Request $request)
+    {
         $Po = PurchaseOrder::find($request->PoId);
         $PoItems = PurchaseOrderItem::where('po_id', $request->PoId)->get();
         $PoItemParameters = PurchaseOrderItemParameter::where('po_id', $request->PoId)->get();
         if ($Po) {
-            foreach ($PoItems as $PoItem){
+            foreach ($PoItems as $PoItem) {
                 foreach ($PoItemParameters as $PoItemParameter) {
                     if (!$PoItemParameter->delete()) {
                         return response()->json(['success' => false]);
@@ -127,14 +129,15 @@ class PurchaseOrderController extends Controller
         return response()->json(['success' => false]);
     }
 
-    public function deletePurchaseOrderItemRow(Request $request){
+    public function deletePurchaseOrderItemRow(Request $request)
+    {
         $PoItemId = PurchaseOrderItem::find($request->poItemId);
         $PoItemParameters = PurchaseOrderItemParameter::where('po_item_id', $request->poItemId)->get();
-        if ($PoItemId){
-            foreach ($PoItemParameters as $PoItemParameter){
-                    if (!$PoItemParameter->delete()) {
-                        return response()->json(['success' => false]);
-                    }
+        if ($PoItemId) {
+            foreach ($PoItemParameters as $PoItemParameter) {
+                if (!$PoItemParameter->delete()) {
+                    return response()->json(['success' => false]);
+                }
             }
             if ($PoItemId->delete()) {
                 return response()->json(['success' => true]);
@@ -164,17 +167,18 @@ class PurchaseOrderController extends Controller
         $shipAddresses = CompanyShipAddress::get();
         $vendors = User::where('role', 'vendor')->get();
         $products = Product::get();
-        return view('content.supplyChain.po.edit', compact('Po','companies', 'shipAddresses', 'vendors', 'products', 'PoParameters'));
+        return view('content.supplyChain.po.edit', compact('Po', 'companies', 'shipAddresses', 'vendors', 'products', 'PoParameters'));
     }
 
-    public function getSelectedParameters(Request $request){
+    public function getSelectedParameters(Request $request)
+    {
         $product_id = $request->product_id;
         $po_id = $request->po_id;
         $po_item_id = $request->po_item_id;
 
-        $purchaseOrderItem = PurchaseOrderItem::with( 'purchaseOrderItemParameter')
-                            ->where('id', $po_item_id)
-                            ->get();
+        $purchaseOrderItem = PurchaseOrderItem::with('purchaseOrderItemParameter')
+            ->where('id', $po_item_id)
+            ->get();
 
         $data = [];
 
@@ -182,16 +186,16 @@ class PurchaseOrderController extends Controller
         $productSizeArray = [];
         $productSkuArray = [];
         $productQtyArray = [];
-            foreach ($purchaseOrderItem as $PoItem) {
-                if ($PoItem->purchaseOrderItemParameter) {
-                    foreach ($PoItem->purchaseOrderItemParameter as $Parameter) {
-                        $productColorArray[] = $Parameter->item_color;
-                        $productSizeArray[] = $Parameter->item_size;
-                        $productSkuArray[] = $Parameter->item_sku;
-                        $productQtyArray[] = $Parameter->item_qty;
-                    }
+        foreach ($purchaseOrderItem as $PoItem) {
+            if ($PoItem->purchaseOrderItemParameter) {
+                foreach ($PoItem->purchaseOrderItemParameter as $Parameter) {
+                    $productColorArray[] = $Parameter->item_color;
+                    $productSizeArray[] = $Parameter->item_size;
+                    $productSkuArray[] = $Parameter->item_sku;
+                    $productQtyArray[] = $Parameter->item_qty;
                 }
             }
+        }
 
         $data["productColors"] = $productColorArray;
         $data["productSize"] = $productSizeArray;
@@ -227,78 +231,78 @@ class PurchaseOrderController extends Controller
                 ]);
                 $Po->save();
             }
-        }else{
+        } else {
             return redirect()->route('po.index')->withErrors('Validation Failed');
         }
 
-            if ($Po->save()) {
-                foreach ($request->product_id as $i => $productId) {
-                    if (isset($request->poItemId[$i])){
-                        $PoItem = PurchaseOrderItem::where('id', $request->poItemId[$i])->first();
-                        if ($PoItem) {
-                            echo $request->poItemId[$i] . '<br>';
+        if ($Po->save()) {
+            foreach ($request->product_id as $i => $productId) {
+                if (isset($request->poItemId[$i])) {
+                    $PoItem = PurchaseOrderItem::where('id', $request->poItemId[$i])->first();
+                    if ($PoItem) {
+                        echo $request->poItemId[$i] . '<br>';
 
-                            $PoItem->product_description = $request->description[$i];
-                            $PoItem->unit_price = $request->unitPrice[$i];
-                            $PoItem->tax_amount = $request->tax[$i];
-                            $PoItem->total_quantity = $request->TotalQty[$i];
-
-                            if (!$PoItem->save()) {
-                                return redirect()->route('po.edit')->withErrors('Error updating POItems.');
-                            }
-                        }
-                    } else {
-                        $PoItem = new PurchaseOrderItem([
-                            'po_id' => $Po->id,
-                            'product_id' => $productId,
-                            'product_description' => $request->description[$i],
-                            'unit_price' => $request->unitPrice[$i],
-                            'tax_amount' => $request->tax[$i],
-                            'total_quantity' => $request->TotalQty[$i],
-                        ]);
+                        $PoItem->product_description = $request->description[$i];
+                        $PoItem->unit_price = $request->unitPrice[$i];
+                        $PoItem->tax_amount = $request->tax[$i];
+                        $PoItem->total_quantity = $request->TotalQty[$i];
 
                         if (!$PoItem->save()) {
-                            return redirect()->route('po.edit')->withErrors('Error saving POItems.');
+                            return redirect()->route('po.edit')->withErrors('Error updating POItems.');
                         }
-
                     }
+                } else {
+                    $PoItem = new PurchaseOrderItem([
+                        'po_id' => $Po->id,
+                        'product_id' => $productId,
+                        'product_description' => $request->description[$i],
+                        'unit_price' => $request->unitPrice[$i],
+                        'tax_amount' => $request->tax[$i],
+                        'total_quantity' => $request->TotalQty[$i],
+                    ]);
+
+                    if (!$PoItem->save()) {
+                        return redirect()->route('po.edit')->withErrors('Error saving POItems.');
+                    }
+
+                }
 //                    dd($request->sku[$i]);
-                    if (isset($request->sku[$i])) {
-                        foreach ($request->sku[$i] as $key => $skuValue) {
-                            $PoItemParameter = PurchaseOrderItemParameter::where('po_id', $Po->id)
-                                ->where('po_item_id', $PoItem->id)
-                                ->where('item_sku', $skuValue)
-                                ->first();
+                if (isset($request->sku[$i])) {
+                    foreach ($request->sku[$i] as $key => $skuValue) {
+                        $PoItemParameter = PurchaseOrderItemParameter::where('po_id', $Po->id)
+                            ->where('po_item_id', $PoItem->id)
+                            ->where('item_sku', $skuValue)
+                            ->first();
 
-                            if ($PoItemParameter) {
-                                $PoItemParameter->item_color = $request->color[$i][$key];
-                                $PoItemParameter->item_size = $request->size[$i][$key];
-                                $PoItemParameter->item_qty = $request->quantity[$i][$key];
+                        if ($PoItemParameter) {
+                            $PoItemParameter->item_color = $request->color[$i][$key];
+                            $PoItemParameter->item_size = $request->size[$i][$key];
+                            $PoItemParameter->item_qty = $request->quantity[$i][$key];
 
-                                if (!$PoItemParameter->save()) {
-                                    return redirect()->route('po.edit')->withErrors('Error updating POItemParameters.');
-                                }
-                            } else {
-                                $PoItemParameter = new PurchaseOrderItemParameter([
-                                    'po_id' => $Po->id,
-                                    'po_item_id' => $PoItem->id,
-                                    'item_sku' => $skuValue,
-                                    'item_color' => $request->color[$i][$key],
-                                    'item_size' => $request->size[$i][$key],
-                                    'item_qty' => $request->quantity[$i][$key],
-                                ]);
-                                if (!$PoItemParameter->save()) {
-                                    return redirect()->route('po.edit')->withErrors('Error saving POItemParameters.');
-                                }
+                            if (!$PoItemParameter->save()) {
+                                return redirect()->route('po.edit')->withErrors('Error updating POItemParameters.');
+                            }
+                        } else {
+                            $PoItemParameter = new PurchaseOrderItemParameter([
+                                'po_id' => $Po->id,
+                                'po_item_id' => $PoItem->id,
+                                'item_sku' => $skuValue,
+                                'item_color' => $request->color[$i][$key],
+                                'item_size' => $request->size[$i][$key],
+                                'item_qty' => $request->quantity[$i][$key],
+                            ]);
+                            if (!$PoItemParameter->save()) {
+                                return redirect()->route('po.edit')->withErrors('Error saving POItemParameters.');
                             }
                         }
                     }
                 }
-
-                return redirect()->route('po.index')->withSuccess('Successfully Saved');
-            } else {
-                return redirect()->route('po.edit')->withErrors('Error saving PO.');
             }
+
+            return redirect()->route('po.index')->withSuccess('Successfully Saved');
+        } else {
+            return redirect()->route('po.edit')->withErrors('Error saving PO.');
+        }
     }
 
     /**

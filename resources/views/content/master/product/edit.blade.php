@@ -75,8 +75,8 @@
                         <div class="col-12 col-lg-8">
                             <!-- Product Information -->
                             <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-tile mb-0">Product information</h5>
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Product information
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
@@ -147,8 +147,8 @@
 
                             @foreach($colors as $color => $sizes)
                                 <div class="card mb-4">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Variants</h5>
+                                    <div class="text-white rounded-top bg-primary p-2">
+                                        Variant
                                     </div>
                                     <div class="card-body">
                                         <div id="productSKU{{$color_num}}">
@@ -233,8 +233,9 @@
                             </div>
 
                             <div class="card mb-4">
-                                <h5 class="card-header">Price</h5>
-                                <div class="card-body">
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Price
+                                </div>                                <div class="card-body">
                                     <div class="row">
 
                                         {{--Cost Price--}}
@@ -281,8 +282,8 @@
                         <div class="col-12 col-lg-4">
                             <!-- Pricing Card -->
                             <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Status</h5>
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Status
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
@@ -298,8 +299,8 @@
                             </div>
                             <!-- Organize Card -->
                             <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Organize</h5>
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Organize
                                 </div>
                                 <div class="card-body">
                                     <!-- Category -->

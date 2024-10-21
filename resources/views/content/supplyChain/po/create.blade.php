@@ -8,21 +8,20 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('/supplyChain') }}">Supply Chain</a>
             </li>
-            <li class="breadcrumb-item active"> P.O. </li>
+            <li class="breadcrumb-item active"> P.O.</li>
             <li class="breadcrumb-item active">Add</li>
         </ol>
     </nav>
 
     <!-- Invoice List Widget -->
-
-    <div class="card">
-        <div class="card-body">
-            <div class="content">
-                <div class="content-header mb-4">
-                    <h3 class="mb-1">Create P.O.</h3>
-                </div>
-                <form method="post" action="{{ route('po.store') }}" enctype="multipart/form-data">
-                    @csrf
+    <form method="post" action="{{ route('po.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="card">
+            <div class="text-white rounded-top bg-primary p-2">
+                Create P.O.
+            </div>
+            <div class="card-body">
+                <div class="content">
 
                     <div class="row">
 
@@ -47,7 +46,20 @@
                             </select>
                         </div>
 
+                        <div class="col-md-3 mt-3">
+                            <label class="form-label" for="poNumber">Po No</label>
+                            <input type="text" id="poNumber" name="poNumber" class="form-control"
+                                   placeholder="Add Purchase Order Number"/>
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label class="form-label" for="po_date">Po Date</label>
+                            <input type="date" id="po_date" name="po_date" class="form-control"
+                                   placeholder="Add Purchase Order Date" value="{{now()->toDateString()}}"/>
+                        </div>
+
                     </div>
+
                     <div class="row">
                         <div class="col-md-4 my-4 mx-1" id="compAdd">
 
@@ -71,22 +83,23 @@
                         </div>
                     </div>
 
-
-
                     <div class="row">
                         <div class="col-md-4 my-4 mx-1" id="vendorAdd">
-
                         </div>
                     </div>
 
-                    <div class="col-md-3 mt-3">
-                        <label class="form-label" for="poNumber">Po No</label>
-                        <input type="text" id="poNumber" name="poNumber" class="form-control"
-                               placeholder="Add Purchase Order Number"/>
-                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-3" >
+            <div class="text-white rounded-top bg-primary p-2">
+                Products
+            </div>
+            <div class="card-body">
+                <div class="content">
                     <div class="row" id="po_table">
+
                         <div class="row" id="row_0">
-                            <hr class="mt-5">
                             <div class="col-md-3 mt-3">
                                 <label class="form-label">Product</label>
                                 <select id="product_id[0]" name="product_id[0]"
@@ -107,13 +120,15 @@
 
                             <div class="col-md-3 mt-3">
                                 <label class="form-label" for="unitPrice[0]">Unit Price</label>
-                                <input type="number" id="unitPrice[0]" onchange="calculateTotal(0)" name="unitPrice[0]" class="form-control"
+                                <input type="number" id="unitPrice[0]" onchange="calculateTotal(0)" name="unitPrice[0]"
+                                       class="form-control"
                                        placeholder="Unit Price"/>
                             </div>
 
                             <div class="col-md-3 mt-3">
                                 <label class="form-label" for="tax[0]">Tax</label>
-                                <input type="number" id="tax[0]" name="tax[0]" onchange="calculateTotal(0)" class="form-control"
+                                <input type="number" id="tax[0]" name="tax[0]" onchange="calculateTotal(0)"
+                                       class="form-control"
                                        placeholder="Tax"/>
                             </div>
 
@@ -144,8 +159,10 @@
                             <div class="col-4 mt-4">
                                 <div id="collapseButtonDiv[0]" hidden>
                                     <button id="toggleCollapseButton"
-                                            class="btn btn-primary mt-3 waves-effect waves-light collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTable" aria-expanded="true"
+                                            class="btn btn-primary mt-3 waves-effect waves-light collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTable"
+                                            aria-expanded="true"
                                             aria-controls="collapseExample">
                                         <i class="fas fa-angle-double-down me-2"></i>View Parameters
                                     </button>
@@ -164,11 +181,8 @@
                                     </table>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                     <div class="px-0 mt-3 row">
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <button type="button" class="btn btn-outline-primary d-grid w-100 waves-effect"
@@ -191,9 +205,6 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row g-3">
-                                        <div class="form-text">
-                                            <b>Note</b> : All Quantity should be in comma separated
-                                        </div>
                                         <div class="col-md-12">
 
                                             <label class="form-label" for="sku_code0">Select SKUs</label>
@@ -207,21 +218,22 @@
 
                                     </div>
                                 </div>
-                                    <div class="col-md-12 m-4">
-                                        <button type="button" class="btn btn-label-success ml-3"
-                                                data-bs-dismiss="modal"
-                                                aria-label="Close" onclick="displaySelectionInTable(0)">
-                                            Done
-                                        </button>
-                                    </div>
+                                <div class="col-md-12 m-4">
+                                    <button type="button" class="btn btn-label-success ml-3"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close" onclick="displaySelectionInTable(0)">
+                                        Done
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                </form>
+
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
 @endsection
 

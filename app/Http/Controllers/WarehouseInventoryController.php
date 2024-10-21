@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CentralWarehouse;
+use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\WarehouseInventory;
 use App\Http\Requests\StoreWarehouseInventoryRequest;
@@ -159,9 +160,9 @@ class WarehouseInventoryController extends Controller
 
     public function getInventory()
     {
-        $inventory = WarehouseInventory::with('product', 'ProductVariant')->get();
 
-//        dd($inventory);
+        $inventory = WarehouseInventory::with('product.shelfProduct.shelf', 'ProductVariant')->get();
+
         $result = array("data" => array());
 
         $num = 1;

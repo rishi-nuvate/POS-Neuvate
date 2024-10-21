@@ -149,7 +149,7 @@ class ShelfController extends Controller
     {
         $warehouseId = CentralWarehouse::where('warehouse_name', $warehouse)->first()->id;
 
-        $products = Product::with('sheshelfProductlf')->get();
+        $products = Product::with('shelfProduct')->get();
 
         $shelves = shelf::with('shelfProduct.product')->where('warehouse_id', $warehouseId)->where('row_num', $row_num)->get();
 //dd($shelves);

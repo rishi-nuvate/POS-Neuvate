@@ -108,7 +108,7 @@ class BarcodeController extends Controller
 
     public function productData()
     {
-        $products = Product::with('sheshelfProductlf')->get();
+        $products = Product::with('shelfProduct')->get();
         return json_encode($products);
     }
 
@@ -141,8 +141,8 @@ class BarcodeController extends Controller
 
             $variant = ProductVariant::with('allcolor')->where('product_id', $product_id)
                 ->get()
-                ->groupBy(function($variant) {
-                    return $variant->allcolor->color;
+                ->groupBy(function ($variants) {
+                    return $variants->allcolor->color;
                 });
 
 

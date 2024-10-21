@@ -129,7 +129,7 @@
 
                                         <select id="store_type" name="store_type" class="select2 form-select"
                                                 data-allow-clear="true">
-                                            <option value=""> Select</option>
+                                            <option value=""> Select Store Type</option>
                                             @foreach($storeTypes as $storeType)
                                                 <option value="{{$storeType->id}}"> {{$storeType->store_type}}</option>
                                             @endforeach
@@ -140,7 +140,7 @@
                                         <label class="form-label" for="op_date">Op. Date</label>
                                         <input type="date" name="op_date" id="op_date"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter opening Date"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -162,14 +162,14 @@
                                         <label class="form-label" for="store_status">store status</label>
                                         <input type="text" name="store_status" id="store_status"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Store Status"/>
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="format_name">Format</label>
+                                        <label class="form-label" for="format_name">Store Format</label>
                                         <input type="text" name="format_name" id="format_name"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Store Format"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -183,21 +183,21 @@
                                         <label class="form-label" for="gst">GST No.</label>
                                         <input type="text" name="gst" id="gst"
                                                class="form-control"
-                                               placeholder="enter firm"/>
+                                               placeholder="enter GST No."/>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="store_phone">Store Phone</label>
                                         <input type="text" name="store_phone" id="store_phone"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Store phone"/>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="store_email">Store Email</label>
                                         <input type="text" name="store_email" id="store_email"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Store Email"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -287,48 +287,48 @@
                                         <label class="form-label" for="map_link">GMap Link</label>
                                         <input type="text" name="map_link" id="map_link"
                                                class="form-control"
-                                               placeholder="enter Area"/>
+                                               placeholder="enter Gmap Link"/>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-label" for="franchise_name">Franchise Name</label>
                                         <input type="text" name="franchise_name" id="franchise_name"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Franchise Name"/>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="franchise_phone">Franchise Phone</label>
                                         <input type="text" name="franchise_phone" id="franchise_phone"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Franchise Phone"/>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="franchise_email">Franchise Email</label>
                                         <input type="email" name="franchise_email" id="franchise_email"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter  Franchise Email"/>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="datanote_name">Datanote name</label>
                                         <input type="text" name="datanote_name" id="datanote_name"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Datanote Name"/>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="seller_ware_1seller_ware_1">Sellerware1 name</label>
                                         <input type="text" name="seller_ware_1" id="seller_ware_1"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter First Sellerware Name"/>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label" for="seller_ware_2">Sellerware2 name</label>
                                         <input type="text" name="seller_ware_2" id="seller_ware_2"
                                                class="form-control"
-                                               placeholder="enter Store Rating"/>
+                                               placeholder="enter Second Sellerware Name"/>
                                     </div>
 
 
@@ -346,10 +346,6 @@
                             </div>
 
                             <div id="commertial-info-validation" class="content">
-                                <div class="content-header mb-3">
-                                    <h6 class="mb-0">Personal Info</h6>
-                                    <small>Enter Your Personal Info.</small>
-                                </div>
                                 <div class="row g-3">
 
                                     <div class="col-sm-6">
@@ -359,7 +355,7 @@
                                             id="sba_sqft"
                                             name="sba_sqft"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="SBA Square Feet"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -369,7 +365,7 @@
                                             id="ca_sqft"
                                             name="ca_sqft"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="CA Square Feet"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -377,7 +373,7 @@
 
                                         <select id="store_rating" name="store_rating" class="select2 form-select"
                                                 data-allow-clear="true">
-                                            <option value=""> Select</option>
+                                            <option value="">Select Store Rating</option>
                                             <option value="platinum"> P</option>
                                             <option value="a++"> A++</option>
                                             <option value="a+"> A+</option>
@@ -392,7 +388,7 @@
                                             id="commercial_model"
                                             name="commercial_model"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Commercial model"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -402,7 +398,7 @@
                                             id="margin"
                                             name="margin"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Margin"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -412,7 +408,7 @@
                                             id="add_support"
                                             name="add_support"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Additional support"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -422,7 +418,7 @@
                                             id="security_deposit"
                                             name="security_deposit"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Security Deposit"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -432,7 +428,7 @@
                                             id="capex"
                                             name="capex"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Capex"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -442,7 +438,7 @@
                                             id="rent"
                                             name="rent"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Rent"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -452,7 +448,7 @@
                                             id="bep"
                                             name="bep"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="BEP"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -462,7 +458,7 @@
                                             id="mf"
                                             name="mf"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="MF"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -472,7 +468,7 @@
                                             id="mf_percent"
                                             name="mf_percent"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="MF %"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -482,7 +478,7 @@
                                             id="asm"
                                             name="asm"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="ASM"/>
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-between">
@@ -501,10 +497,6 @@
 
                             <!-- Personal Info -->
                             <div id="personal-info-validation" class="content">
-                                <div class="content-header mb-3">
-                                    <h6 class="mb-0">Personal Info</h6>
-                                    <small>Enter Your Personal Info.</small>
-                                </div>
                                 <div class="row g-3">
 
                                     <div class="col-sm-6">
@@ -514,7 +506,7 @@
                                             id="store_manager"
                                             name="store_manager"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Store Manager"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -524,7 +516,7 @@
                                             id="store_manager_phone"
                                             name="store_manager_phone"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Store Manager Phone"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -534,48 +526,8 @@
                                             id="store_manager_email"
                                             name="store_manager_email"
                                             class="form-control"
-                                            placeholder="Square Feet"/>
+                                            placeholder="Store Manager Email"/>
                                     </div>
-
-{{--                                    @php $num = 1 @endphp--}}
-{{--                                    @foreach($categories as $category)--}}
-
-{{--                                        <div class="col-md-4">--}}
-{{--                                            <label class="form-label" for="franchise">Category</label>--}}
-{{--                                            <input--}}
-{{--                                                type="hidden"--}}
-{{--                                                id="category_id[{{$num}}]"--}}
-{{--                                                name="category_id[{{$num}}]"--}}
-{{--                                                class="form-control" value="{{$category->id}}"/>--}}
-{{--                                            <input--}}
-{{--                                                type="text"--}}
-{{--                                                id="category[{{$num}}]"--}}
-{{--                                                name="category[{{$num}}]"--}}
-{{--                                                class="form-control"--}}
-{{--                                                placeholder="Square Feet" value="{{$category->name}}" readonly/>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-4">--}}
-{{--                                            <label class="form-label" for="square_fit">Square Feet</label>--}}
-{{--                                            <input--}}
-{{--                                                type="text"--}}
-{{--                                                id="category_qty[{{$num}}]"--}}
-{{--                                                name="category_qty[{{$num}}]"--}}
-{{--                                                class="form-control"--}}
-{{--                                                placeholder="Square Feet"/>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-md-4">--}}
-{{--                                            <div class="input-group-append">--}}
-{{--                                                <button class="btn btn-primary waves-effect"--}}
-{{--                                                        data-bs-toggle="modal" data-bs-target="#addQty0" type="button"--}}
-{{--                                                        onclick="getSubCategory({{$num}})">--}}
-{{--                                                    <i class="fa fa-plus"></i> Add Sku Wise--}}
-{{--                                                </button>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        @php $num++ @endphp--}}
-{{--                                    @endforeach--}}
-
 
                                     <div class="col-12 d-flex justify-content-between">
                                         <button class="btn btn-label-secondary btn-prev">
@@ -592,9 +544,6 @@
                             <!-- Social Links -->
 
                             <div id="social-links-validation" class="content">
-                                <div class="content-header mb-3">
-                                    <h6 class="mb-0">Payment Type</h6>
-                                </div>
                                 <div class="row g-3">
 
                                     <div class="col-sm-6">
@@ -605,7 +554,7 @@
                                             name="loi"
                                             id="loi"
                                             class="form-control"
-                                            placeholder=""/>
+                                            placeholder="LOI"/>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-label"
@@ -615,7 +564,7 @@
                                             name="agreement"
                                             id="agreement"
                                             class="form-control"
-                                            placeholder=""/>
+                                            placeholder="Agreement"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -626,7 +575,7 @@
                                             name="architecture_draw"
                                             id="architecture_draw"
                                             class="form-control"
-                                            placeholder=""/>
+                                            placeholder="Architecture drawing"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -637,7 +586,7 @@
                                             name="photo"
                                             id="photo"
                                             class="form-control"
-                                            placeholder=""/>
+                                            placeholder="Photographs"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -648,7 +597,7 @@
                                             name="aadhar_file"
                                             id="aadhar_file"
                                             class="form-control"
-                                            placeholder=""/>
+                                            placeholder="Aadhar"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -659,7 +608,7 @@
                                             name="pan_file"
                                             id="pan_file"
                                             class="form-control"
-                                            placeholder=""/>
+                                            placeholder="Pan"/>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -670,7 +619,7 @@
                                             name="gst_file"
                                             id="gst_file"
                                             class="form-control"
-                                            placeholder=""/>
+                                            placeholder="GST"/>
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-between">

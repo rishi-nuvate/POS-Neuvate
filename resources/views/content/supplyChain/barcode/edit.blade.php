@@ -10,9 +10,9 @@
                 <a href="{{ url('/supplyChain') }}">Supply Chain</a>
             </li>
             <li class="breadcrumb-item active">
-            <a href="{{route('barcode.index')}}">
-                Barcode
-            </a>
+                <a href="{{route('barcode.index')}}">
+                    Barcode
+                </a>
             </li>
             <li class="breadcrumb-item active">Add</li>
         </ol>
@@ -28,7 +28,8 @@
                 <div class="content-header mb-4">
                     <h3 class="mb-1">Create Barcode</h3>
                 </div>
-                <form method="post" action="{{route('barcode.update',['barcode'=>$barcode->id])}}" enctype="multipart/form-data">
+                <form method="post" action="{{route('barcode.update',['barcode'=>$barcode->id])}}"
+                      enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
 
@@ -131,7 +132,11 @@
 
                     <div class="px-0 mt-3">
                         <div class="col-lg-2 col-md-12 col-sm-12">
-                            <button type="submit" class="btn btn-primary d-grid w-100">Save</button>
+                            <button type="submit" id="btnSave"
+                                    class="btn btn-primary button-prevent-multiple-submits d-grid w-100 d-flex align-items-center justify-content-center waves-effect waves-light">
+                                <i class="fas fa-angle-double-up me-2"></i>
+                                Save
+                            </button>
                         </div>
                     </div>
                 </form>

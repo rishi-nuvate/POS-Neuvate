@@ -30,21 +30,14 @@
             <!-- Invoice Add-->
 
             <div class="col-lg-12 col-12 mb-lg-0 mb-4">
+                <div class="text-white rounded-top bg-primary p-2">
+                    Warehouse Information
+                </div>
                 <div class="card invoice-preview-card">
-
                     <div class="shipping-address-card card-body">
-
                         <div class="content">
-
-                            <div>
-                                <h3 class="mb-1">Warehouse Information </h3>
-
-                            </div>
-
                             <div id="shipping-address-container">
-
                                 <div class="row g-3 mb-4">
-
                                     <div class="col-sm-4">
                                         <label class="form-label" for="company_id">Company</label>
                                         <select required id="company_id" name="company_id"
@@ -52,24 +45,20 @@
                                                 data-allow-clear="true">
                                             <option value="">Select</option>
                                             @foreach($companies as $company)
-                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                                <option value="{{$company->id}}">{{$company->company_name}}</option>
                                             @endforeach
 
                                         </select>
                                     </div>
-
                                 </div>
-
                                 <div class="row g-3 mb-4">
-
                                     {!! textInputField('col-md-4', 'Warehouse Name', 'text', 'warehouse_name', 'warehouse_name', 'Warehouse Name', '*', 'form-control','','required','') !!}
 
                                     {!! textInputField('col-md-4', 'Contact Person Name', 'text', 'contact_person_name', 'contact_person_name', 'Mobile No.', '*', 'form-control','','required','') !!}
 
                                     {!! textInputField('col-md-4', 'Contact Person Email', 'email', 'contact_person_email', 'contact_person_email', 'Email', '*', 'form-control','','required','') !!}
 
-{{--                                    {!! textInputField('col-md-4', 'GST No.', 'text', 'ShipGstNo', 'ShipGstNo', 'GST No.', '*', 'form-control','','required','') !!}--}}
-
+                                    {{--                                    {!! textInputField('col-md-4', 'GST No.', 'text', 'ShipGstNo', 'ShipGstNo', 'GST No.', '*', 'form-control','','required','') !!}--}}
 
                                     <div class="col-md-4">
                                         <label class="form-label" for="address_line_1">Address Line
@@ -149,16 +138,19 @@
                                     {!! textInputField('col-md-4', 'PinCode', 'number', 'pincode', 'pincode', 'Pin Code', '*', 'form-control','','required','') !!}
 
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="col-lg-3 col-12 invoice-actions mt-3">
-            <button type="submit" class="btn btn-primary d-grid w-100">Save</button>
+            <button type="submit" id="btnSave"
+                    class="btn btn-primary button-prevent-multiple-submits d-grid w-100 d-flex align-items-center justify-content-center waves-effect waves-light">
+                <i class="fas fa-angle-double-up me-2"></i>
+                Save
+            </button>
         </div>
     </form>
 

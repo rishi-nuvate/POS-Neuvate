@@ -17,38 +17,38 @@
     <!-- Invoice List Widget -->
 
     <div class="card">
+        <div class="text-white rounded-top bg-primary p-2">
+            Base Stock
+        </div>
         <div class="card-body">
             <div class="content">
 
-                <div class="content-header mb-4">
-                    <h3 class="mb-1">Add Base Stock</h3>
-                </div>
                 <form method="post" action="{{route('baseStock.store')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
-                        <div class="col-md-3 my-3">
+                        <div class="col-md-3">
                             <label class="form-label" for="store_id">Store</label>
-                            <select  id="store_id" name="store_id"
+                            <select id="store_id" name="store_id"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Company" required>
                                 <option value="">Select</option>
-                               @foreach($stores as $store)
-                                <option value="{{$store->id}}">{{$store->store_name}}</option>
-                               @endforeach
+                                @foreach($stores as $store)
+                                    <option value="{{$store->id}}">{{$store->store_name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
-                    <div class="row">
-                        {{-- Example --}}
-                        {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','inputClass', 'defaultValue', 'required','readonly')}} --}}
+                    {{-- Example --}}
+                    {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','inputClass', 'defaultValue', 'required','readonly')}} --}}
 
-                        @php $num = 1 @endphp
-                        @foreach($categories as $category)
+                    @php $num = 1 @endphp
+                    @foreach($categories as $category)
+                        <div class="row">
 
-                            <div class="col-md-4">
-                                <label class="form-label" for="franchise">Category</label>
+                            <div class="col-md-4 mt-2">
+                                <label class="form-label" for="category">Category</label>
                                 <input
                                     type="hidden"
                                     id="category_id[{{$num}}]"
@@ -62,8 +62,8 @@
                                     placeholder="Square Feet" value="{{$category->name}}" readonly/>
                             </div>
 
-                            <div class="col-md-4">
-                                <label class="form-label" for="square_fit">Total Quantity</label>
+                            <div class="col-md-4 mt-2">
+                                <label class="form-label" for="category_qty">Total Quantity</label>
                                 <input
                                     type="number"
                                     id="category_qty[{{$num}}]"
@@ -71,7 +71,7 @@
                                     class="form-control"
                                     placeholder="Total Quantity"/>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 mt-2">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary waves-effect"
                                             data-bs-toggle="modal" data-bs-target="#addQty{{$num}}" type="button"
@@ -80,56 +80,61 @@
                                     </button>
                                 </div>
                             </div>
-                            @php $num++ @endphp
-                        @endforeach
+                        </div>
 
-                    </div>
+                        @php $num++ @endphp
+                    @endforeach
+
                     <br>
                     <div class="row px-0 mt-3">
                         <div class="col-lg-2 col-md-12 col-sm-12">
-                            <button type="submit" class="btn btn-primary d-grid w-100">Save</button>
+                            <button type="submit" id="btnSave" class="btn btn-primary button-prevent-multiple-submits d-grid w-100 d-flex align-items-center justify-content-center waves-effect waves-light">
+                                <i class="fas fa-angle-double-up me-2"></i>
+                                Save
+                            </button>
                         </div>
                     </div>
 
                     @php $num = 1 @endphp
                     @foreach($categories as $category)
-                    <div class="modal fade ValidateModelForTotalQty" id="addQty{{$num}}" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-simple modal-edit-user modal-dialog-scrollable">
+                        <div class="modal fade ValidateModelForTotalQty" id="addQty{{$num}}" tabindex="-1"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-simple modal-edit-user modal-dialog-scrollable">
 
-                            <div class="modal-content p-1 p-md-0" style="min-height: 60vh;">
-                                <div class="modal-header text-white rounded-top bg-primary p-2">
-                                    Parameter Information
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row g-3">
-                                        <div class="form-text">
-                                            <b>Note</b> : All sizes should be in comma separated
-                                        </div>
-                                        <div class="col-md-12">
-
-                                            <label class="form-label" for="size">Enter Size</label>
-                                            <input
-                                                type="text"
-                                                id="allSizes"
-                                                name="allSizes"
-                                                class="form-control"
-                                                placeholder="Total Quantity" onkeyup="allSize(this.value)"/>
-
-                                            <div id="table-container{{$category->id}}"></div>
-                                        </div>
-
+                                <div class="modal-content p-1 p-md-0" style="min-height: 60vh;">
+                                    <div class="modal-header text-white rounded-top bg-primary p-2">
+                                        Parameter Information
                                     </div>
-                                </div>
-                                <div class="col-md-12 m-4">
-                                    <button type="button" class="btn btn-label-success ml-3"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close" onclick="">
-                                        Done
-                                    </button>
+                                    <div class="modal-body">
+                                        <div class="row g-3">
+                                            <div class="form-text">
+                                                <b>Note</b> : All sizes should be in comma separated
+                                            </div>
+                                            <div class="col-md-12">
+
+                                                <label class="form-label" for="size">Enter Size</label>
+                                                <input
+                                                    type="text"
+                                                    id="allSizes"
+                                                    name="allSizes"
+                                                    class="form-control"
+                                                    placeholder="Total Quantity" onkeyup="allSize(this.value)"/>
+
+                                                <div id="table-container{{$category->id}}"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 m-4">
+                                        <button type="button" class="btn btn-label-success ml-3"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close" onclick="">
+                                            Done
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                         @php $num++ @endphp
                     @endforeach
                 </form>
@@ -153,7 +158,7 @@
         function allSize(input) {
 
             const numbers = input.split(',');
-            $('#table-container'+ cat_id).empty();
+            $('#table-container' + cat_id).empty();
             $.each(numbers, function (key, value) {
                 if (value !== '') {
 

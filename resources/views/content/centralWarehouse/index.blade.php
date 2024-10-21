@@ -67,11 +67,8 @@
                                     History</a>
                                 <a class="dropdown-item" href="{{route('importInventory')}}"><i
                                         class="ti ti-eye me-1"></i>
-                                    Import Inventory</a>
+                                    Import/Replace Inventory</a>
 
-                                <a class="dropdown-item" href="#"><i
-                                        class="ti ti-eye me-1"></i>
-                                    Replace Inventory</a>
                             </div>
                         </div>
 

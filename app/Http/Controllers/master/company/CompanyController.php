@@ -44,7 +44,7 @@ class CompanyController extends Controller
 
             try {
             $company = new Company();
-            $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode', 'PanGstNo','customer_care_num','customer_care_email']));
+            $company->fill($request->only(['CompanyName', 'BillingName', 'BillingMobileNo', 'BillingEmail', 'AddLine1', 'AddLine2', 'City', 'State', 'PinCode', 'PanGstNo','customer_care_num','customer_care_email','company_prefix']));
             $company->save();
             if ($request->PanGstFile) {
 

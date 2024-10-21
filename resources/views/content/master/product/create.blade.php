@@ -49,11 +49,7 @@
                             <h4 class="mb-1 mt-3">Add a new Product</h4>
                         </div>
                         <div class="d-flex align-content-center flex-wrap gap-3">
-                            {{--                            <div class="d-flex gap-3">--}}
-                            {{--                                <button class="btn btn-label-secondary">Discard</button>--}}
-                            {{--                                <button class="btn btn-label-primary">Save draft</button>--}}
-                            {{--                            </div>--}}
-                            <button type="button" class="btn btn-primary">import Products</button>
+                            {{--                            <button type="button" class="btn btn-primary">import Products</button>--}}
                             <button type="submit" class="btn btn-primary">Save Product</button>
 
                         </div>
@@ -62,11 +58,11 @@
                     <div class="row">
                         <!-- First column-->
                         <div class="col-12 col-lg-8">
+                            <div class="text-white rounded-top bg-primary p-2">
+                                Product information
+                            </div>
                             <!-- Product Information -->
                             <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-tile mb-0">Product information</h5>
-                                </div>
                                 <div class="card-body">
                                     <div class="row">
 
@@ -143,8 +139,8 @@
                             <!-- Variants -->
 
                             <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Variants</h5>
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Variants
                                 </div>
                                 <div class="card-body">
                                     <div id="productSKU0">
@@ -220,7 +216,9 @@
 
                             <!-- /Variants -->
                             <div class="card mb-4">
-                                <h5 class="card-header">Price</h5>
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Price
+                                </div>
                                 <div class="card-body">
                                     <div class="row">
 
@@ -268,8 +266,8 @@
                         <div class="col-12 col-lg-4">
                             <!-- Pricing Card -->
                             <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Status</h5>
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Status
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
@@ -283,8 +281,8 @@
                             </div>
                             <!-- Organize Card -->
                             <div class="card mb-4">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Organize</h5>
+                                <div class="text-white rounded-top bg-primary p-2">
+                                    Organize
                                 </div>
                                 <div class="card-body">
                                     <!-- Category -->

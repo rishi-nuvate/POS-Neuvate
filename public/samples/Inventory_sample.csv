@@ -1,0 +1,3 @@
+id,Warehouse_name,Sku,good_inventory,bad_inventory,block_inventory,total_inventory
+1,Testing,45M,50,5,5,60
+1,Dhruvil,45M,30,1,1,32

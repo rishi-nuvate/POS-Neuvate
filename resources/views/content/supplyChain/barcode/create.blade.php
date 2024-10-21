@@ -40,7 +40,7 @@
                         {!! textInputField('col-md-3 mt-3', 'Pack on Date', 'date', 'pack_date', 'pack_date', 'Description', '', '', '','') !!}
 
 
-                        <div class="col-md-3 mt-3" id="po_number">
+                        <div class="col-md-3 mt-3" id="po_number" style="display: none">
                             <label class="form-label" for="po_id">P.O. Number</label>
                             <select required id="po_id" name="po_id"
                                     class="select2 select21 form-select" data-allow-clear="true"
@@ -61,51 +61,53 @@
 
                     </div>
                     <hr>
-                    <div class="row" id="with_po">
+                    <div class="row" id="with_po" style="display: none">
+                        <div class="row">
 
 
-                        {{-- SKU --}}
-                        {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
+                            {{-- SKU --}}
+                            {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
 
-                        {{--                       Remaining Quantity--}}
+                            {{--                       Remaining Quantity--}}
 
-                        {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
+                            {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
 
-                        {{--                        Barcode QTY--}}
-                        {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
+                            {{--                        Barcode QTY--}}
+                            {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
 
-                        {{-- SKU --}}
-                        {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
+                            {{-- SKU --}}
+                            {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
 
-                        {{--                       Remaining Quantity--}}
+                            {{--                       Remaining Quantity--}}
 
-                        {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
+                            {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
 
-                        {{--                        Barcode QTY--}}
-                        {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
-
-
-                        {{-- SKU --}}
-                        {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
-
-                        {{--                       Remaining Quantity--}}
-
-                        {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
-
-                        {{--                        Barcode QTY--}}
-                        {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
+                            {{--                        Barcode QTY--}}
+                            {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
 
 
-                        {{-- SKU --}}
-                        {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
+                            {{-- SKU --}}
+                            {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
 
-                        {{--                       Remaining Quantity--}}
+                            {{--                       Remaining Quantity--}}
 
-                        {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
+                            {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
 
-                        {{--                        Barcode QTY--}}
-                        {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
+                            {{--                        Barcode QTY--}}
+                            {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
 
+
+                            {{-- SKU --}}
+                            {!! textInputField('col-md-4 mt-3', 'SKU Code', 'text', 'sku', 'date', '3453543', '', '', '','readonly') !!}
+
+                            {{--                       Remaining Quantity--}}
+
+                            {!! textInputField('col-md-4 mt-3', 'Remaining QTY', 'text', 'productName', 'productName', '50', '', '', 'required') !!}
+
+                            {{--                        Barcode QTY--}}
+                            {!! textInputField('col-md-4 mt-3', 'Barcode QTY', 'text', 'color', 'color', '5', '', '', '', 'readonly') !!}
+
+                        </div>
 
                     </div>
 
@@ -146,31 +148,36 @@
 
             console.log(element.value);
             if (element.value == 'with_po') {
+
                 $('#with_po').css('display', 'block');
                 $('#po_number').css('display', 'block');
                 $('#without_po').css('display', 'none');
+
             } else {
                 $('#with_po').css('display', 'none');
                 $('#po_number').css('display', 'none');
                 $('#without_po').css('display', 'block');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('productData') }}',
+                    data: {
+                        '_token': "{{ csrf_token() }}",
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+
+                        $('#products').empty();
+                        $.each(response, function (key, value) {
+                            $('#products').append('<option value="' + value.id + '">' + value
+                                .product_name + '</option>');
+                        });
+                    }
+                });
+
             }
 
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('productData') }}',
-                data: {
-                    '_token': "{{ csrf_token() }}",
-                },
-                dataType: 'json',
-                success: function (response) {
 
-                    $('#products').empty();
-                    $.each(response, function (key, value) {
-                        $('#products').append('<option value="' + value.id + '">' + value
-                            .product_name + '</option>');
-                    });
-                }
-            });
         }
 
         function productVariantBarcode() {
@@ -190,7 +197,9 @@
                     $('#product_variant').empty();
                     $.each(response, function (key, value) {
 
-                        $('#product_variant').append('<p class = "my-4"> ' + key + '</p>');
+                        $('#product_variant').append(`<div class="mt-2">
+<button type="button" class="btn btn-outline waves-effect" style="color: ${key};border-color: ${key}">${key}</button>
+</div>`);
 
                         $.each(value, function (key, value1) {
                             $('#product_variant').append(' <div class="row"> <div class="col-md-4 mt-3"> ' +
