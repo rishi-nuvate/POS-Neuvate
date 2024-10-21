@@ -13,4 +13,10 @@ class Color extends Model
     protected $guarded = [];
 
     use HasFactory;
+
+    public function productvarient()
+    {
+        return $this->hasMany(ProductVariant::class, 'color', 'id');
+    }
+
 }

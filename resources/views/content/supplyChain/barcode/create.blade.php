@@ -189,7 +189,9 @@
 
                     $('#product_variant').empty();
                     $.each(response, function (key, value) {
+
                         $('#product_variant').append('<p class = "my-4"> ' + key + '</p>');
+
                         $.each(value, function (key, value1) {
                             $('#product_variant').append(' <div class="row"> <div class="col-md-4 mt-3"> ' +
                                 '<label class="form-label" for="date">SKU Code</label> ' +

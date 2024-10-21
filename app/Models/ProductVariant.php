@@ -17,16 +17,21 @@ class ProductVariant extends Model
 
     function barcodeItem()
     {
-        return $this->belongsTo(BarcodeItem::class, 'id','sku_id');
+        return $this->belongsTo(BarcodeItem::class, 'id', 'sku_id');
     }
 
     function product()
     {
-        return $this->belongsTo(Product::class, 'product_id','id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function warehouseInventory()
     {
-        return $this->belongsTo(WarehouseInventory::class,'id','sku_id');
+        return $this->belongsTo(WarehouseInventory::class, 'id', 'sku_id');
+    }
+
+    public function allcolor()
+    {
+        return $this->belongsTo(Color::class, 'color', 'id');
     }
 }

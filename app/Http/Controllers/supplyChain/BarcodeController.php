@@ -115,6 +115,7 @@ class BarcodeController extends Controller
     public function productVariantBarcode(Request $request)
     {
         $product_id = $request->input('productId');
+//        DD($product_id);
         $barcode_id = $request->input('barcodeId') ?? '';
 
         if (!empty($barcode_id)) {
@@ -135,11 +136,17 @@ class BarcodeController extends Controller
                 })
                 ->groupBy('color');
 
-//            dd($allBarcode);
             return json_encode($allBarcode);
         } else {
 
-            $variant = ProductVariant::where('product_id', $product_id)->get()->groupBy('color');
+            $variant = ProductVariant::with('allcolor')->where('product_id', $product_id)
+                ->get()
+                ->groupBy(function($variant) {
+                    return $variant->allcolor->color;
+                });
+
+
+//            dd($variant);
 
             return json_encode($variant);
 
@@ -223,6 +230,6 @@ class BarcodeController extends Controller
         $company = Company::where('id', 14)->first();
         $allSku = BarcodeItem::where('barcode_id', $barcode_id)->with('productVariant.product')->get();
 //        dd($sku);
-        return view('content.supplyChain.barcode.barcodeGenerate', compact('allSku','company'));
+        return view('content.supplyChain.barcode.barcodeGenerate', compact('allSku', 'company'));
     }
 }
