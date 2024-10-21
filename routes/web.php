@@ -168,6 +168,8 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/deleteProduct/{product}', [ProductController::class, 'destroy']);
     Route::post('deleteVariant', [ProductController::class, 'deleteVariant'])->name('deleteVariant');
     Route::post('deleteSize', [ProductController::class, 'deleteSize'])->name('deleteSize');
+    Route::get('productImport', [ProductController::class, 'productImport'])->name('productImport');
+    Route::post('productImportStore', [ProductController::class, 'productImportStore'])->name('productImportStore');
 
 
     // Employee

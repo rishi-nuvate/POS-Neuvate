@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CentralWarehouse;
 use App\Models\ProductVariant;
 use App\Models\WarehouseInventory;
 use App\Http\Requests\StoreWarehouseInventoryRequest;
@@ -239,18 +240,8 @@ class WarehouseInventoryController extends Controller
             'inventory' => 'required|file|mimes:csv,txt|max:2048',
         ]);
 
-        $tempPath = $request->file('inventory')->getRealPath();
+        DB::beginTransaction();
 
-//        dd($tempPath);
-
-        if (($csvFile = fopen($tempPath, 'r')) !== false) {
-
-            $header = fgetcsv($csvFile);
-
-            while (($row = fgetcsv($csvFile)) !== false) {
-                print_r($row);
-            }
-        }
         $filePath = $request->file('inventory')->storeAs('csv', 'uploaded_file.csv');
 
         $file = new SplFileObject(storage_path('app/' . $filePath));
@@ -258,30 +249,60 @@ class WarehouseInventoryController extends Controller
         $data = [];
 
         foreach ($file as $key => $row) {
-            if (empty($row) || $key === 0 ) {
+            if (empty($row) || $key === 0) {
                 continue;
             }
             $data[] = $row;
         }
 
+//        dd($data);
+
+        $warehouse = CentralWarehouse::get();
+        $allSku = ProductVariant::get();
+
         foreach ($data as $rows) {
+
+            $warehouseId = $warehouse->where('warehouse_name', trim($rows[1]))->first()->id;
+            $sku = $allSku->where('sku', trim($rows[2]))->first();
+
             $stockIn = new WarehouseStockIn([
                 'date' => date('Y-m-d'),
                 'user_id' => Auth::id(),
-                'sku_id' => $rows[2],
-                'barcode_number' => $rows[3],
-                'scan_quantity' =>$rows[7]
+                'sku_id' => $sku->id,
+                'barcode_number' => $sku->barcode,
+                'scan_quantity' => $rows[6]
             ]);
+
             $stockIn->save();
+
+            $inventory = WarehouseInventory::where('sku_id', $sku->id)->first();
+
+            if ($inventory != null) {
+                $inventory->update([
+                    'good_inventory' => $inventory->good_inventory + $rows[3],
+                    'bad_inventory' => $inventory->bad_inventory + $rows[4],
+                    'block_inventory' => $inventory->block_inventory + $rows[5],
+                    'total_inventory' => $inventory->total_inventory + $rows[3],
+                ]);
+            } else {
+                $newInventory = new WarehouseInventory([
+                    'sku_id' => $sku->id,
+                    'product_id' => $sku->product_id,
+                    'good_inventory' => $rows[3],
+                    'bad_inventory' => $rows[4],
+                    'block_inventory' => $rows[5],
+                    'total_inventory' => $rows[3]
+                ]);
+
+                $newInventory->save();
+            }
+
         }
 
-//        $Reader = new Xlsx();
-//        $targetPath = public_path() . '/uploads/' . $_FILES['commission_file']['name'];
-//        move_uploaded_file($_FILES['commission_file']['tmp_name'], $targetPath);
-//        $spreadSheet = $Reader->load($targetPath);
-//        $excelSheet = $spreadSheet->getActiveSheet();
-//        $spreadSheetAry = $excelSheet->toArray();
-//        $sheetCount = count($spreadSheetAry);
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Product variant added successfully');
+
     }
 
 //    public function bulkImportStore(Request $request)

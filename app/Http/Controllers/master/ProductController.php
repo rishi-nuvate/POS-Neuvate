@@ -13,10 +13,12 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Season;
 use App\Models\Sleeve;
+use App\Models\SubCategory;
 use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use SplFileObject;
 
 class ProductController extends Controller
 {
@@ -54,7 +56,7 @@ class ProductController extends Controller
 
 //dd($request->all());
 
-//            try {
+            try {
 
                 if (!empty($request->tag_id)) {
                     $tag = implode(',', $request->tag_id);
@@ -81,6 +83,8 @@ class ProductController extends Controller
                 ]);
                 $product->save();
 
+                $colors = Color::get();
+
                 if (!empty($request->productColor)) {
                     foreach ($request->productColor as $key => $color) {
                         if (!empty($color['color'])) {
@@ -97,7 +101,7 @@ class ProductController extends Controller
                             }
 
                             foreach ($request->optionValueSize[$key] as $size) {
-//                                dd($size);
+//                                dd($colors);
                                 if (!empty($size['size'])) {
                                     $variant = new ProductVariant([
                                         'product_id' => $product->id,
@@ -116,10 +120,10 @@ class ProductController extends Controller
 
                 DB::commit();
                 return redirect()->back()->with('success', 'Product added successfully');
-//            } catch (\Exception $e) {
-//                DB::rollBack();
-//                return redirect()->back()->with('error', $e->getMessage());
-//            }
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
 
 //            dd($request->all());
         }
@@ -159,6 +163,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
+
+        DB::beginTransaction();
 
         $product->update([
             'product_name' => $request->product_name,
@@ -234,6 +240,7 @@ class ProductController extends Controller
             }
         }
 
+        DB::commit();
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');
     }
@@ -322,6 +329,141 @@ class ProductController extends Controller
         $product = ProductVariant::where('id', $id)->delete();
 
         return redirect()->back()->with('success', 'Product variant deleted.');
+
+    }
+
+    public function productImport()
+    {
+        return view('content.master.product.import');
+    }
+
+    public function productImportStore(Request $request)
+    {
+
+        $category = Category::get();
+        $subCategory = SubCategory::get();
+        $tag = Tags::get();
+        $season = Season::get();
+        $brand = Brand::get();
+        $fit = Fit::get();
+        $sleeve = Sleeve::get();
+        $products = Product::with('productVariant')->get();
+
+        $request->validate([
+            'products' => 'required|file|mimes:csv,txt|max:2048',
+        ]);
+
+        DB::beginTransaction();
+
+        $filePath = $request->file('products')->storeAs('csv', 'uploaded_file.csv');
+
+        $file = new SplFileObject(storage_path('app/' . $filePath));
+        $file->setFlags(SplFileObject::READ_CSV | SplFileObject::SKIP_EMPTY);
+        $data = [];
+
+        foreach ($file as $key => $row) {
+            if (empty($row) || $key === 0) {
+                continue;
+            }
+            $data[] = $row;
+        }
+
+
+        try {
+
+            foreach ($data as $rows) {
+                if (empty($products->where('product_name', $rows[1])->first())) {
+
+                    if (!empty($rows[17])) {
+                        $allTag = [];
+                        $values = explode(',', $rows[17]);
+                        foreach ($values as $tags) {
+                            array_push($allTag, $tag->where('name', $tags)->first()->id);
+                        }
+                        $allTag = implode(',', $allTag);
+                    } else {
+                        $allTag = '';
+                    }
+
+                    $product = new Product([
+                        'product_name' => $rows[1],
+                        'size_cm' => $rows[2],
+                        'product_code' => $rows[3],
+                        'hsn_code' => $rows[4],
+                        'material' => $rows[5],
+                        'product_description' => $rows[6],
+                        'cost_price' => $rows[11],
+                        'sell_price' => $rows[12],
+                        'product_mrp' => $rows[13],
+                        'status' => $rows[14] == 'active' ? '0' : '1',
+                        'cat_id' => $category->where('name', trim($rows[15]))->first()->id,
+                        'sub_cat_id' => $subCategory->where('name', trim($rows[16]))->first()->id,
+                        'tag_id' => $allTag,
+                        'season_id' => $season->where('name', trim($rows[18]))->first()->id,
+                        'brand_id' => $brand->where('name', trim($rows[19]))->first()->id,
+                    ]);
+
+                    $product->save();
+                    $id = $product->id;
+
+                } else {
+                    $id = $products->where('product_name', $rows[1])->first()->id;
+                };
+
+                $colors = Color::get();
+
+                $sizes = explode(',', $rows[8]);
+                $skus = explode(',', $rows[9]);
+                $barcodes = explode(',', $rows[10]);
+                $color = $colors->where('color', strtolower(trim($rows[7])))->first()->color;
+//            dd($sizes);
+
+
+//                            if (!empty($color['media'])) {
+//
+//                                $name = $color['media']->getClientOriginalName();
+//                                $destination_path = public_path('productImage/' . $product->id . '/' . $color['color']);
+//
+//                                if (!is_dir($destination_path)) {
+//                                    mkdir($destination_path, 0777, true);
+//                                }
+//                                $color['media']->move($destination_path, $name);
+//                            }
+
+                foreach ($sizes as $key => $size) {
+
+                    if (Product::where('product_name', $rows[1])->whereHas('productVariant', function ($query) use ($size, $skus, $barcodes, $color, $key) {
+                        $query->where('color', $color);
+                        $query->where('barcode', $barcodes[$key]);
+                        $query->where('size', $size);
+                        $query->where('sku', $skus[$key]);
+                    })->first()) {
+
+                        dd(1);
+
+                    } else {
+                        $variant = new ProductVariant([
+                            'product_id' => $id,
+                            'color' => $color,
+                            'size' => $size,
+                            'sku' => $skus[$key],
+                            'barcode' => $barcodes[$key],
+//                        'image' => $name ?? null,
+                        ]);
+                        $variant->save();
+                    }
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Product added successfully');
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return redirect()->back()->with('error', $e->getMessage());
+        }
 
     }
 }

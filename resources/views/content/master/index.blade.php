@@ -228,7 +228,7 @@
                                     View</a>
                             </div>
                         </div>
-{{--                        Color--}}
+                        {{--                        Color--}}
                         <div class="btn-group mb-2">
                             <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -269,6 +269,9 @@
                                 <a class="dropdown-item" href="{{ route('product.index') }}"><i
                                         class="ti ti-eye me-1"></i>
                                     View</a>
+                                <a class="dropdown-item" href="{{ route('productImport') }}"><i
+                                        class="ti ti-file me-1"></i>
+                                    Product Import</a>
                             </div>
                         </div>
 

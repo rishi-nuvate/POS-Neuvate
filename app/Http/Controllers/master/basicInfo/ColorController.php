@@ -36,7 +36,7 @@ class ColorController extends Controller
         DB::beginTransaction();
 
         $color = new Color([
-            'color' => $request->color,
+            'color' => strtolower($request->color),
         ]);
 
         $color->save();
@@ -70,7 +70,7 @@ class ColorController extends Controller
         DB::beginTransaction();
 
         $color->update([
-            'color' => $request->color,
+            'color' => strtolower($request->color),
         ]);
 
         DB::commit();
@@ -110,7 +110,7 @@ class ColorController extends Controller
                 $color->id .
                 ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';
 
-            array_push($result['data'], [$num, $color->color,$action]);
+            array_push($result['data'], [$num, strtoupper($color->color),$action]);
             $num++;
         }
 
