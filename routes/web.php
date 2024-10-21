@@ -41,7 +41,6 @@ use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ShelfController;
-use App\Http\Controllers\ShelfManageController;
 use App\Http\Controllers\StockAllocationController;
 use App\Http\Controllers\storeInventory\StockInController;
 use App\Http\Controllers\supplyChain\BarcodeController;
