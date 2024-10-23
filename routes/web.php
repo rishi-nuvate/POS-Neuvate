@@ -156,14 +156,15 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('centralWarehouse', CentralWarehouseController::class);
     Route::post('/deleteCentralWarehouse/{centralWarehouse}', [CentralWarehouseController::class, 'destroy']);
 
-//    Vendor
+//  Vendor
     Route::resource('vendors', VenderController::class);
     Route::post('/vendor/store', [VenderController::class, 'store']);
     Route::post('/vendor/viewModelUserEdit', [VenderController::class, 'viewModelUserEdit'])->name('viewModelUserEdit');
 
+
     // SKU Master
     Route::resource('product', ProductController::class);
-    Route::post('getProduct', [ProductController::class, 'getProduct'])->name('getProduct');
+    Route::post('getProduct', [ProductController::class, 'getProduct'])->name('getProductList');
     Route::post('/deleteProduct/{product}', [ProductController::class, 'destroy']);
     Route::post('deleteVariant', [ProductController::class, 'deleteVariant'])->name('deleteVariant');
     Route::post('deleteSize', [ProductController::class, 'deleteSize'])->name('deleteSize');
@@ -189,6 +190,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('shelfInward', [ShelfController::class, 'shelfInward'])->name('shelfInward');
     Route::get('/shelfProduct/{row}/{warehouse}', [ShelfController::class, 'shelfProduct'])->name('shelfProduct');
     Route::post('shelf/shelfProduct/store', [ShelfController::class, 'shelfProductStore'])->name('shelfProductStore');
+    Route::post('shelf/product', [ShelfController::class, 'getProduct'])->name('getProduct');
 
 
 //    Design Library
@@ -197,7 +199,6 @@ Route::middleware('auth:web')->group(callback: function () {
 ////    PO
 //    Route::resource('po', PurchaseOrderController::class);
 //    Route::post('/po/getSkuByProduct', [PurchaseOrderController::class, 'getSkuByProduct'])->name('getSkuByProduct');
-//    Route::post('/po/getProductVariant', [PurchaseOrderController::class, 'getProductVariant'])->name('getProductVariant');
 //    Route::post('/po/getVendorAddress', [PurchaseOrderController::class, 'getVendorAddress'])->name('getVendorAddress');
 //    Route::post('/po/poListAjax', [PurchaseOrderController::class, 'poListAjax'])->name('poListAjax');
 
@@ -271,10 +272,6 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/centralWarehouse/stockIn/getAllPOItem', [StockInMasterController::class, 'getAllPOItem'])->name('getAllPOItem');
     Route::post('/centralWarehouse/getProductSku', [StockInMasterController::class, 'getProductSku'])->name('getProductSku');
 //    Route::post('/centralWarehouse/stockIn/bulkInward/store', [StockInMasterController::class, 'bulkInwardStore'])->name('bulkInwardStore');
-
-//Shelf
-    Route::get('/centralWarehouse/shelf/create', [ShelfMasterController::class, 'create'])->name('create-shelf');
-
 
 //Pick
     Route::get('/centralWarehouse/pick/pendingList', [PickMasterController::class, 'pendingList'])->name('pending-list-pick');

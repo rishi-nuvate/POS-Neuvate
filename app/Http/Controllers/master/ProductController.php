@@ -194,6 +194,7 @@ class ProductController extends Controller
                                 ->update([
                                     'size' => $size['size'],
                                     'sku' => $size['sku'],
+                                    'barcode' => $size['barcode'],
                                 ]);
                         }
                     }
@@ -202,23 +203,23 @@ class ProductController extends Controller
         }
 
 
-        if (!empty($request->productColor)) {
-            foreach ($request->productColor as $key => $color) {
-                if (!empty($color['color'])) {
-                    foreach ($request->newOptionValueSize[$key] as $size) {
-                        if (!empty($size['size'])) {
-                            $variant = new ProductVariant([
-                                'product_id' => $product->id,
-                                'color' => $color['color'],
-                                'size' => $size['size'],
-                                'sku' => $size['sku'],
-                            ]);
-                        }
-                        $variant->save();
-                    }
-                }
-            }
-        }
+//        if (!empty($request->productColor)) {
+//            foreach ($request->productColor as $key => $color) {
+//                if (!empty($color['color'])) {
+//                    foreach ($request->newOptionValueSize[$key] as $size) {
+//                        if (!empty($size['size'])) {
+//                            $variant = new ProductVariant([
+//                                'product_id' => $product->id,
+//                                'color' => $color['color'],
+//                                'size' => $size['size'],
+//                                'sku' => $size['sku'],
+//                            ]);
+//                        }
+//                        $variant->save();
+//                    }
+//                }
+//            }
+//        }
 
 //        dd(request()->all());
 

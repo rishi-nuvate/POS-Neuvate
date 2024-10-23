@@ -79,16 +79,24 @@
                                     Product information
                                 </div>
                                 <div class="card-body">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="product_name">Name</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="product_name"
-                                            placeholder="Product title"
-                                            name="product_name"
-                                            aria-label="Product title" value="{{$product->product_name}}"/>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-8">
+                                            <label class="form-label" for="product_name">Name</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="product_name"
+                                                placeholder="Product title"
+                                                name="product_name"
+                                                aria-label="Product title" value="{{$product->product_name}}"/>
+                                        </div>
+
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="productSizeCm">Size(CM)</label>
+                                            <input type="text" id="productSizeCm" name="size_cm" class="form-control" placeholder="Size" value="{{$product->size_cm ?? ''}}">
+                                        </div>
                                     </div>
+
                                     <div class="row mb-3 col-md-12">
                                         <div class="col-md-4 mt-1">
                                             <label class="form-label" for="product_code">Product Code</label>
@@ -177,7 +185,7 @@
                                                     <input type="hidden"
                                                            name="optionValueSize[{{$color_num}}][{{$size_num}}][size_id]"
                                                            value="{{$size->id}}">
-                                                    <div class="mb-3 col-3">
+                                                    <div class="mb-3 col-md-4">
                                                         <label class="form-label" for="productSKU">Size</label>
                                                         <input type="text"
                                                                name="optionValueSize[{{$color_num}}][{{$size_num}}][size]"
@@ -186,7 +194,7 @@
                                                                class="form-control" value="{{$size->size}}">
                                                     </div>
 
-                                                    <div class="mb-3 col-6">
+                                                    <div class="mb-3 col-md-3">
                                                         <label class="form-label" for="productSKU">SKU</label>
                                                         <input
                                                             type="text"
@@ -195,7 +203,17 @@
                                                             class="form-control"
                                                             placeholder="SKU" value="{{$size->sku}}"/>
                                                     </div>
-                                                    <div class="col-3 align-item-center">
+
+                                                    <div class="mb-3 col-md-3">
+                                                        <label class="form-label" for="productBarcode">Barcode</label>
+                                                        <input
+                                                            type="text"
+                                                            id="productBarcode"
+                                                            name="optionValueSize[{{$color_num}}][{{$size_num}}][barcode]"
+                                                            class="form-control"
+                                                            placeholder="barcode" value="{{$size->barcode ?? ''}}"/>
+                                                    </div>
+                                                    <div class="col-md-2 mt-4 align-item-center">
                                                         <button type="button" onclick="deleteSize({{$size->id}})"
                                                                 class="btn rounded-pill btn-icon btn-label-danger waves-effect">
                                                             <span class="ti ti-trash"></span>

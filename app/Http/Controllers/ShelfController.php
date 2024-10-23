@@ -174,10 +174,10 @@ class ShelfController extends Controller
 
     public function shelfInward()
     {
-
         $shelves = Shelf::all();
-
         $products = Product::all();
         return view('content.centralWarehouse.shelf.shelfInward', compact('shelves','products'));
     }
+
+
 }
