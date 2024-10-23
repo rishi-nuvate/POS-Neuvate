@@ -98,6 +98,9 @@
                                 <a class="dropdown-item" href="{{route('shelf.index')}}"><i
                                         class="ti ti-eye me-1"></i>
                                     List</a>
+                                <a class="dropdown-item" href="{{route('shelfInward')}}"><i
+                                        class="ti ti-eye me-1"></i>
+                                    Inward Products</a>
                                 <a class="dropdown-item" href="#"><i
                                         class="ti ti-eye me-1"></i>
                                     Shelf Design</a>

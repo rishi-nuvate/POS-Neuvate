@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\CentralWarehouse;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\StoreGenerate;
+use App\Models\Tags;
 use App\Models\WarehouseInventory;
 use App\Http\Requests\StoreWarehouseInventoryRequest;
 use App\Http\Requests\UpdateWarehouseInventoryRequest;
@@ -22,7 +25,11 @@ class WarehouseInventoryController extends Controller
     public function index()
     {
 
-        return view('content.centralWarehouse.inventoryManagement.inventoryList');
+        $categories = category::all();
+        $products = Product::all();
+        $warehouses = CentralWarehouse::all();
+
+        return view('content.centralWarehouse.inventoryManagement.inventoryList', compact('categories', 'products', 'warehouses'));
     }
 
     /**
@@ -56,6 +63,7 @@ class WarehouseInventoryController extends Controller
         $stockIn->save();
 
         $inventory = WarehouseInventory::where('sku_id', $sku->id)->first();
+
         if ($inventory->exists()) {
             $inventory->update([
                 'good_inventory' => $inventory->good_inventory + 1,
@@ -63,6 +71,7 @@ class WarehouseInventoryController extends Controller
             ]);
         } else {
             $newInventory = new WarehouseInventory([
+                'warehouse_id' => $request->warehouse_id,
                 'sku_id' => $sku->id,
                 'product_id' => $sku->product_id,
                 'good_inventory' => 1,
@@ -142,6 +151,7 @@ class WarehouseInventoryController extends Controller
             } else {
                 $newInventory = new WarehouseInventory([
                     'sku_id' => $sku->id,
+                    'warehouse_id' => $request->warehouse_id,
                     'product_id' => $sku->product_id,
                     'good_inventory' => $request->inward_quantity[$key],
                     'total_inventory' => $request->inward_quantity[$key]
@@ -158,16 +168,29 @@ class WarehouseInventoryController extends Controller
 
     }
 
-    public function getInventory()
+    public function getInventory(Request $request)
     {
-
+//        $inventory = WarehouseInventory::with('product.shelfProduct.shelf', 'ProductVariant')->get();
         $inventory = WarehouseInventory::with('product.shelfProduct.shelf', 'ProductVariant')->get();
 
         $result = array("data" => array());
 
+//        dd($inventory);
+
+        if ($request->input('warehouse')) {
+            $inventory = $inventory->where('warehouse_id', $request->input('warehouse'));
+        }
+
+        if ($request->input('category')) {
+            $inventory = $inventory->where('product.cat_id', $request->input('category'));
+        }
+
+        if ($request->input('subCategory')) {
+            $inventory = $inventory->where('product.sub_cat_id', $request->input('subCategory'));
+        }
+
         $num = 1;
         foreach ($inventory as $item) {
-
 //            $warehouse = $inventory->warehouse->warehouse_name ?? null;
             $product = $item->product->product_name;
             $rate = '<div class="d-flex align-items-center">
@@ -199,6 +222,20 @@ class WarehouseInventoryController extends Controller
                 </div>
             </div>';
 
+            $test = [];
+            if (!empty($item->product->shelfProduct->toArray())) {
+                foreach ($item->product->shelfProduct as $shelfProduct) {
+                    array_push($test, $shelfProduct->shelf->column_name);
+                }
+            }
+
+            $rackColumn = '';
+            foreach (array_unique($test) as $rack) {
+                $rackColumn .= '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $rack . '</button>';
+            }
+
+//            dd($rackColumn);
+
             $goodInventory = '<div class="d-flex align-items-center">
                 <div class="badge rounded-pill bg-label-success me-3 p-2">
                     <i class="ti ti-shopping-cart ti-sm"></i>
@@ -221,7 +258,7 @@ class WarehouseInventoryController extends Controller
             </div>';
             $action = '<a class="btn btn-icon btn-label-primary mt-1 waves-effect mx-1" href="#"><i class="ti ti-eye ti-sm"></i></a>';
 
-            array_push($result["data"], array($num, $product, $sku, $total, $rate, $goodInventory, $badInventory, $action));
+            array_push($result["data"], array($num, $product, $sku, $total, $rate, $goodInventory, $badInventory, $rackColumn, $action));
             $num++;
         }
 

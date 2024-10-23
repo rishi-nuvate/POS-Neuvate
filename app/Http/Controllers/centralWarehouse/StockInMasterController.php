@@ -4,6 +4,7 @@ namespace App\Http\Controllers\centralWarehouse;
 
 use App\Http\Controllers\Controller;
 use App\Models\BarcodeItem;
+use App\Models\CentralWarehouse;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\PurchaseOrderItem;
@@ -69,13 +70,17 @@ class StockInMasterController extends Controller
 
     public function bulkInward()
     {
+        $warehouses = CentralWarehouse::all();
         $products = Product::get();
-        return view('content.centralWarehouse.stockIn.bulkInward', compact('products'));
+        return view('content.centralWarehouse.stockIn.bulkInward', compact('products','warehouses'));
     }
 
     public function singleInward()
     {
-        return view('content.centralWarehouse.stockIn.singleInward');
+
+        $warehouses = CentralWarehouse::all();
+
+        return view('content.centralWarehouse.stockIn.singleInward', compact('warehouses'));
     }
 
     public function getAllPOItem(Request $request)

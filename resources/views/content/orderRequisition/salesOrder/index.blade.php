@@ -18,22 +18,6 @@
                     Filters
                 </div>
                 <div class="card-body row">
-
-                    {{--                    Dates--}}
-                    {{--                    <div class="mt-3 col-md-3 col-lg-3">--}}
-                    {{--                        <label class="form-label" for="type">Date range</label>--}}
-                    {{--                        <span class="form-group form-control-sm">--}}
-                    {{--                                <div id="dateRange" class="pull-right"--}}
-                    {{--                                     style="background: #fff; cursor: pointer; padding: 8px 10px; border: 1px solid #ccc; width: 100%">--}}
-                    {{--                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;--}}
-                    {{--                                    <span></span> <b class="caret"></b>--}}
-                    {{--                                </div>--}}
-                    {{--                                <input type="hidden" id="startDateShow">--}}
-                    {{--                                <input type="hidden" id="endDateShow">--}}
-                    {{--                            </span>--}}
-                    {{--                    </div>--}}
-
-                    {{--                    Store Rating--}}
                     <div class="col-md-3 mt-3">
                         <label class="form-label" for="store_id">Store Rating</label>
                         <select required id="store_rating" name="store_rating"
@@ -43,9 +27,6 @@
                             <option value="1">A++</option>
                             <option value="2">A+</option>
                             <option value="3">B</option>
-                            {{--                            @foreach($companies as $company)--}}
-                            {{--                                <option value="{{$company->id}}">{{$company->CompanyName}}</option>--}}
-                            {{--                            @endforeach--}}
                         </select>
                     </div>
 
@@ -153,6 +134,7 @@
         </span>
             </div>
         </div>
+
         <div class="mt-1 card">
             <div class="card card-datatable table-responsive">
                 <table class="cell-border invoice-list-table dataTable table" id="datatable-list">
@@ -183,7 +165,9 @@
                     <tbody>
 
                     <tr>
-                        <th><button type="button" class="btn btn-label-info waves-effect">JEANS</button></th>
+                        <th>
+                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
+                        </th>
                         <th>
                             <div class="avatar me-2">
                                             <span class="avatar-initial rounded-circle bg-label-primary">
@@ -214,7 +198,9 @@
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <th><button type="button" class="btn btn-label-info waves-effect">JEANS</button></th>
+                        <th>
+                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
+                        </th>
                         <th>
                             <div class="avatar me-2">
                                             <span class="avatar-initial rounded-circle bg-label-primary">
@@ -245,7 +231,9 @@
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <th><button type="button" class="btn btn-label-info waves-effect">JEANS</button></th>
+                        <th>
+                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
+                        </th>
                         <th>
                             <div class="avatar me-2">
                                             <span class="avatar-initial rounded-circle bg-label-primary">
@@ -276,7 +264,9 @@
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <th><button type="button" class="btn btn-label-info waves-effect">JEANS</button></th>
+                        <th>
+                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
+                        </th>
                         <th>
                             <div class="avatar me-2">
                                             <span class="avatar-initial rounded-circle bg-label-primary">
@@ -767,7 +757,6 @@
                     },
                 });
             }
-            // $('div.dataTables_filter input', table.table().container()).attr('title', 'search');
         }
 
         {{--function daletePo(PoId) {--}}

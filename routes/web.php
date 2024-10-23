@@ -186,6 +186,7 @@ Route::middleware('auth:web')->group(callback: function () {
 //    Shelf Management
     Route::resource('shelf', ShelfController::class);
     Route::post('getShelfData', [ShelfController::class, 'getShelfData'])->name('getShelfData');
+    Route::get('shelfInward', [ShelfController::class, 'shelfInward'])->name('shelfInward');
     Route::get('/shelfProduct/{row}/{warehouse}', [ShelfController::class, 'shelfProduct'])->name('shelfProduct');
     Route::post('shelf/shelfProduct/store', [ShelfController::class, 'shelfProductStore'])->name('shelfProductStore');
 

@@ -73,6 +73,19 @@
                     </div>
 
                     <div class="row" id="withoutPoItem" style="display: none">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label" for="warehouse_id">Warehouse</label>
+                                <select required id="warehouse_id" name="warehouse_id"
+                                        class="select2 select21 form-select"
+                                        data-placeholder="Select Warehouse">
+                                    <option value="">Select</option>
+                                    @foreach($warehouses as $warehouse)
+                                        <option value="{{$warehouse->id}}">{{$warehouse->warehouse_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div id="productItemContainer">
                             <div class="row">
                                 <div class="col-md-2 mt-3">

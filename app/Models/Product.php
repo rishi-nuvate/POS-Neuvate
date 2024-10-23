@@ -60,6 +60,6 @@ class Product extends Model
     }
 
     public function shelfProduct(){
-        return $this->hasMany(ShelfRelation::class,'id','product_id');
+        return $this->hasMany(ShelfRelation::class,'product_id','id');
     }
 }
