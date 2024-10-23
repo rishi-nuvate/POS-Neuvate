@@ -203,36 +203,23 @@ class ProductController extends Controller
         }
 
 
-//        if (!empty($request->productColor)) {
-//            foreach ($request->productColor as $key => $color) {
-//                if (!empty($color['color'])) {
-//                    foreach ($request->newOptionValueSize[$key] as $size) {
-//                        if (!empty($size['size'])) {
-//                            $variant = new ProductVariant([
-//                                'product_id' => $product->id,
-//                                'color' => $color['color'],
-//                                'size' => $size['size'],
-//                                'sku' => $size['sku'],
-//                            ]);
-//                        }
-//                        $variant->save();
-//                    }
-//                }
-//            }
-//        }
-
 //        dd(request()->all());
 
         if (!empty($request->newProductColor)) {
+//            dd($request->newProductColor);
             foreach ($request->newProductColor as $key => $color) {
                 if (!empty($color['color'])) {
+//                    dd(4);
                     foreach ($request->newOptionValueSize[$key] as $size) {
+
                         if (!empty($size['size'])) {
+//                            dd($color['color']);
                             $variant = new ProductVariant([
                                 'product_id' => $product->id,
                                 'color' => $color['color'],
                                 'size' => $size['size'],
                                 'sku' => $size['sku'],
+                                'barcode' => $size['barcode'],
                             ]);
                         }
                         $variant->save();
@@ -240,7 +227,7 @@ class ProductController extends Controller
                 }
             }
         }
-
+//        dd(1);
         DB::commit();
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');

@@ -179,5 +179,14 @@ class ShelfController extends Controller
         return view('content.centralWarehouse.shelf.shelfInward', compact('shelves','products'));
     }
 
+    public function getProduct(Request $request)
+    {
+//        dd(1);
+        $id = $request->input('product_id');
+//        dd($id);
+        $product = Product::with('productVariant','category','subCategory')->where('id',$id)->first();
+        return response()->json($product);
+    }
+
 
 }

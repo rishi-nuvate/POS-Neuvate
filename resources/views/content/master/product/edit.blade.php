@@ -446,15 +446,20 @@
             newDiv.className = "row";
             newDiv.id = "sizeItem_" + colorVariantStart + sizeVariantStart;
             newDiv.innerHTML = `
-          <div class="mb-3 col-3">
+          <div class="mb-3 col-md-4">
               <label class="form-label" for="newOptionValueSize_${colorVariantStart}">Size</label>
               <input type="text" name="newOptionValueSize[${colorVariantStart}][${newIndex}][size]" id="size_${colorVariantStart}" placeholder="Size" class="form-control">
           </div>
-          <div class="mb-3 col-8">
+          <div class="mb-3 col--md-3">
               <label class="form-label" for="newOptionValueSize_${colorVariantStart}">SKU</label>
               <input type="text" id="newOptionValueSize_${colorVariantStart}" name="newOptionValueSize[${colorVariantStart}][${newIndex}][sku]" class="form-control" placeholder="SKU" />
           </div>
-          <div class="col-1 mt-4">
+
+          <div class="mb-3 col--md-3">
+              <label class="form-label" for="newOptionValueSize_${colorVariantStart}">Barcode</label>
+              <input type="text" id="newOptionValueSize_${colorVariantStart}" name="newOptionValueSize[${colorVariantStart}][${newIndex}][barcode]" class="form-control" placeholder="SKU" />
+          </div>
+          <div class="col-md-1 mt-4">
               <button type="button" onclick="removeSize(${colorVariantStart},${newIndex})" class="btn rounded-pill btn-icon btn-label-danger waves-effect">
                   <span class="ti ti-trash"></span>
               </button>
@@ -508,17 +513,26 @@
 
                                     <div class="row">
 
-                                        <div class="mb-3 col-3">
+                                        <div class="mb-3 col-md-4">
                                             <label class="form-label" for="productSKU">Size</label>
                                             <input type="text" name="newOptionValueSize[${counter1}][0][size]" id="size" placeholder="Size"
                                                    class="form-control">
                                         </div>
                                         <input type="hidden" id="sizeVariantStart${counter1}" value="1">
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-md-4">
                                             <label class="form-label" for="productSKU">SKU</label>
                                             <input
                                                 type="text"
                                                 name="newOptionValueSize[${counter1}][0][sku]"
+                                                id="productSKU"
+                                                class="form-control"
+                                                placeholder="SKU"/>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="productBarcode">Barcode</label>
+                                            <input
+                                                type="text"
+                                                name="newOptionValueSize[${counter1}][0][barcode]"
                                                 id="productSKU"
                                                 class="form-control"
                                                 placeholder="SKU"/>
