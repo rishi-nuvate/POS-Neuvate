@@ -16,13 +16,11 @@
 
 
     <div class="card">
+        <div class="text-white rounded-top bg-primary p-2">
+            Bulk Inward
+        </div>
         <div class="card-body">
             <div class="content">
-
-
-                <div class="content-header mb-4">
-                    <h3 class="mb-1">Create Bulk Inward</h3>
-                </div>
                 <div class="form-check form-check-primary mt-3 mb-3">
                     <input class="form-check-input" type="checkbox" name="WithOutPO"
                            onchange="toggleTableVisibility()" value="1" id="WithOutPO">

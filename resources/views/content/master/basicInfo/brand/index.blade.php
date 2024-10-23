@@ -94,27 +94,27 @@
                     $("#overlay").fadeOut(100);
                 },
                 bDestroy: true,
-                columnDefs: [
-                    { targets: 0, visible: false }  // Hide the column used for grouping
-                ],
-                drawCallback: function (settings) {
-                    var api = this.api();
-                    var rows = api.rows({page: 'current'}).nodes();
-                    var last = null;
-
-                    api
-                        .column(0, {page: 'current'})
-                        .data()
-                        .each(function (group, i) {
-                            if (last !== group) {
-                                $(rows)
-                                    .eq(i)
-                                    .before('<tr class="group"><td colspan="8">' + group + '</td></tr>');
-
-                                last = group;
-                            }
-                        });
-                },
+                // columnDefs: [
+                //     { targets: 0, visible: false }  // Hide the column used for grouping
+                // ],
+                // drawCallback: function (settings) {
+                //     var api = this.api();
+                //     var rows = api.rows({page: 'current'}).nodes();
+                //     var last = null;
+                //
+                //     api
+                //         .column(0, {page: 'current'})
+                //         .data()
+                //         .each(function (group, i) {
+                //             if (last !== group) {
+                //                 $(rows)
+                //                     .eq(i)
+                //                     .before('<tr class="group"><td colspan="8">' + group + '</td></tr>');
+                //
+                //                 last = group;
+                //             }
+                //         });
+                // },
             });
 
         }

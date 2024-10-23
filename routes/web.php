@@ -191,6 +191,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('/shelfProduct/{row}/{warehouse}', [ShelfController::class, 'shelfProduct'])->name('shelfProduct');
     Route::post('shelf/shelfProduct/store', [ShelfController::class, 'shelfProductStore'])->name('shelfProductStore');
     Route::post('shelf/product', [ShelfController::class, 'getProduct'])->name('getProduct');
+    Route::post('shelf/product/store', [ShelfController::class, 'productStore'])->name('productStore');
 
 
 //    Design Library

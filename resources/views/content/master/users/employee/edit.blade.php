@@ -9,9 +9,21 @@
 @endsection
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Master / Employee /</span> Edit
-    </h4>
+
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('/master') }}">Master</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a href="{{route('employee.index')}}">
+                    Employee
+                </a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ol>
+    </nav>
+
     <!-- Invoice List Widget -->
 
     <form method="post" action="{{route('employee.update',['employee'=>$employee->id])}}" enctype="multipart/form-data">

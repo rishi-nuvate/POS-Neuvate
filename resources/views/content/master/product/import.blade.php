@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Create-Shelf ')
+@section('title', 'product-import')
 
 @section('page-script')
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
@@ -22,16 +22,13 @@
 
 
     <div class="card">
+        <div class="text-white rounded-top bg-primary p-2">
+            Import Products
+        </div>
         <div class="card-body">
             <div class="content">
-
-
-                <div class="content-header mb-4">
-                    <h3 class="mb-1">Create Shelf</h3>
-                </div>
                 <form method="post" action="{{route('productImportStore')}}" enctype="multipart/form-data">
                     @csrf
-
                     <div class="row">
 
                         {{-- Example --}}
@@ -39,6 +36,15 @@
 
 
                         {!! textInputField('col-md-3 mt-3', 'Import Products', 'File', 'products', 'products', 'Import Products','',old('products'), '','') !!}
+
+                        <div class="col-md-3 mt-4 ">
+                            <div class="align-item-center">
+                                <a type="button" href="{{ \URL::to('samples/product_test.csv') }}"
+                                   class="m-2 btn btn-md btn-outline-primary round waves-effect"><i
+                                        class="fa-solid fa-file-arrow-down mx-2"></i> Download Sample csv
+                                </a>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="px-0 mt-3">

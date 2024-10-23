@@ -188,5 +188,17 @@ class ShelfController extends Controller
         return response()->json($product);
     }
 
+    public function productStore(Request $request)
+    {
+//        dd($request->all());
+
+        $shelf = new ShelfRelation([
+            'shelf_id' => $request->shelf_id,
+            'product_id' => $request->product_id,
+        ]);
+        $shelf->save();
+        return redirect()->back()->with('Success', 'added successfully');
+
+    }
 
 }

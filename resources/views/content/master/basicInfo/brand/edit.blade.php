@@ -21,14 +21,11 @@
     <!-- Invoice List Widget -->
 
     <div class="card">
-        {{-- <h5 class="card-header">Applicable Categories</h5> --}}
+        <div class="text-white rounded-top bg-primary p-2">
+            Add Brand
+        </div>
         <div class="card-body">
             <div class="content">
-
-
-                <div class="content-header mb-4">
-                    <h3 class="mb-1">Add Brand</h3>
-                </div>
                 <form method="post" action="{{route('brand.update',[$brands->id])}}" enctype="multipart/form-data">
                     @method('put')
                     @csrf

@@ -13,9 +13,6 @@
             <li class="breadcrumb-item active">Add</li>
         </ol>
     </nav>
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Master / Tags /</span> Add
-    </h4>
     <!-- Invoice List Widget -->
 
 

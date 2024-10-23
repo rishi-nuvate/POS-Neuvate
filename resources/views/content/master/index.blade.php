@@ -35,12 +35,15 @@
         {{--     Comapany   --}}
         <div class="col-xl-3 col-12">
             <div class="card mb-4" id="page-block">
-                <h5 class="card-header">Company</h5>
+                <div class="text-white rounded-top bg-primary p-2">
+                    Company
+                </div>
+{{--                <h5 class="card-header">Company</h5>--}}
                 <div class="card-body">
                     <div class="block-ui-btn demo-inline-spacing">
                         {{--Company--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Company
                             </button>
@@ -56,7 +59,7 @@
 
                         {{--                        Central Warehouse--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Central Warehouse
                             </button>
@@ -81,12 +84,14 @@
         <!-- Customer Data -->
         <div class="col-xl-4 col-12">
             <div class="card mb-4" id="card-block">
-                <h5 class="card-header">Users</h5>
+                <div class="text-white rounded-top bg-primary p-2">
+                    Users
+                </div>
                 <div class="card-body">
                     <div class="block-ui-btn demo-inline-spacing">
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Employee
                             </button>
@@ -102,7 +107,7 @@
                         </div>
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Vendor
                             </button>
@@ -117,7 +122,7 @@
                         </div>
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>SIS Brand
                             </button>
@@ -132,12 +137,14 @@
         <!-- SKU -->
         <div class="col-xl-5 col-12">
             <div class="card mb-4" id="card-block">
-                <h5 class="card-header">Basic Info</h5>
+                <div class="text-white rounded-top bg-info p-2">
+                    Basic Info
+                </div>
                 <div class="card-body">
                     <div class="block-ui-btn demo-inline-spacing">
                         {{--categories--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Category
                             </button>
@@ -153,7 +160,7 @@
 
                         {{--Brand--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Brand
                             </button>
@@ -169,7 +176,7 @@
 
                         {{--                        Season--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Season
                             </button>
@@ -185,7 +192,7 @@
 
                         {{--                        Tags--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Tags
                             </button>
@@ -200,7 +207,7 @@
                         </div>
                         {{--                        FIT--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Fit
                             </button>
@@ -215,7 +222,7 @@
                         </div>
                         {{--                        SLIM--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Sleeve
                             </button>
@@ -230,7 +237,7 @@
                         </div>
                         {{--                        Color--}}
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Color
                             </button>
@@ -252,13 +259,15 @@
         <!-- Category Data -->
         <div class="col-xl-3 col-12">
             <div class="card mb-4" id="page-block">
-                <h5 class="card-header">Product Info</h5>
+                <div class="text-white rounded-top bg-info p-2">
+                    Product Info
+                </div>
                 <div class="card-body">
                     <div class="block-ui-btn demo-inline-spacing">
 
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-info dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Product
                             </button>
@@ -285,12 +294,14 @@
         <!-- Category Data -->
         <div class="col-xl-5 col-12">
             <div class="card mb-4" id="page-block">
-                <h5 class="card-header">Store</h5>
+                <div class="text-white rounded-top bg-success p-2">
+                    Store
+                </div>
                 <div class="card-body">
                     <div class="block-ui-btn demo-inline-spacing">
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-primary dropdown-toggle"
+                            <button type="button" class="btn btn-label-success dropdown-toggle"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Store Type
@@ -306,7 +317,7 @@
                         </div>
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-primary dropdown-toggle"
+                            <button type="button" class="btn btn-label-success dropdown-toggle"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Payment Type
@@ -321,7 +332,7 @@
                             </div>
                         </div>
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-primary dropdown-toggle"
+                            <button type="button" class="btn btn-label-success dropdown-toggle"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Store Generate
@@ -337,7 +348,7 @@
                         </div>
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-primary dropdown-toggle"
+                            <button type="button" class="btn btn-label-success dropdown-toggle"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Base Stock
@@ -360,12 +371,14 @@
         <!-- Discount -->
         <div class="col-xl-4 col-12">
             <div class="card mb-4" id="page-block">
-                <h5 class="card-header">Discount</h5>
+                <div class="text-white rounded-top bg-success p-2">
+                    Discount
+                </div>
                 <div class="card-body">
                     <div class="block-ui-btn demo-inline-spacing">
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-success dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Discount
                             </button>
@@ -380,7 +393,7 @@
                         </div>
 
                         <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            <button type="button" class="btn btn-label-success dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-truck"></i>Coupon Code
                             </button>

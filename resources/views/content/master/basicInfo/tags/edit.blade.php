@@ -17,12 +17,11 @@
     <!-- Invoice List Widget -->
 
     <div class="card">
+        <div class="text-white rounded-top bg-primary p-2">
+            Tags Add
+        </div>
         <div class="card-body">
             <div class="content">
-
-                <div class="content-header mb-4">
-                    <h3 class="mb-1">Add Brand</h3>
-                </div>
                 <form method="post" action="{{route('tags.update',[$tag->id])}}" enctype="multipart/form-data">
                     @method('put')
                     @csrf
