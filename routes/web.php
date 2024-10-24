@@ -272,21 +272,22 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('/centralWarehouse/stockIn/singleInward', [StockInMasterController::class, 'singleInward'])->name('singleInward');
     Route::post('/centralWarehouse/stockIn/getAllPOItem', [StockInMasterController::class, 'getAllPOItem'])->name('getAllPOItem');
     Route::post('/centralWarehouse/getProductSku', [StockInMasterController::class, 'getProductSku'])->name('getProductSku');
-//    Route::post('/centralWarehouse/stockIn/bulkInward/store', [StockInMasterController::class, 'bulkInwardStore'])->name('bulkInwardStore');
+    // Route::post('/centralWarehouse/stockIn/bulkInward/store', [StockInMasterController::class, 'bulkInwardStore'])->name('bulkInwardStore');
 
-//Pick
+    //Pick
     Route::get('/centralWarehouse/pick/pendingList', [PickMasterController::class, 'pendingList'])->name('pending-list-pick');
     Route::get('/centralWarehouse/pick/create', [PickMasterController::class, 'create'])->name('create-pick');
+    Route::get('/centralWarehouse/picker/create', [PickMasterController::class, 'pickerCreat'])->name('create-picker');
 
 
-//Pack
+    //Pack
     Route::get('/centralWarehouse/pack/create', [PackMasterController::class, 'create'])->name('create-pack');
 
-//    Outward (dispatch)
+    //    Outward (dispatch)
     Route::get('/centralWarehouse/outward/pending', [OutwardMasterController::class, 'pending'])->name('pending-outward');
 
 
-//    Order Requisition
+    //    Order Requisition
     Route::resource('/orderRequisition', OrderRequisitionMasterController::class);
 
 //Sales Order

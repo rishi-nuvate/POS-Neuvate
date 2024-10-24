@@ -45,15 +45,18 @@ class WarehouseInventoryController extends Controller
      */
     public function store(StoreWarehouseInventoryRequest $request)
     {
-//        dd($request->barcode_number);
+//        dd(gettype($request->warehouse_id));
 
-        $sku = ProductVariant::where('sku', $request->barcode_number)->first();
+        $sku = ProductVariant::where('barcode', $request->barcode_number)->first();
 
         DB::beginTransaction();
 
         $stockIn = new WarehouseStockIn([
             'date' => date('Y-m-d'),
             'user_id' => Auth::id(),
+            'warehouse_id' => (int) $request->warehouse_id,
+            'description' => 'single',
+            'type' => 'inward',
             'sku_id' => $sku->id,
             'barcode_number' => $request->barcode_number,
             'scan_quantity' => 1,
@@ -62,9 +65,10 @@ class WarehouseInventoryController extends Controller
 
         $stockIn->save();
 
-        $inventory = WarehouseInventory::where('sku_id', $sku->id)->first();
+        $inventory = WarehouseInventory::where('sku_id', $sku->id)->first() ?? null;
 
-        if ($inventory->exists()) {
+
+        if ( $inventory != null) {
             $inventory->update([
                 'good_inventory' => $inventory->good_inventory + 1,
                 'total_inventory' => $inventory->total_inventory + 1,
@@ -131,8 +135,11 @@ class WarehouseInventoryController extends Controller
 
             $stockIn = new WarehouseStockIn([
                 'date' => date('Y-m-d'),
+                'warehouse_id' => $request->warehouse_id,
                 'user_id' => Auth::id(),
                 'sku_id' => $sku->id,
+                'description' => 'bulk',
+                'type' => 'inward',
                 'barcode_number' => $sku->sku,
                 'scan_quantity' => $request->inward_quantity[$key]
             ]);
@@ -306,6 +313,9 @@ class WarehouseInventoryController extends Controller
             $stockIn = new WarehouseStockIn([
                 'date' => date('Y-m-d'),
                 'user_id' => Auth::id(),
+                'warehouse_id' => $warehouseId,
+                'description' => 'inward',
+                'type' => 'type',
                 'sku_id' => $sku->id,
                 'barcode_number' => $sku->barcode,
                 'scan_quantity' => $rows[6]

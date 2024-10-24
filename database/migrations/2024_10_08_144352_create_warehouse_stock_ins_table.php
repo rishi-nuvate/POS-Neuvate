@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('sku_id')->constrained('product_variants')->onDelete('cascade');
             $table->foreignId('po_id')->constrained('purchase_orders')->onDelete('cascade');
+            $table->enum('description', ['import', 'single','bulk']);
+            $table->enum('type', ['inward', 'outward']);
             $table->string('barcode_number')->nullable();
             $table->timestamps();
             $table->softDeletes();

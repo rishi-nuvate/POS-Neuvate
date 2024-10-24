@@ -128,39 +128,38 @@ class StoreGenerateController extends Controller
 
         $architectureDraw = $request->architecture_draw->getClientOriginalName();
         $architectureDraw_extention = $request->architecture_draw->getClientOriginalExtension();
-        $architectureDrawName = $id . '_loi_' . date('md') . '.' . $architectureDraw_extention;
+        $architectureDrawName = $id . '_architecture_' . date('md') . '.' . $architectureDraw_extention;
 
         $request->architecture_draw->move($path, $architectureDrawName);
 
 
         $photograph = $request->photo->getClientOriginalName();
         $photograph_extention = $request->photo->getClientOriginalExtension();
-        $photographName = $id . '_loi_' . date('md') . '.' . $photograph_extention;
+        $photographName = $id . '_photograph_' . date('md') . '.' . $photograph_extention;
 
         $request->photo->move($path, $photographName);
 
 
         $aadhar = $request->aadhar_file->getClientOriginalName();
         $aadhar_extention = $request->aadhar_file->getClientOriginalExtension();
-        $aadharName = $id . '_loi_' . date('md') . '.' . $aadhar_extention;
+        $aadharName = $id . '_aadhar_' . date('md') . '.' . $aadhar_extention;
 
         $request->aadhar_file->move($path, $aadharName);
 
 
         $pan = $request->pan_file->getClientOriginalName();
         $pan_extention = $request->pan_file->getClientOriginalExtension();
-        $panName = $id . '_loi_' . date('md') . '.' . $pan_extention;
+        $panName = $id . '_panCard_' . date('md') . '.' . $pan_extention;
 
         $request->pan_file->move($path, $panName);
 
 
         $gst = $request->gst_file->getClientOriginalName();
         $gst_extention = $request->gst_file->getClientOriginalExtension();
-        $gstName = $id . '_loi_' . date('md') . '.' . $gst_extention;
+        $gstName = $id . '_gst_' . date('md') . '.' . $gst_extention;
 
         $request->gst_file->move($path, $gstName);
 
-//        dd(2);
         $attachments = new StoreAttachment([
             'store_id' => $id,
             'loi' => $loiName,

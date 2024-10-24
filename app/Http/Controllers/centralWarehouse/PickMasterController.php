@@ -67,4 +67,9 @@ class PickMasterController extends Controller
     {
         //
     }
+
+    public function pickerCreat()
+    {
+        return view('content.centralWarehouse.pick.picker');
+    }
 }
