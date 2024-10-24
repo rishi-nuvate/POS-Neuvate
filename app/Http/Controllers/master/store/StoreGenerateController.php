@@ -232,7 +232,6 @@ class StoreGenerateController extends Controller
 
             $action =
                 ' <a href="storeGenerate/' . $store->id . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
- <a href="storeGenerate/baseStock/' . $store->id . '" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="fa-regular fa-file-lines mx-2"></i></a>
             <button onclick="deleteBlog(' .
                 $store->id .
                 ')" title="Delete" class="btn btn-icon btn-label-danger mx-1"><i class="ti ti-trash mx-2 ti-sm"></i></button>';

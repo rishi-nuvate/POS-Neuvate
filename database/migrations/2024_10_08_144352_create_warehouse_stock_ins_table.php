@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('warehouse_stock_ins', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->foreignId('warehouse_id')->constrained('central_warehouses')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('sku_id')->constrained('product_variants')->onDelete('cascade');
             $table->foreignId('po_id')->constrained('purchase_orders')->onDelete('cascade');

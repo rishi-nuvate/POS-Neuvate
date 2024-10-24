@@ -101,6 +101,9 @@
                         notEmpty: {
                             message: 'Please enter store email id'
                         },
+                        emailAddress: {
+                            message: 'The value is not a valid email address'
+                        }
                     }
                 },
                 store_city: {
@@ -167,6 +170,9 @@
                         notEmpty: {
                             message: 'Please enter Franchise Email'
                         },
+                        emailAddress: {
+                            message: 'The value is not a valid email address'
+                        }
                     }
                 }, datanote_name: {
                     validators: {
@@ -383,6 +389,9 @@
                         notEmpty: {
                             message: 'Enter Payment Type'
                         },
+                        emailAddress: {
+                            message: 'The value is not a valid email address'
+                        }
                     }
                 },
             },

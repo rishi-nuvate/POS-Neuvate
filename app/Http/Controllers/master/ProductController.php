@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use SplFileObject;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\File as LaravelFile;
 
 class ProductController extends Controller
 {
@@ -145,16 +147,16 @@ class ProductController extends Controller
     {
 
 //        dd($product);
-
+        $colors = Color::all();
         $categories = Category::all();
         $tags = Tags::all();
         $seasons = Season::all();
         $brands = Brand::all();
-        $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant', 'fit', 'sleeve')->where('id', $product->id)->first();
+        $product = $product->with('category', 'subCategory', 'brand', 'season', 'productVariant.allcolor', 'fit', 'sleeve')->where('id', $product->id)->first();
 
-//        dd($product->category);
+//        dd($product->productVariant[0]->allcolor);
 
-        return view('content.master.product.edit', compact('product', 'categories', 'tags', 'seasons', 'brands'));
+        return view('content.master.product.edit', compact('product', 'categories', 'tags', 'seasons', 'brands', 'colors'));
 
     }
 
@@ -186,6 +188,20 @@ class ProductController extends Controller
 
         if (!empty($request->productColor)) {
             foreach ($request->productColor as $key => $color) {
+
+                if (!empty($color['media'])) {
+                    $name = $color['media']->getClientOriginalName();
+
+                    $destination_path = public_path('productImage/' . $product->id . '/' . $color['colorId']);
+
+                    if (!is_dir($destination_path)) {
+                        mkdir($destination_path, 0777, true);
+                    }
+                    $color['media']->move($destination_path, $name);
+                } else {
+                    $name = null;
+                }
+
                 if (!empty($color['color'])) {
                     foreach ($request->optionValueSize[$key] as $size) {
                         if (!empty($size['size'])) {
@@ -195,36 +211,51 @@ class ProductController extends Controller
                                     'size' => $size['size'],
                                     'sku' => $size['sku'],
                                     'barcode' => $size['barcode'],
+                                    'image' => $name
                                 ]);
                         }
                     }
                 }
+                $name = null;
             }
         }
 
-
-//        dd(request()->all());
+//        dd($request->all());
 
         if (!empty($request->newProductColor)) {
-//            dd($request->newProductColor);
             foreach ($request->newProductColor as $key => $color) {
-                if (!empty($color['color'])) {
-//                    dd(4);
-                    foreach ($request->newOptionValueSize[$key] as $size) {
 
+//                dd($color);
+
+                if (!empty($color['media'])) {
+                    $name = $color['media']->getClientOriginalName();
+
+                    $destination_path = public_path('productImage/' . $product->id . '/' . $color['color']);
+
+                    if (!is_dir($destination_path)) {
+                        mkdir($destination_path, 0777, true);
+                    }
+                    $color['media']->move($destination_path, $name);
+                } else {
+                    $name = null;
+                }
+
+                if (!empty($color['color'])) {
+                    foreach ($request->newOptionValueSize[$key] as $size) {
                         if (!empty($size['size'])) {
-//                            dd($color['color']);
                             $variant = new ProductVariant([
                                 'product_id' => $product->id,
                                 'color' => $color['color'],
                                 'size' => $size['size'],
                                 'sku' => $size['sku'],
                                 'barcode' => $size['barcode'],
+                                'image' => $name
                             ]);
                         }
                         $variant->save();
                     }
                 }
+                $name = null;
             }
         }
 //        dd(1);
@@ -328,6 +359,7 @@ class ProductController extends Controller
     public function productImportStore(Request $request)
     {
 
+
         $category = Category::get();
         $subCategory = SubCategory::get();
         $tag = Tags::get();
@@ -355,7 +387,6 @@ class ProductController extends Controller
             }
             $data[] = $row;
         }
-
 
         try {
 
@@ -406,17 +437,22 @@ class ProductController extends Controller
                 $color = $colors->where('color', strtolower(trim($rows[7])))->first()->color;
 //            dd($sizes);
 
+                $imageContents = file_get_contents($rows[24]);
 
-//                            if (!empty($color['media'])) {
+                $imageName = basename($rows[24]);
+
+                File::put('productImage/' . $imageName, $imageContents);
+
+//                if (!empty($color['media'])) {
 //
-//                                $name = $color['media']->getClientOriginalName();
-//                                $destination_path = public_path('productImage/' . $product->id . '/' . $color['color']);
+//                    $name = $color['media']->getClientOriginalName();
+//                    $destination_path = public_path('productImage/' . $product->id . '/' . $color['color']);
 //
-//                                if (!is_dir($destination_path)) {
-//                                    mkdir($destination_path, 0777, true);
-//                                }
-//                                $color['media']->move($destination_path, $name);
-//                            }
+//                    if (!is_dir($destination_path)) {
+//                        mkdir($destination_path, 0777, true);
+//                    }
+//                    $color['media']->move($destination_path, $name);
+//                }
 
                 foreach ($sizes as $key => $size) {
 

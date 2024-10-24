@@ -93,7 +93,8 @@
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label" for="productSizeCm">Size(CM)</label>
-                                            <input type="text" id="productSizeCm" name="size_cm" class="form-control" placeholder="Size" value="{{$product->size_cm ?? ''}}">
+                                            <input type="text" id="productSizeCm" name="size_cm" class="form-control"
+                                                   placeholder="Size" value="{{$product->size_cm ?? ''}}">
                                         </div>
                                     </div>
 
@@ -149,11 +150,13 @@
 
                             <!-- Variants -->
                             @php
-                                $colors = $product->productVariant->groupBy('color');
+                                $productColors = $product->productVariant->groupBy('color');
                                 $color_num = 0;
                             @endphp
+                            {{--                            {{dd($colors)}}--}}
 
-                            @foreach($colors as $color => $sizes)
+                            @foreach($productColors as $color => $sizes)
+                                {{--                                {{dd($sizes)}}--}}
                                 <div class="card mb-4">
                                     <div class="text-white rounded-top bg-primary p-2">
                                         Variant
@@ -167,7 +170,10 @@
                                                     <input type="text" name="productColor[{{$color_num}}][color]"
                                                            id="color{{$color_num}}"
                                                            placeholder="Color"
-                                                           class="form-control" value="{{$color}}" readonly>
+                                                           class="form-control" value="{{$sizes[0]->allcolor->color}}"
+                                                           readonly>
+                                                    <input type="hidden" name="productColor[{{$color_num}}][colorId]"
+                                                           value="{{$color}}">
                                                 </div>
 
                                                 <div class="mb-3 col-6">
@@ -253,7 +259,8 @@
                             <div class="card mb-4">
                                 <div class="text-white rounded-top bg-primary p-2">
                                     Price
-                                </div>                                <div class="card-body">
+                                </div>
+                                <div class="card-body">
                                     <div class="row">
 
                                         {{--Cost Price--}}
@@ -328,7 +335,7 @@
                                                 class="select2 form-select" id="productCategory"
                                                 data-placeholder="Select Category" name="cat_id">
                                             <option value="">Select Category</option>
-{{--                                            {{dd($categories)}}--}}
+                                            {{--                                            {{dd($categories)}}--}}
                                             @foreach($categories as $category)
                                                 <option
                                                     value="{{$category->id}}" {{$product->category->id == $category->id ? 'selected' :'' }}>{{$category->name}}</option>
@@ -349,12 +356,10 @@
                                     <div class="mb-3">
                                         <label for="ecommerce-product-tags" class="form-label mb-1">Tags</label>
                                         <select name="tag_id[]" class="select2 form-select" id="tag_id" multiple>
-                                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                                <option value="">select Tag</option>
-                                                @foreach($tags as $tag)
-                                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                                @endforeach
-                                            </optgroup>
+                                            <option value="">select Tag</option>
+                                            @foreach($tags as $tag)
+                                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     {{--Season--}}
@@ -485,6 +490,11 @@
         var counter2 = 0;
 
         function addAnotherColor() {
+
+            var colors = `@foreach($colors as $color)
+            <option value="{{$color->id}}">{{$color->color}}</option>
+                                                    @endforeach`;
+
             counter1++;
             // Create a new div element with the specified HTML code
             var newDiv = document.createElement("div");
@@ -500,8 +510,12 @@
                                     <div class="row">
                                         <div class="mb-3 col-3">
                                             <label class="form-label" for="newProductColor">Color</label>
-                                            <input type="text" name="newProductColor[${counter1}][color]" id="color${counter1}" placeholder="Color"
-                                                   class="form-control">
+                                            <select class="select2 form-select" id="color${counter1}"
+                                                        data-placeholder="Select Color" name="newProductColor[${counter1}][color]" required>
+                                                    <option value="">Select Color</option>
+                                                    ${colors}
+                                            </select>
+
                                         </div>
 
                                         <div class="mb-3 col-6">
@@ -560,6 +574,8 @@
             newDiv.addEventListener('animationend', () => {
                 newDiv.classList.remove('fade-in');
             });
+            $('.select2').select2();
+
         }
 
         function removeItem(counter1) {
