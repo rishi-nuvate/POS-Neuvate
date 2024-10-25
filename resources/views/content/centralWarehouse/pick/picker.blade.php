@@ -27,7 +27,7 @@
                 <tr class="odd">
                     <td> 1</td>
                     <td>
-                        <button type="button" class="m-2 btn btn-lg btn-success round waves-effect">kurti</button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addQty" class="m-2 btn btn-lg btn-success round waves-effect">kurti</button>
                         <button type="button" class="m-2 btn btn-lg btn-success round waves-effect">Dress</button>
                     </td>
                 </tr>
@@ -47,6 +47,40 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="modal fade ValidateModelForTotalQty" id="addQty" tabindex="-1"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+
+            <div class="modal-content p-1 p-md-0">
+                <div class="modal-header text-white rounded-top bg-primary p-2">
+                    Parameter Information
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-12 mt-0 justify-content-center d-flex fs-5">
+                            <div class="form-check form-check-inline mt-3">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Full</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-3">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Half</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3 justify-content-center d-flex">
+                    <button type="button" class="btn btn-label-success ml-3"
+                            data-bs-dismiss="modal"
+                            aria-label="Close" onclick="">
+                        Done
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
