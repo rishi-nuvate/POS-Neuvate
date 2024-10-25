@@ -240,6 +240,9 @@ class WarehouseInventoryController extends Controller
             foreach (array_unique($test) as $rack) {
                 $rackColumn .= '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $rack . '</button>';
             }
+            if($rackColumn == ''){
+                $rackColumn = '<button type="button" class="m-2 btn btn-sm btn-outline-warning round waves-effect">Inward Rack</button>';
+            }
 
 //            dd($rackColumn);
 
