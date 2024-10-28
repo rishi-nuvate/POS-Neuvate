@@ -11,6 +11,7 @@ use App\Http\Requests\StoreStockAllocationRequest;
 use App\Http\Requests\UpdateStockAllocationRequest;
 use App\Models\StoreGenerate;
 use App\Models\Tags;
+use App\Models\WarehouseInventory;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
@@ -27,7 +28,7 @@ class StockAllocationController extends Controller
         $tags = Tags::all();
         $stores = StoreGenerate::all();
         $warehouses = CentralWarehouse::all();
-        return view('content.orderRequisition.salesOrder.index',compact('seasons','categories','products','tags','stores','warehouses'));
+        return view('content.orderRequisition.salesOrder.index', compact('seasons', 'categories', 'products', 'tags', 'stores', 'warehouses'));
 
     }
 
@@ -79,7 +80,7 @@ class StockAllocationController extends Controller
         //
     }
 
-    public function getAllFilters()
+    public function getAllFilters(Request $request)
     {
         $seasons = Season::all();
         $categories = category::all();
@@ -95,7 +96,34 @@ class StockAllocationController extends Controller
             'stores' => $stores,
         ];
 
+        $warehouseId = $request->input('warehouseId');
+
+        $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product.productVariant.allcolor')->get();
+
+        foreach ($inventory as $inventoryItem) {
+//            dd($inventoryItem->product->productVariant->groupBy('color'));
+            foreach ($inventoryItem->product->productVariant->groupBy('color') as $color=> $variant) {
+
+                $product = $inventoryItem->product->product_name;
+
+                dd($product);
+
+            }
+        }
+
+//            ->map(function ($item) {
+//                return [
+//                    'id' => $item->id,
+//                    'sku' => $item->productVariant->sku,
+//                    'color' => $item->productVariant->color,
+//                    'sku_quantity' => $item->sku_quantity,
+//                ];
+//            });
+
+        dd($inventory);
+
         return response()->json($data);
+
 
     }
 

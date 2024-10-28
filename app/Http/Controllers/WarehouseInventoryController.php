@@ -65,7 +65,9 @@ class WarehouseInventoryController extends Controller
 
         $stockIn->save();
 
-        $inventory = WarehouseInventory::where('sku_id', $sku->id)->first() ?? null;
+        $inventory = WarehouseInventory::where('sku_id', $sku->id)
+            ->where('warehouse_id',$request->warehouse_id)
+            ->first() ?? null;
 
 
         if ( $inventory != null) {

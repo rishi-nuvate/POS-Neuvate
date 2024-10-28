@@ -28,5 +28,9 @@ class WarehouseInventory extends Model
         return $this->hasOne(ProductVariant::class,'id','sku_id');
     }
 
+    public function sku(){
+        return $this->hasOne(ProductVariant::class,'id','sku_id');
+    }
+
     use HasFactory;
 }

@@ -35,7 +35,7 @@
                         <label class="form-label" for="store_id">Store </label>
                         <select required id="store_id" name="store_id[]"
                                 class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Store" multiple>
+                                data-placeholder="Select Store">
                             <option value="">Select</option>
 
                         </select>
@@ -94,7 +94,7 @@
                         <label class="form-label" for="product_id">Products</label>
                         <select required id="product_id" name="product_id[]"
                                 class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Store Rating" multiple>
+                                data-placeholder="Select SProduct" multiple>
                             <option value="">Select</option>
                             <option value="all">All</option>
 
@@ -107,7 +107,7 @@
                         <label class="form-label" for="tag_id">Product Tags</label>
                         <select required id="tag_id" name="tag_id[]"
                                 class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Store Rating" onchange="getData()" multiple>
+                                data-placeholder="Select tag" onchange="getData()" multiple>
                             <option value="">Select</option>
 
                         </select>
@@ -117,7 +117,7 @@
                         <label class="form-label" for="store_tag">Store Tag</label>
                         <select required id="store_tag" name="store_tag[]"
                                 class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Store Rating" multiple>
+                                data-placeholder="Select Store">
                             <option value="">Select</option>
                             {{--                            @foreach($companies as $company)--}}
                             {{--                                <option value="{{$company->id}}">{{$company->CompanyName}}</option>--}}
@@ -137,166 +137,162 @@
 
         <div class="mt-1 card">
             <div class="card card-datatable table-responsive">
-                <table class="cell-border invoice-list-table dataTable table" id="datatable-list">
+                <table class="cell-border invoice-list-table dataTable table table-bordered" id="datatable-list">
                     <thead class="table-secondary text-bold">
-                    <tr>
-                        <th>Products</th>
-                        <th>Size</th>
-                        <th colspan="2">Warehouse</th>
-                        <th colspan="2">Store 1</th>
-                        <th colspan="2">Store 2</th>
-                        <th colspan="2">Store 3</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <th>Products</th>
-                        <th>Size</th>
-                        <th>Store</th>
-                        <th>Allocated</th>
-                        <th>Store</th>
-                        <th>Allocated</th>
-                        <th>Store</th>
-                        <th>Allocated</th>
-                        <th>Store</th>
-                        <th>Allocated</th>
-                        <th>Action</th>
+                    <tr class="text-center">
+                        <th>Product</th>
+                        <th></th>
+                        <th>24</th>
+                        <th>26</th>
+                        <th>28</th>
+                        <th>30</th>
+                        <th>32</th>
+                        <th>34</th>
+                        <th>36</th>
+                        <th>38</th>
+                        <th>40</th>
+                        <th>42</th>
+                        <th>Total</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr>
-                        <th>
+                        <td>
                             <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
-                        </th>
-                        <th>
-                            <div class="avatar me-2">
-                                            <span class="avatar-initial rounded-circle bg-label-primary">
-                                            XL
-                                            </span>
+                        </td>
+                        <td>W.S.</td>
+                        <td>24</td>
+                        <td>26</td>
+                        <td>28</td>
+                        <td>30</td>
+                        <td>32</td>
+                        <td>34</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                        <td>330</td>
+                        <td>
+                            <div class="form-check justify-content-center d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                             </div>
-                        </th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">50
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control" readonly></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">10
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">5
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">4
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>Action</th>
+                        </td>
                     </tr>
                     <tr>
-                        <th>
+                        <td>
                             <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
-                        </th>
-                        <th>
-                            <div class="avatar me-2">
-                                            <span class="avatar-initial rounded-circle bg-label-primary">
-                                            L
-                                            </span>
+                        </td>
+                        <td>S.S.</td>
+                        <td>6</td>
+                        <td>10</td>
+                        <td>4</td>
+                        <td>13</td>
+                        <td>20</td>
+                        <td>1</td>
+                        <td>8</td>
+                        <td>21</td>
+                        <td>18</td>
+                        <td>17</td>
+                        <td>68</td>
+                        <td>
+                            <div class="form-check justify-content-center d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                             </div>
-                        </th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">150
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control" readonly></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">20
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">30
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">20
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>Action</th>
+                        </td>
+
                     </tr>
                     <tr>
-                        <th>
+                        <td>
                             <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
-                        </th>
-                        <th>
-                            <div class="avatar me-2">
-                                            <span class="avatar-initial rounded-circle bg-label-primary">
-                                            M
-                                            </span>
+                        </td>
+                        <td>Allo.</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="form-check justify-content-center d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                             </div>
-                        </th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">200
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control" readonly></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">50
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">60
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">35
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>
-                        </th>
-                        <th>
-                            <div class="avatar me-2">
-                                            <span class="avatar-initial rounded-circle bg-label-primary">
-                                            SM
-                                            </span>
-                            </div>
-                        </th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">50
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control" readonly></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">50
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">50
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>
-                            <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">50
-                            </button>
-                        </th>
-                        <th><input type="number" name="qty[]" id="qty" class="form-control"></th>
-                        <th>Action</th>
+                        </td>
                     </tr>
 
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>
+                        </td>
+                        <td>W.S.</td>
+                        <td>24</td>
+                        <td>26</td>
+                        <td>28</td>
+                        <td>30</td>
+                        <td>32</td>
+                        <td>34</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                        <td>330</td>
+                        <td>
+                            <div class="form-check justify-content-center d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>
+                        </td>
+                        <td>S.S.</td>
+                        <td>6</td>
+                        <td>10</td>
+                        <td>4</td>
+                        <td>13</td>
+                        <td>20</td>
+                        <td>1</td>
+                        <td>8</td>
+                        <td>21</td>
+                        <td>18</td>
+                        <td>17</td>
+                        <td>68</td>
+                        <td>
+                            <div class="form-check justify-content-center d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>
+                        </td>
+                        <td>Allo.</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="form-check justify-content-center d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            </div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -339,21 +335,64 @@
                 [10, 20, 100, 500],
                 [10, 20, 100, "All"]
             ],
-
-            order: [
-                [0, 'asc']
+            columnDefs: [
+                { orderable: true, targets: 0 },
+                { orderable: true, targets: -1 },
+                { orderable: false, targets: '_all' } // Disable sorting for all other columns
             ],
-            {{--"ajax": {--}}
-                {{--    "url": "{{ route('getBrandData') }}",--}}
-                {{--    "type": "POST",--}}
-                {{--    "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",--}}
-                {{--    "data": {--}}
-                {{--        "_token": "{{ csrf_token() }}"--}}
-                {{--    },--}}
-                {{--},--}}
-
-            "initComplete": function (setting, json) {
+            // order: [
+            //     [0, 'desc']
+            // ],
+            initComplete: function (settings, json) {
                 $("#overlay").fadeOut(100);
+
+                // Apply rowspan to the first column
+                var table = this.api();
+                var rowCount = table.rows().count();
+                var lastColumnIndex = table.columns().count() - 1;
+
+                // Loop through the rows and apply rowspan to the first and last columns
+                for (var i = 0; i < rowCount; i += 3) {
+                    // Check if there are enough rows left for a complete group of 3
+                    if (i + 2 < rowCount) {
+                        // Apply rowspan to the first column
+                        var firstCell = $(table.cell(i, 0).node());
+                        firstCell.attr('rowspan', 3); // Set rowspan to 3
+                        // Hide the next two cells in the first column
+                        $(table.cell(i + 1, 0).node()).hide();
+                        $(table.cell(i + 2, 0).node()).hide();
+
+                        // Apply rowspan to the last column
+                        var lastCell = $(table.cell(i, lastColumnIndex).node());
+                        lastCell.attr('rowspan', 3); // Set rowspan to 3
+                        // Hide the next two cells in the last column
+                        $(table.cell(i + 1, lastColumnIndex).node()).hide();
+                        $(table.cell(i + 2, lastColumnIndex).node()).hide();
+                    }
+                }
+                // var previousValue = null;
+                // var rowspanCount = 1;
+                //
+                // table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                //     var data = this.data();
+                //     var cell = $(table.cell(rowIdx, 0).node());
+                //
+                //     if (previousValue === data[0]) {
+                //         rowspanCount++;
+                //         cell.hide();
+                //     } else {
+                //         if (rowspanCount > 1) {
+                //             $(table.cell(rowIdx - rowspanCount, 0).node()).attr('rowspan', rowspanCount);
+                //         }
+                //         rowspanCount = 1;
+                //         previousValue = data[0];
+                //     }
+                // });
+
+                // Apply rowspan on the last set if applicable
+                // if (rowspanCount > 1) {
+                //     $(table.cell(table.rows()[0].length - rowspanCount, 0).node()).attr('rowspan', rowspanCount);
+                // }
             },
             bDestroy: true,
             dom:
@@ -504,27 +543,26 @@
                     }
                 }
             ],
-            columnDefs: [
-                {targets: 0, visible: false}  // Hide the column used for grouping
-            ],
-            drawCallback: function (settings) {
-                var api = this.api();
-                var rows = api.rows({page: 'current'}).nodes();
-                var last = null;
-
-                api
-                    .column(0, {page: 'current'})
-                    .data()
-                    .each(function (group, i) {
-                        if (last !== group) {
-                            $(rows)
-                                .eq(i)
-                                .before('<tr class="group"><td colspan="8">' + group + '</td></tr>');
-
-                            last = group;
-                        }
-                    });
-            },
+            // columnDefs: [
+            //     {targets: 0, visible: false}  // Hide the column used for grouping
+            // ],
+            // drawCallback: function (settings) {
+            //     var api = this.api();
+            //     var rows = api.rows({page: 'current'}).nodes();
+            //     var last = null;
+            //     api
+            //         .column(0, {page: 'current'})
+            //         .data()
+            //         .each(function (group, i) {
+            //             if (last !== group) {
+            //                 $(rows)
+            //                     .eq(i)
+            //                     .before('<tr class="group"><td colspan="8">' + group + '</td></tr>');
+            //
+            //                 last = group;
+            //             }
+            //         });
+            // },
         });
 
         // getData();
@@ -822,7 +860,7 @@
                     type: 'POST',
                     url: '{{route('getAllFilters')}}',
                     data: {
-                        categoryId: 6,
+                        warehouseId: warehouseId,
                         '_token': "<?php echo e(csrf_token()); ?>",
                     },
                     dataType: 'json',

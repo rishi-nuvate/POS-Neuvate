@@ -228,6 +228,7 @@ class ProductController extends Controller
 //                dd($color);
 
                 if (!empty($color['media'])) {
+
                     $name = $color['media']->getClientOriginalName();
 
                     $destination_path = public_path('productImage/' . $product->id . '/' . $color['color']);

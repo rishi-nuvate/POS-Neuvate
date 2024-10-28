@@ -34,4 +34,9 @@ class ProductVariant extends Model
     {
         return $this->belongsTo(Color::class, 'color', 'id');
     }
+
+    public function warehouse(){
+        return $this->belongsTo(WarehouseInventory::class,'id','sku_id');
+    }
+
 }

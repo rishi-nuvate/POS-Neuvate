@@ -209,7 +209,7 @@
                             <div id="colorVariant">
                             </div>
                             <div class="m-4">
-                                <button type="button" class="btn btn-warning" onclick="addAnotherColor()">Add another
+                                <button type="button" class="btn btn-label-warning" onclick="addAnotherColor()">Add another
                                     Color
                                 </button>
                             </div>
