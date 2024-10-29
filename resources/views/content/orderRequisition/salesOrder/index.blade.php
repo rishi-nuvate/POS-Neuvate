@@ -46,7 +46,7 @@
                         <label class="form-label" for="warehouse_id">Warehouse</label>
                         <select required id="warehouse_id" name="warehouse_id"
                                 class="select2 select21 form-select"
-                                data-placeholder="Select Warehouse" onchange="getAllFilters()">
+                                data-placeholder="Select Warehouse" onchange="getAllFilters();getData()">
                             <option value="">Select</option>
                             @foreach($warehouses as $warehouse)
                                 <option value="{{$warehouse->id}}">{{$warehouse->warehouse_name}}</option>
@@ -59,7 +59,7 @@
                         <label class="form-label" for="cat_id">Category</label>
                         <select required id="cat_id" name="cat_id"
                                 class="select2 select21 form-select" data-allow-clear="true"
-                                data-placeholder="Select Category" onchange="getSubCategoriesData()">
+                                data-placeholder="Select Category" onchange="getSubCategoriesData();getData()">
                             <option value="">Select</option>
 
                         </select>
@@ -336,9 +336,9 @@
                 [10, 20, 100, "All"]
             ],
             columnDefs: [
-                { orderable: true, targets: 0 },
-                { orderable: true, targets: -1 },
-                { orderable: false, targets: '_all' } // Disable sorting for all other columns
+                {orderable: true, targets: 0},
+                {orderable: true, targets: -1},
+                {orderable: false, targets: '_all'} // Disable sorting for all other columns
             ],
             // order: [
             //     [0, 'desc']
@@ -543,26 +543,6 @@
                     }
                 }
             ],
-            // columnDefs: [
-            //     {targets: 0, visible: false}  // Hide the column used for grouping
-            // ],
-            // drawCallback: function (settings) {
-            //     var api = this.api();
-            //     var rows = api.rows({page: 'current'}).nodes();
-            //     var last = null;
-            //     api
-            //         .column(0, {page: 'current'})
-            //         .data()
-            //         .each(function (group, i) {
-            //             if (last !== group) {
-            //                 $(rows)
-            //                     .eq(i)
-            //                     .before('<tr class="group"><td colspan="8">' + group + '</td></tr>');
-            //
-            //                 last = group;
-            //             }
-            //         });
-            // },
         });
 
         // getData();
@@ -571,6 +551,21 @@
 
             var warehouseId = document.getElementById('warehouse_id').value;
             var categoryId = document.getElementById('cat_id').value;
+
+            if (warehouseId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route('getStockAllocation')}}',
+                    data: {
+                        warehouseId: warehouseId,
+                        categoryId: categoryId,
+                        '_token': "<?php echo e(csrf_token()); ?>",
+                    },
+                    dataType: 'json',
+                })
+
+            };
+            // var warehouseId = document.getElementById('warehouse_id').value;
             var subCategoryId = document.getElementById('sub_cat_id').value;
             var seasonId = document.getElementById('season_id').value;
             var tags = document.getElementById('tag_id').value;

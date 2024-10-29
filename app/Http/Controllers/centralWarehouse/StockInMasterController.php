@@ -102,6 +102,7 @@ class StockInMasterController extends Controller
                 $num++;
             }
         }
+
         return json_encode($result['data']);
 
     }

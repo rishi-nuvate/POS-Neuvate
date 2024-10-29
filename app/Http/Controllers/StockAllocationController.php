@@ -96,20 +96,17 @@ class StockAllocationController extends Controller
             'stores' => $stores,
         ];
 
-        $warehouseId = $request->input('warehouseId');
+//        foreach ($inventory as $inventoryItem) {
+////            dd($inventoryItem->product->productVariant->groupBy('color'));
+//            foreach ($inventoryItem->product->productVariant->groupBy('color') as $color=> $variant) {
+//
+//                $product = $inventoryItem->product->product_name;
+//
+//                dd($product);
+//
+//            }
+//        }
 
-        $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product.productVariant.allcolor')->get();
-
-        foreach ($inventory as $inventoryItem) {
-//            dd($inventoryItem->product->productVariant->groupBy('color'));
-            foreach ($inventoryItem->product->productVariant->groupBy('color') as $color=> $variant) {
-
-                $product = $inventoryItem->product->product_name;
-
-                dd($product);
-
-            }
-        }
 
 //            ->map(function ($item) {
 //                return [
@@ -120,8 +117,6 @@ class StockAllocationController extends Controller
 //                ];
 //            });
 
-        dd($inventory);
-
         return response()->json($data);
 
 
@@ -130,6 +125,33 @@ class StockAllocationController extends Controller
 
     public function getStockAllocation(Request $request)
     {
+
+        $warehouseId = $request->input('warehouseId');
+        $category = $request->input('categoryId');
+
+        $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product', 'productVariant')->get();
+
+        $test = $inventory->filter(fn($item) => $item->product->cat_id == $category);
+
+        dd($test);
+
+        $array = array('51' => array('red' => array('24' => '50')));
+        $array['51']['red']['26'] = '50';
+        $array['51']['red']['28'] = '0';
+
+        dd($array);
+
+        $result = [];
+
+        foreach ($array as $key1 => $subArray) {
+            foreach ($subArray as $key2 => $values) {
+                $flattened = array_merge([$key1, $key2], array_values($values));
+                $result[] = $flattened;
+            }
+        }
+
+//        dd($result);
+
         dd($request->all());
     }
 }
