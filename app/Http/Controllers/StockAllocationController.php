@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\CentralWarehouse;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\Season;
 use App\Models\StockAllocation;
@@ -118,8 +119,6 @@ class StockAllocationController extends Controller
 //            });
 
         return response()->json($data);
-
-
     }
 
 
@@ -127,31 +126,65 @@ class StockAllocationController extends Controller
     {
 
         $warehouseId = $request->input('warehouseId');
+//        dd($request->all());
         $category = $request->input('categoryId');
 
         $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product', 'productVariant')->get();
 
-        $test = $inventory->filter(fn($item) => $item->product->cat_id == $category);
-
-        dd($test);
-
-        $array = array('51' => array('red' => array('24' => '50')));
-        $array['51']['red']['26'] = '50';
-        $array['51']['red']['28'] = '0';
-
-        dd($array);
-
-        $result = [];
-
-        foreach ($array as $key1 => $subArray) {
-            foreach ($subArray as $key2 => $values) {
-                $flattened = array_merge([$key1, $key2], array_values($values));
-                $result[] = $flattened;
-            }
+        $result = array();
+        foreach ($inventory as $item) {
+            $result[$item->product_id][$item->productVariant->color][$item->productVariant->size] = (int) $item->good_inventory;
         }
-
 //        dd($result);
 
-        dd($request->all());
+        $headers = [];
+
+        foreach ($result as $productId => $color) {
+            foreach ($color as $variant) {
+                $headers = array_merge($headers, array_keys($variant));
+            }
+        }
+        $headers = array_unique($headers);
+        sort($headers);
+
+        $rows = [];
+
+        foreach ($result as $productId => $color) {
+
+            $name = Product::where('id', $productId)->first()->product_name;
+
+            foreach ($color as $key=>$variant) {
+                $row = array_fill_keys($headers, null);
+                foreach ($headers as $header) {
+                    $row[$header] = $variant[$header] ?? 0;
+                }
+                $color = Color::where('id', $key)->first()->color;
+                $productDetail = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $name . '</button><button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $color . '</button>';
+                $checkbox = '<div class="form-check justify-content-center d-flex"> <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"> </div>';
+
+//                $total = array_sum();
+//                print_r(array_sum(array_values($row)));
+
+                $rows[] = array_merge([$productDetail,'W.S.'], array_values($row),['total',$checkbox]);
+            }
+        }
+//        dd($rows);
+        $headers = array_merge(['product'], $headers);
+
+        $result = array();
+        $result['data'] = $rows;
+
+//        $data = array();
+//        dd($rows);
+
+//        $result = [];
+//        foreach ($array as $key1 => $subArray) {
+//            foreach ($subArray as $key2 => $values) {
+//                $flattened = array_merge([$key1, $key2], array_values($values));
+//                $result[] = $flattened;
+//            }
+//        }
+
+        return response()->json($result);
     }
 }
