@@ -124,21 +124,21 @@ class StockAllocationController extends Controller
 
     public function getStockAllocation(Request $request)
     {
-
         $warehouseId = $request->input('warehouseId');
-//        dd($request->all());
+
         $category = $request->input('categoryId');
 
         $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product', 'productVariant')->get();
 
+//        if ($category) {
+        $inventory = $inventory->where('product.cat_id', $category);
+//        }
+
         $result = array();
         foreach ($inventory as $item) {
-            $result[$item->product_id][$item->productVariant->color][$item->productVariant->size] = (int) $item->good_inventory;
+            $result[$item->product_id][$item->productVariant->color][$item->productVariant->size] = (int)$item->good_inventory;
         }
-//        dd($result);
-
         $headers = [];
-
         foreach ($result as $productId => $color) {
             foreach ($color as $variant) {
                 $headers = array_merge($headers, array_keys($variant));
@@ -148,43 +148,59 @@ class StockAllocationController extends Controller
         sort($headers);
 
         $rows = [];
+        $inputField = '<div class="input-group">
+                                <input type="text" name="quantity" class="form-control"
+                                       aria-label="Item" />
+                            </div>';
 
         foreach ($result as $productId => $color) {
 
-            $name = Product::where('id', $productId)->first()->product_name;
+            $name = Product::with('category', 'subCategory')->where('id', $productId)->first();
 
-            foreach ($color as $key=>$variant) {
-                $row = array_fill_keys($headers, null);
+            foreach ($color as $key => $variant) {
+
+                $warehouseStock = array_fill_keys($headers, 0);
+                $alloted = array_fill_keys($headers, $inputField);
+
                 foreach ($headers as $header) {
-                    $row[$header] = $variant[$header] ?? 0;
+                    $warehouseStock[$header] = $variant[$header] ?? 0;
                 }
+
                 $color = Color::where('id', $key)->first()->color;
-                $productDetail = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $name . '</button><button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $color . '</button>';
+//                $productDetail = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $name->product_name . '</button><button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $color . '</button>';
+                $productDetail = '<div class="row">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-8 fs-6">
+                    <ul>
+                        <li>'.$name->category->name.'</li>
+                        <li>'.$name->subCategory->name.'</li>
+                        <li>'.$name->product_name.'</li>
+                        <li>Product code: '.$name->product_code.'</li>
+                        <li>Product Color: '.$color.'</li>
+                    </ul>
+                </div>
+            </div>';
                 $checkbox = '<div class="form-check justify-content-center d-flex"> <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"> </div>';
 
-//                $total = array_sum();
-//                print_r(array_sum(array_values($row)));
+                $rows[] = array_merge([$productDetail, 'W.S.'], array_values($warehouseStock), [array_sum(array_values($warehouseStock)), $checkbox]);
+                $rows[] = array_merge([$productDetail, 'S.S.'], array_values($warehouseStock), [array_sum(array_values($warehouseStock)), $checkbox]);
+                $rows[] = array_merge([$productDetail, 'A.S.'], array_values($alloted), ['total', $checkbox]);
 
-                $rows[] = array_merge([$productDetail,'W.S.'], array_values($row),['total',$checkbox]);
             }
         }
-//        dd($rows);
-        $headers = array_merge(['product'], $headers);
+
+        $headers = array_merge(['product', ''], $headers, ['Total', '']);
 
         $result = array();
         $result['data'] = $rows;
+//        return response()->json($result);
 
-//        $data = array();
-//        dd($rows);
+        return response()->json([
+            'data' => $result['data'],
+            'header' => $headers,
+        ]);
 
-//        $result = [];
-//        foreach ($array as $key1 => $subArray) {
-//            foreach ($subArray as $key2 => $values) {
-//                $flattened = array_merge([$key1, $key2], array_values($values));
-//                $result[] = $flattened;
-//            }
-//        }
-
-        return response()->json($result);
     }
 }

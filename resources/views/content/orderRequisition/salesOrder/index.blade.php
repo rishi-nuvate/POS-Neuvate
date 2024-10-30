@@ -139,161 +139,161 @@
             <div class="card card-datatable table-responsive">
                 <table class="cell-border invoice-list-table dataTable table table-bordered" id="datatable-list">
                     <thead class="table-secondary text-bold">
-                    <tr class="text-center">
+                    <tr class="text-center" id="dynamic-header">
                         <th>Product</th>
-                        <th></th>
-                        <th>24</th>
-                        <th>26</th>
-                        <th>28</th>
-                        <th>30</th>
-                        <th>32</th>
-                        <th>34</th>
-                        <th>36</th>
-                        <th>38</th>
-                        <th>40</th>
-                        <th>42</th>
-                        <th>Total</th>
-                        <th></th>
+                        {{--                        <th></th>--}}
+                        {{--                        <th>24</th>--}}
+                        {{--                        <th>26</th>--}}
+                        {{--                        <th>28</th>--}}
+                        {{--                        <th>30</th>--}}
+                        {{--                        <th>32</th>--}}
+                        {{--                        <th>34</th>--}}
+                        {{--                        <th>36</th>--}}
+                        {{--                        <th>38</th>--}}
+                        {{--                        <th>40</th>--}}
+                        {{--                        <th>42</th>--}}
+                        {{--                        <th>Total</th>--}}
+                        {{--                        <th></th>--}}
                     </tr>
                     </thead>
-{{--                    <tbody>--}}
+                    <thead>
 
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>--}}
-{{--                        </td>--}}
-{{--                        <td>W.S.</td>--}}
-{{--                        <td>24</td>--}}
-{{--                        <td>26</td>--}}
-{{--                        <td>28</td>--}}
-{{--                        <td>30</td>--}}
-{{--                        <td>32</td>--}}
-{{--                        <td>34</td>--}}
-{{--                        <td>36</td>--}}
-{{--                        <td>38</td>--}}
-{{--                        <td>40</td>--}}
-{{--                        <td>42</td>--}}
-{{--                        <td>330</td>--}}
-{{--                        <td>--}}
-{{--                            <div class="form-check justify-content-center d-flex">--}}
-{{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>--}}
-{{--                        </td>--}}
-{{--                        <td>S.S.</td>--}}
-{{--                        <td>6</td>--}}
-{{--                        <td>10</td>--}}
-{{--                        <td>4</td>--}}
-{{--                        <td>13</td>--}}
-{{--                        <td>20</td>--}}
-{{--                        <td>1</td>--}}
-{{--                        <td>8</td>--}}
-{{--                        <td>21</td>--}}
-{{--                        <td>18</td>--}}
-{{--                        <td>17</td>--}}
-{{--                        <td>68</td>--}}
-{{--                        <td>--}}
-{{--                            <div class="form-check justify-content-center d-flex">--}}
-{{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
+                    {{--                    <tr>--}}
+                    {{--                        <td>--}}
+                    {{--                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>W.S.</td>--}}
+                    {{--                        <td>24</td>--}}
+                    {{--                        <td>26</td>--}}
+                    {{--                        <td>28</td>--}}
+                    {{--                        <td>30</td>--}}
+                    {{--                        <td>32</td>--}}
+                    {{--                        <td>34</td>--}}
+                    {{--                        <td>36</td>--}}
+                    {{--                        <td>38</td>--}}
+                    {{--                        <td>40</td>--}}
+                    {{--                        <td>42</td>--}}
+                    {{--                        <td>330</td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <div class="form-check justify-content-center d-flex">--}}
+                    {{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
+                    {{--                            </div>--}}
+                    {{--                        </td>--}}
+                    {{--                    </tr>--}}
+                    {{--                    <tr>--}}
+                    {{--                        <td>--}}
+                    {{--                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>S.S.</td>--}}
+                    {{--                        <td>6</td>--}}
+                    {{--                        <td>10</td>--}}
+                    {{--                        <td>4</td>--}}
+                    {{--                        <td>13</td>--}}
+                    {{--                        <td>20</td>--}}
+                    {{--                        <td>1</td>--}}
+                    {{--                        <td>8</td>--}}
+                    {{--                        <td>21</td>--}}
+                    {{--                        <td>18</td>--}}
+                    {{--                        <td>17</td>--}}
+                    {{--                        <td>68</td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <div class="form-check justify-content-center d-flex">--}}
+                    {{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
+                    {{--                            </div>--}}
+                    {{--                        </td>--}}
 
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>--}}
-{{--                        </td>--}}
-{{--                        <td>Allo.</td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td>--}}
-{{--                            <div class="form-check justify-content-center d-flex">--}}
-{{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
+                    {{--                    </tr>--}}
+                    {{--                    <tr>--}}
+                    {{--                        <td>--}}
+                    {{--                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>Allo.</td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <div class="form-check justify-content-center d-flex">--}}
+                    {{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
+                    {{--                            </div>--}}
+                    {{--                        </td>--}}
+                    {{--                    </tr>--}}
 
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>--}}
-{{--                        </td>--}}
-{{--                        <td>W.S.</td>--}}
-{{--                        <td>24</td>--}}
-{{--                        <td>26</td>--}}
-{{--                        <td>28</td>--}}
-{{--                        <td>30</td>--}}
-{{--                        <td>32</td>--}}
-{{--                        <td>34</td>--}}
-{{--                        <td>36</td>--}}
-{{--                        <td>38</td>--}}
-{{--                        <td>40</td>--}}
-{{--                        <td>42</td>--}}
-{{--                        <td>330</td>--}}
-{{--                        <td>--}}
-{{--                            <div class="form-check justify-content-center d-flex">--}}
-{{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>--}}
-{{--                        </td>--}}
-{{--                        <td>S.S.</td>--}}
-{{--                        <td>6</td>--}}
-{{--                        <td>10</td>--}}
-{{--                        <td>4</td>--}}
-{{--                        <td>13</td>--}}
-{{--                        <td>20</td>--}}
-{{--                        <td>1</td>--}}
-{{--                        <td>8</td>--}}
-{{--                        <td>21</td>--}}
-{{--                        <td>18</td>--}}
-{{--                        <td>17</td>--}}
-{{--                        <td>68</td>--}}
-{{--                        <td>--}}
-{{--                            <div class="form-check justify-content-center d-flex">--}}
-{{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
+                    {{--                    <tr>--}}
+                    {{--                        <td>--}}
+                    {{--                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>W.S.</td>--}}
+                    {{--                        <td>24</td>--}}
+                    {{--                        <td>26</td>--}}
+                    {{--                        <td>28</td>--}}
+                    {{--                        <td>30</td>--}}
+                    {{--                        <td>32</td>--}}
+                    {{--                        <td>34</td>--}}
+                    {{--                        <td>36</td>--}}
+                    {{--                        <td>38</td>--}}
+                    {{--                        <td>40</td>--}}
+                    {{--                        <td>42</td>--}}
+                    {{--                        <td>330</td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <div class="form-check justify-content-center d-flex">--}}
+                    {{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
+                    {{--                            </div>--}}
+                    {{--                        </td>--}}
+                    {{--                    </tr>--}}
+                    {{--                    <tr>--}}
+                    {{--                        <td>--}}
+                    {{--                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>S.S.</td>--}}
+                    {{--                        <td>6</td>--}}
+                    {{--                        <td>10</td>--}}
+                    {{--                        <td>4</td>--}}
+                    {{--                        <td>13</td>--}}
+                    {{--                        <td>20</td>--}}
+                    {{--                        <td>1</td>--}}
+                    {{--                        <td>8</td>--}}
+                    {{--                        <td>21</td>--}}
+                    {{--                        <td>18</td>--}}
+                    {{--                        <td>17</td>--}}
+                    {{--                        <td>68</td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <div class="form-check justify-content-center d-flex">--}}
+                    {{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
+                    {{--                            </div>--}}
+                    {{--                        </td>--}}
 
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>--}}
-{{--                        </td>--}}
-{{--                        <td>Allo.</td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td></td>--}}
-{{--                        <td>--}}
-{{--                            <div class="form-check justify-content-center d-flex">--}}
-{{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                    </tbody>--}}
+                    {{--                    </tr>--}}
+                    {{--                    <tr>--}}
+                    {{--                        <td>--}}
+                    {{--                            <button type="button" class="btn btn-label-info waves-effect">Shirt</button>--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>Allo.</td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td></td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <div class="form-check justify-content-center d-flex">--}}
+                    {{--                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
+                    {{--                            </div>--}}
+                    {{--                        </td>--}}
+                    {{--                    </tr>--}}
+                    {{--                    </tbody>--}}
                 </table>
             </div>
         </div>
@@ -552,22 +552,8 @@
             var warehouseId = document.getElementById('warehouse_id').value;
             var categoryId = document.getElementById('cat_id').value;
 
-            {{--if (warehouseId) {--}}
-            {{--    $.ajax({--}}
-            {{--        type: 'POST',--}}
-            {{--        url: '{{route('getStockAllocation')}}',--}}
-            {{--        data: {--}}
-            {{--            warehouseId: warehouseId,--}}
-            {{--            categoryId: categoryId,--}}
-            {{--            '_token': "<?php echo e(csrf_token()); ?>",--}}
-            {{--        },--}}
-            {{--        dataType: 'json',--}}
-            {{--    })--}}
-
-            {{--}--}}
-
-            $('#datatable-list').DataTable({
-                autoWidth: false,
+            var dataTable = $('#datatable-list').DataTable({
+                // autoWidth: false,
                 lengthMenu: [
                     [10, 20, 100, 500],
                     [10, 20, 100, "All"]
@@ -577,43 +563,71 @@
                     {orderable: true, targets: -1},
                     {orderable: false, targets: '_all'} // Disable sorting for all other columns
                 ],
-                "ajax": {
-                    "url": "{{ route('getStockAllocation') }}",
-                    "type": "POST",
-                    "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
-                    "data": {
+                ajax: {
+                    url: "{{ route('getStockAllocation') }}",
+                    type: "POST",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: {
                         'warehouseId': warehouseId,
                         'categoryId': categoryId,
                         "_token": "{{ csrf_token() }}"
                     },
+                    dataSrc: function (response) {
+                        // Clear existing table and header
+                        dataTable.clear().destroy();
+
+                        // Clear the existing headers
+                        $('#dynamic-header').empty();
+
+                        // Generate new headers
+                        response.header.forEach(function (header) {
+                            $('#dynamic-header').append('<th>' + header + '</th>');
+                        });
+
+                        // Initialize DataTable again with new columns
+                        // dataTable = $('#datatable-list').DataTable({
+                        //     autoWidth: false,
+                        //     lengthMenu: [
+                        //         [10, 20, 100, 500],
+                        //         [10, 20, 100, "All"]
+                        //     ],
+                        //     columnDefs: [
+                        //         { orderable: true, targets: 0 },
+                        //         { orderable: true, targets: -1 },
+                        //         { orderable: false, targets: '_all' }
+                        //     ],
+                        //     data: response.data // Assuming your row data is in `response.data`
+                        // });
+
+                        // return response.data; // Ensure the data is returned to DataTables
+                    }
                 },
                 initComplete: function (settings, json) {
                     $("#overlay").fadeOut(100);
 
-                    // Apply rowspan to the first column
-                    // var table = this.api();
-                    // var rowCount = table.rows().count();
-                    // var lastColumnIndex = table.columns().count() - 1;
-                    //
-                    // // Loop through the rows and apply rowspan to the first and last columns
-                    // for (var i = 0; i < rowCount; i += 3) {
-                    //     // Check if there are enough rows left for a complete group of 3
-                    //     if (i + 2 < rowCount) {
-                    //         // Apply rowspan to the first column
-                    //         var firstCell = $(table.cell(i, 0).node());
-                    //         firstCell.attr('rowspan', 3); // Set rowspan to 3
-                    //         // Hide the next two cells in the first column
-                    //         $(table.cell(i + 1, 0).node()).hide();
-                    //         $(table.cell(i + 2, 0).node()).hide();
-                    //
-                    //         // Apply rowspan to the last column
-                    //         var lastCell = $(table.cell(i, lastColumnIndex).node());
-                    //         lastCell.attr('rowspan', 3); // Set rowspan to 3
-                    //         // Hide the next two cells in the last column
-                    //         $(table.cell(i + 1, lastColumnIndex).node()).hide();
-                    //         $(table.cell(i + 2, lastColumnIndex).node()).hide();
-                    //     }
-                    // }
+                    var table = this.api();
+                    var rowCount = table.rows().count();
+                    var lastColumnIndex = table.columns().count() - 1;
+
+                    // Loop through the rows and apply rowspan to the first and last columns
+                    for (var i = 0; i < rowCount; i += 3) {
+
+                        if (i + 2 < rowCount) {
+                            // Apply rowspan to the first column
+                            var firstCell = $(table.cell(i, 0).node());
+                            firstCell.attr('rowspan', 3); // Set rowspan to 3
+
+                            $(table.cell(i + 1, 0).node()).hide();
+                            $(table.cell(i + 2, 0).node()).hide();
+
+                            // Apply rowspan to the last column
+                            var lastCell = $(table.cell(i, lastColumnIndex).node());
+                            lastCell.attr('rowspan', 3); // Set rowspan to 3
+
+                            $(table.cell(i + 1, lastColumnIndex).node()).hide();
+                            $(table.cell(i + 2, lastColumnIndex).node()).hide();
+                        }
+                    }
                 },
                 bDestroy: true,
                 dom:
@@ -766,81 +780,6 @@
                 ],
             });
 
-            // var subCategoryId = document.getElementById('sub_cat_id').value;
-            // var seasonId = document.getElementById('season_id').value;
-            // var tags = document.getElementById('tag_id').value;
-            // var productId = document.getElementById('product_id').value;
-
-            // $('#overlay').fadeIn(100);
-            // if (startDate === undefined || startDate === '') {
-            //     startDate = $('#startDateShow').val();
-            // }
-            // if (endDate === undefined || endDate === '') {
-            //     endDate = $('#endDateShow').val();
-            // }
-            // if ($.fn.DataTable.isDataTable('#po-datatable-list')) {
-            //     $('#po-datatable-list').DataTable().destroy();
-            // }
-
-            // var dtInvoiceTable = $('#datatable-list');
-
-            // if (startDate !== '') {
-            //     $('#dateFilterShow').html('<b>Date Range</b> : ' + formatDate(startDate) + ' to ' + formatDate(endDate));
-            // }
-
-            {{--if (dtInvoiceTable.length) {--}}
-            {{--    var table = dtInvoiceTable.DataTable({--}}
-            {{--        scrollX: true,--}}
-            {{--        processing: true,--}}
-            {{--        serverSide: true,--}}
-            {{--        order: [[0, "desc"]],--}}
-            {{--        ajax: {--}}
-            {{--            'url': "{{ route('getStockAllocation') }}",--}}
-            {{--            'type': 'POST',--}}
-            {{--            'headers': '{ \'X-CSRF-TOKEN\': $(\'meta[name=\'csrf-token\']\').attr(\'content\') }',--}}
-            {{--            'data': {--}}
-            {{--                'warehouseId': warehouseId,--}}
-            {{--                'categoryId': categoryId,--}}
-            {{--                'subCategoryId': subCategoryId,--}}
-            {{--                'seasonId': seasonId,--}}
-            {{--                'tags': tags,--}}
-            {{--                'productId': productId,--}}
-            {{--                '_token': "{{ csrf_token() }}"--}}
-            {{--            }--}}
-            {{--        },--}}
-            {{--        'initComplete': function (setting, json) {--}}
-            {{--            $('.dataTables_filter input').removeClass('form-control-sm');--}}
-            {{--            $('.dataTables_length select').removeClass('form-select-sm');--}}
-            {{--            $('#overlay').fadeOut(100);--}}
-            {{--        },--}}
-            {{--        dom:--}}
-            {{--            '<"row me-2"' +--}}
-            {{--            '<"col-md-2"<"me-3"l>>' +--}}
-            {{--            '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +--}}
-            {{--            '>t' +--}}
-            {{--            '<"row mx-2"' +--}}
-            {{--            '<"col-sm-12 col-md-6"i>' +--}}
-            {{--            '<"col-sm-12 col-md-6"p>' +--}}
-            {{--            '>',--}}
-            {{--        drawCallback: function (settings) {--}}
-            {{--            var api = this.api();--}}
-            {{--            var rows = api.rows({page: 'current'}).nodes();--}}
-            {{--            var last = null;--}}
-            {{--            api--}}
-            {{--                .column(2, {page: 'current'})--}}
-            {{--                .data()--}}
-            {{--                .each(function (group, i) {--}}
-            {{--                    if (last !== group) {--}}
-            {{--                        $(rows)--}}
-            {{--                            .eq(i)--}}
-            {{--                            .before('<tr class="group"><td colspan="8">' + group + '</td></tr>');--}}
-
-            {{--                        last = group;--}}
-            {{--                    }--}}
-            {{--                });--}}
-            {{--        },--}}
-            {{--    });--}}
-            {{--}--}}
         }
 
         {{--function daletePo(PoId) {--}}
