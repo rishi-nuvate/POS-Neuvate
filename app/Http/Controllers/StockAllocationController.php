@@ -125,14 +125,12 @@ class StockAllocationController extends Controller
     public function getStockAllocation(Request $request)
     {
         $warehouseId = $request->input('warehouseId');
-
         $category = $request->input('categoryId');
 
         $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product', 'productVariant')->get();
 
-//        if ($category) {
         $inventory = $inventory->where('product.cat_id', $category);
-//        }
+
 
         $result = array();
         foreach ($inventory as $item) {
@@ -147,6 +145,7 @@ class StockAllocationController extends Controller
         $headers = array_unique($headers);
         sort($headers);
 
+//        if ($token != 0) {
         $rows = [];
         $inputField = '<div class="input-group">
                                 <input type="text" name="quantity" class="form-control"
@@ -172,13 +171,13 @@ class StockAllocationController extends Controller
                 <div class="col-md-4">
 
                 </div>
-                <div class="col-md-8 fs-6">
+                <div class="col-md-12 fs-6">
                     <ul>
-                        <li>'.$name->category->name.'</li>
-                        <li>'.$name->subCategory->name.'</li>
-                        <li>'.$name->product_name.'</li>
-                        <li>Product code: '.$name->product_code.'</li>
-                        <li>Product Color: '.$color.'</li>
+                        <li>' . $name->category->name . '</li>
+                        <li>' . $name->subCategory->name . '</li>
+                        <li>' . $name->product_name . '</li>
+                        <li>Product code: ' . $name->product_code . '</li>
+                        <li>Product Color: ' . $color . '</li>
                     </ul>
                 </div>
             </div>';
@@ -191,16 +190,24 @@ class StockAllocationController extends Controller
             }
         }
 
+//        }
+
+
         $headers = array_merge(['product', ''], $headers, ['Total', '']);
+
+//        if ($token != 0) {
 
         $result = array();
         $result['data'] = $rows;
-//        return response()->json($result);
 
         return response()->json([
             'data' => $result['data'],
             'header' => $headers,
         ]);
-
+//        }else{
+//            return response()->json([
+//                'header' => $headers,
+//            ]);
+//        }
     }
 }

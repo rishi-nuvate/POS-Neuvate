@@ -7,6 +7,7 @@ use App\Models\BarcodeItem;
 use App\Models\CentralWarehouse;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 use Illuminate\Http\Request;
 
@@ -70,9 +71,10 @@ class StockInMasterController extends Controller
 
     public function bulkInward()
     {
+        $purchaseOrders = PurchaseOrder::all();
         $warehouses = CentralWarehouse::all();
-        $products = Product::get();
-        return view('content.centralWarehouse.stockIn.bulkInward', compact('products','warehouses'));
+        $products = Product::all();
+        return view('content.centralWarehouse.stockIn.bulkInward', compact('products','warehouses','purchaseOrders'));
     }
 
     public function singleInward()
@@ -86,24 +88,27 @@ class StockInMasterController extends Controller
     public function getAllPOItem(Request $request)
     {
         $poId = $request->input('poId');
-        $result = ['data' => []];
         $poItem = PurchaseOrderItem::where('po_id', $poId)->with('purchaseOrderItemParameter', 'product')->get();
-        $num = 1;
-        foreach ($poItem as $item) {
 
-            foreach ($item->purchaseOrderItemParameter as $allSku) {
-                $sku = $allSku->item_sku;
-                $qty = $allSku->item_qty;
-                $product = $item->product->product_name;
-//                dd($item);
+//        $result = ['data' => []];
+//        $num = 1;
+//        foreach ($poItem as $item) {
+//
+//            foreach ($item->purchaseOrderItemParameter as $allSku) {
+//                $sku = $allSku->item_sku;
+//                $qty = $allSku->item_qty;
+//                $product = $item->product->product_name;
+////                dd($item);
+//
+//                array_push($result['data'], [$num, $sku, $qty, $product]);
+//
+//                $num++;
+//            }
+//        }
 
-                array_push($result['data'], [$num, $sku, $qty, $product]);
+        return json_encode($poItem);
 
-                $num++;
-            }
-        }
-
-        return json_encode($result['data']);
+//        return json_encode($result['data']);
 
     }
 

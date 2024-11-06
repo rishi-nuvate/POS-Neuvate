@@ -40,34 +40,51 @@
                             <select required id="po_id" name="po_id"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Company" onchange="getAllPOItem()">
-                                <option value="dd">Select</option>
-                                <option value="3">Admin</option>
+                                {{--                                <option value=" ">Select</option>--}}
+                                @foreach($purchaseOrders as $purchaseOrder)
+                                    <option value="{{$purchaseOrder->id}}">{{$purchaseOrder->po_no}}</option>
+                                @endforeach
                             </select>
                         </div>
 
                     </div>
                     <div class="row" id="withPoItem">
 
-                        {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+                        <div class="row">
 
-                        {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
 
-                        {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+                        </div>
+                        <div class="row">
 
-                        {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
 
-                        {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                        {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+                        </div>
+                        <div class="row">
 
+                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+
+                        </div>
+                        <div class="row">
+
+                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+
+                        </div>
+                        <div class="row">
+
+                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
+                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
+
+                        </div>
                     </div>
 
                     <div class="row" id="withoutPoItem" style="display: none">
@@ -110,7 +127,8 @@
                                 <div class="col-md-2 mt-3">
                                     <label class="form-label" for="inward_quantity">Inward</label>
                                     <span class="text-danger"><strong></strong></span>
-                                    <input type="text" id="inward_quantity" name="inward_quantity[]" class="form-control  " placeholder="5"
+                                    <input type="text" id="inward_quantity" name="inward_quantity[]"
+                                           class="form-control  " placeholder="5"
                                            value=""/>
                                 </div>
 
@@ -123,7 +141,8 @@
                     <div class="row" id="withoutPoAdd" style="display: none">
                         <div class="px-0 mt-3">
                             <div class="col-lg-2 col-md-12 col-sm-12">
-                                <button type="button" class="btn btn-primary d-grid w-100" onclick="addProduct()">Add
+                                <button type="button" class="btn btn-primary d-grid w-100" onclick="addProduct()">
+                                    Add
                                     Another SKU
                                 </button>
                             </div>
@@ -163,17 +182,20 @@
                 dataType: 'json',
                 success: function (response) {
 
-                    $('#items').empty();
-                    $.each(response, function (key, value) {
-                        console.log(value);
-                        $('#product_variant').append(' <div class="row"> <div class="col-md-4 mt-3"> ' +
-                            '<label class="form-label" for="date">SKU Code</label> ' +
-                            '<input type="text" id="date" name="sku[]" class="form-control" value="' + value.sku + '" readonly> ' +
-                            '<input type="hidden" id="date" name="sku_id[]" class="form-control" value="' + value.id + '"> ' +
-                            '</div> <div class="col-md-4 mt-3"> ' +
-                            '<label class="form-label" for="sku_quantity">Quantity</label> ' +
-                            '<input type="text" id="sku_quantity" name="sku_quantity[]" class="form-control" placeholder="enter quantity" value="" > ' +
-                            '</div> </div>');
+                    $('#withPoItem').empty();
+                    $.each(response, function (key, po) {
+                        console.log(po);
+                        $.each(po.purchase_order_item_parameter, function (id, sku) {
+                            console.log(sku);
+                            $('#withPoItem').append(' <div class="row"> <div class="col-md-3 mt-3"> ' +
+                                '<label class="form-label" for="date">SKU Code</label> ' +
+                                '<input type="text" id="date" name="sku[]" class="form-control" value="' + sku.item_sku + '" readonly> ' +
+                                '<input type="hidden" id="date" name="sku_id[]" class="form-control" value="' + sku.id + '"> ' +
+                                '</div> <div class="col-md-3 mt-3"> ' +
+                                '<label class="form-label" for="sku_quantity">Quantity</label> ' +
+                                '<input type="text" id="sku_quantity" name="sku_quantity[]" class="form-control" placeholder="enter quantity" value="'+sku.item_qty+'" > ' +
+                                '</div></div>');
+                        });
                     });
                 }
             });
@@ -210,7 +232,7 @@
             var num = document.getElementById('number').value;
             num++;
             const productOptions = ` @foreach($products as $product)
-                                        <option value="{{$product->id}}">{{$product->product_name}}</option>
+            <option value="{{$product->id}}">{{$product->product_name}}</option>
                                      @endforeach `;
 
             $('#productItemContainer').append('' +

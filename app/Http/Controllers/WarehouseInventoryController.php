@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\CentralWarehouse;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\PurchaseOrder;
 use App\Models\StoreGenerate;
 use App\Models\Tags;
 use App\Models\WarehouseInventory;
@@ -25,11 +26,12 @@ class WarehouseInventoryController extends Controller
     public function index()
     {
 
+        $purchaseOrders = PurchaseOrder::all();
         $categories = category::all();
         $products = Product::all();
         $warehouses = CentralWarehouse::all();
 
-        return view('content.centralWarehouse.inventoryManagement.inventoryList', compact('categories', 'products', 'warehouses'));
+        return view('content.centralWarehouse.inventoryManagement.inventoryList', compact('categories', 'products', 'warehouses', 'purchaseOrders'));
     }
 
     /**

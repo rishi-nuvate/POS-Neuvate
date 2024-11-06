@@ -139,25 +139,29 @@
             <div class="card card-datatable table-responsive">
                 <table class="cell-border invoice-list-table dataTable table table-bordered" id="datatable-list">
                     <thead class="table-secondary text-bold">
-                    <tr class="text-center" id="dynamic-header">
-                        <th>Product</th>
-                        {{--                        <th></th>--}}
-                        {{--                        <th>24</th>--}}
-                        {{--                        <th>26</th>--}}
-                        {{--                        <th>28</th>--}}
-                        {{--                        <th>30</th>--}}
-                        {{--                        <th>32</th>--}}
-                        {{--                        <th>34</th>--}}
-                        {{--                        <th>36</th>--}}
-                        {{--                        <th>38</th>--}}
-                        {{--                        <th>40</th>--}}
-                        {{--                        <th>42</th>--}}
-                        {{--                        <th>Total</th>--}}
-                        {{--                        <th></th>--}}
-                    </tr>
+                    {{--                    <tr class="text-center">--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                        <th>Product</th>--}}
+                    {{--                    </tr>--}}
                     </thead>
-                    <thead>
+                    <tbody>
 
+                    </tbody>
+                    {{--                    <tbody id="dynamic-body"></tbody>--}}
+                    {{--                    <tbody id="dynamic-body">--}}
+                    {{--                    </tbody>--}}
                     {{--                    <tr>--}}
                     {{--                        <td>--}}
                     {{--                            <button type="button" class="btn btn-label-info waves-effect">JEANS</button>--}}
@@ -327,460 +331,860 @@
             $('#endDateShow').val(endDate);
         }
 
-        // getDateFind();
-
-        $('#datatable-list').DataTable({
-            autoWidth: false,
-            lengthMenu: [
-                [10, 20, 100, 500],
-                [10, 20, 100, "All"]
-            ],
-            columnDefs: [
-                {orderable: true, targets: 0},
-                {orderable: true, targets: -1},
-                {orderable: false, targets: '_all'} // Disable sorting for all other columns
-            ],
-            // order: [
-            //     [0, 'desc']
-            // ],
-            initComplete: function (settings, json) {
-                $("#overlay").fadeOut(100);
-
-                // Apply rowspan to the first column
-                var table = this.api();
-                var rowCount = table.rows().count();
-                var lastColumnIndex = table.columns().count() - 1;
-
-                // Loop through the rows and apply rowspan to the first and last columns
-                for (var i = 0; i < rowCount; i += 3) {
-                    // Check if there are enough rows left for a complete group of 3
-                    if (i + 2 < rowCount) {
-                        // Apply rowspan to the first column
-                        var firstCell = $(table.cell(i, 0).node());
-                        firstCell.attr('rowspan', 3); // Set rowspan to 3
-                        // Hide the next two cells in the first column
-                        $(table.cell(i + 1, 0).node()).hide();
-                        $(table.cell(i + 2, 0).node()).hide();
-
-                        // Apply rowspan to the last column
-                        var lastCell = $(table.cell(i, lastColumnIndex).node());
-                        lastCell.attr('rowspan', 3); // Set rowspan to 3
-                        // Hide the next two cells in the last column
-                        $(table.cell(i + 1, lastColumnIndex).node()).hide();
-                        $(table.cell(i + 2, lastColumnIndex).node()).hide();
-                    }
-                }
-                // var previousValue = null;
-                // var rowspanCount = 1;
-                //
-                // table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-                //     var data = this.data();
-                //     var cell = $(table.cell(rowIdx, 0).node());
-                //
-                //     if (previousValue === data[0]) {
-                //         rowspanCount++;
-                //         cell.hide();
-                //     } else {
-                //         if (rowspanCount > 1) {
-                //             $(table.cell(rowIdx - rowspanCount, 0).node()).attr('rowspan', rowspanCount);
-                //         }
-                //         rowspanCount = 1;
-                //         previousValue = data[0];
-                //     }
-                // });
-
-                // Apply rowspan on the last set if applicable
-                // if (rowspanCount > 1) {
-                //     $(table.cell(table.rows()[0].length - rowspanCount, 0).node()).attr('rowspan', rowspanCount);
-                // }
-            },
-            bDestroy: true,
-            dom:
-                '<"row me-2"' +
-                '<"col-md-2"<"me-3"l>>' +
-                '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +
-                '>t' +
-                '<"row mx-2"' +
-                '<"col-sm-12 col-md-6"i>' +
-                '<"col-sm-12 col-md-6"p>' +
-                '>',
-            buttons: [
-                {
-                    extend: 'collection',
-                    className: 'btn btn-label-primary dropdown-toggle mx-3',
-                    text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',
-                    buttons: [
-                        {
-                            extend: 'print',
-                            text: '<i class="ti ti-printer me-2" ></i>Print',
-                            className: 'dropdown-item',
-                            exportOptions: {
-                                format: {
-                                    body: function (inner, coldex, rowdex) {
-                                        if (inner.length <= 0) return inner;
-                                        var el = $.parseHTML(inner);
-                                        var result = '';
-                                        $.each(el, function (index, item) {
-                                            if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                result = result + item.lastChild.firstChild.textContent;
-                                            } else if (item.innerText === undefined) {
-                                                result = result + item.textContent;
-                                            } else result = result + item.innerText;
-                                        });
-                                        return result;
-                                    }
-                                }
-                            },
-                            customize: function (win) {
-                                //customize print view for dark
-                                $(win.document.body)
-                                    .css('color', headingColor)
-                                    .css('border-color', borderColor)
-                                    .css('background-color', bodyBg);
-                                $(win.document.body)
-                                    .find('table')
-                                    .addClass('compact')
-                                    .css('color', 'inherit')
-                                    .css('border-color', 'inherit')
-                                    .css('background-color', 'inherit');
-                            }
-                        },
-                        {
-                            extend: 'csv',
-                            text: '<i class="ti ti-file-text me-2" ></i>Csv',
-                            className: 'dropdown-item',
-                            exportOptions: {
-                                format: {
-                                    body: function (inner, coldex, rowdex) {
-                                        if (inner.length <= 0) return inner;
-                                        var el = $.parseHTML(inner);
-                                        var result = '';
-                                        $.each(el, function (index, item) {
-                                            if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                result = result + item.lastChild.firstChild.textContent;
-                                            } else if (item.innerText === undefined) {
-                                                result = result + item.textContent;
-                                            } else result = result + item.innerText;
-                                        });
-                                        return result;
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            extend: 'excel',
-                            text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
-                            className: 'dropdown-item',
-                            exportOptions: {
-                                format: {
-                                    body: function (inner, coldex, rowdex) {
-                                        if (inner.length <= 0) return inner;
-                                        var el = $.parseHTML(inner);
-                                        var result = '';
-                                        $.each(el, function (index, item) {
-                                            if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                result = result + item.lastChild.firstChild.textContent;
-                                            } else if (item.innerText === undefined) {
-                                                result = result + item.textContent;
-                                            } else result = result + item.innerText;
-                                        });
-                                        return result;
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            extend: 'pdf',
-                            text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
-                            className: 'dropdown-item',
-                            exportOptions: {
-                                format: {
-                                    body: function (inner, coldex, rowdex) {
-                                        if (inner.length <= 0) return inner;
-                                        var el = $.parseHTML(inner);
-                                        var result = '';
-                                        $.each(el, function (index, item) {
-                                            if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                result = result + item.lastChild.firstChild.textContent;
-                                            } else if (item.innerText === undefined) {
-                                                result = result + item.textContent;
-                                            } else result = result + item.innerText;
-                                        });
-                                        return result;
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            extend: 'copy',
-                            text: '<i class="ti ti-copy me-2" ></i>Copy',
-                            className: 'dropdown-item',
-                            exportOptions: {
-                                format: {
-                                    body: function (inner, coldex, rowdex) {
-                                        if (inner.length <= 0) return inner;
-                                        var el = $.parseHTML(inner);
-                                        var result = '';
-                                        $.each(el, function (index, item) {
-                                            if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                result = result + item.lastChild.firstChild.textContent;
-                                            } else if (item.innerText === undefined) {
-                                                result = result + item.textContent;
-                                            } else result = result + item.innerText;
-                                        });
-                                        return result;
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                },
-                {
-                    text: '<i class="ti ti-filter me-md-1"></i><span class="d-md-inline-block d-none"></span>',
-                    className: 'btn btn-primary',
-                    action: function (e, dt, button, config) {
-                        $('#filter-search').toggleClass('d-none');
-                    }
-                }
-            ],
-        });
-
-        // getData();
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
 
         function getData() {
 
             var warehouseId = document.getElementById('warehouse_id').value;
             var categoryId = document.getElementById('cat_id').value;
 
-            var dataTable = $('#datatable-list').DataTable({
-                // autoWidth: false,
-                lengthMenu: [
-                    [10, 20, 100, 500],
-                    [10, 20, 100, "All"]
-                ],
-                columnDefs: [
-                    {orderable: true, targets: 0},
-                    {orderable: true, targets: -1},
-                    {orderable: false, targets: '_all'} // Disable sorting for all other columns
-                ],
-                ajax: {
-                    url: "{{ route('getStockAllocation') }}",
-                    type: "POST",
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    data: {
-                        'warehouseId': warehouseId,
-                        'categoryId': categoryId,
-                        "_token": "{{ csrf_token() }}"
-                    },
-                    dataSrc: function (response) {
-                        // Clear existing table and header
-                        dataTable.clear().destroy();
+            $.ajax({
 
-                        // Clear the existing headers
-                        $('#dynamic-header').empty();
-
-                        // Generate new headers
-                        response.header.forEach(function (header) {
-                            $('#dynamic-header').append('<th>' + header + '</th>');
-                        });
-
-                        // Initialize DataTable again with new columns
-                        // dataTable = $('#datatable-list').DataTable({
-                        //     autoWidth: false,
-                        //     lengthMenu: [
-                        //         [10, 20, 100, 500],
-                        //         [10, 20, 100, "All"]
-                        //     ],
-                        //     columnDefs: [
-                        //         { orderable: true, targets: 0 },
-                        //         { orderable: true, targets: -1 },
-                        //         { orderable: false, targets: '_all' }
-                        //     ],
-                        //     data: response.data // Assuming your row data is in `response.data`
-                        // });
-
-                        // return response.data; // Ensure the data is returned to DataTables
-                    }
+                data: {
+                    'warehouseId': warehouseId,
+                    'categoryId': categoryId,
+                    "_token": "{{ csrf_token() }}"
                 },
-                initComplete: function (settings, json) {
-                    $("#overlay").fadeOut(100);
+                url: "{{ route('getStockAllocation') }}",
+                method: 'POST',
+                success: function (response) {
+                    // $('#datatable-list').DataTable().clear();
+                    const headers = response.header;
+                    const data = response.data;
 
-                    var table = this.api();
-                    var rowCount = table.rows().count();
-                    var lastColumnIndex = table.columns().count() - 1;
-
-                    // Loop through the rows and apply rowspan to the first and last columns
-                    for (var i = 0; i < rowCount; i += 3) {
-
-                        if (i + 2 < rowCount) {
-                            // Apply rowspan to the first column
-                            var firstCell = $(table.cell(i, 0).node());
-                            firstCell.attr('rowspan', 3); // Set rowspan to 3
-
-                            $(table.cell(i + 1, 0).node()).hide();
-                            $(table.cell(i + 2, 0).node()).hide();
-
-                            // Apply rowspan to the last column
-                            var lastCell = $(table.cell(i, lastColumnIndex).node());
-                            lastCell.attr('rowspan', 3); // Set rowspan to 3
-
-                            $(table.cell(i + 1, lastColumnIndex).node()).hide();
-                            $(table.cell(i + 2, lastColumnIndex).node()).hide();
-                        }
+                    console.log(data);
+                    if (!headers || !data) {
+                        console.error("Headers or data are undefined");
+                        return;
                     }
-                },
-                bDestroy: true,
-                dom:
-                    '<"row me-2"' +
-                    '<"col-md-2"<"me-3"l>>' +
-                    '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +
-                    '>t' +
-                    '<"row mx-2"' +
-                    '<"col-sm-12 col-md-6"i>' +
-                    '<"col-sm-12 col-md-6"p>' +
-                    '>',
-                buttons: [
-                    {
-                        extend: 'collection',
-                        className: 'btn btn-label-primary dropdown-toggle mx-3',
-                        text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',
-                        buttons: [
-                            {
-                                extend: 'print',
-                                text: '<i class="ti ti-printer me-2" ></i>Print',
-                                className: 'dropdown-item',
-                                exportOptions: {
-                                    format: {
-                                        body: function (inner, coldex, rowdex) {
-                                            if (inner.length <= 0) return inner;
-                                            var el = $.parseHTML(inner);
-                                            var result = '';
-                                            $.each(el, function (index, item) {
-                                                if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                    result = result + item.lastChild.firstChild.textContent;
-                                                } else if (item.innerText === undefined) {
-                                                    result = result + item.textContent;
-                                                } else result = result + item.innerText;
-                                            });
-                                            return result;
-                                        }
-                                    }
-                                },
-                                customize: function (win) {
-                                    //customize print view for dark
-                                    $(win.document.body)
-                                        .css('color', headingColor)
-                                        .css('border-color', borderColor)
-                                        .css('background-color', bodyBg);
-                                    $(win.document.body)
-                                        .find('table')
-                                        .addClass('compact')
-                                        .css('color', 'inherit')
-                                        .css('border-color', 'inherit')
-                                        .css('background-color', 'inherit');
-                                }
-                            },
-                            {
-                                extend: 'csv',
-                                text: '<i class="ti ti-file-text me-2" ></i>Csv',
-                                className: 'dropdown-item',
-                                exportOptions: {
-                                    format: {
-                                        body: function (inner, coldex, rowdex) {
-                                            if (inner.length <= 0) return inner;
-                                            var el = $.parseHTML(inner);
-                                            var result = '';
-                                            $.each(el, function (index, item) {
-                                                if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                    result = result + item.lastChild.firstChild.textContent;
-                                                } else if (item.innerText === undefined) {
-                                                    result = result + item.textContent;
-                                                } else result = result + item.innerText;
-                                            });
-                                            return result;
-                                        }
-                                    }
-                                }
-                            },
-                            {
-                                extend: 'excel',
-                                text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
-                                className: 'dropdown-item',
-                                exportOptions: {
-                                    format: {
-                                        body: function (inner, coldex, rowdex) {
-                                            if (inner.length <= 0) return inner;
-                                            var el = $.parseHTML(inner);
-                                            var result = '';
-                                            $.each(el, function (index, item) {
-                                                if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                    result = result + item.lastChild.firstChild.textContent;
-                                                } else if (item.innerText === undefined) {
-                                                    result = result + item.textContent;
-                                                } else result = result + item.innerText;
-                                            });
-                                            return result;
-                                        }
-                                    }
-                                }
-                            },
-                            {
-                                extend: 'pdf',
-                                text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
-                                className: 'dropdown-item',
-                                exportOptions: {
-                                    format: {
-                                        body: function (inner, coldex, rowdex) {
-                                            if (inner.length <= 0) return inner;
-                                            var el = $.parseHTML(inner);
-                                            var result = '';
-                                            $.each(el, function (index, item) {
-                                                if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                    result = result + item.lastChild.firstChild.textContent;
-                                                } else if (item.innerText === undefined) {
-                                                    result = result + item.textContent;
-                                                } else result = result + item.innerText;
-                                            });
-                                            return result;
-                                        }
-                                    }
-                                }
-                            },
-                            {
-                                extend: 'copy',
-                                text: '<i class="ti ti-copy me-2" ></i>Copy',
-                                className: 'dropdown-item',
-                                exportOptions: {
-                                    format: {
-                                        body: function (inner, coldex, rowdex) {
-                                            if (inner.length <= 0) return inner;
-                                            var el = $.parseHTML(inner);
-                                            var result = '';
-                                            $.each(el, function (index, item) {
-                                                if (item.classList !== undefined && item.classList.contains('user-name')) {
-                                                    result = result + item.lastChild.firstChild.textContent;
-                                                } else if (item.innerText === undefined) {
-                                                    result = result + item.textContent;
-                                                } else result = result + item.innerText;
-                                            });
-                                            return result;
-                                        }
-                                    }
+
+                    const columns = headers.map((header, index) => {
+                        return {title: String(header), data: index.toString()};
+                    });
+
+// Clear and destroy the existing DataTable instance
+                    if ($.fn.DataTable.isDataTable('#datatable-list')) {
+                        $('#datatable-list').DataTable().clear().destroy();
+                    }
+
+                    $('#datatable-list').DataTable({
+                        data: data,
+                        columns: columns,
+                        autoWidth: false,
+                        lengthMenu: [
+                            [10, 20, 100, 500],
+                            [10, 20, 100, "All"]
+                        ],
+
+                        initComplete: function (settings, json) {
+                            $("#overlay").fadeOut(100);
+
+                            var table = this.api();
+                            var rowCount = table.rows().count();
+                            var lastColumnIndex = table.columns().count() - 1;
+
+                            // Loop through the rows and apply rowspan to the first and last columns
+                            for (var i = 0; i < rowCount; i += 3) {
+
+                                if (i + 2 < rowCount) {
+                                    // Apply rowspan to the first column
+                                    var firstCell = $(table.cell(i, 0).node());
+                                    firstCell.attr('rowspan', 3); // Set rowspan to 3
+
+                                    $(table.cell(i + 1, 0).node()).hide();
+                                    $(table.cell(i + 2, 0).node()).hide();
+
+                                    // Apply rowspan to the last column
+                                    var lastCell = $(table.cell(i, lastColumnIndex).node());
+                                    lastCell.attr('rowspan', 3); // Set rowspan to 3
+
+                                    $(table.cell(i + 1, lastColumnIndex).node()).hide();
+                                    $(table.cell(i + 2, lastColumnIndex).node()).hide();
                                 }
                             }
-                        ]
-                    },
-                    {
-                        text: '<i class="ti ti-filter me-md-1"></i><span class="d-md-inline-block d-none"></span>',
-                        className: 'btn btn-primary',
-                        action: function (e, dt, button, config) {
-                            $('#filter-search').toggleClass('d-none');
-                        }
-                    }
-                ],
-            });
+                        },
 
+                        columnDefs: [
+                            {orderable: true, targets: 0},
+                            {orderable: true, targets: -1},
+                            {orderable: false, targets: '_all'} // Disable sorting for all other columns
+                        ],
+                        bDestroy: true,
+                        dom:
+                            '<"row me-2"' +
+                            '<"col-md-2"<"me-3"l>>' +
+                            '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +
+                            '>t' +
+                            '<"row mx-2"' +
+                            '<"col-sm-12 col-md-6"i>' +
+                            '<"col-sm-12 col-md-6"p>' +
+                            '>',
+                        buttons: [
+                            {
+                                extend: 'collection',
+                                className: 'btn btn-label-primary dropdown-toggle mx-3',
+                                text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',
+                                buttons: [
+                                    {
+                                        extend: 'print',
+                                        text: '<i class="ti ti-printer me-2" ></i>Print',
+                                        className: 'dropdown-item',
+                                        exportOptions: {
+                                            format: {
+                                                body: function (inner, coldex, rowdex) {
+                                                    if (inner.length <= 0) return inner;
+                                                    var el = $.parseHTML(inner);
+                                                    var result = '';
+                                                    $.each(el, function (index, item) {
+                                                        if (item.classList !== undefined && item.classList.contains('user-name')) {
+                                                            result = result + item.lastChild.firstChild.textContent;
+                                                        } else if (item.innerText === undefined) {
+                                                            result = result + item.textContent;
+                                                        } else result = result + item.innerText;
+                                                    });
+                                                    return result;
+                                                }
+                                            }
+                                        },
+                                        customize: function (win) {
+                                            //customize print view for dark
+                                            $(win.document.body)
+                                                .css('color', headingColor)
+                                                .css('border-color', borderColor)
+                                                .css('background-color', bodyBg);
+                                            $(win.document.body)
+                                                .find('table')
+                                                .addClass('compact')
+                                                .css('color', 'inherit')
+                                                .css('border-color', 'inherit')
+                                                .css('background-color', 'inherit');
+                                        }
+                                    },
+                                    {
+                                        extend: 'csv',
+                                        text: '<i class="ti ti-file-text me-2" ></i>Csv',
+                                        className: 'dropdown-item',
+                                        exportOptions: {
+                                            format: {
+                                                body: function (inner, coldex, rowdex) {
+                                                    if (inner.length <= 0) return inner;
+                                                    var el = $.parseHTML(inner);
+                                                    var result = '';
+                                                    $.each(el, function (index, item) {
+                                                        if (item.classList !== undefined && item.classList.contains('user-name')) {
+                                                            result = result + item.lastChild.firstChild.textContent;
+                                                        } else if (item.innerText === undefined) {
+                                                            result = result + item.textContent;
+                                                        } else result = result + item.innerText;
+                                                    });
+                                                    return result;
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        extend: 'excel',
+                                        text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
+                                        className: 'dropdown-item',
+                                        exportOptions: {
+                                            format: {
+                                                body: function (inner, coldex, rowdex) {
+                                                    if (inner.length <= 0) return inner;
+                                                    var el = $.parseHTML(inner);
+                                                    var result = '';
+                                                    $.each(el, function (index, item) {
+                                                        if (item.classList !== undefined && item.classList.contains('user-name')) {
+                                                            result = result + item.lastChild.firstChild.textContent;
+                                                        } else if (item.innerText === undefined) {
+                                                            result = result + item.textContent;
+                                                        } else result = result + item.innerText;
+                                                    });
+                                                    return result;
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        extend: 'pdf',
+                                        text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',
+                                        className: 'dropdown-item',
+                                        exportOptions: {
+                                            format: {
+                                                body: function (inner, coldex, rowdex) {
+                                                    if (inner.length <= 0) return inner;
+                                                    var el = $.parseHTML(inner);
+                                                    var result = '';
+                                                    $.each(el, function (index, item) {
+                                                        if (item.classList !== undefined && item.classList.contains('user-name')) {
+                                                            result = result + item.lastChild.firstChild.textContent;
+                                                        } else if (item.innerText === undefined) {
+                                                            result = result + item.textContent;
+                                                        } else result = result + item.innerText;
+                                                    });
+                                                    return result;
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        extend: 'copy',
+                                        text: '<i class="ti ti-copy me-2" ></i>Copy',
+                                        className: 'dropdown-item',
+                                        exportOptions: {
+                                            format: {
+                                                body: function (inner, coldex, rowdex) {
+                                                    if (inner.length <= 0) return inner;
+                                                    var el = $.parseHTML(inner);
+                                                    var result = '';
+                                                    $.each(el, function (index, item) {
+                                                        if (item.classList !== undefined && item.classList.contains('user-name')) {
+                                                            result = result + item.lastChild.firstChild.textContent;
+                                                        } else if (item.innerText === undefined) {
+                                                            result = result + item.textContent;
+                                                        } else result = result + item.innerText;
+                                                    });
+                                                    return result;
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                text: '<i class="ti ti-filter me-md-1"></i><span class="d-md-inline-block d-none"></span>',
+                                className: 'btn btn-primary',
+                                action: function (e, dt, button, config) {
+                                    $('#filter-search').toggleClass('d-none');
+                                }
+                            }
+                        ],
+
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching data:", error);
+                }
+            });
         }
+
+        {{--var dataTable = $('#datatable-list').DataTable({--}}
+        {{--    autoWidth: false,--}}
+        {{--    lengthMenu: [--}}
+        {{--        [10, 20, 100, 500],--}}
+        {{--        [10, 20, 100, "All"]--}}
+        {{--    ],--}}
+        {{--    columnDefs: [--}}
+        {{--        {orderable: true, targets: 0},--}}
+        {{--        {orderable: true, targets: -1},--}}
+        {{--        {orderable: false, targets: '_all'} // Disable sorting for all other columns--}}
+        {{--    ],--}}
+        {{--    // order: [--}}
+        {{--    //     [0, 'desc']--}}
+        {{--    // ],--}}
+        {{--    initComplete: function (settings, json) {--}}
+        {{--        $("#overlay").fadeOut(100);--}}
+
+        {{--        // Apply rowspan to the first column--}}
+        {{--        var table = this.api();--}}
+        {{--        var rowCount = table.rows().count();--}}
+        {{--        var lastColumnIndex = table.columns().count() - 1;--}}
+
+        {{--        // Loop through the rows and apply rowspan to the first and last columns--}}
+        {{--        for (var i = 0; i < rowCount; i += 3) {--}}
+        {{--            // Check if there are enough rows left for a complete group of 3--}}
+        {{--            if (i + 2 < rowCount) {--}}
+        {{--                // Apply rowspan to the first column--}}
+        {{--                var firstCell = $(table.cell(i, 0).node());--}}
+        {{--                firstCell.attr('rowspan', 3); // Set rowspan to 3--}}
+        {{--                // Hide the next two cells in the first column--}}
+        {{--                $(table.cell(i + 1, 0).node()).hide();--}}
+        {{--                $(table.cell(i + 2, 0).node()).hide();--}}
+
+        {{--                // Apply rowspan to the last column--}}
+        {{--                var lastCell = $(table.cell(i, lastColumnIndex).node());--}}
+        {{--                lastCell.attr('rowspan', 3); // Set rowspan to 3--}}
+        {{--                // Hide the next two cells in the last column--}}
+        {{--                $(table.cell(i + 1, lastColumnIndex).node()).hide();--}}
+        {{--                $(table.cell(i + 2, lastColumnIndex).node()).hide();--}}
+        {{--            }--}}
+        {{--        }--}}
+        {{--        // var previousValue = null;--}}
+        {{--        // var rowspanCount = 1;--}}
+        {{--        //--}}
+        {{--        // table.rows().every(function (rowIdx, tableLoop, rowLoop) {--}}
+        {{--        //     var data = this.data();--}}
+        {{--        //     var cell = $(table.cell(rowIdx, 0).node());--}}
+        {{--        //--}}
+        {{--        //     if (previousValue === data[0]) {--}}
+        {{--        //         rowspanCount++;--}}
+        {{--        //         cell.hide();--}}
+        {{--        //     } else {--}}
+        {{--        //         if (rowspanCount > 1) {--}}
+        {{--        //             $(table.cell(rowIdx - rowspanCount, 0).node()).attr('rowspan', rowspanCount);--}}
+        {{--        //         }--}}
+        {{--        //         rowspanCount = 1;--}}
+        {{--        //         previousValue = data[0];--}}
+        {{--        //     }--}}
+        {{--        // });--}}
+
+        {{--        // Apply rowspan on the last set if applicable--}}
+        {{--        // if (rowspanCount > 1) {--}}
+        {{--        //     $(table.cell(table.rows()[0].length - rowspanCount, 0).node()).attr('rowspan', rowspanCount);--}}
+        {{--        // }--}}
+        {{--    },--}}
+        {{--    bDestroy: true,--}}
+        {{--    dom:--}}
+        {{--        '<"row me-2"' +--}}
+        {{--        '<"col-md-2"<"me-3"l>>' +--}}
+        {{--        '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +--}}
+        {{--        '>t' +--}}
+        {{--        '<"row mx-2"' +--}}
+        {{--        '<"col-sm-12 col-md-6"i>' +--}}
+        {{--        '<"col-sm-12 col-md-6"p>' +--}}
+        {{--        '>',--}}
+        {{--    buttons: [--}}
+        {{--        {--}}
+        {{--            extend: 'collection',--}}
+        {{--            className: 'btn btn-label-primary dropdown-toggle mx-3',--}}
+        {{--            text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',--}}
+        {{--            buttons: [--}}
+        {{--                {--}}
+        {{--                    extend: 'print',--}}
+        {{--                    text: '<i class="ti ti-printer me-2" ></i>Print',--}}
+        {{--                    className: 'dropdown-item',--}}
+        {{--                    exportOptions: {--}}
+        {{--                        format: {--}}
+        {{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--                                if (inner.length <= 0) return inner;--}}
+        {{--                                var el = $.parseHTML(inner);--}}
+        {{--                                var result = '';--}}
+        {{--                                $.each(el, function (index, item) {--}}
+        {{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                    } else if (item.innerText === undefined) {--}}
+        {{--                                        result = result + item.textContent;--}}
+        {{--                                    } else result = result + item.innerText;--}}
+        {{--                                });--}}
+        {{--                                return result;--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    },--}}
+        {{--                    customize: function (win) {--}}
+        {{--                        //customize print view for dark--}}
+        {{--                        $(win.document.body)--}}
+        {{--                            .css('color', headingColor)--}}
+        {{--                            .css('border-color', borderColor)--}}
+        {{--                            .css('background-color', bodyBg);--}}
+        {{--                        $(win.document.body)--}}
+        {{--                            .find('table')--}}
+        {{--                            .addClass('compact')--}}
+        {{--                            .css('color', 'inherit')--}}
+        {{--                            .css('border-color', 'inherit')--}}
+        {{--                            .css('background-color', 'inherit');--}}
+        {{--                    }--}}
+        {{--                },--}}
+        {{--                {--}}
+        {{--                    extend: 'csv',--}}
+        {{--                    text: '<i class="ti ti-file-text me-2" ></i>Csv',--}}
+        {{--                    className: 'dropdown-item',--}}
+        {{--                    exportOptions: {--}}
+        {{--                        format: {--}}
+        {{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--                                if (inner.length <= 0) return inner;--}}
+        {{--                                var el = $.parseHTML(inner);--}}
+        {{--                                var result = '';--}}
+        {{--                                $.each(el, function (index, item) {--}}
+        {{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                    } else if (item.innerText === undefined) {--}}
+        {{--                                        result = result + item.textContent;--}}
+        {{--                                    } else result = result + item.innerText;--}}
+        {{--                                });--}}
+        {{--                                return result;--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    }--}}
+        {{--                },--}}
+        {{--                {--}}
+        {{--                    extend: 'excel',--}}
+        {{--                    text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',--}}
+        {{--                    className: 'dropdown-item',--}}
+        {{--                    exportOptions: {--}}
+        {{--                        format: {--}}
+        {{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--                                if (inner.length <= 0) return inner;--}}
+        {{--                                var el = $.parseHTML(inner);--}}
+        {{--                                var result = '';--}}
+        {{--                                $.each(el, function (index, item) {--}}
+        {{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                    } else if (item.innerText === undefined) {--}}
+        {{--                                        result = result + item.textContent;--}}
+        {{--                                    } else result = result + item.innerText;--}}
+        {{--                                });--}}
+        {{--                                return result;--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    }--}}
+        {{--                },--}}
+        {{--                {--}}
+        {{--                    extend: 'pdf',--}}
+        {{--                    text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',--}}
+        {{--                    className: 'dropdown-item',--}}
+        {{--                    exportOptions: {--}}
+        {{--                        format: {--}}
+        {{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--                                if (inner.length <= 0) return inner;--}}
+        {{--                                var el = $.parseHTML(inner);--}}
+        {{--                                var result = '';--}}
+        {{--                                $.each(el, function (index, item) {--}}
+        {{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                    } else if (item.innerText === undefined) {--}}
+        {{--                                        result = result + item.textContent;--}}
+        {{--                                    } else result = result + item.innerText;--}}
+        {{--                                });--}}
+        {{--                                return result;--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    }--}}
+        {{--                },--}}
+        {{--                {--}}
+        {{--                    extend: 'copy',--}}
+        {{--                    text: '<i class="ti ti-copy me-2" ></i>Copy',--}}
+        {{--                    className: 'dropdown-item',--}}
+        {{--                    exportOptions: {--}}
+        {{--                        format: {--}}
+        {{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--                                if (inner.length <= 0) return inner;--}}
+        {{--                                var el = $.parseHTML(inner);--}}
+        {{--                                var result = '';--}}
+        {{--                                $.each(el, function (index, item) {--}}
+        {{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                    } else if (item.innerText === undefined) {--}}
+        {{--                                        result = result + item.textContent;--}}
+        {{--                                    } else result = result + item.innerText;--}}
+        {{--                                });--}}
+        {{--                                return result;--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    }--}}
+        {{--                }--}}
+        {{--            ]--}}
+        {{--        },--}}
+        {{--        {--}}
+        {{--            text: '<i class="ti ti-filter me-md-1"></i><span class="d-md-inline-block d-none"></span>',--}}
+        {{--            className: 'btn btn-primary',--}}
+        {{--            action: function (e, dt, button, config) {--}}
+        {{--                $('#filter-search').toggleClass('d-none');--}}
+        {{--            }--}}
+        {{--        }--}}
+        {{--    ],--}}
+        {{--});--}}
+
+        {{--function getData() {--}}
+
+        {{--    // var dataTable = $('#datatable-list').DataTable();--}}
+
+        {{--    var warehouseId = document.getElementById('warehouse_id').value;--}}
+        {{--    var categoryId = document.getElementById('cat_id').value;--}}
+
+
+        {{--    $('#datatable-list').DataTable({--}}
+        {{--        autoWidth: false,--}}
+        {{--        lengthMenu: [--}}
+        {{--            [10, 20, 100, 500],--}}
+        {{--            [10, 20, 100, "All"]--}}
+        {{--        ],--}}
+        {{--        columnDefs: [--}}
+        {{--            {orderable: true, targets: 0},--}}
+        {{--            {orderable: true, targets: -1},--}}
+        {{--            {orderable: false, targets: '_all'} // Disable sorting for all other columns--}}
+        {{--        ],--}}
+        {{--        ajax: {--}}
+        {{--            url: "{{ route('getStockAllocation') }}",--}}
+        {{--            type: "POST",--}}
+        {{--            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},--}}
+        {{--            data: {--}}
+        {{--                'warehouseId': warehouseId,--}}
+        {{--                'categoryId': categoryId,--}}
+        {{--                "_token": "{{ csrf_token() }}"--}}
+        {{--            },--}}
+
+        {{--        },--}}
+        {{--        initComplete: function (settings, json) {--}}
+        {{--            $("#overlay").fadeOut(100);--}}
+
+        {{--            var table = this.api();--}}
+        {{--            var rowCount = table.rows().count();--}}
+        {{--            var lastColumnIndex = table.columns().count() - 1;--}}
+
+        {{--            // Loop through the rows and apply rowspan to the first and last columns--}}
+        {{--            for (var i = 0; i < rowCount; i += 3) {--}}
+
+        {{--                if (i + 2 < rowCount) {--}}
+        {{--                    // Apply rowspan to the first column--}}
+        {{--                    var firstCell = $(table.cell(i, 0).node());--}}
+        {{--                    firstCell.attr('rowspan', 3); // Set rowspan to 3--}}
+
+        {{--                    $(table.cell(i + 1, 0).node()).hide();--}}
+        {{--                    $(table.cell(i + 2, 0).node()).hide();--}}
+
+        {{--                    // Apply rowspan to the last column--}}
+        {{--                    var lastCell = $(table.cell(i, lastColumnIndex).node());--}}
+        {{--                    lastCell.attr('rowspan', 3); // Set rowspan to 3--}}
+
+        {{--                    $(table.cell(i + 1, lastColumnIndex).node()).hide();--}}
+        {{--                    $(table.cell(i + 2, lastColumnIndex).node()).hide();--}}
+        {{--                }--}}
+        {{--            }--}}
+        {{--        },--}}
+        {{--        bDestroy: true,--}}
+        {{--        dom:--}}
+        {{--            '<"row me-2"' +--}}
+        {{--            '<"col-md-2"<"me-3"l>>' +--}}
+        {{--            '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +--}}
+        {{--            '>t' +--}}
+        {{--            '<"row mx-2"' +--}}
+        {{--            '<"col-sm-12 col-md-6"i>' +--}}
+        {{--            '<"col-sm-12 col-md-6"p>' +--}}
+        {{--            '>',--}}
+        {{--        buttons: [--}}
+        {{--            {--}}
+        {{--                extend: 'collection',--}}
+        {{--                className: 'btn btn-label-primary dropdown-toggle mx-3',--}}
+        {{--                text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',--}}
+        {{--                buttons: [--}}
+        {{--                    {--}}
+        {{--                        extend: 'print',--}}
+        {{--                        text: '<i class="ti ti-printer me-2" ></i>Print',--}}
+        {{--                        className: 'dropdown-item',--}}
+        {{--                        exportOptions: {--}}
+        {{--                            format: {--}}
+        {{--                                body: function (inner, coldex, rowdex) {--}}
+        {{--                                    if (inner.length <= 0) return inner;--}}
+        {{--                                    var el = $.parseHTML(inner);--}}
+        {{--                                    var result = '';--}}
+        {{--                                    $.each(el, function (index, item) {--}}
+        {{--                                        if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                            result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                        } else if (item.innerText === undefined) {--}}
+        {{--                                            result = result + item.textContent;--}}
+        {{--                                        } else result = result + item.innerText;--}}
+        {{--                                    });--}}
+        {{--                                    return result;--}}
+        {{--                                }--}}
+        {{--                            }--}}
+        {{--                        },--}}
+        {{--                        customize: function (win) {--}}
+        {{--                            //customize print view for dark--}}
+        {{--                            $(win.document.body)--}}
+        {{--                                .css('color', headingColor)--}}
+        {{--                                .css('border-color', borderColor)--}}
+        {{--                                .css('background-color', bodyBg);--}}
+        {{--                            $(win.document.body)--}}
+        {{--                                .find('table')--}}
+        {{--                                .addClass('compact')--}}
+        {{--                                .css('color', 'inherit')--}}
+        {{--                                .css('border-color', 'inherit')--}}
+        {{--                                .css('background-color', 'inherit');--}}
+        {{--                        }--}}
+        {{--                    },--}}
+        {{--                    {--}}
+        {{--                        extend: 'csv',--}}
+        {{--                        text: '<i class="ti ti-file-text me-2" ></i>Csv',--}}
+        {{--                        className: 'dropdown-item',--}}
+        {{--                        exportOptions: {--}}
+        {{--                            format: {--}}
+        {{--                                body: function (inner, coldex, rowdex) {--}}
+        {{--                                    if (inner.length <= 0) return inner;--}}
+        {{--                                    var el = $.parseHTML(inner);--}}
+        {{--                                    var result = '';--}}
+        {{--                                    $.each(el, function (index, item) {--}}
+        {{--                                        if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                            result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                        } else if (item.innerText === undefined) {--}}
+        {{--                                            result = result + item.textContent;--}}
+        {{--                                        } else result = result + item.innerText;--}}
+        {{--                                    });--}}
+        {{--                                    return result;--}}
+        {{--                                }--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    },--}}
+        {{--                    {--}}
+        {{--                        extend: 'excel',--}}
+        {{--                        text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',--}}
+        {{--                        className: 'dropdown-item',--}}
+        {{--                        exportOptions: {--}}
+        {{--                            format: {--}}
+        {{--                                body: function (inner, coldex, rowdex) {--}}
+        {{--                                    if (inner.length <= 0) return inner;--}}
+        {{--                                    var el = $.parseHTML(inner);--}}
+        {{--                                    var result = '';--}}
+        {{--                                    $.each(el, function (index, item) {--}}
+        {{--                                        if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                            result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                        } else if (item.innerText === undefined) {--}}
+        {{--                                            result = result + item.textContent;--}}
+        {{--                                        } else result = result + item.innerText;--}}
+        {{--                                    });--}}
+        {{--                                    return result;--}}
+        {{--                                }--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    },--}}
+        {{--                    {--}}
+        {{--                        extend: 'pdf',--}}
+        {{--                        text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',--}}
+        {{--                        className: 'dropdown-item',--}}
+        {{--                        exportOptions: {--}}
+        {{--                            format: {--}}
+        {{--                                body: function (inner, coldex, rowdex) {--}}
+        {{--                                    if (inner.length <= 0) return inner;--}}
+        {{--                                    var el = $.parseHTML(inner);--}}
+        {{--                                    var result = '';--}}
+        {{--                                    $.each(el, function (index, item) {--}}
+        {{--                                        if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                            result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                        } else if (item.innerText === undefined) {--}}
+        {{--                                            result = result + item.textContent;--}}
+        {{--                                        } else result = result + item.innerText;--}}
+        {{--                                    });--}}
+        {{--                                    return result;--}}
+        {{--                                }--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    },--}}
+        {{--                    {--}}
+        {{--                        extend: 'copy',--}}
+        {{--                        text: '<i class="ti ti-copy me-2" ></i>Copy',--}}
+        {{--                        className: 'dropdown-item',--}}
+        {{--                        exportOptions: {--}}
+        {{--                            format: {--}}
+        {{--                                body: function (inner, coldex, rowdex) {--}}
+        {{--                                    if (inner.length <= 0) return inner;--}}
+        {{--                                    var el = $.parseHTML(inner);--}}
+        {{--                                    var result = '';--}}
+        {{--                                    $.each(el, function (index, item) {--}}
+        {{--                                        if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--                                            result = result + item.lastChild.firstChild.textContent;--}}
+        {{--                                        } else if (item.innerText === undefined) {--}}
+        {{--                                            result = result + item.textContent;--}}
+        {{--                                        } else result = result + item.innerText;--}}
+        {{--                                    });--}}
+        {{--                                    return result;--}}
+        {{--                                }--}}
+        {{--                            }--}}
+        {{--                        }--}}
+        {{--                    }--}}
+        {{--                ]--}}
+        {{--            },--}}
+        {{--            {--}}
+        {{--                text: '<i class="ti ti-filter me-md-1"></i><span class="d-md-inline-block d-none"></span>',--}}
+        {{--                className: 'btn btn-primary',--}}
+        {{--                action: function (e, dt, button, config) {--}}
+        {{--                    $('#filter-search').toggleClass('d-none');--}}
+        {{--                }--}}
+        {{--            }--}}
+        {{--        ],--}}
+        {{--    });--}}
+
+        {{--    // $('#datatable-list').DataTable({--}}
+        {{--    //     autoWidth: false,--}}
+        {{--    //     lengthMenu: [--}}
+        {{--    --}}{{----}}{{--        [10, 20, 100, 500],--}}
+        {{--    --}}{{--        [10, 20, 100, "All"]--}}
+        {{--    --}}{{--    ],--}}
+        {{--    --}}{{--    columnDefs: [--}}
+        {{--    --}}{{--        {orderable: true, targets: 0},--}}
+        {{--    --}}{{--        {orderable: true, targets: -1},--}}
+        {{--    --}}{{--        {orderable: false, targets: '_all'} // Disable sorting for all other columns--}}
+        {{--    --}}{{--    ],--}}
+        {{--    --}}{{--    ajax: {--}}
+        {{--    --}}{{--        url: "{{ route('getStockAllocation') }}",--}}
+        {{--    --}}{{--        type: "POST",--}}
+        {{--    --}}{{--        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},--}}
+        {{--    --}}{{--        data: {--}}
+        {{--    --}}{{--            'warehouseId': warehouseId,--}}
+        {{--    --}}{{--            'categoryId': categoryId,--}}
+        {{--    --}}{{--            "_token": "{{ csrf_token() }}"--}}
+        {{--    --}}{{--        },--}}
+        {{--    --}}{{--        dataSrc: function (response) {--}}
+        {{--    --}}{{--            // Clear the existing headers--}}
+        {{--    --}}{{--            $('#dynamic-header').empty();--}}
+        {{--    --}}{{--            $('#dynamic-body').empty();--}}
+        {{--    --}}{{--            // Generate new headers--}}
+        {{--    --}}{{--            response.header.forEach(function (header) {--}}
+        {{--    --}}{{--                $('#dynamic-header').append('<th>' + header + '</th>');--}}
+        {{--    --}}{{--            });--}}
+        {{--    --}}{{--            // response.data.forEach(function (product) {--}}
+        {{--    --}}{{--            //     let row = $('<tr></tr>'); // Create a new row element--}}
+        {{--    --}}{{--            //     product.forEach(function (data) {--}}
+        {{--    --}}{{--            //         row.append('<td>' + data + '</td>'); // Append each data point to the row--}}
+        {{--    --}}{{--            //     });--}}
+        {{--    --}}{{--            //     $('#dynamic-body').append(row); // Append the row to the table body--}}
+        {{--    --}}{{--            // });--}}
+        {{--    --}}{{--        },--}}
+        {{--    --}}{{--    },--}}
+
+        {{--    --}}{{--    bDestroy: true,--}}
+        {{--    --}}{{--    dom:--}}
+        {{--    --}}{{--        '<"row me-2"' +--}}
+        {{--    --}}{{--        '<"col-md-2"<"me-3"l>>' +--}}
+        {{--    --}}{{--        '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +--}}
+        {{--    --}}{{--        '>t' +--}}
+        {{--    --}}{{--        '<"row mx-2"' +--}}
+        {{--    --}}{{--        '<"col-sm-12 col-md-6"i>' +--}}
+        {{--    --}}{{--        '<"col-sm-12 col-md-6"p>' +--}}
+        {{--    --}}{{--        '>',--}}
+        {{--    --}}{{--    buttons: [--}}
+        {{--    --}}{{--        {--}}
+        {{--    --}}{{--            extend: 'collection',--}}
+        {{--    --}}{{--            className: 'btn btn-label-primary dropdown-toggle mx-3',--}}
+        {{--    --}}{{--            text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',--}}
+        {{--    --}}{{--            buttons: [--}}
+        {{--    --}}{{--                {--}}
+        {{--    --}}{{--                    extend: 'print',--}}
+        {{--    --}}{{--                    text: '<i class="ti ti-printer me-2" ></i>Print',--}}
+        {{--    --}}{{--                    className: 'dropdown-item',--}}
+        {{--    --}}{{--                    exportOptions: {--}}
+        {{--    --}}{{--                        format: {--}}
+        {{--    --}}{{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--    --}}{{--                                if (inner.length <= 0) return inner;--}}
+        {{--    --}}{{--                                var el = $.parseHTML(inner);--}}
+        {{--    --}}{{--                                var result = '';--}}
+        {{--    --}}{{--                                $.each(el, function (index, item) {--}}
+        {{--    --}}{{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--    --}}{{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--    --}}{{--                                    } else if (item.innerText === undefined) {--}}
+        {{--    --}}{{--                                        result = result + item.textContent;--}}
+        {{--    --}}{{--                                    } else result = result + item.innerText;--}}
+        {{--    --}}{{--                                });--}}
+        {{--    --}}{{--                                return result;--}}
+        {{--    --}}{{--                            }--}}
+        {{--    --}}{{--                        }--}}
+        {{--    --}}{{--                    },--}}
+        {{--    --}}{{--                    customize: function (win) {--}}
+        {{--    --}}{{--                        //customize print view for dark--}}
+        {{--    --}}{{--                        $(win.document.body)--}}
+        {{--    --}}{{--                            .css('color', headingColor)--}}
+        {{--    --}}{{--                            .css('border-color', borderColor)--}}
+        {{--    --}}{{--                            .css('background-color', bodyBg);--}}
+        {{--    --}}{{--                        $(win.document.body)--}}
+        {{--    --}}{{--                            .find('table')--}}
+        {{--    --}}{{--                            .addClass('compact')--}}
+        {{--    --}}{{--                            .css('color', 'inherit')--}}
+        {{--    --}}{{--                            .css('border-color', 'inherit')--}}
+        {{--    --}}{{--                            .css('background-color', 'inherit');--}}
+        {{--    --}}{{--                    }--}}
+        {{--    --}}{{--                },--}}
+        {{--    --}}{{--                {--}}
+        {{--    --}}{{--                    extend: 'csv',--}}
+        {{--    --}}{{--                    text: '<i class="ti ti-file-text me-2" ></i>Csv',--}}
+        {{--    --}}{{--                    className: 'dropdown-item',--}}
+        {{--    --}}{{--                    exportOptions: {--}}
+        {{--    --}}{{--                        format: {--}}
+        {{--    --}}{{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--    --}}{{--                                if (inner.length <= 0) return inner;--}}
+        {{--    --}}{{--                                var el = $.parseHTML(inner);--}}
+        {{--    --}}{{--                                var result = '';--}}
+        {{--    --}}{{--                                $.each(el, function (index, item) {--}}
+        {{--    --}}{{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--    --}}{{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--    --}}{{--                                    } else if (item.innerText === undefined) {--}}
+        {{--    --}}{{--                                        result = result + item.textContent;--}}
+        {{--    --}}{{--                                    } else result = result + item.innerText;--}}
+        {{--    --}}{{--                                });--}}
+        {{--    --}}{{--                                return result;--}}
+        {{--    --}}{{--                            }--}}
+        {{--    --}}{{--                        }--}}
+        {{--    --}}{{--                    }--}}
+        {{--    --}}{{--                },--}}
+        {{--    --}}{{--                {--}}
+        {{--    --}}{{--                    extend: 'excel',--}}
+        {{--    --}}{{--                    text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',--}}
+        {{--    --}}{{--                    className: 'dropdown-item',--}}
+        {{--    --}}{{--                    exportOptions: {--}}
+        {{--    --}}{{--                        format: {--}}
+        {{--    --}}{{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--    --}}{{--                                if (inner.length <= 0) return inner;--}}
+        {{--    --}}{{--                                var el = $.parseHTML(inner);--}}
+        {{--    --}}{{--                                var result = '';--}}
+        {{--    --}}{{--                                $.each(el, function (index, item) {--}}
+        {{--    --}}{{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--    --}}{{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--    --}}{{--                                    } else if (item.innerText === undefined) {--}}
+        {{--    --}}{{--                                        result = result + item.textContent;--}}
+        {{--    --}}{{--                                    } else result = result + item.innerText;--}}
+        {{--    --}}{{--                                });--}}
+        {{--    --}}{{--                                return result;--}}
+        {{--    --}}{{--                            }--}}
+        {{--    --}}{{--                        }--}}
+        {{--    --}}{{--                    }--}}
+        {{--    --}}{{--                },--}}
+        {{--    --}}{{--                {--}}
+        {{--    --}}{{--                    extend: 'pdf',--}}
+        {{--    --}}{{--                    text: '<i class="ti ti-file-code-2 me-2"></i>Pdf',--}}
+        {{--    --}}{{--                    className: 'dropdown-item',--}}
+        {{--    --}}{{--                    exportOptions: {--}}
+        {{--    --}}{{--                        format: {--}}
+        {{--    --}}{{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--    --}}{{--                                if (inner.length <= 0) return inner;--}}
+        {{--    --}}{{--                                var el = $.parseHTML(inner);--}}
+        {{--    --}}{{--                                var result = '';--}}
+        {{--    --}}{{--                                $.each(el, function (index, item) {--}}
+        {{--    --}}{{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--    --}}{{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--    --}}{{--                                    } else if (item.innerText === undefined) {--}}
+        {{--    --}}{{--                                        result = result + item.textContent;--}}
+        {{--    --}}{{--                                    } else result = result + item.innerText;--}}
+        {{--    --}}{{--                                });--}}
+        {{--    --}}{{--                                return result;--}}
+        {{--    --}}{{--                            }--}}
+        {{--    --}}{{--                        }--}}
+        {{--    --}}{{--                    }--}}
+        {{--    --}}{{--                },--}}
+        {{--    --}}{{--                {--}}
+        {{--    --}}{{--                    extend: 'copy',--}}
+        {{--    --}}{{--                    text: '<i class="ti ti-copy me-2" ></i>Copy',--}}
+        {{--    --}}{{--                    className: 'dropdown-item',--}}
+        {{--    --}}{{--                    exportOptions: {--}}
+        {{--    --}}{{--                        format: {--}}
+        {{--    --}}{{--                            body: function (inner, coldex, rowdex) {--}}
+        {{--    --}}{{--                                if (inner.length <= 0) return inner;--}}
+        {{--    --}}{{--                                var el = $.parseHTML(inner);--}}
+        {{--    --}}{{--                                var result = '';--}}
+        {{--    --}}{{--                                $.each(el, function (index, item) {--}}
+        {{--    --}}{{--                                    if (item.classList !== undefined && item.classList.contains('user-name')) {--}}
+        {{--    --}}{{--                                        result = result + item.lastChild.firstChild.textContent;--}}
+        {{--    --}}{{--                                    } else if (item.innerText === undefined) {--}}
+        {{--    --}}{{--                                        result = result + item.textContent;--}}
+        {{--    --}}{{--                                    } else result = result + item.innerText;--}}
+        {{--    --}}{{--                                });--}}
+        {{--    --}}{{--                                return result;--}}
+        {{--    --}}{{--                            }--}}
+        {{--    --}}{{--                        }--}}
+        {{--    --}}{{--                    }--}}
+        {{--    --}}{{--                }--}}
+        {{--    --}}{{--            ]--}}
+        {{--    --}}{{--        },--}}
+        {{--    --}}{{--        {--}}
+        {{--    --}}{{--            text: '<i class="ti ti-filter me-md-1"></i><span class="d-md-inline-block d-none"></span>',--}}
+        {{--    --}}{{--            className: 'btn btn-primary',--}}
+        {{--    --}}{{--            action: function (e, dt, button, config) {--}}
+        {{--    --}}{{--                $('#filter-search').toggleClass('d-none');--}}
+        {{--    --}}{{--            }--}}
+        {{--    --}}{{--        }--}}
+        {{--    --}}{{--    ],--}}
+        {{--    --}}{{--});--}}
+
+        {{--}--}}
 
         {{--function daletePo(PoId) {--}}
         {{--    Swal.fire({--}}
