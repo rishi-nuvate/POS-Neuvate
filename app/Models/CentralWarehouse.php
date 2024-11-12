@@ -27,4 +27,8 @@ class CentralWarehouse extends Model
         return $this->hasMany(Shelf::class,'warehouse_id','id');
     }
 
+    public function stockAllocation(){
+        return $this->belongsTo(StockAllocation::class,'id','warehouse_id');
+    }
+
 }

@@ -38,9 +38,11 @@ class ShelfController extends Controller
     {
         DB::beginTransaction();
 
-        $last = Shelf::get()->last()->column_name;
-
-        if (empty($last)) {
+        if ($request->row_num != 1) {
+            $last = Shelf::where('warehouse_id', $request->warehouse_id)
+                ->where('row_num', (int)$request->row_num - 1)
+                ->get()->last()->column_name;
+        } else {
             $last = 0;
         }
         $columnNum = $request->column_num; // Assuming this gives you an integer
@@ -72,9 +74,13 @@ class ShelfController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Shelf $shelf)
+    public function edit($row_num, $warehouse, Request $request)
     {
-        //
+        $warehouseId = CentralWarehouse::where('warehouse_name', $warehouse)->first()->id;
+
+        $shelves = shelf::with('shelfProduct.product')->where('warehouse_id', $warehouseId)->where('row_num', $row_num)->get();
+
+        return view('content.centralWarehouse.shelf.edit', compact('shelves', 'warehouse', 'warehouseId','row_num'));
     }
 
     /**
@@ -122,18 +128,16 @@ class ShelfController extends Controller
                 });
             });
 
-//        dd($shelves);
-
         $result = ['data' => []];
         $num = 1;
 
         foreach ($shelves as $warehouseName => $rows) {
             $warehouse = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $warehouseName . '</button>';
-//            dd($rows);
+
             foreach ($rows as $row => $column) {
-//                dd($column);
+
                 $action =
-                    ' <a href="" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
+                    ' <a href="/shelfProduct/' . $row . '/' . $warehouseName . '/edit" title="Edit" class="btn btn-icon btn-label-primary mx-1"><i class="ti ti-edit mx-2 ti-sm"></i></a>
                       <a href="/shelfProduct/' . $warehouseName . '/' . $row . '" title="Update" class="btn btn-icon btn-label-warning mx-1"><i class="fa-regular fa-file-lines mx-2"></i></a>';
 
                 array_push($result['data'], [$num, $warehouse, $row, $column['count'], $column['first_column_name'], $action]);
@@ -153,7 +157,7 @@ class ShelfController extends Controller
 
         $shelves = shelf::with('shelfProduct.product')->where('warehouse_id', $warehouseId)->where('row_num', $row_num)->get();
 //dd($shelves);
-        return view('content.centralWarehouse.shelf.shelfProduct', compact('shelves', 'warehouse','products'));
+        return view('content.centralWarehouse.shelf.shelfProduct', compact('shelves', 'warehouse', 'products'));
     }
 
     public function shelfProductStore(Request $request)
@@ -176,7 +180,7 @@ class ShelfController extends Controller
     {
         $shelves = Shelf::all();
         $products = Product::all();
-        return view('content.centralWarehouse.shelf.shelfInward', compact('shelves','products'));
+        return view('content.centralWarehouse.shelf.shelfInward', compact('shelves', 'products'));
     }
 
     public function getProduct(Request $request)
@@ -184,7 +188,7 @@ class ShelfController extends Controller
 //        dd(1);
         $id = $request->input('product_id');
 //        dd($id);
-        $product = Product::with('productVariant','category','subCategory')->where('id',$id)->first();
+        $product = Product::with('productVariant', 'category', 'subCategory')->where('id', $id)->first();
         return response()->json($product);
     }
 

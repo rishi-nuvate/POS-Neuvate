@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('stock_allocations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('store_id')->constrained('store_generates')->onDelete('cascade');
+            $table->foreignId('warehouse_id')->constrained('central_warehouses')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->text('order_id')->unique();
+            $table->integer('total_qty')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

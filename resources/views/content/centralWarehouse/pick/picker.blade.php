@@ -19,30 +19,73 @@
             <table class="datatables-basic table" id="datatable-list">
                 <thead>
                 <tr>
-                    <th>SR No.</th>
+                    <th>column No.</th>
                     <th>Products</th>
+                    <th>28</th>
+                    <th>30</th>
+                    <th>32</th>
+                    <th>34</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="odd">
                     <td> 1</td>
                     <td>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addQty" class="m-2 btn btn-lg btn-success round waves-effect">kurti</button>
-                        <button type="button" class="m-2 btn btn-lg btn-success round waves-effect">Dress</button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addQty"
+                                class="m-2 btn btn-lg btn-primary round waves-effect">Dress
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">5</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">6</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">3</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">9</button>
                     </td>
                 </tr>
                 <tr class="odd">
-                    <td> 2</td>
+                    <td> 5,6 </td>
                     <td>
-                        <button type="button" class="m-2 btn btn-lg btn-success round waves-effect">Jeans</button>
-                        <button type="button" class="m-2 btn btn-lg btn-success round waves-effect">Denim</button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addQty"
+                                class="m-2 btn btn-lg btn-primary round waves-effect">Jeans
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">6</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">2</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">8</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">1</button>
                     </td>
                 </tr>
                 <tr class="odd">
-                    <td> 5</td>
+                    <td>  9 </td>
                     <td>
-                        <button type="button" class="m-2 btn btn-lg btn-success round waves-effect">Shirt</button>
-                        <button type="button" class="m-2 btn btn-lg btn-success round waves-effect">Sleeveless</button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addQty"
+                                class="m-2 btn btn-lg btn-primary round waves-effect">Shirt
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">5</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">3</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">4</button>
+                    </td>
+                    <td>
+                        <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">2</button>
                     </td>
                 </tr>
                 </tbody>
@@ -62,11 +105,13 @@
                     <div class="row g-3">
                         <div class="col-md-12 mt-0 justify-content-center d-flex fs-5">
                             <div class="form-check form-check-inline mt-3">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                       value="option1">
                                 <label class="form-check-label" for="inlineRadio1">Full</label>
                             </div>
                             <div class="form-check form-check-inline mt-3">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                       value="option2">
                                 <label class="form-check-label" for="inlineRadio2">Half</label>
                             </div>
                         </div>

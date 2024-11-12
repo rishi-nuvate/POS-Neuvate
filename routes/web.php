@@ -107,60 +107,58 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/tagsDelete/{tag}', [TagsController::class, 'destroy']);
     Route::post('/tagsData/', [TagsController::class, 'getTagData'])->name('getTagData');
 
-// Brand Master
+    // Brand Master
     Route::resource('brand', BrandController::class);
     Route::post('/brands/{brand}', [BrandController::class, 'destroy']);
     Route::post('/brandsData', [BrandController::class, 'getBrandData'])->name('getBrandData');
 
-//    Fit Master
+    // Fit Master
     Route::resource('fit', FitController::class);
     Route::post('/getFitData', [FitController::class, 'getFitData'])->name('getFitData');
     Route::post('/deleteFit/{fit}', [FitController::class, 'destroy']);
 
-//    Slim Master
+    // Slim Master
     Route::resource('slim', SlimController::class);
     Route::post('/getSlimData', [SlimController::class, 'getSlimData'])->name('getSlimData');
     Route::post('/slimDelete/{slim}', [SlimController::class, 'destroy']);
 
-//    Sleeve
+    // Sleeve
     Route::resource('sleeve', SleeveController::class);
     Route::post('/getSleeveData', [SleeveController::class, 'getSleeveData'])->name('getSleeveData');
     Route::post('/sleeveDelete/{sleeve}', [SleeveController::class, 'destroy']);
 
-//    Color
+    // Color
     Route::resource('color', ColorController::class);
     Route::post('getColorData', [ColorController::class, 'getColorData'])->name('getColorData');
     Route::post('/deleteColor/{color}', [ColorController::class, 'destroy'])->name('deleteColor');
 
-// Category Master
+    // Category Master
     Route::resource('category', CategoryController::class);
     Route::post('/category/{category}', [CategoryController::class, 'destroy']);
     Route::post('/getCategory', [CategoryController::class, 'getCategory'])->name('getCategory');
 
-//    Sub-Category Master
+    // Sub-Category Master
     Route::post('/getSubCategories', [SubCategoryController::class, 'getSubCategories'])->name('getSubCategories');
     Route::post('/getSleeveFit', [SubCategoryController::class, 'getSleeveFit'])->name('getSleeveFit');
 
-
-// Company
+    // Company
     Route::resource('/company', CompanyController::class);
     Route::post('/company/{company}', [CompanyController::class, 'destroy']);
     Route::post('/getCompanyAddress', [CompanyController::class, 'getCompanyAddress'])->name('getCompanyAddress');
 
-//    Shipping Address
+    // Shipping Address
     Route::post('/shipAddressByCompany', [CompanyShipAddressController::class, 'shipAddressByCompany'])->name('shipAddressByCompany');
     Route::post('/getShippingAddress', [CompanyShipAddressController::class, 'getShippingAddress'])->name('getShippingAddress');
 
-//    Master Central Warehouse
+    // Master Central Warehouse
 
     Route::resource('centralWarehouse', CentralWarehouseController::class);
     Route::post('/deleteCentralWarehouse/{centralWarehouse}', [CentralWarehouseController::class, 'destroy']);
 
-//  Vendor
+    // Vendor
     Route::resource('vendors', VenderController::class);
     Route::post('/vendor/store', [VenderController::class, 'store']);
     Route::post('/vendor/viewModelUserEdit', [VenderController::class, 'viewModelUserEdit'])->name('viewModelUserEdit');
-
 
     // SKU Master
     Route::resource('product', ProductController::class);
@@ -171,21 +169,20 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('productImport', [ProductController::class, 'productImport'])->name('productImport');
     Route::post('productImportStore', [ProductController::class, 'productImportStore'])->name('productImportStore');
 
-
     // Employee
     Route::resource('employee', EmployeeController::class);
     Route::post('/employeeData', [EmployeeController::class, 'getEmployeeData'])->name('getEmployeeData');
     Route::post('/employee/{employee}', [EmployeeController::class, 'destroy']);
 
-
-    //Inventory Master
+    // Inventory Master
     Route::resource('/storeInventory', InventoryMasterController::class);
 
-    //Supply Chain
+    // Supply Chain
     Route::resource('/supplyChain', SupplyChainMasterController::class);
 
-//    Shelf Management
+    // Shelf Management
     Route::resource('shelf', ShelfController::class);
+    Route::get('/shelfProduct/{row}/{warehouse}/edit', [ShelfController::class, 'edit']);
     Route::post('getShelfData', [ShelfController::class, 'getShelfData'])->name('getShelfData');
     Route::get('shelfInward', [ShelfController::class, 'shelfInward'])->name('shelfInward');
     Route::get('/shelfProduct/{row}/{warehouse}', [ShelfController::class, 'shelfProduct'])->name('shelfProduct');
@@ -193,8 +190,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('shelf/product', [ShelfController::class, 'getProduct'])->name('getProduct');
     Route::post('shelf/product/store', [ShelfController::class, 'productStore'])->name('productStore');
 
-
-//    Design Library
+    // Design Library
     Route::get('/supplyChain/designLibrary/create', [DesignLibraryMasterController::class, 'create'])->name('create-design');
 
 ////    PO
@@ -204,7 +200,7 @@ Route::middleware('auth:web')->group(callback: function () {
 //    Route::post('/po/poListAjax', [PurchaseOrderController::class, 'poListAjax'])->name('poListAjax');
 
 
-    //    PO
+    // PO
     Route::resource('po', PurchaseOrderController::class);
     Route::post('/po/delete', [PurchaseOrderController::class, 'deletePurchaseOrder'])->name('deletePurchaseOrder');
     Route::post('/po/deletePoItem', [PurchaseOrderController::class, 'deletePurchaseOrderItemRow'])->name('deletePurchaseOrderItemRow');
@@ -214,14 +210,11 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('/po/getSelectedParameters', [PurchaseOrderController::class, 'getSelectedParameters'])->name('getSelectedParameters');
     Route::post('/po/poListAjax', [PurchaseOrderController::class, 'poListAjax'])->name('poListAjax');
 
-
-//    Stock In
+    // Stock In
     Route::get('/storeInventory/stockIn/pending', [StockInController::class, 'pending'])->name('pending-stock-in');
     Route::get('/storeInventory/stockIn/create', [StockInController::class, 'create'])->name('create-stock-in');
 
-
-//    Barcode
-
+    // Barcode
     Route::resource('barcode', BarcodeController::class);
     Route::post('productData', [BarcodeController::class, 'productData'])->name('productData');
     Route::post('productVariantBarcode', [BarcodeController::class, 'productVariantBarcode'])->name('productVariantBarcode');
@@ -230,11 +223,11 @@ Route::middleware('auth:web')->group(callback: function () {
 
 //    Store Master
 
-//    Store Type
+    // Store Type
     Route::resource('storeType', StoreTypeController::class);
     Route::post('/getStoreType', [StoreTypeController::class, 'getStoreType'])->name('getStoreType');
 
-//    Store Generate
+    // Store Generate
     Route::resource('storeGenerate', StoreGenerateController::class);
     Route::post('/storeGenerate/store', [StoreGenerateController::class, 'store'])->name('storeGenerate.store');
     Route::post('getAllStoreData', [StoreGenerateController::class, 'getAllStoreData'])->name('getAllStoreData');
@@ -244,59 +237,55 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::post('getBaseStock', [BaseStockCategoryController::class, 'getBaseStock'])->name('getBaseStock');
     Route::post('getBaseStockSize', [BaseStockCategoryController::class, 'getBaseStockSize'])->name('getBaseStockSize');
 
-
-//    Warehouse Inventory
-
+    // Warehouse Inventory
     Route::resource('WarehouseInventory', WarehouseInventoryController::class);
     Route::post('bulkInwardStore', [WarehouseInventoryController::class, 'bulkInwardStore'])->name('bulkInwardStore');
     Route::post('getInventory', [WarehouseInventoryController::class, 'getInventory'])->name('getInventory');
     Route::get('importInventory', [WarehouseInventoryController::class, 'importInventory'])->name('importInventory');
     Route::post('importInventoryStore', [WarehouseInventoryController::class, 'importInventoryStore'])->name('importInventoryStore');
 
-
     Route::get('/generateBarcode/{barcode_id}', [BarcodeController::class, 'generateBarcode']);
 
-//    Stock Allocation
+    // Stock Allocation
     Route::resource('stockAllocation', StockAllocationController::class);
     Route::post('stockAllocation/getAllFilters', [StockAllocationController::class, 'getAllFilters'])->name('getAllFilters');
     Route::post('getStockAllocation', [StockAllocationController::class, 'getStockAllocation'])->name('getStockAllocation');
 
-    //Central Warehouse
+    // Central Warehouse
     Route::resource('centralWarehouseMaster', CentralWarehouseMasterController::class);
 
-//    GRN
+    // GRN
     Route::get('/centralWarehouse/grn/create', [GRNMasterController::class, 'create'])->name('create-grn');
 
-//Stock In
+    // Stock In
     Route::get('/centralWarehouse/stockIn/bulkInward', [StockInMasterController::class, 'bulkInward'])->name('bulkInward');
     Route::get('/centralWarehouse/stockIn/singleInward', [StockInMasterController::class, 'singleInward'])->name('singleInward');
     Route::post('/centralWarehouse/stockIn/getAllPOItem', [StockInMasterController::class, 'getAllPOItem'])->name('getAllPOItem');
     Route::post('/centralWarehouse/getProductSku', [StockInMasterController::class, 'getProductSku'])->name('getProductSku');
     // Route::post('/centralWarehouse/stockIn/bulkInward/store', [StockInMasterController::class, 'bulkInwardStore'])->name('bulkInwardStore');
 
-    //Pick
+    // Pick
     Route::get('/centralWarehouse/pick/pendingList', [PickMasterController::class, 'pendingList'])->name('pending-list-pick');
-    Route::get('/centralWarehouse/pick/create', [PickMasterController::class, 'create'])->name('create-pick');
-    Route::get('/centralWarehouse/picker/create', [PickMasterController::class, 'pickerCreat'])->name('create-picker');
+    Route::get('/centralWarehouse/pick/create/{id}', [PickMasterController::class, 'create'])->name('create-pick');
+    Route::get('/centralWarehouse/picker/create/{id}', [PickMasterController::class, 'pickerCreat'])->name('create-picker');
+    Route::post('/centralWarehouse/setPicker', [PickMasterController::class, 'setPicker'])->name('setPicker');
 
 
-    //Pack
+    // Pack
     Route::get('/centralWarehouse/pack/create', [PackMasterController::class, 'create'])->name('create-pack');
 
-    //    Outward (dispatch)
+    // Outward (dispatch)
     Route::get('/centralWarehouse/outward/pending', [OutwardMasterController::class, 'pending'])->name('pending-outward');
 
 
-    //    Order Requisition
+    // Order Requisition
     Route::resource('/orderRequisition', OrderRequisitionMasterController::class);
 
-//Sales Order
+    // Sales Order
     Route::get('/orderRequisition/salesOrder/create', [SalesOrderController::class, 'create'])->name('create-salesOrder');
-
 
     // Inventory Controller
     Route::resource('/inventory', InventoryController::class);
-
 
     // Inventory Trasnfer Controller
     Route::get('/inventory-transfer/add-by-scan', [InventoryTransferController::class, 'createByScan'])->name('add-inventory-by-scan');

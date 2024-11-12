@@ -9,6 +9,9 @@ class Employee extends Model
 {
     public $guarded = [];
 
-
     use HasFactory;
+
+    public function stock(){
+        return $this->belongsTo(StockAllocation::class,'id','picker_id');
+    }
 }

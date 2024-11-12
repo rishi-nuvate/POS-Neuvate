@@ -117,7 +117,7 @@
                                         class="ti ti-pencil me-1"></i>
                                     Pending List</a>
 
-                                <a class="dropdown-item" href="{{route('create-pick')}}"><i
+                                <a class="dropdown-item" href="{{route('create-pick',2)}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Pick Create</a>
                                 <a class="dropdown-item" href="#"><i

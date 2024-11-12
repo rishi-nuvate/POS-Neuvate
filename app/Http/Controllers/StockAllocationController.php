@@ -6,14 +6,18 @@ use App\Models\Category;
 use App\Models\CentralWarehouse;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use App\Models\Season;
 use App\Models\StockAllocation;
 use App\Http\Requests\StoreStockAllocationRequest;
 use App\Http\Requests\UpdateStockAllocationRequest;
+use App\Models\StockAllocationProduct;
 use App\Models\StoreGenerate;
 use App\Models\Tags;
 use App\Models\WarehouseInventory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
 class StockAllocationController extends Controller
@@ -46,7 +50,71 @@ class StockAllocationController extends Controller
      */
     public function store(StoreStockAllocationRequest $request)
     {
-        //
+
+        DB::beginTransaction();
+
+//        dd($request->all());
+
+        $order_id = StockAllocation::all()->last()->order_id + 1;
+
+        $productVarient = ProductVariant::get();
+
+        $stock = new StockAllocation([
+            'store_id' => $request->store_id,
+            'warehouse_id' => $request->warehouse_id,
+            'category_id' => $request->cat_id,
+            'order_id' => $order_id,
+            'user_id' => Auth::id(),
+        ]);
+        $totalQuantity = 0;
+
+        $stock->save();
+
+//        dd($request->total_allocated);
+
+        foreach ($request->allocatedProducts as $oneProduct) {
+
+            $totalQuantity += $request->total_allocated[$oneProduct];
+
+            $all = explode('_', $oneProduct);
+            $productId = $all[1];
+
+            foreach ($request->$oneProduct as $key => $qty) {
+                if (!empty($productVarient->where('product_id', $productId)->where('size', $key)->toArray())) {
+
+                    $skus = $productVarient->where('product_id', $productId)->where('size', $key);
+                    foreach ($skus as $sku) {
+
+                        $stockProduct = new StockAllocationProduct([
+                            'stock_allocation_id' => $stock->id,
+                            'product_id' => $productId,
+                            'sku_id' => $sku->id,
+                            'quantity' => $qty,
+                        ]);
+                        $stockProduct->save();
+                    }
+                }
+            }
+
+        }
+        $stock->total_qty = $totalQuantity;
+        DB::commit();
+
+//        $totalAllotted = $request->input('totalAllotted');
+//        $id = explode(' ', $request->input('buttonId'));
+//        $productId = $id[0];
+//        $colorId = $id[1];
+//
+//        $id = str_replace(' ', '_', $request->input('buttonId'));
+//        $name = 'allot_' . $id;
+//
+//        $inputData = array_values($request->except('_token', 'buttonId', 'product'));
+//
+//        dd($totalAllotted);
+
+        return redirect()->back()->with('success', 'successful');
+
+
     }
 
     /**
@@ -131,17 +199,20 @@ class StockAllocationController extends Controller
 
         $inventory = $inventory->where('product.cat_id', $category);
 
-
         $result = array();
+
         foreach ($inventory as $item) {
             $result[$item->product_id][$item->productVariant->color][$item->productVariant->size] = (int)$item->good_inventory;
         }
+
         $headers = [];
+
         foreach ($result as $productId => $color) {
             foreach ($color as $variant) {
                 $headers = array_merge($headers, array_keys($variant));
             }
         }
+
         $headers = array_unique($headers);
         sort($headers);
 
@@ -150,42 +221,54 @@ class StockAllocationController extends Controller
         $inputField = '<div class="input-group">
                                 <input type="text" name="quantity" class="form-control"
                                        aria-label="Item" />
+                                <input type="hidden" name="allot"/>
                             </div>';
+
 
         foreach ($result as $productId => $color) {
 
             $name = Product::with('category', 'subCategory')->where('id', $productId)->first();
 
             foreach ($color as $key => $variant) {
+                $color = Color::where('id', $key)->first();
 
                 $warehouseStock = array_fill_keys($headers, 0);
                 $alloted = array_fill_keys($headers, $inputField);
 
                 foreach ($headers as $header) {
                     $warehouseStock[$header] = $variant[$header] ?? 0;
+                    $alloted[$header] = '<div class="input-group">
+                                <input type="number" name="allot_' . $name->id . '_' . $color->id . '[' . $header . ']" class="form-control"
+                                       aria-label="Item" value= 0 onchange="totalAllocated(\'' . $name->id . '_' . $color->id . '\')" />
+                            </div>';
                 }
 
-                $color = Color::where('id', $key)->first()->color;
-//                $productDetail = '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $name->product_name . '</button><button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $color . '</button>';
-                $productDetail = '<div class="row">
+
+                $total = '<div class="input-group">
+                                <input type="number" name="total_allocated[allot_' . $name->id . '_' . $color->id . ']" id="total_' . $name->id . '_' . $color->id . '" class="form-control"
+                                       aria-label="Item" value= 0 readonly/>
+                            </div>';
+
+                $productDetail = '<div class="row productData" id="' . $name->id . ' ' . $color->id . '">
                 <div class="col-md-4">
 
                 </div>
-                <div class="col-md-12 fs-6">
+                <div class="col-md-8 fs-6">
                     <ul>
                         <li>' . $name->category->name . '</li>
                         <li>' . $name->subCategory->name . '</li>
                         <li>' . $name->product_name . '</li>
                         <li>Product code: ' . $name->product_code . '</li>
-                        <li>Product Color: ' . $color . '</li>
+                        <li>Product Color: ' . $color->color . '</li>
                     </ul>
                 </div>
-            </div>';
-                $checkbox = '<div class="form-check justify-content-center d-flex"> <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"> </div>';
+                </div>';
+
+                $checkbox = '<div class="justify-content-center d-flex"> <a class="btn btn-icon btn-label-success m-1 waves-effect rightCheck" id="' . $name->id . ' ' . $color->id . '"><i class="fa-solid fa-check"></i></a><a class="btn btn-icon btn-label-danger m-1 waves-effect" id="' . $name->id . '"><i class="fa-solid fa-xmark" style="color: red;"></i></a></div>';
 
                 $rows[] = array_merge([$productDetail, 'W.S.'], array_values($warehouseStock), [array_sum(array_values($warehouseStock)), $checkbox]);
                 $rows[] = array_merge([$productDetail, 'S.S.'], array_values($warehouseStock), [array_sum(array_values($warehouseStock)), $checkbox]);
-                $rows[] = array_merge([$productDetail, 'A.S.'], array_values($alloted), ['total', $checkbox]);
+                $rows[] = array_merge([$productDetail, 'A.S.'], array_values($alloted), [$total, $checkbox]);
 
             }
         }
@@ -210,4 +293,5 @@ class StockAllocationController extends Controller
 //            ]);
 //        }
     }
+
 }

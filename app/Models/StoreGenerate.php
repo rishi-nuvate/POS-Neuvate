@@ -22,4 +22,8 @@ class StoreGenerate extends Model
     public function baseStock(){
        return $this->hasMany(BaseStockCategory::class,'store_id', 'id');
     }
+
+    public function stockAllocation(){
+        return $this->belongsTo(StockAllocation::class,'id','store_id');
+    }
 }

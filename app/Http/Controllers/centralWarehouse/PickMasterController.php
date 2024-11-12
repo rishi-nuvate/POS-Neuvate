@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\centralWarehouse;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StockAllocationProductController;
+use App\Models\Employee;
+use App\Models\StockAllocation;
+use App\Models\StockAllocationProduct;
 use Illuminate\Http\Request;
 
 class PickMasterController extends Controller
@@ -18,14 +22,19 @@ class PickMasterController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        return view('content.centralWarehouse.pick.create');
+
+        $allocatedStocks = StockAllocation::with('store')->where('picker_id', $id)->get();
+
+        return view('content.centralWarehouse.pick.create', compact('allocatedStocks'));
     }
 
     public function pendingList()
     {
-        return view('content.centralWarehouse.pick.pendingList');
+        $stockAllocation = StockAllocation::with('store', 'stockProduct', 'picker')->get();
+        $employees = Employee::all();
+        return view('content.centralWarehouse.pick.pendingList', compact('stockAllocation', 'employees'));
     }
 
     /**
@@ -68,8 +77,26 @@ class PickMasterController extends Controller
         //
     }
 
-    public function pickerCreat()
+    public function pickerCreat($id)
     {
+        $products = StockAllocationProduct::where('stock_allocation_id',$id)->get()->groupBy('product_id');
+//        dd($products);
         return view('content.centralWarehouse.pick.picker');
     }
+
+    public function setPicker(Request $request)
+    {
+        $stockId = $request->input('stockId');
+        $picker_id = $request->input('pickerId');
+//        dd($picker_id);
+
+        $picker = StockAllocation::where('id', $stockId)->update([
+            'picker_id' => $picker_id,
+        ]);
+
+        if ($picker) {
+            echo 'success';
+        }
+    }
+
 }
