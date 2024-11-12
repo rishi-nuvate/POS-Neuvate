@@ -39,4 +39,8 @@ class ProductVariant extends Model
         return $this->belongsTo(WarehouseInventory::class,'id','sku_id');
     }
 
+    public function stockProduct(){
+        return $this->hasMany(StockAllocationProduct::class, 'sku_id','id');
+    }
+
 }

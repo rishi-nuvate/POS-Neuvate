@@ -1,6 +1,6 @@
 @extends('layouts.layoutMaster')
 
-@section('title', 'List-Company')
+@section('title', 'Stock-Allocation')
 
 @section('vendor-style')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
@@ -8,10 +8,58 @@
 
 @section('content')
     <section class="invoice-list-wrapper">
-        <h5 class="py-2 mb-2"><i class="fa fa-list px-1"></i> <span class="text-muted fw-light"> Po / </span>List</h5>
+
+        <nav aria-label="breadcrumb" style="font-size: 20px">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('/master') }}">Warehouse</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <a onclick="selection()">Stock Allocation</a>
+                </li>
+                <li class="breadcrumb-item active">List</li>
+            </ol>
+        </nav>
+
+        <div class="row justify-content-center" id="selectType">
+
+            <div class="col-xl-4 col-12">
+                <div class="card mb-4" id="page-block">
+                    <div class="card-body">
+                        <div class="block-ui-btn demo-inline-spacing ">
+                            <div class="row d-flex justify-content-center">
+
+                                <div class="col-md-4">
+                                    <div class="btn-group mb-2">
+                                        <button type="button" onclick="refill()" class="btn btn-primary">
+                                            Refill
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="btn-group mb-2">
+                                        <button type="button" class="btn btn-primary">
+                                            New Stock
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{--        <div class="card mt-2" >--}}
+
+        {{--        </div>--}}
 
         <!-- DataTable with Buttons -->
-        <form method="post" action="{{route('stockAllocation.store')}}" enctype="multipart/form-data">
+        <form method="post" id="stockRefill" action="{{route('stockAllocation.store')}}" enctype="multipart/form-data"
+              style="display: none">
             @csrf
 
             <div class="card mb-2">
@@ -25,6 +73,7 @@
                         <div class="col-md-3 mt-3">
                             <label class="form-label" for="store_id">Store Rating</label>
                             <select required id="store_rating" name="store_rating"
+                                    onchange="getData()"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Store Rating">
                                 <option value="">Select</option>
@@ -38,6 +87,7 @@
                         <div class="col-md-3 mt-3">
                             <label class="form-label" for="store_id">Store </label>
                             <select required id="store_id" name="store_id"
+                                    onchange="getData()"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Store">
                                 <option value="">Select</option>
@@ -67,6 +117,7 @@
 
                             </select>
                         </div>
+                        <input type="hidden" name="order_id" id="order_id" value="">
 
                         {{--                    Subcategory--}}
                         <div class="col-md-3 mt-3">
@@ -136,6 +187,21 @@
           <small class="m-2" id="dateFilterShow"></small>
         </span>
                 </div>
+            </div>
+
+            <div class="card mt-2" id="baseStock" style="display: none">
+                <table class="cell-border invoice-list-table dataTable table table-bordered" id="baseStock_size">
+                    <thead class="table-secondary text-bold">
+                    <tr id="baseStock_size_head">
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="baseStock_size_body">>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="mt-1 card">
@@ -352,24 +418,24 @@
             test += $('.productData[id="' + buttonId + '"]').html();
             test += '</div>';
 
-            // const inputs = document.querySelectorAll(`input[name^='allot_${name}']`);
-            // let inputData = {};
-            //
-            // inputs.forEach(input => {
-            //     const match = input.name.match(/\[(\d+)\]/);
-            //     const index = match ? match[1] : null;
-            //     if (index) {
-            //         inputData[`allot_${name}[${index}]`] = input.value;
-            //     }
-            // });
+            const inputs = document.querySelectorAll(`input[name^='allot_${name}']`);
+            let inputData = {};
+
+            inputs.forEach(input => {
+
+                const match = input.name.match(/\[([a-zA-Z0-9]+)\]/);
+                console.log(match);
+                const index = match ? match[1] : null;
+                if (index) {
+                    inputData[`allot_${name}[${index}]`] = input.value;
+                }
+            });
 
             var totalAllotted = document.getElementById('total_' + name).value;
 
             data.push(test, `<button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect"> alloted</button><input type="hidden" name="allocatedProducts[]" value="allot_${name}"> `, totalAllotted);
 
             allottedProducts.push(data);
-
-            console.log(allottedProducts);
 
             $('#allProducts').css('display', 'flow');
 
@@ -379,19 +445,35 @@
             table.rows.add(allottedProducts);
             table.draw();
 
+            var orderId = document.getElementById('order_id').value;
+            var storeId = document.getElementById('store_id').value;
+            var warehouseId = document.getElementById('warehouse_id').value;
+            var categoryId = document.getElementById('cat_id').value;
 
-            {{--$.ajax({--}}
-            {{--    data: {--}}
-            {{--        'buttonId': buttonId,--}}
-            {{--        'product': test,--}}
-            {{--        'totalAllotted': totalAllotted,--}}
-            {{--        ...inputData,--}}
-            {{--        "_token": "{{ csrf_token() }}"--}}
-            {{--    },--}}
-            {{--    url: "{{  }}",--}}
-            {{--    method: 'POST',--}}
+            var allot = 'allot_' + name;
 
-            {{--});--}}
+            $.ajax({
+                data: {
+                    'orderId': orderId,
+                    'storeId': storeId,
+                    'warehouseId': warehouseId,
+                    'categoryId': categoryId,
+                    'buttonId': buttonId,
+                    'allot': allot,
+                    'totalAllotted': totalAllotted,
+                    ...inputData,
+                    "_token": "{{ csrf_token() }}"
+                },
+                url: "{{ route('stockAllocation.store') }}",
+                method: 'POST',
+                success: function (resultData) {
+                    document.getElementById('order_id').value = resultData.id;
+                    // Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
+                    //     location.reload();
+                    //     $('#overlay').fadeOut(100);
+                    // });
+                }
+            });
 
         });
 
@@ -400,20 +482,33 @@
 
             var warehouseId = document.getElementById('warehouse_id').value;
             var categoryId = document.getElementById('cat_id').value;
+            var storeId = document.getElementById('store_id').value;
 
             $.ajax({
 
                 data: {
                     'warehouseId': warehouseId,
                     'categoryId': categoryId,
+                    'storeId': storeId,
                     "_token": "{{ csrf_token() }}"
                 },
                 url: "{{ route('getStockAllocation') }}",
                 method: 'POST',
                 success: function (response) {
-                    // $('#datatable-list').DataTable().clear();
+
+                    const baseStock = response.allSize;
                     const headers = response.header;
                     const data = response.data;
+
+                    if (baseStock != null) {
+                        $('#baseStock').css('display', 'flow');
+                        baseStock.forEach((item) => {
+                            $('#baseStock_size_head').append(`<td>${item.size}</td>`)
+                            $('#baseStock_size_body').append(`<td>${item.qty}</td>`)
+                        });
+                    } else {
+                        $('#baseStock').css('display', 'none');
+                    }
 
                     if (!headers || !data) {
                         console.error("Headers or data are undefined");
@@ -424,7 +519,6 @@
                         return {title: String(header), data: index.toString()};
                     });
 
-// Clear and destroy the existing DataTable instance
                     if ($.fn.DataTable.isDataTable('#datatable-list')) {
                         $('#datatable-list').DataTable().clear().destroy();
 
@@ -435,8 +529,6 @@
                         });
 
                         $('#tableHeader').empty().append('<tr>')
-
-
                     }
 
                     $('#datatable-list').DataTable({
@@ -666,7 +758,10 @@
 
         function getAllFilters() {
             var warehouseId = document.getElementById('warehouse_id').value;
+            var storeId = document.getElementById('store_id').value;
+            var categoryId = document.getElementById('cat_id').value;
             if (warehouseId) {
+
                 $.ajax({
                     type: 'POST',
                     url: '{{route('getAllFilters')}}',
@@ -728,8 +823,17 @@
 
             var test = event.target.value;
             var total = parseInt(document.getElementById('total_' + value).value, 10);
-            console.log(total);
             document.getElementById('total_' + value).value = total + parseInt(test, 10);
+        }
+
+        function refill() {
+            $('#selectType').css('display', 'none')
+            $('#stockRefill').css('display', 'flow')
+        }
+
+        function selection(){
+            $('#selectType').css('display', 'flex')
+            $('#stockRefill').css('display', 'none')
         }
     </script>
 @endsection

@@ -38,6 +38,7 @@ use App\Http\Controllers\orderRequisition\SalesOrderController;
 use App\Http\Controllers\pages\ExpenseController;
 use App\Http\Controllers\pages\InventoryController;
 use App\Http\Controllers\pages\InventoryTransferController;
+use App\Http\Controllers\PickerAllocationController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ShelfController;
@@ -48,6 +49,7 @@ use App\Http\Controllers\supplyChain\DesignLibraryMasterController;
 use App\Http\Controllers\supplyChain\SupplyChainMasterController;
 use App\Http\Controllers\WarehouseInventoryController;
 use App\Http\Middleware\EnsureTokenIsValid;
+use App\Models\PickerAllocation;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -270,6 +272,10 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('/centralWarehouse/picker/create/{id}', [PickMasterController::class, 'pickerCreat'])->name('create-picker');
     Route::post('/centralWarehouse/setPicker', [PickMasterController::class, 'setPicker'])->name('setPicker');
 
+    Route::post('/stockProduct', [PickMasterController::class, 'stockProduct'])->name('stockProduct');
+
+    //Picker
+    Route::resource('picker', PickerAllocationController::class);
 
     // Pack
     Route::get('/centralWarehouse/pack/create', [PackMasterController::class, 'create'])->name('create-pack');

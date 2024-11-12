@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaseStockCategory;
 use App\Models\Category;
 use App\Models\CentralWarehouse;
 use App\Models\Color;
@@ -55,49 +56,58 @@ class StockAllocationController extends Controller
 
 //        dd($request->all());
 
-        $order_id = StockAllocation::all()->last()->order_id + 1;
+        $allot = $request->input('allot');
+        $products = $request->input($allot);
+
+        $orderId = $request->input('orderId');
+
+        $order_id = StockAllocation::all()->last();
+
+        if ($orderId != null) {
+            $stockId = $orderId;
+        } else {
+
+            $order_id = $order_id->order_id + 1;
+            $stock = new StockAllocation([
+                'store_id' => $request->input('storeId'),
+                'warehouse_id' => $request->input('warehouseId'),
+                'category_id' => $request->input('categoryId'),
+                'order_id' => $order_id,
+                'user_id' => Auth::id(),
+            ]);
+
+            $stock->save();
+            $stockId = $stock->id;
+        }
 
         $productVarient = ProductVariant::get();
 
-        $stock = new StockAllocation([
-            'store_id' => $request->store_id,
-            'warehouse_id' => $request->warehouse_id,
-            'category_id' => $request->cat_id,
-            'order_id' => $order_id,
-            'user_id' => Auth::id(),
-        ]);
-        $totalQuantity = 0;
 
-        $stock->save();
+//        foreach ($request->allocatedProducts as $oneProduct) {
+//            $totalQuantity += $request->total_allocated[$oneProduct];
 
-//        dd($request->total_allocated);
+        $all = explode('_', $allot);
+        $productId = $all[1];
 
-        foreach ($request->allocatedProducts as $oneProduct) {
+        foreach ($products as $key => $qty) {
+            if (!empty($productVarient->where('product_id', $productId)->where('size', $key)->toArray())) {
 
-            $totalQuantity += $request->total_allocated[$oneProduct];
+                $skus = $productVarient->where('product_id', $productId)->where('size', $key);
+                foreach ($skus as $sku) {
 
-            $all = explode('_', $oneProduct);
-            $productId = $all[1];
-
-            foreach ($request->$oneProduct as $key => $qty) {
-                if (!empty($productVarient->where('product_id', $productId)->where('size', $key)->toArray())) {
-
-                    $skus = $productVarient->where('product_id', $productId)->where('size', $key);
-                    foreach ($skus as $sku) {
-
-                        $stockProduct = new StockAllocationProduct([
-                            'stock_allocation_id' => $stock->id,
-                            'product_id' => $productId,
-                            'sku_id' => $sku->id,
-                            'quantity' => $qty,
-                        ]);
-                        $stockProduct->save();
-                    }
+                    $stockProduct = new StockAllocationProduct([
+                        'stock_allocation_id' => $stockId,
+                        'product_id' => $productId,
+                        'sku_id' => $sku->id,
+                        'quantity' => $qty,
+                    ]);
+                    $stockProduct->save();
                 }
             }
-
         }
-        $stock->total_qty = $totalQuantity;
+
+//        }
+//        $stock->total_qty = $totalQuantity;
         DB::commit();
 
 //        $totalAllotted = $request->input('totalAllotted');
@@ -112,7 +122,8 @@ class StockAllocationController extends Controller
 //
 //        dd($totalAllotted);
 
-        return redirect()->back()->with('success', 'successful');
+//        return redirect()->back()->with('success', 'successful');
+        return response()->json(['success' => 'true', 'id' => $stockId]);
 
 
     }
@@ -194,6 +205,21 @@ class StockAllocationController extends Controller
     {
         $warehouseId = $request->input('warehouseId');
         $category = $request->input('categoryId');
+        $storeId = $request->input('storeId');
+
+        $allSize = null;
+        if ($storeId != null) {
+            if ($category != null) {
+                if ($baseStock = BaseStockCategory::where('store_id', $storeId)
+                    ->where('cat_id', $category)
+                    ->with('size')
+                    ->first()) {
+                    $allSize = $baseStock->size;
+                }
+            }
+        }
+
+//        dd($allSize);
 
         $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product', 'productVariant')->get();
 
@@ -216,14 +242,12 @@ class StockAllocationController extends Controller
         $headers = array_unique($headers);
         sort($headers);
 
-//        if ($token != 0) {
         $rows = [];
         $inputField = '<div class="input-group">
                                 <input type="text" name="quantity" class="form-control"
                                        aria-label="Item" />
                                 <input type="hidden" name="allot"/>
                             </div>';
-
 
         foreach ($result as $productId => $color) {
 
@@ -273,12 +297,7 @@ class StockAllocationController extends Controller
             }
         }
 
-//        }
-
-
         $headers = array_merge(['product', ''], $headers, ['Total', '']);
-
-//        if ($token != 0) {
 
         $result = array();
         $result['data'] = $rows;
@@ -286,12 +305,9 @@ class StockAllocationController extends Controller
         return response()->json([
             'data' => $result['data'],
             'header' => $headers,
+            'allSize' => $allSize,
         ]);
-//        }else{
-//            return response()->json([
-//                'header' => $headers,
-//            ]);
-//        }
+
     }
 
 }

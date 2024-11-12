@@ -63,4 +63,8 @@ class Product extends Model
         return $this->hasMany(ShelfRelation::class,'product_id','id');
     }
 
+    public function stockProduct(){
+        return $this->hasMany(StockAllocationProduct::class, 'product_id','id');
+    }
+
 }

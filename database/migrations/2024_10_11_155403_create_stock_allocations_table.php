@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('order_id')->unique();
             $table->integer('total_qty')->nullable();
+            $table->timestamp('final_submit')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

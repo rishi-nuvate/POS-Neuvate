@@ -4,6 +4,7 @@ namespace App\Http\Controllers\centralWarehouse;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StockAllocationProductController;
+use App\Models\Category;
 use App\Models\Employee;
 use App\Models\StockAllocation;
 use App\Models\StockAllocationProduct;
@@ -24,15 +25,17 @@ class PickMasterController extends Controller
      */
     public function create($id)
     {
+        $allocatedStocks = StockAllocation::with('store')->where('id', $id)->first();
+        $categories = Category::all();
+        $pickers = Employee::all();
 
-        $allocatedStocks = StockAllocation::with('store')->where('picker_id', $id)->get();
-
-        return view('content.centralWarehouse.pick.create', compact('allocatedStocks'));
+//        dd($allocatedStocks);
+        return view('content.centralWarehouse.pick.create', compact('allocatedStocks','categories','pickers'));
     }
 
     public function pendingList()
     {
-        $stockAllocation = StockAllocation::with('store', 'stockProduct', 'picker')->get();
+        $stockAllocation = StockAllocation::with('store', 'stockProduct', 'picker')->whereNotNull('total_qty')->get();
         $employees = Employee::all();
         return view('content.centralWarehouse.pick.pendingList', compact('stockAllocation', 'employees'));
     }
@@ -79,8 +82,16 @@ class PickMasterController extends Controller
 
     public function pickerCreat($id)
     {
-        $products = StockAllocationProduct::where('stock_allocation_id',$id)->get()->groupBy('product_id');
-//        dd($products);
+        $allSize = [];
+
+        $products = StockAllocationProduct::with('sku')->where('stock_allocation_id', $id)->get();
+
+        foreach ($products as $product) {
+            array_push($allSize, $product->sku->size);
+        }
+        $allSize = array_unique($allSize);
+
+
         return view('content.centralWarehouse.pick.picker');
     }
 
@@ -97,6 +108,10 @@ class PickMasterController extends Controller
         if ($picker) {
             echo 'success';
         }
+    }
+
+    public function stockProduct(Request $request){
+
     }
 
 }

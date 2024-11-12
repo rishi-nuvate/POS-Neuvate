@@ -20,12 +20,12 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Stock Allocation
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{route('create-salesOrder')}}"><i
-                                        class="ti ti-pencil me-1"></i>
-                                    Create</a>
+{{--                                <a class="dropdown-item" href="{{route('create-salesOrder')}}"><i--}}
+{{--                                        class="ti ti-pencil me-1"></i>--}}
+{{--                                    </a>--}}
                                 <a class="dropdown-item" href="{{route('stockAllocation.index')}}"><i
                                         class="ti ti-eye me-1"></i>
-                                    List</a>
+                                    Create</a>
                                 <a class="dropdown-item" href=""><i
                                         class="ti ti-eye me-1"></i>
                                     Upload</a>
