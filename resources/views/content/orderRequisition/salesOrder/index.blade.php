@@ -58,7 +58,7 @@
         {{--        </div>--}}
 
         <!-- DataTable with Buttons -->
-        <form method="post" id="stockRefill" action="{{route('stockAllocation.store')}}" enctype="multipart/form-data"
+        <form method="post" id="stockRefill" action="{{route('stockAllocation-submit')}}" enctype="multipart/form-data"
               style="display: none">
             @csrf
 
@@ -91,6 +91,9 @@
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Store">
                                 <option value="">Select</option>
+                                @foreach($stores as $store)
+                                    <option value="{{$store->id}}">{{$store->store_name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -401,7 +404,7 @@
     <script>
 
         var allottedProducts = [];
-
+        var categoryId;
 
         $(document).on('click', '.rightCheck', function () {
 
@@ -477,15 +480,69 @@
 
         });
 
-
-        function getData() {
+        function getAllFilters() {
 
             var warehouseId = document.getElementById('warehouse_id').value;
-            var categoryId = document.getElementById('cat_id').value;
+            // var storeId = document.getElementById('store_id').value;
+            if (warehouseId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route('getAllFilters')}}',
+                    data: {
+                        warehouseId: warehouseId,
+                        '_token': "<?php echo e(csrf_token()); ?>",
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+
+                        // Category
+                        $('#cat_id').empty().append(
+                            '<option value="">Select Category</option>');
+                        $.each(response.categories, function (key, value) {
+                            $('#cat_id').append('<option value="' + value.id + '">' + value
+                                .name + '</option>');
+                        });
+
+                        // Season
+                        $('#season_id').empty().append(
+                            '<option value="">Select Sub Category</option>');
+                        $.each(response.seasons, function (key, value) {
+                            $('#season_id').append('<option value="' + value.id + '">' + value
+                                .name + '</option>');
+                        });
+
+                        // Tag
+                        $('#tag_id').empty().append(
+                            '<option value="">Select Sub Category</option>');
+                        $.each(response.tags, function (key, value) {
+                            $('#tag_id').append('<option value="' + value.id + '">' + value
+                                .name + '</option>');
+                        });
+
+                        // Products
+                        $('#product_id').empty().append(
+                            '<option value="">Select Sub Category</option>');
+                        $.each(response.products, function (key, value) {
+                            $('#product_id').append('<option value="' + value.id + '">' + value
+                                .product_name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#subCategory').empty().append('<option value="">Select Sub Category</option>');
+            }
+            // if (categoryId) {
+            //     console.log();
+            // }
+        }
+
+        function getData() {
+            console.log(document.getElementById('cat_id').value);
+            var warehouseId = document.getElementById('warehouse_id').value;
+            categoryId = document.getElementById('cat_id').value;
             var storeId = document.getElementById('store_id').value;
 
             $.ajax({
-
                 data: {
                     'warehouseId': warehouseId,
                     'categoryId': categoryId,
@@ -502,6 +559,10 @@
 
                     if (baseStock != null) {
                         $('#baseStock').css('display', 'flow');
+
+                        $('#baseStock_size_head').empty();
+                        $('#baseStock_size_body').empty();
+
                         baseStock.forEach((item) => {
                             $('#baseStock_size_head').append(`<td>${item.size}</td>`)
                             $('#baseStock_size_body').append(`<td>${item.qty}</td>`)
@@ -732,7 +793,9 @@
         }
 
         function getSubCategoriesData() {
-            var categoryId = document.getElementById('cat_id').value;
+
+            categoryId = document.getElementById('cat_id').value;
+
             if (categoryId) {
                 $.ajax({
                     type: 'POST',
@@ -756,82 +819,31 @@
             }
         }
 
-        function getAllFilters() {
-            var warehouseId = document.getElementById('warehouse_id').value;
-            var storeId = document.getElementById('store_id').value;
-            var categoryId = document.getElementById('cat_id').value;
-            if (warehouseId) {
-
-                $.ajax({
-                    type: 'POST',
-                    url: '{{route('getAllFilters')}}',
-                    data: {
-                        warehouseId: warehouseId,
-                        '_token': "<?php echo e(csrf_token()); ?>",
-                    },
-                    dataType: 'json',
-                    success: function (response) {
-
-                        // Category
-                        $('#cat_id').empty().append(
-                            '<option value="">Select Category</option>');
-                        $.each(response.categories, function (key, value) {
-                            $('#cat_id').append('<option value="' + value.id + '">' + value
-                                .name + '</option>');
-                        });
-
-                        // Season
-                        $('#season_id').empty().append(
-                            '<option value="">Select Sub Category</option>');
-                        $.each(response.seasons, function (key, value) {
-                            $('#season_id').append('<option value="' + value.id + '">' + value
-                                .name + '</option>');
-                        });
-
-                        // Tag
-                        $('#tag_id').empty().append(
-                            '<option value="">Select Sub Category</option>');
-                        $.each(response.tags, function (key, value) {
-                            $('#tag_id').append('<option value="' + value.id + '">' + value
-                                .name + '</option>');
-                        });
-
-                        // Products
-                        $('#product_id').empty().append(
-                            '<option value="">Select Sub Category</option>');
-                        $.each(response.products, function (key, value) {
-                            $('#product_id').append('<option value="' + value.id + '">' + value
-                                .product_name + '</option>');
-                        });
-
-                        // Stores
-                        $('#store_id').empty().append(
-                            '<option value="">Select Store</option>');
-                        $.each(response.stores, function (key, value) {
-                            $('#store_id').append('<option value="' + value.id + '">' + value
-                                .store_name + '</option>');
-                        });
-
-                    }
-                });
-            } else {
-                $('#subCategory').empty().append('<option value="">Select Sub Category</option>');
-            }
-        }
-
         function totalAllocated(value) {
+            // console.log(value);
 
-            var test = event.target.value;
-            var total = parseInt(document.getElementById('total_' + value).value, 10);
-            document.getElementById('total_' + value).value = total + parseInt(test, 10);
+            var name = event.target.name;
+            var baseName = name.replace(/\[([a-zA-Z0-9]+)\]/, '');
+            var inputs = document.querySelectorAll(`input[name^="${baseName}["]`);
+            // console.log(inputs)
+
+            var sum = 0;
+            inputs.forEach(function (input) {
+                var inputValue = parseFloat(input.value) || 0; // Convert value to a number, default to 0 if NaN
+                sum += inputValue;
+            });
+
+            document.getElementById('total_' + value).value = sum;
         }
 
         function refill() {
+            $('#filter-search').toggleClass('d-none');
+
             $('#selectType').css('display', 'none')
             $('#stockRefill').css('display', 'flow')
         }
 
-        function selection(){
+        function selection() {
             $('#selectType').css('display', 'flex')
             $('#stockRefill').css('display', 'none')
         }

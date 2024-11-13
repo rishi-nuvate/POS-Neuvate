@@ -26,4 +26,9 @@ class StoreGenerate extends Model
     public function stockAllocation(){
         return $this->belongsTo(StockAllocation::class,'id','store_id');
     }
+
+    function pickerAllocation()
+    {
+        return $this->hasMany(PickerAllocation::class,'store_id','id');
+    }
 }

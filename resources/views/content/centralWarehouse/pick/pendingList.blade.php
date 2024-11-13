@@ -27,7 +27,6 @@
                         <th>Sales Order No.</th>
                         <th>Shop Name</th>
                         <th>Total Quantity</th>
-                        {{--                        <th>Picker</th>--}}
                         <th>Action</th>
                     </tr>
                     </thead>

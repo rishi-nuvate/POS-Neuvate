@@ -11,7 +11,8 @@ class Employee extends Model
 
     use HasFactory;
 
-    public function stock(){
-        return $this->belongsTo(StockAllocation::class,'id','picker_id');
+    function pickerAllocation()
+    {
+        return $this->hasMany(Employee::class,'emp_id','id');
     }
 }

@@ -15,8 +15,8 @@
     </nav>
     <!-- Invoice List Widget -->
 
-    <form method="post" action="{{route('picker.index')}}" enctype="multipart/form-data">
-    @csrf
+    <form method="post" action="{{route('picker.store')}}" enctype="multipart/form-data">
+        @csrf
 
         <div class="card">
             <div class="text-white rounded-top bg-primary p-2">
@@ -38,6 +38,7 @@
                                 <input readonly type="text" name="order_num" class="form-control"
                                        value="{{$allocatedStocks->order_id}}"/>
                             </div>
+                            <input type="hidden" name="order_id" id="order_id" value="{{$allocatedStocks->id}}">
                         </div>
 
                         <div class="col-md-2">
@@ -46,6 +47,7 @@
                                 <input readonly type="text" name="shop_name" class="form-control"
                                        value="{{$allocatedStocks->store->store_name}}"/>
                             </div>
+                            <input type="hidden" name="store_id" value="{{$allocatedStocks->store->id}}">
                         </div>
 
                         <div class="col-md-3">
@@ -62,9 +64,9 @@
 
                         <div class="col-md-3">
                             <label class="form-label" for="category_id">Category</label>
-                            <select required id="category_id" name="category_id"
+                            <select id="category_id" name="category_id"
                                     class="select2 select21 form-select"
-                                    data-placeholder="Select Category">
+                                    data-placeholder="Select Category" onchange="orderProducts()">
                                 <option value="">Select</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -89,82 +91,33 @@
                             <th>Category</th>
                             <th>Quantity</th>
                             <th>Check Box</th>
-                            {{--                            <th>Action</th>--}}
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <div class="d-flex justify-content-start align-items-center user-name">
-                                    <div class="d-flex flex-column"><span
-                                            class="emp_name text-truncate">Jeans</span><small
-                                            class="emp_post text-truncate text-muted"></small></div>
-                                </div>
-                            </td>
-                            <td>
-                                <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">
-                                    Jeans
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">50
-                                </button>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <div class="d-flex justify-content-start align-items-center user-name">
-                                    <div class="d-flex flex-column"><span
-                                            class="emp_name text-truncate">cargo Jeans</span><small
-                                            class="emp_post text-truncate text-muted"></small></div>
-                                </div>
-                            </td>
-                            <td>
-                                <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">
-                                    Jeans
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">50
-                                </button>
-                            </td>
-                            <td>
-                                <div class="form-check" >
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>
-                                <div class="d-flex justify-content-start align-items-center user-name">
-                                    <div class="d-flex flex-column"><span
-                                            class="emp_name text-truncate">Blue Jeans</span><small
-                                            class="emp_post text-truncate text-muted"></small></div>
-                                </div>
-                            </td>
-                            <td>
-                                <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">
-                                    Jeans
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">50
-                                </button>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                </div>
-                            </td>
-                        </tr>
+                        {{--                        <tr>--}}
+                        {{--                            <td>1</td>--}}
+                        {{--                            <td>--}}
+                        {{--                                <div class="d-flex justify-content-start align-items-center user-name">--}}
+                        {{--                                    <div class="d-flex flex-column"><span--}}
+                        {{--                                            class="emp_name text-truncate">Jeans</span><small--}}
+                        {{--                                            class="emp_post text-truncate text-muted"></small></div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </td>--}}
+                        {{--                            <td>--}}
+                        {{--                                <button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">--}}
+                        {{--                                    Jeans--}}
+                        {{--                                </button>--}}
+                        {{--                            </td>--}}
+                        {{--                            <td>--}}
+                        {{--                                <button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect">50--}}
+                        {{--                                </button>--}}
+                        {{--                            </td>--}}
+                        {{--                            <td>--}}
+                        {{--                                <div class="form-check">--}}
+                        {{--                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">--}}
+                        {{--                                </div>--}}
+                        {{--                            </td>--}}
+                        {{--                        </tr>--}}
                         </tbody>
                     </table>
                 </div>
@@ -187,16 +140,39 @@
 
     <script>
 
-        $('#datatable-list').DataTable({
-            autoWidth: false,
-            lengthMenu: [
-                [10, 20, 100, 500],
-                [10, 20, 100, "All"]
-            ],
-            order: [
-                [0, 'asc']
-            ]
-        });
+        var orderId = document.getElementById('order_id').value;
+
+        window.onload = orderProducts;
+
+        function orderProducts() {
+
+            var catId = document.getElementById('category_id').value;
+
+            $('#datatable-list').DataTable().clear().destroy();
+
+            var table = new $('#datatable-list').DataTable({
+                autoWidth: false,
+                lengthMenu: [
+                    [10, 20, 100, 500],
+                    [10, 20, 100, "All"]
+                ],
+                order: [
+                    [0, 'asc']
+                ],
+                "ajax": {
+                    "url": "{{ route('orderProducts') }}",
+                    "type": "POST",
+                    "headers": "{ 'X-CSRF-TOKEN': $('meta[name='csrf-token']').attr('content') }",
+                    "data": {
+                        "orderId": orderId,
+                        "catId": catId,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                },
+            });
+
+
+        }
 
         {{--var categoryId = --}}
 

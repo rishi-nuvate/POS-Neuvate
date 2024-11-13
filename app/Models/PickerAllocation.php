@@ -13,4 +13,26 @@ class PickerAllocation extends Model
     protected $guarded = [];
 
     use HasFactory;
+
+    function pickerProduct()
+    {
+        return $this->hasMany(PickerAllocationProduct::class,'picker_allocation_id','id');
+    }
+
+    function stockAllocation()
+    {
+        return $this->belongsTo(StockAllocation::class,'order_id','id');
+    }
+
+    function store()
+    {
+        return $this->belongsTo(StoreGenerate::class,'store_id','id');
+    }
+
+    function employee()
+    {
+        return $this->belongsTo(Employee::class,'emp_id','id');
+    }
+
+
 }

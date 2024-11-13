@@ -35,9 +35,9 @@ class PickMasterController extends Controller
 
     public function pendingList()
     {
-        $stockAllocation = StockAllocation::with('store', 'stockProduct', 'picker')->whereNotNull('total_qty')->get();
-        $employees = Employee::all();
-        return view('content.centralWarehouse.pick.pendingList', compact('stockAllocation', 'employees'));
+        $stockAllocation = StockAllocation::with('store', 'stockProduct')->get();
+//        dd($stockAllocation);
+        return view('content.centralWarehouse.pick.pendingList', compact('stockAllocation'));
     }
 
     /**
@@ -95,20 +95,20 @@ class PickMasterController extends Controller
         return view('content.centralWarehouse.pick.picker');
     }
 
-    public function setPicker(Request $request)
-    {
-        $stockId = $request->input('stockId');
-        $picker_id = $request->input('pickerId');
-//        dd($picker_id);
-
-        $picker = StockAllocation::where('id', $stockId)->update([
-            'picker_id' => $picker_id,
-        ]);
-
-        if ($picker) {
-            echo 'success';
-        }
-    }
+//    public function setPicker(Request $request)
+//    {
+//        $stockId = $request->input('stockId');
+//        $picker_id = $request->input('pickerId');
+////        dd($picker_id);
+//
+//        $picker = StockAllocation::where('id', $stockId)->update([
+//            'picker_id' => $picker_id,
+//        ]);
+//
+//        if ($picker) {
+//            echo 'success';
+//        }
+//    }
 
     public function stockProduct(Request $request){
 

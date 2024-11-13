@@ -67,4 +67,9 @@ class Product extends Model
         return $this->hasMany(StockAllocationProduct::class, 'product_id','id');
     }
 
+    function pickerProduct()
+    {
+        return $this->belongsTo(PickerAllocationProduct::class,'id','product_id');
+    }
+
 }

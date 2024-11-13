@@ -31,7 +31,8 @@ class StockAllocation extends Model
         return $this->hasMany(StockAllocationProduct::class,'stock_allocation_id','id');
     }
 
-    public function picker(){
-        return $this->hasOne(Employee::class,'id','picker_id');
+    function pickerAllocation()
+    {
+        return $this->hasMany(PickerAllocation::class,'order_id','id');
     }
 }

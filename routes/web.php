@@ -252,6 +252,7 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('stockAllocation', StockAllocationController::class);
     Route::post('stockAllocation/getAllFilters', [StockAllocationController::class, 'getAllFilters'])->name('getAllFilters');
     Route::post('getStockAllocation', [StockAllocationController::class, 'getStockAllocation'])->name('getStockAllocation');
+    Route::post('stockAllocationSubmit', [StockAllocationController::class, 'stockAllocationSubmit'])->name('stockAllocation-submit');
 
     // Central Warehouse
     Route::resource('centralWarehouseMaster', CentralWarehouseMasterController::class);
@@ -270,12 +271,14 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::get('/centralWarehouse/pick/pendingList', [PickMasterController::class, 'pendingList'])->name('pending-list-pick');
     Route::get('/centralWarehouse/pick/create/{id}', [PickMasterController::class, 'create'])->name('create-pick');
     Route::get('/centralWarehouse/picker/create/{id}', [PickMasterController::class, 'pickerCreat'])->name('create-picker');
-    Route::post('/centralWarehouse/setPicker', [PickMasterController::class, 'setPicker'])->name('setPicker');
+//    Route::post('/centralWarehouse/setPicker', [PickMasterController::class, 'setPicker'])->name('setPicker');
 
     Route::post('/stockProduct', [PickMasterController::class, 'stockProduct'])->name('stockProduct');
 
     //Picker
-    Route::resource('picker', PickerAllocationController::class);
+    Route::resource('/picker', PickerAllocationController::class);
+    Route::post('/orderProducts', [PickerAllocationController::class, 'orderProducts'])->name('orderProducts');
+    Route::post('/getPicker', [PickerAllocationController::class, 'getPicker'])->name('getPicker');
 
     // Pack
     Route::get('/centralWarehouse/pack/create', [PackMasterController::class, 'create'])->name('create-pack');

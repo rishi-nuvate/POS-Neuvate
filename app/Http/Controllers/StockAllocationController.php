@@ -82,19 +82,23 @@ class StockAllocationController extends Controller
 
         $productVarient = ProductVariant::get();
 
-
 //        foreach ($request->allocatedProducts as $oneProduct) {
 //            $totalQuantity += $request->total_allocated[$oneProduct];
 
         $all = explode('_', $allot);
         $productId = $all[1];
+        $colorId = $all[2];
+
+        $total = StockAllocation::where('id',$stockId)->first()->total_qty;
+
 
         foreach ($products as $key => $qty) {
-            if (!empty($productVarient->where('product_id', $productId)->where('size', $key)->toArray())) {
 
-                $skus = $productVarient->where('product_id', $productId)->where('size', $key);
+            if (!empty($productVarient->where('product_id', $productId)->where('color', $colorId)->where('size', $key)->toArray())) {
+
+                $skus = $productVarient->where('product_id', $productId)->where('color', $colorId)->where('size', $key);
+//                dd($skus);
                 foreach ($skus as $sku) {
-
                     $stockProduct = new StockAllocationProduct([
                         'stock_allocation_id' => $stockId,
                         'product_id' => $productId,
@@ -103,11 +107,14 @@ class StockAllocationController extends Controller
                     ]);
                     $stockProduct->save();
                 }
+                $total += $qty;
             }
         }
 
-//        }
-//        $stock->total_qty = $totalQuantity;
+        $stock = StockAllocation::where('id',$stockId)->update([
+            'total_qty' => $total,
+        ]);
+
         DB::commit();
 
 //        $totalAllotted = $request->input('totalAllotted');
@@ -173,7 +180,6 @@ class StockAllocationController extends Controller
             'categories' => $categories,
             'products' => $products,
             'tags' => $tags,
-            'stores' => $stores,
         ];
 
 //        foreach ($inventory as $inventoryItem) {
@@ -274,10 +280,8 @@ class StockAllocationController extends Controller
                             </div>';
 
                 $productDetail = '<div class="row productData" id="' . $name->id . ' ' . $color->id . '">
-                <div class="col-md-4">
 
-                </div>
-                <div class="col-md-8 fs-6">
+                <div class="col-md-12 fs-6">
                     <ul>
                         <li>' . $name->category->name . '</li>
                         <li>' . $name->subCategory->name . '</li>
@@ -310,4 +314,15 @@ class StockAllocationController extends Controller
 
     }
 
+
+    public function stockAllocationSubmit(Request $request)
+    {
+        $orderId = $request->order_id;
+
+        $stockAllocation = StockAllocation::where('id', $orderId)->update([
+            'final_submit' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Stock Allocation Submitted Successfully');
+    }
 }
