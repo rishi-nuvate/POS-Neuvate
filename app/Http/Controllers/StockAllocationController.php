@@ -89,7 +89,7 @@ class StockAllocationController extends Controller
         $productId = $all[1];
         $colorId = $all[2];
 
-        $total = StockAllocation::where('id',$stockId)->first()->total_qty;
+        $total = StockAllocation::where('id', $stockId)->first()->total_qty;
 
 
         foreach ($products as $key => $qty) {
@@ -111,7 +111,7 @@ class StockAllocationController extends Controller
             }
         }
 
-        $stock = StockAllocation::where('id',$stockId)->update([
+        $stock = StockAllocation::where('id', $stockId)->update([
             'total_qty' => $total,
         ]);
 
@@ -211,7 +211,9 @@ class StockAllocationController extends Controller
     {
         $warehouseId = $request->input('warehouseId');
         $category = $request->input('categoryId');
+        $subCatId = $request->input('subCatId');
         $storeId = $request->input('storeId');
+        $seasonId = $request->input('seasonId');
 
         $allSize = null;
         if ($storeId != null) {
@@ -230,6 +232,13 @@ class StockAllocationController extends Controller
         $inventory = WarehouseInventory::where('warehouse_id', $warehouseId)->with('product', 'productVariant')->get();
 
         $inventory = $inventory->where('product.cat_id', $category);
+
+        if ($subCatId != null) {
+            $inventory = $inventory->where('product.sub_cat_id', $subCatId);
+        }
+        if ($seasonId != null) {
+            $inventory = $inventory->where('product.season_id', $seasonId);
+        }
 
         $result = array();
 

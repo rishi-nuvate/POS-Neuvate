@@ -125,7 +125,7 @@
                         {{--                    Subcategory--}}
                         <div class="col-md-3 mt-3">
                             <label class="form-label" for="sub_cat_id">Sub Category</label>
-                            <select id="sub_cat_id" name="sub_cat_id"
+                            <select id="sub_cat_id" name="sub_cat_id" onchange="getData()"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Store Rating">
                                 <option value="">Select</option>
@@ -138,7 +138,7 @@
                         {{--                    Season--}}
                         <div class="col-md-3 mt-3">
                             <label class="form-label" for="season_id">season</label>
-                            <select id="season_id" name="season_id"
+                            <select id="season_id" name="season_id" onchange="getData()"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Store Rating">
                                 <option value="">Select</option>
@@ -540,13 +540,17 @@
             console.log(document.getElementById('cat_id').value);
             var warehouseId = document.getElementById('warehouse_id').value;
             categoryId = document.getElementById('cat_id').value;
+            var subCatId = document.getElementById('sub_cat_id').value;
+            var seasonId = document.getElementById('season_id').value;
             var storeId = document.getElementById('store_id').value;
 
             $.ajax({
                 data: {
                     'warehouseId': warehouseId,
                     'categoryId': categoryId,
+                    'subCatId': subCatId,
                     'storeId': storeId,
+                    'seasonId': seasonId,
                     "_token": "{{ csrf_token() }}"
                 },
                 url: "{{ route('getStockAllocation') }}",
