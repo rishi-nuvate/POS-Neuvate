@@ -56,7 +56,7 @@ class WarehouseInventoryController extends Controller
         $stockIn = new WarehouseStockIn([
             'date' => date('Y-m-d'),
             'user_id' => Auth::id(),
-            'warehouse_id' => (int) $request->warehouse_id,
+            'warehouse_id' => (int)$request->warehouse_id,
             'description' => 'single',
             'type' => 'inward',
             'sku_id' => $sku->id,
@@ -68,11 +68,11 @@ class WarehouseInventoryController extends Controller
         $stockIn->save();
 
         $inventory = WarehouseInventory::where('sku_id', $sku->id)
-            ->where('warehouse_id',$request->warehouse_id)
+            ->where('warehouse_id', $request->warehouse_id)
             ->first() ?? null;
 
 
-        if ( $inventory != null) {
+        if ($inventory != null) {
             $inventory->update([
                 'good_inventory' => $inventory->good_inventory + 1,
                 'total_inventory' => $inventory->total_inventory + 1,
@@ -244,7 +244,7 @@ class WarehouseInventoryController extends Controller
             foreach (array_unique($test) as $rack) {
                 $rackColumn .= '<button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">' . $rack . '</button>';
             }
-            if($rackColumn == ''){
+            if ($rackColumn == '') {
                 $rackColumn = '<button type="button" class="m-2 btn btn-sm btn-outline-warning round waves-effect">Inward Rack</button>';
             }
 
@@ -257,6 +257,17 @@ class WarehouseInventoryController extends Controller
                 <div class="card-info">
                     <h5 class="mb-0"> ' . $item->good_inventory . '</h5>
                     <small>Good</small>
+                </div>
+            </div>';
+
+            $blockInventory = $item->block_inventory ?? 0;
+            $allocatedInventory = '<div class="d-flex align-items-center">
+                <div class="badge rounded-pill bg-label-success me-3 p-2">
+                    <i class="ti ti-shopping-cart ti-sm"></i>
+                </div>
+                <div class="card-info">
+                    <h5 class="mb-0"> ' . $blockInventory . '</h5>
+                    <small>Allocated</small>
                 </div>
             </div>';
 //            $goodInventory = $item->good_inventory;
@@ -272,7 +283,7 @@ class WarehouseInventoryController extends Controller
             </div>';
             $action = '<a class="btn btn-icon btn-label-primary mt-1 waves-effect mx-1" href="#"><i class="ti ti-eye ti-sm"></i></a>';
 
-            array_push($result["data"], array($num, $product, $sku, $total, $rate, $goodInventory, $badInventory, $rackColumn, $action));
+            array_push($result["data"], array($num, $product, $sku, $total, $rate, $goodInventory, $badInventory, $allocatedInventory, $rackColumn, $action));
             $num++;
         }
 

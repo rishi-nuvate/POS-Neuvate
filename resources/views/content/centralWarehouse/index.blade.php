@@ -32,6 +32,21 @@
                         <div class="btn-group mb-2">
                             <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
+                                <i class="menu-icon tf-icons ti ti-users"></i>Q.C.
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" href="{{route('create-grn')}}"><i
+                                        class="ti ti-pencil me-1"></i>
+                                    Create</a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="ti ti-pencil me-1"></i>
+                                    List</a>
+                            </div>
+                        </div>
+
+                        <div class="btn-group mb-2">
+                            <button type="button" class="btn btn-label-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                 <i class="menu-icon tf-icons ti ti-users"></i>Stock In
                             </button>
                             <div class="dropdown-menu" style="">
@@ -47,7 +62,7 @@
 
                                 <a class="dropdown-item" href=""><i
                                         class="ti ti-eye me-1"></i>
-                                    QC report</a>
+                                    Inward History</a>
 
 
                             </div>

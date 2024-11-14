@@ -1,11 +1,17 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Create-GRN ')
+@section('title', 'Create-GRN')
 
 @section('content')
-    <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light float-left">Supply Chain/ Barcode /</span> Create
-    </h4>
+    <nav aria-label="breadcrumb" style="font-size: 20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{url('/centralWarehouseMaster')}}">Central Warehouse</a>
+            </li>
+            <li class="breadcrumb-item active">GRN</li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+    </nav>
     <!-- Invoice List Widget -->
 
 
@@ -15,7 +21,7 @@
 
 
                 <div class="content-header mb-4">
-                    <h3 class="mb-1">Create Barcode</h3>
+                    <h3 class="mb-1">Create GRN</h3>
                 </div>
                 <div class="form-check form-check-primary mt-3 mb-3">
                     <input class="form-check-input" type="checkbox" name="WithOutPO"
@@ -33,9 +39,11 @@
                         </div> --}}
 
                         {{-- Example --}}
-                        {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star', 'defaultValue', 'required')}} --}}
+                        {{-- {{!! textInputField('div.class', 'label', 'inputType', 'name', 'id', 'placeholder', 'star','input Class', 'defaultValue', 'required','readonly)}} --}}
 
-                        {!! textInputField('col-md-3 mt-3', 'Date', 'date', 'date', 'date', 'Description', '', '', '','') !!}
+                        @php $date =  date('d-m-Y'); @endphp
+                        {{--{{dd($date)}}--}}
+                        {!! textInputField('col-md-3 mt-3', 'Date', 'date', 'date', 'date', '', '', '', now()->toDateString(),'','') !!}
 
                         <div class="col-md-3 mt-3" id="withPo">
                             <label class="form-label" for="category">P.O. Number</label>
@@ -47,7 +55,7 @@
                             </select>
                         </div>
 
-                        {!! textInputField('col-md-3 mt-3', 'Invoice', 'text', 'invoice_no', 'invoice_no', 'Description', '', '', '','') !!}
+                        {!! textInputField('col-md-3 mt-3', 'Invoice', 'text', 'invoice_no', 'invoice_no', 'Number', '', '', '','','') !!}
 
                     </div>
                     <div id="withPoContainer" class="mt-3">
@@ -60,8 +68,6 @@
                                     <td scope="row">Item Name</td>
                                     <td scope="row">Po Qty</td>
                                     <td scope="row">Received Qty</td>
-                                    <td scope="row">Remaining to Rec. Qty</td>
-                                    <td scope="row">Quantity</td>
                                     {{-- <td scope="row">Add</td> --}}
                                 </tr>
                                 </thead>
@@ -95,9 +101,10 @@
                                 <tr>
                                     <td scope="row">Sr.No</td>
                                     <td scope="row">Item Name</td>
+                                    <td scope="row">Item Code</td>
                                     <td scope="row">Quantity</td>
                                     <td scope="row">Rate</td>
-                                    <td scope="row">Action</td>
+                                    <td scope="row">Total</td>
                                     {{-- <td scope="row">Add</td> --}}
                                 </tr>
                                 </thead>
@@ -109,8 +116,7 @@
                             </table>
                             <div class="col-lg-3 col-12 invoice-actions mt-3">
                                 <button type="button" class="btn btn-outline-primary" onclick="addItem()">
-                                    Add
-                                    another
+                                    Add Another
                                 </button>
                             </div>
                         </div>

@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\StockAllocationProductController;
 use App\Models\Category;
 use App\Models\Employee;
+use App\Models\PickerAllocationProduct;
 use App\Models\StockAllocation;
 use App\Models\StockAllocationProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PickMasterController extends Controller
 {
@@ -30,12 +32,40 @@ class PickMasterController extends Controller
         $pickers = Employee::all();
 
 //        dd($allocatedStocks);
-        return view('content.centralWarehouse.pick.create', compact('allocatedStocks','categories','pickers'));
+        return view('content.centralWarehouse.pick.create', compact('allocatedStocks', 'categories', 'pickers'));
     }
 
     public function pendingList()
     {
-        $stockAllocation = StockAllocation::with('store', 'stockProduct')->get();
+        $stockProducts = DB::table('stock_allocation_products')
+            ->select('stock_allocation_id', 'product_id')
+            ->distinct()
+            ->get()
+            ->toArray();
+
+        $stockArray = [];
+        $pickerArray = [];
+
+        foreach ($stockProducts as $stockPair) {
+            $stockPair = (array)$stockPair;
+            $stockArray[] = $stockPair['stock_allocation_id'] . '_' . $stockPair['product_id'];
+        }
+        $pickerPairs = PickerAllocationProduct::select('order_id', 'product_id')->get()->toArray();
+        foreach ($pickerPairs as $pickerPair) {
+            $pickerArray[] =$pickerPair['order_id'].'_'.$pickerPair['product_id'];
+        }
+
+        $stockArray = collect($stockArray);
+        $pickerArray = collect($pickerArray);
+
+        $diff1 = $stockArray->diff($pickerArray)->toArray();
+
+        $result = array_map(function($item) {
+            return explode('_', $item)[0];
+        }, $diff1);
+
+
+        $stockAllocation = StockAllocation::with('store', 'stockProduct')->whereIn('id',array_values($result))->get();
 //        dd($stockAllocation);
         return view('content.centralWarehouse.pick.pendingList', compact('stockAllocation'));
     }
@@ -110,7 +140,8 @@ class PickMasterController extends Controller
 //        }
 //    }
 
-    public function stockProduct(Request $request){
+    public function stockProduct(Request $request)
+    {
 
     }
 

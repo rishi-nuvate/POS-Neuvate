@@ -68,7 +68,7 @@
                             {{--                            </td>--}}
                             <td>
                                 <a href="{{route('create-pick', $allocation->id)}}"
-                                   type="button" class="btn btn-outline-success waves-effect" >
+                                   type="button" class="btn btn-outline-success waves-effect">
                                     <span class="ti-xs ti ti-note me-1"></span>Create
                                 </a>
                             </td>
@@ -100,7 +100,7 @@
 
             order: [
                 [0, 'asc']
-            ]
+            ],
         });
 
 

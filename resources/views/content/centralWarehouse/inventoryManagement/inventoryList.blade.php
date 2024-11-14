@@ -119,6 +119,7 @@
                     <th>PRICE</th>
                     <th>Good Inventory</th>
                     <th>Bad Inventory</th>
+                    <th>Allocated Inventory</th>
                     <th>Rack column</th>
                     <th>Action</th>
                 </tr>

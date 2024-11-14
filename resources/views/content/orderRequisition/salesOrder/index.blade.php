@@ -31,7 +31,7 @@
 
                                 <div class="col-md-4">
                                     <div class="btn-group mb-2">
-                                        <button type="button" onclick="refill()" class="btn btn-primary">
+                                        <button type="button" onclick="refill(0)" class="btn btn-primary">
                                             Refill
                                         </button>
                                     </div>
@@ -39,7 +39,7 @@
 
                                 <div class="col-md-4">
                                     <div class="btn-group mb-2">
-                                        <button type="button" class="btn btn-primary">
+                                        <button type="button" onclick="refill(1)" class="btn btn-primary">
                                             New Stock
                                         </button>
                                     </div>
@@ -72,7 +72,7 @@
                     <div class="card-body row">
                         <div class="col-md-3 mt-3">
                             <label class="form-label" for="store_id">Store Rating</label>
-                            <select required id="store_rating" name="store_rating"
+                            <select id="store_rating" name="store_rating"
                                     onchange="getData()"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Store Rating">
@@ -83,6 +83,7 @@
                             </select>
                         </div>
 
+                        <input type="hidden" name="allocationType" id="allocationType">
                         {{--                    Store--}}
                         <div class="col-md-3 mt-3">
                             <label class="form-label" for="store_id">Store </label>
@@ -120,7 +121,6 @@
 
                             </select>
                         </div>
-                        <input type="hidden" name="order_id" id="order_id" value="">
 
                         {{--                    Subcategory--}}
                         <div class="col-md-3 mt-3">
@@ -181,6 +181,13 @@
                                 {{--                            @endforeach--}}
                             </select>
                         </div>
+                        <div id="order_id_input" style="display: none">
+                            <div class="col-md-3 mt-3">
+                                <label class="form-label" for="order_id">Order Id</label>
+                                <input type="text" id="order_id" name="order_id" class="form-control" readonly>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
@@ -388,7 +395,7 @@
 
             <div class="row p-2 justify-content-end">
                 <div class="col-lg-2 col-md-12 col-sm-12">
-                    <button type="submit" class="btn btn-primary d-grid w-100 waves-effect waves-light">Submit</button>
+                    <button type="submit" class="btn btn-primary d-grid w-100 waves-effect waves-light">Submit & Close</button>
                 </div>
             </div>
         </form>
@@ -411,9 +418,6 @@
             var buttonId = $(this).attr('id');
             var name = buttonId.replace(/ /g, '_');
 
-            $('a[id="' + buttonId + '"]').closest('tr').each(function () {
-                $(this).css('display', 'none');
-            });
 
             var data = [];
 
@@ -425,7 +429,6 @@
             let inputData = {};
 
             inputs.forEach(input => {
-
                 const match = input.name.match(/\[([a-zA-Z0-9]+)\]/);
                 console.log(match);
                 const index = match ? match[1] : null;
@@ -436,17 +439,6 @@
 
             var totalAllotted = document.getElementById('total_' + name).value;
 
-            data.push(test, `<button type="button" class="m-2 btn btn-md btn-outline-success round waves-effect"> alloted</button><input type="hidden" name="allocatedProducts[]" value="allot_${name}"> `, totalAllotted);
-
-            allottedProducts.push(data);
-
-            $('#allProducts').css('display', 'flow');
-
-            var table = $('#allotted_products').DataTable();
-
-            table.clear();
-            table.rows.add(allottedProducts);
-            table.draw();
 
             var orderId = document.getElementById('order_id').value;
             var storeId = document.getElementById('store_id').value;
@@ -470,11 +462,31 @@
                 url: "{{ route('stockAllocation.store') }}",
                 method: 'POST',
                 success: function (resultData) {
+                    $('#order_id_input').css('display', 'flow');
                     document.getElementById('order_id').value = resultData.id;
+
+                    toastr.success('Successfully added');
                     // Swal.fire('Done', 'Successfully! Done', 'success').then(() => {
-                    //     location.reload();
+                    //     // location.reload();
                     //     $('#overlay').fadeOut(100);
                     // });
+
+                    $('a[id="' + buttonId + '"]').closest('tr').each(function () {
+                        $(this).css('display', 'none');
+                    });
+
+
+                    data.push(test, `<img src="${resultData.image}" alt="Product Image" width="500" height="600">`, totalAllotted);
+
+                    allottedProducts.push(data);
+
+                    $('#allProducts').css('display', 'flow');
+
+                    var table = $('#allotted_products').DataTable();
+
+                    table.clear();
+                    table.rows.add(allottedProducts);
+                    table.draw();
                 }
             });
 
@@ -537,12 +549,13 @@
         }
 
         function getData() {
-            console.log(document.getElementById('cat_id').value);
+
             var warehouseId = document.getElementById('warehouse_id').value;
             categoryId = document.getElementById('cat_id').value;
             var subCatId = document.getElementById('sub_cat_id').value;
             var seasonId = document.getElementById('season_id').value;
             var storeId = document.getElementById('store_id').value;
+            var allocationType = document.getElementById('allocationType').value;
 
             $.ajax({
                 data: {
@@ -551,6 +564,7 @@
                     'subCatId': subCatId,
                     'storeId': storeId,
                     'seasonId': seasonId,
+                    'allocationType': allocationType,
                     "_token": "{{ csrf_token() }}"
                 },
                 url: "{{ route('getStockAllocation') }}",
@@ -613,24 +627,47 @@
                             var lastColumnIndex = table.columns().count() - 1;
 
                             // Loop through the rows and apply rowspan to the first and last columns
-                            for (var i = 0; i < rowCount; i += 3) {
+                            if (allocationType === '0') {
+                                for (var i = 0; i < rowCount; i += 3) {
 
-                                if (i + 2 < rowCount) {
-                                    // Apply rowspan to the first column
-                                    var firstCell = $(table.cell(i, 0).node());
-                                    firstCell.attr('rowspan', 3); // Set rowspan to 3
+                                    if (i + 2 < rowCount) {
+                                        // Apply rowspan to the first column
+                                        var firstCell = $(table.cell(i, 0).node());
+                                        firstCell.attr('rowspan', 3); // Set rowspan to 3
 
-                                    $(table.cell(i + 1, 0).node()).hide();
-                                    $(table.cell(i + 2, 0).node()).hide();
+                                        $(table.cell(i + 1, 0).node()).hide();
+                                        $(table.cell(i + 2, 0).node()).hide();
 
-                                    // Apply rowspan to the last column
-                                    var lastCell = $(table.cell(i, lastColumnIndex).node());
-                                    lastCell.attr('rowspan', 3); // Set rowspan to 3
+                                        // Apply rowspan to the last column
+                                        var lastCell = $(table.cell(i, lastColumnIndex).node());
+                                        lastCell.attr('rowspan', 3); // Set rowspan to 3
 
-                                    $(table.cell(i + 1, lastColumnIndex).node()).hide();
-                                    $(table.cell(i + 2, lastColumnIndex).node()).hide();
+                                        $(table.cell(i + 1, lastColumnIndex).node()).hide();
+                                        $(table.cell(i + 2, lastColumnIndex).node()).hide();
+                                    }
+                                }
+                            } else {
+                                for (var i = 0; i < rowCount; i += 2) {
+
+                                    if (i + 1 < rowCount) {
+                                        // Apply rowspan to the first column
+                                        var firstCell = $(table.cell(i, 0).node());
+                                        firstCell.attr('rowspan', 2); // Set rowspan to 3
+
+                                        $(table.cell(i + 1, 0).node()).hide();
+                                        // $(table.cell(i + 2, 0).node()).hide();
+
+                                        // Apply rowspan to the last column
+                                        var lastCell = $(table.cell(i, lastColumnIndex).node());
+                                        lastCell.attr('rowspan', 2); // Set rowspan to 3
+
+                                        $(table.cell(i + 1, lastColumnIndex).node()).hide();
+                                        // $(table.cell(i + 2, lastColumnIndex).node()).hide();
+                                    }
                                 }
                             }
+
+
                         },
 
                         columnDefs: [
@@ -840,11 +877,28 @@
             document.getElementById('total_' + value).value = sum;
         }
 
-        function refill() {
+        function refill(id) {
+
+            if (id === 0) {
+                document.getElementById('allocationType').value = 0;
+            } else {
+                document.getElementById('allocationType').value = 1;
+
+            }
+
             $('#filter-search').toggleClass('d-none');
 
             $('#selectType').css('display', 'none')
             $('#stockRefill').css('display', 'flow')
+
+            if ($.fn.DataTable.isDataTable('#datatable-list')) {
+                $('#datatable-list').DataTable().clear().destroy();
+
+                $('#tableHeader').empty().append('<tr>')
+
+                $('#tableHeader').empty().append('<tr>')
+            }
+
         }
 
         function selection() {

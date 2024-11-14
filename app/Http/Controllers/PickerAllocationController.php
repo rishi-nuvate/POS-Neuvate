@@ -121,6 +121,7 @@ class PickerAllocationController extends Controller
             ->map(function ($group) {
                 return $group->sum('quantity');
             });
+
         $num = 1;
         foreach ($products as $productId => $quantity) {
             if ($product->where('id', $productId)->first()) {

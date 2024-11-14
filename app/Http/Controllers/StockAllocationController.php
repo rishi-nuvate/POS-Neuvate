@@ -54,6 +54,8 @@ class StockAllocationController extends Controller
 
         DB::beginTransaction();
 
+        $warehouseInventory = WarehouseInventory::all();
+
 //        dd($request->all());
 
         $allot = $request->input('allot');
@@ -88,9 +90,14 @@ class StockAllocationController extends Controller
         $all = explode('_', $allot);
         $productId = $all[1];
         $colorId = $all[2];
+        $productImage = $productVarient->where('product_id', $productId)->where('color', $colorId)->first()->image;
+        $productImagePath = '';
+
+        if($productImage != null){
+            $productImagePath = public_path('productImage/' . $productId . '/' . $colorId . '/' . $productImage);
+        }
 
         $total = StockAllocation::where('id', $stockId)->first()->total_qty;
-
 
         foreach ($products as $key => $qty) {
 
@@ -106,6 +113,11 @@ class StockAllocationController extends Controller
                         'quantity' => $qty,
                     ]);
                     $stockProduct->save();
+                    $variant = $warehouseInventory->where('sku_id', $sku->id)->first();
+                    $variant->update([
+                        'good_inventory' => $variant->good_inventory - $qty,
+                        'block_inventory' => $qty,
+                    ]);
                 }
                 $total += $qty;
             }
@@ -130,7 +142,7 @@ class StockAllocationController extends Controller
 //        dd($totalAllotted);
 
 //        return redirect()->back()->with('success', 'successful');
-        return response()->json(['success' => 'true', 'id' => $stockId]);
+        return response()->json(['success' => 'true', 'id' => $stockId,'image' => $productImagePath]);
 
 
     }
@@ -214,6 +226,7 @@ class StockAllocationController extends Controller
         $subCatId = $request->input('subCatId');
         $storeId = $request->input('storeId');
         $seasonId = $request->input('seasonId');
+        $allocationType = $request->input('allocationType');
 
         $allSize = null;
         if ($storeId != null) {
@@ -304,7 +317,10 @@ class StockAllocationController extends Controller
                 $checkbox = '<div class="justify-content-center d-flex"> <a class="btn btn-icon btn-label-success m-1 waves-effect rightCheck" id="' . $name->id . ' ' . $color->id . '"><i class="fa-solid fa-check"></i></a><a class="btn btn-icon btn-label-danger m-1 waves-effect" id="' . $name->id . '"><i class="fa-solid fa-xmark" style="color: red;"></i></a></div>';
 
                 $rows[] = array_merge([$productDetail, 'W.S.'], array_values($warehouseStock), [array_sum(array_values($warehouseStock)), $checkbox]);
-                $rows[] = array_merge([$productDetail, 'S.S.'], array_values($warehouseStock), [array_sum(array_values($warehouseStock)), $checkbox]);
+                if ($allocationType == 0) {
+                    $rows[] = array_merge([$productDetail, 'S.S.'], array_values($warehouseStock), [array_sum(array_values($warehouseStock)), $checkbox]);
+                }
+
                 $rows[] = array_merge([$productDetail, 'A.S.'], array_values($alloted), [$total, $checkbox]);
 
             }
