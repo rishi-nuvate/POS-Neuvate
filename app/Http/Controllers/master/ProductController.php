@@ -301,8 +301,6 @@ class ProductController extends Controller
                 }
             }
 
-//            dd($htmlDetails);
-
             $id = $product->id;
             $name = $product->product_name;
             $product_code = $product->product_code;

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\centralWarehouse;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\GrnItem;
+use App\Http\Requests\StoreGrnItemRequest;
+use App\Http\Requests\UpdateGrnItemRequest;
 
-class GRNMasterController extends Controller
+class GrnItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +21,13 @@ class GRNMasterController extends Controller
      */
     public function create()
     {
-        return view('content.centralWarehouse.grn.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGrnItemRequest $request)
     {
         //
     }
@@ -34,7 +35,7 @@ class GRNMasterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(GrnItem $grnItem)
     {
         //
     }
@@ -42,7 +43,7 @@ class GRNMasterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(GrnItem $grnItem)
     {
         //
     }
@@ -50,7 +51,7 @@ class GRNMasterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGrnItemRequest $request, GrnItem $grnItem)
     {
         //
     }
@@ -58,7 +59,7 @@ class GRNMasterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(GrnItem $grnItem)
     {
         //
     }

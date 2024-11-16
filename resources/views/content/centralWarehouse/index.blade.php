@@ -20,10 +20,10 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>GRN
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{route('create-grn')}}"><i
+                                <a class="dropdown-item" href="{{route('grn.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
-                                <a class="dropdown-item" href="#"><i
+                                <a class="dropdown-item" href="{{route('grn.index')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     List</a>
                             </div>
@@ -35,7 +35,7 @@
                                 <i class="menu-icon tf-icons ti ti-users"></i>Q.C.
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="{{route('create-grn')}}"><i
+                                <a class="dropdown-item" href="{{route('qc.create')}}"><i
                                         class="ti ti-pencil me-1"></i>
                                     Create</a>
                                 <a class="dropdown-item" href="#"><i

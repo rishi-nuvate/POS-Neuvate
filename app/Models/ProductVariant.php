@@ -43,4 +43,15 @@ class ProductVariant extends Model
         return $this->hasMany(StockAllocationProduct::class, 'sku_id','id');
     }
 
+    public function grnItem()
+    {
+        return $this->hasMany(GrnItem::class, 'sku_id', 'id');
+    }
+
+    public function poItemParameter()
+    {
+        return $this->hasMany(PurchaseOrderItemParameter::class, 'item_sku', 'id');
+
+    }
+
 }

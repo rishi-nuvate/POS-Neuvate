@@ -8,7 +8,7 @@
             <li class="breadcrumb-item">
                 <a href="{{url('/centralWarehouseMaster')}}">Central Warehouse</a>
             </li>
-            <li class="breadcrumb-item active">GRN</li>
+            <li class="breadcrumb-item active">Q.C.</li>
             <li class="breadcrumb-item active">Create</li>
         </ol>
     </nav>
@@ -21,16 +21,16 @@
 
 
                 <div class="content-header mb-4">
-                    <h3 class="mb-1">Create GRN</h3>
+                    <h3 class="mb-1">Quality Check</h3>
                 </div>
-                <form method="post" action="{{route('grn.store')}}" enctype="multipart/form-data">
+                <form method="post" action="{{route('qc.store')}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-check form-check-primary mt-3 mb-3">
-                        <input class="form-check-input" type="checkbox" name="WithOutPO"
-                               onchange="toggleTableVisibility()" value="1" id="WithOutPO">
-                        <input type="hidden" name="WithPOSelect" id="WithPOSelect" value="1">
-                        <label class="form-check-label" for="customCheckPrimary">Without PO</label>
-                    </div>
+                    {{--                    <div class="form-check form-check-primary mt-3 mb-3">--}}
+                    {{--                        <input class="form-check-input" type="checkbox" name="WithOutPO"--}}
+                    {{--                               onchange="toggleTableVisibility()" value="1" id="WithOutPO">--}}
+                    {{--                        <input type="hidden" name="WithPOSelect" id="WithPOSelect" value="1">--}}
+                    {{--                        <label class="form-check-label" for="customCheckPrimary">Without PO</label>--}}
+                    {{--                    </div>--}}
 
                     <div class="row">
 
@@ -41,24 +41,22 @@
                         {{--{{dd($date)}}--}}
                         {!! textInputField('col-md-3 mt-3', 'Date', 'date', 'date', 'date', '', '', '', now()->toDateString(),'','') !!}
 
+
                         <div class="col-md-3 mt-3" id="withPo">
-                            <label class="form-label" for="po_id">P.O. Number</label>
-                            <select required id="po_id" name="po_id"
+                            <label class="form-label" for="grn_id">GRN Number</label>
+                            <select required id="grn_id" name="grn_id"
                                     class="select2 select21 form-select" data-allow-clear="true"
-                                    data-placeholder="Select Company" onchange="getAllPOItem()">
+                                    data-placeholder="Select Company" onchange="getGrn()">
                                 <option value="">Select</option>
-                                @foreach($purchaseOrders as $po)
-                                    <option value="{{$po->id}}">{{$po->po_no}}</option>
+                                @foreach($allGrn as $grn)
+                                    <option value="{{$grn->id}}">{{$grn->grn_num}}</option>
                                 @endforeach
                             </select>
                         </div>
-
-                        {!! textInputField('col-md-3 mt-3', 'Invoice', 'text', 'invoice_no', 'invoice_no', 'Number', '', '', '','','') !!}
-
                     </div>
 
                     {{--With PO--}}
-                    <div id="withPoContainer" class="mt-3">
+                    <div class="mt-3">
                         <div class="form-group col-sm-12 mt-3">
                             <table id="option-value"
                                    class="responsive table table-bordered ">
@@ -67,53 +65,19 @@
                                     <td scope="row">Sr.No</td>
                                     <td scope="row">Item Name</td>
                                     <td scope="row">Item Sku</td>
-                                    <td scope="row">Po Qty</td>
                                     <td scope="row">Received Qty</td>
+                                    <td scope="row">Remarks</td>
+                                    <td scope="row">Action</td>
                                     {{-- <td scope="row">Add</td> --}}
                                 </tr>
                                 </thead>
-                                <tbody id="withPoBody">
+                                <tbody id="grnBody">
 
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    {{--Withour PO--}}
-                    {{--                    <div class="col-12 col-sm-4 col-lg-4" id="withoutPo" style="display: none;">--}}
-                    {{--                        <label for="users-list-verified">Supplier</label>--}}
-                    {{--                        <fieldset class="form-group">--}}
-                    {{--                            <select class="form-control select2" name="Supplier" id="Supplier">--}}
-                    {{--                            </select>--}}
-                    {{--                        </fieldset>--}}
-                    {{--                    </div>--}}
-                    <div id="withoutPoContainer" class="mt-3" style="display: none;">
-                        <div class="form-group col-sm-12 mt-3">
-                            <table id="WithoutPoTable"
-                                   class="responsive table table-bordered">
-                                <thead>
-                                <tr>
-                                    <td scope="row">Sr.No</td>
-                                    <td scope="row">Item Name</td>
-                                    <td scope="row">Item Sku</td>
-                                    <td scope="row">Item Code</td>
-                                    <td scope="row">Quantity</td>
-                                    <td scope="row">Rate</td>
-                                    <td scope="row">Total</td>
-                                    <td scope="row">Action</td>
-                                </tr>
-                                </thead>
-                                <tbody id="withoutPoBody">
-
-                                </tbody>
-                            </table>
-                            <div class="col-lg-3 col-12 invoice-actions mt-3">
-                                <button type="button" class="btn btn-outline-primary" onclick="addItem()">
-                                    Add Another
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     <div class="px-0 mt-3">
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <button type="submit" class="btn btn-primary d-grid w-100">Save</button>
@@ -134,6 +98,52 @@
     <script>
 
         var counter = 0;
+
+        function getGrn() {
+
+            counter++;
+
+            const grnId = document.getElementById('grn_id').value;
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('getGrn') }}',
+                data: {
+                    'grnId': grnId,
+                    '_token': "{{ csrf_token() }}",
+                },
+                dataType: 'json',
+                success: function (response) {
+
+                    $('#grnBody').empty();
+                    if (response.po_id == null) {
+                        $.each(response.grn_item, function (key, grn) {
+                            $('#grnBody').append(`
+                                    <tr>
+                                        <td>${counter}</td>
+                                        <td id="item_name${counter}"><button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">${grn.sku.product.product_name}</button> </td>
+                                        <td id="item_sku${counter}"><button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">${grn.sku.sku}</button> </td>
+                                        <td id="po_quantity${counter}"><button type="button" class="m-2 btn btn-sm btn-outline-primary round waves-effect">${grn.received_quantity}</button> </td>
+
+                                        <td><input type="text" id="received_quantity" name="received_quantity[]"
+                                                                   class="form-control  " placeholder="Remarks"/>
+                                        <td>
+                                        <a href="#" type="button" class="btn btn-outline-success waves-effect">
+                                            Pass
+                                        </a>
+                                        <a href="#" type="button" class="btn btn-outline-danger waves-effect mx-2">
+                                            Fail
+                                        </a>
+                                        </td>
+                                    </tr>
+                            `)
+                            counter++;
+                        });
+                    }
+
+                }
+            });
+
+        }
 
         function getAllPOItem() {
             const poId = document.getElementById('po_id').value;
@@ -170,9 +180,6 @@
 
         function addItem() {
             counter++;
-            const productOptions = ` @foreach($products as $product)
-            <option value="{{$product->id}}">{{$product->product_name}}</option>
-                                     @endforeach `;
 
             var innerHTML = `
             <tr id="item_${counter}">
@@ -243,29 +250,6 @@
             var rate = document.getElementById('item_rate_' + id).value;
             document.getElementById('total_rate_' + id).value = quantity * rate;
         }
-
-        function toggleTableVisibility() {
-            var withPoContainer = document.getElementById('withPoContainer');
-            var withoutPoContainer = document.getElementById('withoutPoContainer');
-            var checkbox = document.getElementById('WithOutPO');
-
-            if (checkbox.checked) {
-
-                withPo.style.display = 'None';
-                withPoContainer.style.display = 'None';
-                document.getElementById('WithPOSelect').value = 0;
-                document.getElementById('po_id').removeAttribute('required')
-                withoutPoContainer.style.display = 'Block';
-            } else {
-
-                document.getElementById('WithPOSelect').value = 1;
-                withPo.style.display = 'Block';
-                withPoContainer.style.display = 'Block';
-                document.getElementById('po_id').setAttribute('required', 'required')
-                withoutPoContainer.style.display = 'None';
-            }
-        }
-
 
     </script>
 @endsection

@@ -40,7 +40,7 @@
                             <select required id="po_id" name="po_id"
                                     class="select2 select21 form-select" data-allow-clear="true"
                                     data-placeholder="Select Company" onchange="getAllPOItem()">
-                                {{--                                <option value=" ">Select</option>--}}
+                                                                <option value=" ">Select</option>
                                 @foreach($purchaseOrders as $purchaseOrder)
                                     <option value="{{$purchaseOrder->id}}">{{$purchaseOrder->po_no}}</option>
                                 @endforeach
@@ -50,41 +50,7 @@
                     </div>
                     <div class="row" id="withPoItem">
 
-                        <div class="row">
 
-                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
-
-                        </div>
-                        <div class="row">
-
-                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
-
-                        </div>
-                        <div class="row">
-
-                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
-
-                        </div>
-                        <div class="row">
-
-                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
-
-                        </div>
-                        <div class="row">
-
-                            {!! textInputField('col-md-2 mt-3', 'SKU', 'text', 'text', 'text', '34567', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Po number', 'text', 'text', 'text', 'number', '', '', '','readonly') !!}
-                            {!! textInputField('col-md-2 mt-3', 'Dispatched By Factory', 'text', 'text', 'text', '5', '', '', '','readonly') !!}
-
-                        </div>
                     </div>
 
                     <div class="row" id="withoutPoItem" style="display: none">
@@ -184,7 +150,7 @@
 
                     $('#withPoItem').empty();
                     $.each(response, function (key, po) {
-                        console.log(po);
+                        // console.log(po);
                         $.each(po.purchase_order_item_parameter, function (id, sku) {
                             console.log(sku);
                             $('#withPoItem').append(' <div class="row"> <div class="col-md-3 mt-3"> ' +
@@ -239,7 +205,8 @@
                 `<div class="row " id="productItem_${num}">
                 <div class="col-md-2 mt-3"> <label class="form-label" for="productId${num}">Product</label>
                 <select class="select2 form-select" id="productId${num}" data-placeholder="Select Product" name="product_id[${num}]" onchange="getProductSku(${num})"> <option value="">Select Product</option>
-            ${productOptions}
+                <option value="">Select</option>
+                ${productOptions}
                  </select>
                 </div>
                 <div class="col-md-2 mt-3">

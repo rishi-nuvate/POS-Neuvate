@@ -74,7 +74,7 @@ class StockInMasterController extends Controller
         $purchaseOrders = PurchaseOrder::all();
         $warehouses = CentralWarehouse::all();
         $products = Product::all();
-        return view('content.centralWarehouse.stockIn.bulkInward', compact('products','warehouses','purchaseOrders'));
+        return view('content.centralWarehouse.stockIn.bulkInward', compact('products', 'warehouses', 'purchaseOrders'));
     }
 
     public function singleInward()
@@ -89,7 +89,7 @@ class StockInMasterController extends Controller
     {
         $poId = $request->input('poId');
         $poItem = PurchaseOrderItem::where('po_id', $poId)->with('purchaseOrderItemParameter', 'product')->get();
-
+//        dd($poItem);
 //        $result = ['data' => []];
 //        $num = 1;
 //        foreach ($poItem as $item) {

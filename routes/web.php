@@ -6,7 +6,6 @@ use App\Http\Controllers\authenticate\AuthLogin;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\BaseStockCategoryController;
 use App\Http\Controllers\centralWarehouse\CentralWarehouseMasterController;
-use App\Http\Controllers\centralWarehouse\GRNMasterController;
 use App\Http\Controllers\centralWarehouse\OutwardMasterController;
 use App\Http\Controllers\centralWarehouse\PackMasterController;
 use App\Http\Controllers\centralWarehouse\PickMasterController;
@@ -14,6 +13,7 @@ use App\Http\Controllers\centralWarehouse\ShelfMasterController;
 use App\Http\Controllers\centralWarehouse\StockInMasterController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\GrnController;
 use App\Http\Controllers\master\basicInfo\BrandController;
 use App\Http\Controllers\master\basicInfo\CategoryController;
 use App\Http\Controllers\master\basicInfo\ColorController;
@@ -41,6 +41,7 @@ use App\Http\Controllers\pages\InventoryTransferController;
 use App\Http\Controllers\PickerAllocationController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\QualityCheckController;
 use App\Http\Controllers\ShelfController;
 use App\Http\Controllers\StockAllocationController;
 use App\Http\Controllers\storeInventory\StockInController;
@@ -258,7 +259,12 @@ Route::middleware('auth:web')->group(callback: function () {
     Route::resource('centralWarehouseMaster', CentralWarehouseMasterController::class);
 
     // GRN
-    Route::get('/centralWarehouse/grn/create', [GRNMasterController::class, 'create'])->name('create-grn');
+    Route::resource('grn', GRNController::class);
+    Route::post('/getProductGrn', [GRNController::class,'getProductGrn'])->name('getProductGrn');
+    Route::post('/getGrn', [GRNController::class,'getGrn'])->name('getGrn');
+
+//    Q.C.
+    Route::resource('qc', QualityCheckController::class);
 
     // Stock In
     Route::get('/centralWarehouse/stockIn/bulkInward', [StockInMasterController::class, 'bulkInward'])->name('bulkInward');
